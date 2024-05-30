@@ -1,4 +1,4 @@
-from generator import GeneratorFactory
+from generator.generator import GeneratorFactory
 from dotenv import dotenv_values
 import argparse
 

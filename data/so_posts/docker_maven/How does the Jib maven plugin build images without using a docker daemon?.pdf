@@ -1,0 +1,128 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 5 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/GoogleContainerTools/jib)
+>> /Border [ 0 0 0 ] /Rect [ 156.0815 751.4708 210.269 762.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+5 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://www.projectatomic.io/blog/2018/03/the-many-ways-to-build-oci-images/)
+>> /Border [ 0 0 0 ] /Rect [ 127.739 687.4708 147.7415 698.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/GoogleContainerTools/jib/blob/master/jib-maven-plugin/src/main/java/com/google/cloud/tools/jib/maven/BuildImageMojo.java)
+>> /Border [ 0 0 0 ] /Rect [ 141.719 676.2208 182.5715 687.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://en.wikipedia.org/wiki/Union_mount)
+>> /Border [ 0 0 0 ] /Rect [ 234.6215 559.4708 285.899 570.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://docs.docker.com/registry/spec/api/)
+>> /Border [ 0 0 0 ] /Rect [ 195.659 525.7208 263.174 536.9708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+10 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/chanseokoh/docker-hub-upload-speed-test#uploading-using-curl-with-bash)
+>> /Border [ 0 0 0 ] /Rect [ 123.5615 448.7208 172.739 459.9708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+11 0 obj
+<<
+/Annots [ 4 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R ] /Contents 15 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+12 0 obj
+<<
+/PageMode /UseNone /Pages 14 0 R /Type /Catalog
+>>
+endobj
+13 0 obj
+<<
+/Author () /CreationDate (D:20240604101126-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101126-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+14 0 obj
+<<
+/Count 1 /Kids [ 11 0 R ] /Type /Pages
+>>
+endobj
+15 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2547
+>>
+stream
+Gau0D?'F$Q&U`JC1!,@8P`@-VH[QDRD\A[jnX[EoWOaRm5U7U`9`d?UPg"WL*e9t5mFipLEOkH,OoRJjh:"14PQpoHL4?Omk\`[N^.9[ndUGr83#U3)2>q<1o>f*;r(W[2_g+!U:WHD&%gL/FFu7(mcKg^D8E5nE2Ai:.#p!o&E8#bVQHZ6?>*P8K$/XYTr6\Y&iNEa.+1n6'6MWr3UR1+.\WMpM<miX97A\X09tR.R-r$a7'fi6kCp;olr74i=.];on"L_k`V57G<dceG1V8YSLrl4cH$i.G^4KI._Q41dj/$$/!H+GeWrTrfoVUP!indAq0Z9*WIf()(Vb&8<6U+L>]Pm#\/dnX(H9'mKt7em=ld!8kDot@>9*faDq/_A-,1@*"W?iqorV)A;Q?L.iPh6'SBnB,E78ir;2b4'8A['VHr)P-CDR9[^3I.R@#)\%?oPM'V9dptS/cR&dVk(D`<3'9>Rkef@<q)j1PORf.kYqa&Aq5R[7^o#g'*<6GW`H-=JrIq3)fC?cZSMjec!FOfB2e:o7r8&DbZ#ZV0[gEY`;*Vc3*olU8Ysb&2D-"@9=\)%aZLAa>VRK-c?3BZMZg@7U.E2C&)_G3-APG7%mUZUaFk,&R2/9HIpR8BS!^OiPMk]-^Scpei+L(3`1I;':Pn%#`D1`Md-U*F%!O"LPk0'ZNn9kk.>\/+[\IN%<,^Ua,'irq;4Wbm(<Gm_k*"[1:/-?C]PS@a[^hmeu4AoEk:!e!*X]7Sh0Xj%)((\k3?8iU_o!?UdY*d81/KH15g$l)u-DTX[eM\<kUMJ$>%C?Q3ZcXcXPck/i0IhmQJ<;O!<f.m"AgN9K97MkS_TE1<]+Y4Jjn$-SJ8/]UP&0K?@@@PX$g#d9pflH[_:mNsp_q+tDlIs2MO@-L@js5uP4P9QdXh9'<tH,^?cYkrLbaW.(JkC3O*2c5i3jMD%3GI]6gT'+.%DHhL_'T-JE?W8joC/g.f.Q4LuK8"[t6eN06Al`cF9eUlld)C`*MNf9P$$2H2\pN7TE+"NC]0Da5RVa2I(/H.+EBQ(7QoM(C`>,T>*fROeH/`Em&^u5*qrTAIQHl\^[Kc96b+TT24VGl5Ip^]"5VtrZH)W_=KTZ1ctnT>F?o@92KDEVNbnODC[9dmV&3N\83sCjBKHS\u'RU'Wilk,5Yd)C3>!V<3?H<:3'VNq51lrATHt-pZL6NUqM*NR`qt+0E+IVQTZC-F1EYh?a<0A'O&slg):.t]n7>D.MR@g75SmKkV",4gL;$8E\E>9+=sbZ?G_O(Fqa_]PWRA*Q'"WMQ*E59@1LLiAoNii4'>.lmJ%>C`1V[IiT"%,/>$5XjC%u;5^&U;E%jk<kS05fD'Hm>1mq$lSS.+;kYFrI0is..SYe:bNKQ;Ojtg<1N7mIj3bJE>Tci8&n+R$W*O(FMbhJAMEno`0r?t]KmSp_IjA4/lmjmS=%eQAE2AeELYUc71qHVT(GQ<]NMd1MSWW%/;ZI_3iV>g&Ec#78ZKlkM9D3=O@2q8S_DBjSZ#Af*bZU0a3*e+#0"UcJ`d6&!)>.?/>[-V(cIAQaZM,)0pl,)odgj`?91N]MF.cV+u^BXjnP1MnS2SsZ*W'T(HK'@Qu'CJYdS<IC[8iU'()N`^,_RA0D=U(fZ)h_8Fg0/nsR*TqRE^a,k[R:uc[[&LC#M^hK6*B:2nUqsuCeYMLAH.kr?6_Z@B"$U:.J7"MU\U3EHXRZQkB,HTqTX2r\+S#pmJG-^ck>?I&5T@$b`k3,,H+c>8bsuHCcTIbDo)C_NcXP3+q4FuijI&PK-9h9;VmJP9+[S4k6ViFcT"[tZrc7l$dV%IIs?HJpAF<Yb;!DX;i+3ETL5?SO(dZ*b[N4AMmrKOO%R"DYV.#7=,s[.-CS4K"?RS'38ju4oC\eOKFu'j#CU&#+*1mK6FAbP&:Yi;`>?PeAha8-M0qEX^Y04%p9r^q1/-$7p$q6TK`=7rgBW@GAZUJ/!([qljX'>75%#OMN.E$)^c\"$Yk[02flT7j)h@r39_?M7XSDL20)[>]jF7V/oHGl@W6rfJPNE$M5SIV*d7t94,51Sk5F#c^i%e.9XeO_uB7r4s4\,i[P2bFg8["_=M^)S'fNqVlAcS<GZY"QhNm#**e6jRbmrf$g>!_2:ljt>+j7((KXlB`H.*])e[3s$f;.I\-_nXW&;<860QjZk2cU)cjAmpK;AKa4(Ggq6=KZmQtR<q2q6XT+WfA\JQ!3b!H=.cF2iakn)DInM^c(<`DF9fj.*qN1"&[rCt:\.;@J#s;ET/oU)AEh/,6;ONtA6dV1&%oa?)UMlpL!"ZqP`ot7*p>8(^NW[/<gAl045.e\^e>^8L;+/=Z/6r$U7;%6o`^8.I@u5&bc75K1qn4GU[d9o4&3p"E)Ya_jWiE;GJ:.Zn8f#EGoLnAM_a&qbGaRm$WC)NgPR2/6$Or:2Z@9l6I7:Z$=M+KabJHMVP];)qF]4aO6PQ8I^='RAk1*YHAj*9>,WWMbTYS5X1`tH*2eF"p>(0Bq@Z^`KLYE!kINpnTk#7)O)Fq)Qr:h[~>endstream
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000343 00000 n 
+0000000537 00000 n 
+0000000642 00000 n 
+0000000869 00000 n 
+0000001159 00000 n 
+0000001351 00000 n 
+0000001543 00000 n 
+0000001784 00000 n 
+0000002039 00000 n 
+0000002109 00000 n 
+0000002362 00000 n 
+0000002423 00000 n 
+trailer
+<<
+/ID 
+[<889fa411c5010c08cdee9d92017a5f60><889fa411c5010c08cdee9d92017a5f60>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 13 0 R
+/Root 12 0 R
+/Size 16
+>>
+startxref
+5062
+%%EOF

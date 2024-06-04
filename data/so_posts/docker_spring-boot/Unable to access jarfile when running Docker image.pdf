@@ -1,0 +1,112 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://docs.docker.com/engine/reference/builder/#add)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 570.1208 210.269 581.3708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/Annots [ 5 0 R ] /Contents 14 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 13 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Outlines 9 0 R /PageMode /UseNone /Pages 13 0 R /Type /Catalog
+>>
+endobj
+8 0 obj
+<<
+/Author () /CreationDate (D:20240604101129-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101129-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+9 0 obj
+<<
+/Count 3 /First 10 0 R /Last 10 0 R /Type /Outlines
+>>
+endobj
+10 0 obj
+<<
+/Count -1 /Dest [ 6 0 R /Fit ] /First 11 0 R /Last 11 0 R /Parent 9 0 R /Title (Dockerfile Reference - Add)
+>>
+endobj
+11 0 obj
+<<
+/Count -1 /Dest [ 6 0 R /Fit ] /First 12 0 R /Last 12 0 R /Parent 10 0 R /Title (Dockerfile Reference - Add)
+>>
+endobj
+12 0 obj
+<<
+/Dest [ 6 0 R /Fit ] /Parent 11 0 R /Title (Dockerfile Reference - Add)
+>>
+endobj
+13 0 obj
+<<
+/Count 1 /Kids [ 6 0 R ] /Type /Pages
+>>
+endobj
+14 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 939
+>>
+stream
+Gau0B?#Q2d'Re<2\6<7F.5_qJct]$!0'cR*ZROA1Vpteq\0Eo<SS%ip]0MN*D:_[f#UM5")Z-&bF"a6Fi^N2%F:N8[J9+&.HB:gO"se`["2%3O^NsPfTrZjQ9`-"A6ASp6GR(sDcYfR.m*d:J,1iaL&=,IaQu;VT8/r*_R008gZa`H3Bgd^+Y&8[P)>"SN$[r@g-(>SgX9+]bg_dP3H7CVSbddkiOAa.;N)]Y;CCkPFj3JmZK]GQ*r2^*OFuT=INeeWr"ojK9(62C<IFoH6(j7=j.Bkg'FX>I>bk"_6\fE;4iM/rO10dm@"&*;W3D"#I_2o'e;_lHTA2U%VgkCFW(18Pu]&]i-0=)IVW&'h\TJ0N),&7_2%6AT?[T+9D25W)$4*9LXnQJ'5)Vq&)C:pNN#[D/AmqDcjc\/Q.s/;H<DT-j9EhV*Y@:/2fCGUK^c=C]Y!U\7!8#T[,Gm6de/3/Ua8]fP31;m%6@_EG]S7AT>ZRpR,Tt+$UWdRqVO;q,kpIr\-0tdcD.Z;lDAJ:hrKgfc44l[;MAogce%$%B99u8p\edM5eI3--FSW;Hf)o`D2e_u'$h'.W8qghhTo*AX,o.`p_fo?!>e1mS)fh$"Wqf%d2XT=.WTrlg_1?5i,M1^lm_\dA<^t9q<*mRlC$93Or8^Wu"DJa(t*=#f>+\f]rWL>nRc@k8=?Lr7'^<F!k`u[N&n4D!kg[1;*?Ik6fL5"$6?EL)@(?hrjjMlk<qZ`>a=CXbD$YI@Xh)OkGiqB)KI(SD9AM2EDp97C%NODrHU4<Q*<0[ON5tE4U?;ILB$AghnM-4O1lE(A_+;"OAbtIsBf32h5,N7[@)4QiYh%\STUBcfKNL#PDICg)8'j)tE'&)#1r9)D_c5dhLli`p9K_'!rVV8So=<64Oo1uk,&p;d&Gqu6m9(='L2m!4r5><X7+T~>endstream
+endobj
+xref
+0 15
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000336 00000 n 
+0000000448 00000 n 
+0000000652 00000 n 
+0000000875 00000 n 
+0000000960 00000 n 
+0000001212 00000 n 
+0000001285 00000 n 
+0000001415 00000 n 
+0000001546 00000 n 
+0000001640 00000 n 
+0000001700 00000 n 
+trailer
+<<
+/ID 
+[<a7944d559fa5ada75e4d70f0f1f43712><a7944d559fa5ada75e4d70f0f1f43712>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 8 0 R
+/Root 7 0 R
+/Size 15
+>>
+startxref
+2730
+%%EOF

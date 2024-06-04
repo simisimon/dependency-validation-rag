@@ -1,0 +1,187 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/jhipster/jhipster-sample-app-gradle/blob/9e9c3db8f3bedba4b1efd85ecb6ff3f12a5f596a/build.gradle#L230)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 699.8646 439.574 711.1146 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/q/53260385/1688441)
+>> /Border [ 0 0 0 ] /Rect [ 353.2415 679.1146 547.484 690.3646 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/q/53260385/1688441)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 667.8646 79.79146 679.1146 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#configuration-metadata.annotation-processor)
+>> /Border [ 0 0 0 ] /Rect [ 447.1415 499.2583 499.664 510.5083 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://jakubstas.com/configuration-meta-data-in-spring-boot/#.XA53bhP7SL8)
+>> /Border [ 0 0 0 ] /Rect [ 35.60146 393.7583 250.7015 405.0083 ] /Subtype /Link /Type /Annot
+>>
+endobj
+10 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html)
+>> /Border [ 0 0 0 ] /Rect [ 281.1365 393.7583 329.069 405.0083 ] /Subtype /Link /Type /Annot
+>>
+endobj
+11 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/jhipster/generator-jhipster/commit/9e36776721af1b3cd5f3adbcffbba6696612db53)
+>> /Border [ 0 0 0 ] /Rect [ 351.554 352.2583 546.6515 363.5083 ] /Subtype /Link /Type /Annot
+>>
+endobj
+12 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/jhipster/generator-jhipster/commit/9e36776721af1b3cd5f3adbcffbba6696612db53)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 341.0083 141.2315 352.2583 ] /Subtype /Link /Type /Annot
+>>
+endobj
+13 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/questions/53260385/maven-transient-dependency-library-jar-vaadin-json-is-not-being-excluded#comment93414598_53260385)
+>> /Border [ 0 0 0 ] /Rect [ 304.7015 299.5083 399.7415 310.7583 ] /Subtype /Link /Type /Annot
+>>
+endobj
+14 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/questions/3190216/maven-dependency-clash)
+>> /Border [ 0 0 0 ] /Rect [ 59.35396 246.7583 119.804 258.0083 ] /Subtype /Link /Type /Annot
+>>
+endobj
+15 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/users/1384297/andy-wilkinson)
+>> /Border [ 0 0 0 ] /Rect [ 504.254 246.7583 555.5165 258.0083 ] /Subtype /Link /Type /Annot
+>>
+endobj
+16 0 obj
+<<
+/Annots [ 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 
+  15 0 R ] /Contents 23 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 22 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+17 0 obj
+<<
+/Outlines 19 0 R /PageMode /UseNone /Pages 22 0 R /Type /Catalog
+>>
+endobj
+18 0 obj
+<<
+/Author () /CreationDate (D:20240604101140-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101140-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+19 0 obj
+<<
+/Count 2 /First 20 0 R /Last 21 0 R /Type /Outlines
+>>
+endobj
+20 0 obj
+<<
+/Dest [ 16 0 R /Fit ] /Next 21 0 R /Parent 19 0 R /Title (Introduction)
+>>
+endobj
+21 0 obj
+<<
+/Dest [ 16 0 R /Fit ] /Parent 19 0 R /Prev 20 0 R /Title (Questions)
+>>
+endobj
+22 0 obj
+<<
+/Count 1 /Kids [ 16 0 R ] /Type /Pages
+>>
+endobj
+23 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2331
+>>
+stream
+Gb!;e?#Sa](4FN4\A1;\Z\TJtho\SRZTE#&FGlQIJ\_D5Td7cm,*B#V3AhTLhtN:sD-;$[-(QT!&0u8f6!bV(Hg\EQKfOTZq_Kf)hC[[N#7At371Rfl*\;bkpPXse00\ASm@JJFid-.l5W#)H-[&dC[s+=YN4)eY3-V@^_nuWf9_WU^,RSp$PX$\6]/YM41aKf'F`+so,to,L0).;O?EkE%L3gg)Y:Cc_ZUCd=Q7A;\AQ,j;-okL5.cjj7$GOD:[ZDq?F1!V[n3>?qaZ'tYWE:IVL:gD1Lq8!G7i"(ug^#JEHsB4`pmTBbbB+,7`VF^r?uZF0^De:Z=s-##LEhaE1A>)_NXnb6n4mQLld>7t0q!gliN[Xed#FQ/(_</NlF:oeL?'"4U:[?DF3fi_6"Dp[Y#NuJAg9dck5*#;6i&iGI8Y"d;UluQR3bV2MF'HKGE<$WDR-gaXB:3]SdYIiEdR%g-.]Zi'd04<GZp.5)q-*hT"UeQpoZDXOaFY`-?2&3l5t1C[ujCYrH12mW+noX"N`/pncr1N'9als,I1p%qrVS%ruD"1dU-;F*F2lMW``[N?(.Rh,TF`Y+US/N_3_5G9;RpXT3NF#=X)*e'9:s^196Y\Ap7G#alqCVg])'-rW]W#i_bAGn,2n>Ku=K&nU-NS-$Ye=Ne8EtQO<N[9QF')KiME^p%?kc;Uh`o+UHrTNj\`p1X/N+^DU7ZB._<1P!UHr0oo6l9;:39Ga:$:TfgXFT;P8BkAF$8k3%15YcFQ377Q!4s7QiC_.]>?qL"f<a!FUL!tFdD$^XX66J\kic/A8m./S)FGu%gA@m]Dc"o6An'j<nu3s@o83?2Uk;3?@5%@="G'emkXeNl-e<hNHti</nlgK8%0l]uaM9l1-8.jh[^ZL6>;gM'm'[T@[SJi6E?OT"m4WEqRQDJuBY2fj(TQ]9iW(TAECO4UKe<$sjf>T;VnkePCrmQ>fd,4S]G#i5YaMA85+Vr)^'N\1<\'I*gC#CAYQ?=^<tF<BA72l=&@$uJfXd9-V+AWK6qg8dp;nHQ$abtO*T7t):;\X-YT4?JHL\QM.o@@PssY=4;HmHipUQ+b'lGj\EJO&Ou"q6rniX_!WbeAhsSj!KX8?od5F@@d?H2feUiYO-ZkM7u\FZ)VS3[*b5K_E;3XmpUqNBi-fIo/&R;>sZe?:GclInh1Z%0%-W$7:sS)f#u5QTm6P;2gA6Mrh9Il.::]:r3oQgn7o>[HBIf0NZ=cSpSm<q4C^"(I>8VJc(U3qNh^`CPQW@Oif&4++ffeR4d;g5G*mr8naH"C2PRnGP2dr=2lK.r@l4@SW2><V?s;T%AC4F8Q-$U(V!T#m9uFbagl?_CjEo9M^]-eg;J\GG]W+ib:*M!g=G^>uU*FfdD<J\0kBf$?n'_?O.DH"%(O8l6T.^4Hnggp$EATiBAWY-G_Mp6[DJFkj)%15T7Z3>mOu=UiUNRZg7=jouc[$\)8J_[q'=Fh"?*K)aotV^9a4Fk"I.HAN.uVm.9J<@Or*)%?ipIO0G8NLh=?oJi@(/4.:E6G?%W#Ol$bg'5s"lsIdg$q^0(kFi'"gRa:%h<h?d)@mABKsQ,,8'DNUq3il:&_hP;#;r('0ZpK[)5&*.(t-SLkOJ/pZ!J]hG'db2_mLFh]jtRph(4q>uO6T?E%WV"+4#E8jqU]0D/6$6:_r`a5CKoB?!Mi2^snfT\L4)pVK@!$h5b4f779iqg\iV?Fr;=A/LO`A%Z>kH?`?h>(5;PR3?'dR&(9ea*FX2XXVZ1q-qM_"P\Y+5%QT*XW:`\sQYL_1S//7&=b6/B[a$R"K@RRX?p*gi`RX90,,cE/6:\#6u1kETbY2f:WC>'RbObNV9%(5T<XuN+#i]Ya\dSPiS]j_kFG"YW].t])V\,G?C='PTd#$aAZRLbcFI>.TLVf=g^Z*/nN;SpXX*$mFd>=_;.E"^9Vm:+,8[bq9TEA[rq<Y;XaDgqu>l3H=D'rX=hR[,<Tj44^'k>Drn%?8_9?dGb!q;9=10`d#CsSq/4e[MYEMPb;0@o6cF1HZD=^jEe6d'ZI50IUt6J3Kr2YqT\[87OS;:7TlkFVIE!e*JW*X$%J"3PZ"L#kGHq/iaOH/[p63;:A:r`7hm\AtHQQp5*,Q7WJA-=Eri3P.a*IMLmC_MSNu]Wd4@dd=G')C7KcZ)+ip6f$L0lbJCi<j1\KO=e%`SkFOHu358?R<gXJ$rJ&m93T'\c8Zq!K'mF"8I^edJ^UjPZPb8J"8V:2B:&p`H%Xj(%;SXS+DtBe7'oK.,X"C^Zk(EA++/p*4G;V1bp-(coEp1Z('R8'C5t@5Xhm>l5-**"1-~>endstream
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000343 00000 n 
+0000000448 00000 n 
+0000000717 00000 n 
+0000000912 00000 n 
+0000001108 00000 n 
+0000001372 00000 n 
+0000001598 00000 n 
+0000001840 00000 n 
+0000002086 00000 n 
+0000002333 00000 n 
+0000002628 00000 n 
+0000002846 00000 n 
+0000003052 00000 n 
+0000003345 00000 n 
+0000003432 00000 n 
+0000003685 00000 n 
+0000003759 00000 n 
+0000003853 00000 n 
+0000003944 00000 n 
+0000004005 00000 n 
+trailer
+<<
+/ID 
+[<961cbd92ab81bd20715bd287ff00cfaa><961cbd92ab81bd20715bd287ff00cfaa>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 18 0 R
+/Root 17 0 R
+/Size 24
+>>
+startxref
+6428
+%%EOF

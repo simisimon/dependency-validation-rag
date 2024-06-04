@@ -1,0 +1,161 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/questions/26543787/docker-mule-server-curl-56-recv-failure-connection-reset-by-peer)
+>> /Border [ 0 0 0 ] /Rect [ 108.1415 635.8646 127.724 647.1146 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://docs.docker.com/articles/networking/#container-networking)
+>> /Border [ 0 0 0 ] /Rect [ 169.829 635.8646 224.024 647.1146 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/Barlog-M/Simplest-Spring-Boot-MVC-HelloWorld)
+>> /Border [ 0 0 0 ] /Rect [ 216.9365 491.1521 346.1165 502.4021 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/questions/26537652/docker-port-mapping-isnt-working-as-expected-with-osgi-servlet)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 310.8458 86.87146 322.0958 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/Annots [ 5 0 R 6 0 R 7 0 R 8 0 R ] /Contents 21 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 20 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/Outlines 12 0 R /PageMode /UseNone /Pages 20 0 R /Type /Catalog
+>>
+endobj
+11 0 obj
+<<
+/Author () /CreationDate (D:20240604101134-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101134-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+12 0 obj
+<<
+/Count 6 /First 13 0 R /Last 16 0 R /Type /Outlines
+>>
+endobj
+13 0 obj
+<<
+/Dest [ 9 0 R /Fit ] /Next 14 0 R /Parent 12 0 R /Title (The workaround)
+>>
+endobj
+14 0 obj
+<<
+/Dest [ 9 0 R /Fit ] /Next 15 0 R /Parent 12 0 R /Prev 13 0 R /Title (Experiments with ports and expose)
+>>
+endobj
+15 0 obj
+<<
+/Dest [ 9 0 R /Fit ] /Next 16 0 R /Parent 12 0 R /Prev 14 0 R /Title (Hello World works)
+>>
+endobj
+16 0 obj
+<<
+/Count -1 /Dest [ 9 0 R /Fit ] /First 17 0 R /Last 17 0 R /Parent 12 0 R /Prev 15 0 R 
+  /Title (Netstat Results)
+>>
+endobj
+17 0 obj
+<<
+/Count -2 /Dest [ 9 0 R /Fit ] /First 18 0 R /Last 19 0 R /Parent 16 0 R /Title (From the host)
+>>
+endobj
+18 0 obj
+<<
+/Dest [ 9 0 R /Fit ] /Next 19 0 R /Parent 17 0 R /Title (From the host)
+>>
+endobj
+19 0 obj
+<<
+/Dest [ 9 0 R /Fit ] /Parent 17 0 R /Prev 18 0 R /Title (From the container)
+>>
+endobj
+20 0 obj
+<<
+/Count 1 /Kids [ 9 0 R ] /Type /Pages
+>>
+endobj
+21 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2861
+>>
+stream
+Gb!Sn>>sQA(4P^ZEN8^5H4(,(NajG:]sS9qe#D.-3i%Pe.UIe1&;+hF/=CTdk-r[!S:nsgg0Cpf]1nEpAR3UC46M!ST]"f?24njunB1t.5?"3r9Vt(%U^**5_XZ^)miT:&04";F,3&@n]fnie9>#iEj4K@C'HGi6OO3["(VoqN:/'8TKd>pg0ZelDJo>W8]kBq<]rGjsWb^7XUakCl3"ka5YFlSpJlELI$<S9h.FY>V_mC%:b_/q;@<)I6^M72l).C9C/ohe_`9hD7j>3#'IM'\2fNFdgkU=ajP0j<(["E$:R'A^_$jo1Ro<LuHCQqek29RaJA#<.$J=81r,Ij^MNG2RlElJc#"odYWWeDLh"=1Y(_u`i5*uakb(_nf#36o;_(5643JPOZiS+FrpFY!./*![mj-'uWV&dGN)_GjJb]C"Ui$DoB*CKCB-RS3"D72aIL-a4lJ,,u"57a2X23-U\FEgUj4W>WW1*oBQk(GfBj<`1Z*&;-bZ<*EZs&T]`W.]8PGOO[a`82Pp6Y)F8tO_&")V;YE#WpUAjH`r9gL]kHDG,tAaX`7WXN@_]gHsQ.ErQC7&e!S1"<l:/u=^?#oi1VP+*c!uCbnZRM=Y3\_l`oN`g2,t^'\DYaPW,?9@&hT($o.ssQid:bng_mEimZiUEq_1tTP\rLE=\V"aIT2.NhB/[X=7ULniL0_%$G]njV88AqHVX;R6`_Se&M3j0&l$$`k$oYK@nh/X'3?PJS##!2>2)l0#I`FWCQ1]VrK?@ggn41E>8]*N^eJ_U;R8m)P>[.Li/tG(3tp2a)F!M-k[F#hrhfIHcZ!eqXq@1Fd$*4l]\Ksm73BD02JiY&`88F%FNmaXE4),<Ah8>nqD];ZC8AKA<5(t@AlD>13FB`"[35Zr6J;B)MES#71Xq;''f:qDsS1"+JLAbq>-X(L$^@ImaGm:<MD+/cI-t?1@R[-F!!;Y`kQsNYdT^6&3ul[!\HkO".UtPmoqP,a)89IP$[3dG,0a3l*l#RMDLp6U<"*2)CrY`=VIDsm:Ij(bES]C>;Ho&"kFnsiGah.!66Om%%&FWjZ5cc%rQu%c#A\CLi*D4U'bp<kmY?7d,B1U,$.e=AKg2Fren@tB58ZVfT4`OT@QEs9p(!o-6A/<c6)Kh)9;&P+Ie&;,X"j,YYGJG3t!%$"X>t[%];-4*na?kGH=D*/HIAb1rZ:_i_'V:9p#r*_)7&;lW'^FX>(LCP%Un2'XB.)olTM3@F08[=ih<Y?Z;;O$2FWXVN?J5<pr_4!l%MTs2ERRMUg&5e#sPLlDqKm[FOpB@!"0?hrA^7fd&+Lgd^jl14;BlSlr%_lP:#2b61Q1iaIRdAsq0r8m^9u[nc/B<89e=RUfNXm1<Ja]2F*IUishfC=bX]Y5NMM>^ftKNrO)U)L(V!E-,VRPC4\uW9:m&[@0,P"/3276OkCprnOaCdJ<O!khi3kJ'an&841#qk&lVeQ#c]qFO,/8INAISm.C5N6#F+.S4ps&5!)3s=NrekNnJS>i]kr4H3>8Yku$b,0==*4n8]bt,MpnGi1718(QJY./jtsNE*kgk#hY%:id&i]S]@Z3(,lj72Ah$Aq]lU-c4:'=%!RL?G<_Pb@l`,ZR6@r&hD=4te*@bo3)B,Y6W?(j5Xu?,^A`<>(crTk[0_T5\sf+`nSg[u$1;UsX>!rl4InjsaiPo8@;\ssk-E93G8L-?ks&7Shl-Sk9C_WlKP5Pn&ma/DW#.n*>LlKKF2@.83.ClfD$$NQNta/&ms.ACO3k;*,=5T<CK&fe1AM#GTeElof-4BAHN0"9XW`.RQ>H?:?`[4,i25"=THU<Q@U]j^X6f%Dl3t=+3aI3*0=Ro]j%4T<N,s@<jf\89;lUi*mq\VQW9hW0LEFaC^7IuE%]'[&g"HjhFC;M(T,^$JUP<*5:M<:&9rer0%77^9j-GE=(2`=*V;4/>X'/f;VF%ZRIfn<jV^Yj_0.oI%>;]j8/n\X"$sR>Mr=N[5ODX,jLo/^CFum'IkAt"nPCn]tOjB*/^Pr_-<>oT;^5?cU21'Xcar@Lf(A$20md#GkfRkHKODNVHIeJNg@!I&Ur7i7&i@mB-)>JPu>G.*^IX2>N#r6:CIQM.2B/X9>M;%I',G5L&\nh\JnQE5HPhL;T\.Q3jE6OZ*[;qW#e.5.G+39i8>i&Vf*[[%%Vp3;BVk+j>0qGW/MU;;QGC#tA`;_3Qe$E-29'4>cbd,9Pk/rqWPVU.#9:9m0(R4r'b&h!P11Q`K&iFPIs1C_QrEma-*_--Uj@1dFrF^33S*ihLlaHHuk'(kN!g=qRPg)>l7[_r]+Hn]RPmmCPLU^+rc(S2pW:QV!GC*lI.CX3]leIIOSN\q&hK%[MQR4stc;28]&O&=G"j)$B6)JprZ-&Tcc<-f:Ynf%TF%A8/05E+8#lKj,?HG?l6>ug7U;!3J1uJ.e&F!E$cOBK'R#H<acfB'FG_J4@IDjmnHsY;IFDJBGLgsb+7irRrL?<<UZY6&edBg"gm7Vage)uNs[NT!jd/nNM<Z;oiYVfP*8mGpih_V`mZS\8)/:!a\bsaU-2OgHt=Jd?l]XkF%7m"6.YHpW("Z/_:fg=S"cWQO7DqHtOpUUII)n^pSF>Ufo=))ja1?V`3&#OTZ,IO*km>bthF*D#\rntu3_T#3=j`dIO-:E:lNqqu@%*oTLQtoi@Z0t#=W1%HRL[QiKD3jSTBm7g19io=+RFNh)VCU=f77^@H06_gql$HHNg&R^MlFI7]oR2'PFYVoYB:/&FK?#"Z3BPUTdf#e_?kjS5\,TJX_M(Qd,Ijn!Nlj@drR!rQ&?uIA$S6m.<bH/C1Pk]=dSc^rRU;TLPi_fP$l+OT@rH,g+8uC#KT-9~>endstream
+endobj
+xref
+0 22
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000336 00000 n 
+0000000448 00000 n 
+0000000708 00000 n 
+0000000923 00000 n 
+0000001138 00000 n 
+0000001397 00000 n 
+0000001638 00000 n 
+0000001725 00000 n 
+0000001978 00000 n 
+0000002052 00000 n 
+0000002147 00000 n 
+0000002274 00000 n 
+0000002385 00000 n 
+0000002521 00000 n 
+0000002639 00000 n 
+0000002733 00000 n 
+0000002832 00000 n 
+0000002892 00000 n 
+trailer
+<<
+/ID 
+[<f381e86aa0435dc41147d685edde6194><f381e86aa0435dc41147d685edde6194>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 11 0 R
+/Root 10 0 R
+/Size 22
+>>
+startxref
+5845
+%%EOF

@@ -1,0 +1,120 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 6 0 R /F5 7 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://docs.docker.com/compose/compose-file/compose-file-v3/#domainname-hostname-ipc-mac_address-privileged-read_only-shm_size-stdin_open-tty-user-working_dir)
+>> /Border [ 0 0 0 ] /Rect [ 327.479 574.2208 428.3465 585.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F5 /Subtype /Type1 /Type /Font
+>>
+endobj
+8 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/zabbix/zabbix-docker/issues/710)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 354.8646 199.004 366.1146 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/Annots [ 5 0 R 8 0 R ] /Contents 15 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/Outlines 12 0 R /PageMode /UseNone /Pages 14 0 R /Type /Catalog
+>>
+endobj
+11 0 obj
+<<
+/Author () /CreationDate (D:20240604101115-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101115-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+12 0 obj
+<<
+/Count 1 /First 13 0 R /Last 13 0 R /Type /Outlines
+>>
+endobj
+13 0 obj
+<<
+/Dest [ 9 0 R /Fit ] /Parent 12 0 R /Title (Setting both a User AND a Group in docker-compose.yml:)
+>>
+endobj
+14 0 obj
+<<
+/Count 1 /Kids [ 9 0 R ] /Type /Pages
+>>
+endobj
+15 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1857
+>>
+stream
+Gb!Sm>Ar7S'RnB3387*=Tr)tAC^f(R-><MqD43F4p(YjdD0(h-<M\W!^OCs$02eO?EbZ+P@7QPRn`\cSG8Lu%r0YG\L]Q@mTm(+#Bu,$$VF)=?It6#<dFY/>ph-b$[X;OGT&YB?(rR?F2X[[uS'X%9):CH[drJl:KS7Up]DBJ?>StLhRKQ^^(&FbTip*uk`@%-@B?XAoL2\a\TEGBARIXLP0aL3ea0KS*i`&H<Q>r_Po+\-P85Yt_%&ehQ#k\Ras+^'I>)(@W%%j"8l2,m<3/<[X;Fgt07CX>Gk/[''W7d*h(f[s)a_[g,KEV_46>RAb@DUJ6<Ee!t(Ua2G-Fj2<?^Vla=GZ;R.1mEC\\pLaQVAfqE\qBDnK!t+]:6\cY&-=fhg-dP4j(f6;R4c&Eqm0bm+SYnRUk)7&"'HeG\IG_U8_8!XSnHOL.T[cYYL)BKlALs[=_Sb*P+tF*Z+uhW%UjpJ*dfQPU3$9I;IcX9,14U1HF,!F$-<Uf'(+.%l,<I<:s]L^IDMr_&/:H:\':7AXNF66kto#T;lPG4jQM/ZU>g?pXc1pbL-"UQVU[1N=&dF4M+=ePaJ)[I7j=`0REK]oQ#>+HLkRpaOFSoA7UapgDHM/-K(T31bd`4LKb8Q+0:-DRBm#K+Js?E<#*=(]uZOV[,e5npCNOqA^0i66R!sbR1UQMAZchp?*ju&8gR@H$*,8K,Qq,MApL+h6.3:>K\jX6i(9>X3Q?KSKS]))'$mn-0D+.3&hQ^70<cUA]87:o?c7%:eo<DpVA2\qN#&c$fGq@9eM^TgqM_](!AVhWTqR%,6Bf/5N4+=^Lj-4"X-jF<6h#h:E;IAHP)/g@VWK)(j6^G@<rn?V5_Z#BJ#Qe7+9b*N_R\l6:S#(TBnNKMW,SCo=tA)>*&,3fJq0[)XZfA<#0+(/b4Q#:l6P_o>hu1]/DGrHlhN-]9"B!8r[7e_i"K&LBTG-Uhfg4JHSF+MMW">r8Vj&rZ-q+.)\tb>n9HBOOKt>1m-d3.@@#"LVQMpZ&C:P,R#.3YiE1DI);2U;fJXo:Z+1&_A_7bt97@h#K&-eORj*>R^c'N)Cm3G]G5@!\=U:u/rZATqd;DdY]BSDV8!%Ft3;$d*4-/1'9tXTb!Rpd'T?XXSJLgSS*:@2=oI[_$NjV11p+?;9JMr<ufnNdOk7ZB*\!\5fCn3_)9O9NOoHDFH'Ls`6kkOJFkYubJ7NYE,o/0,\h"3cDM!W\QY'9$Z*dCku)sO`]N+\?*h)>iS@SXEA"Epk[4IVph:brKje>Pa4I[i^2)D/"4`;)kCd>(aZP+m6J9WR^J-IhAA,I#F,(+eT1R-S5Qn^I81_9q^2.CR()<L#S^/K5+?[B;FWk7Y%2EX-Y$V:.OnRBYW*o8q'O*P+]a[.*)+"j+$os2J(UO>%HU!]FYTUTE"0=S@hg9M-!mf%iKm\GHKq<*[+G"q$'4$G\V9H-r$&(jHfb$l`RWbtudp?b)/]mA=OVUdAJn4]7F);3=kWgnNN&#WEPI_tOrV@`1)t[/rZ1nX+))P@^Gg80mTIMT.@K2J.A3hL*KjZ-Y[/5pe]g1"`@kLgN-k`A#ZS:,a/+Rk2Q=7=9m$\+&%0]gU7`TWD:N4[[`u.,5j\`+e>QYJO9mii%@jAATG"FS:\=XbLo,EbhjN_&DI"4AgCU,=_(qXc_`mJo5`*=XROQQ?+47fr_qr-WjpgNS<jYb2N3W`FX>hqi2uYp'/GsQtpS[Ap`-Lr0A5)df()K^;n_)\UF36R\-nGQn+HE@BVW-Q8kKJN1jS66-A-NE@GrUH[X@V/L0*m/fgHlmo>+NV"[uSMFoFBM!OO?Q9g1fOV%@R5W\b"B7F[W*KL+&:_<%&~>endstream
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000073 00000 n 
+0000000144 00000 n 
+0000000251 00000 n 
+0000000356 00000 n 
+0000000468 00000 n 
+0000000778 00000 n 
+0000000897 00000 n 
+0000001007 00000 n 
+0000001208 00000 n 
+0000001437 00000 n 
+0000001524 00000 n 
+0000001777 00000 n 
+0000001851 00000 n 
+0000001973 00000 n 
+0000002033 00000 n 
+trailer
+<<
+/ID 
+[<dd0fa9eddc7a60c641cc2a73620659dc><dd0fa9eddc7a60c641cc2a73620659dc>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 11 0 R
+/Root 10 0 R
+/Size 16
+>>
+startxref
+3982
+%%EOF

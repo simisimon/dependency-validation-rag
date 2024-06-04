@@ -1,0 +1,193 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 4 0 R /F3 11 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://spring.io/guides/gs/rest-service/)
+>> /Border [ 0 0 0 ] /Rect [ 137.9165 772.2208 245.4515 783.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://localhost:8080/greeting/)
+>> /Border [ 0 0 0 ] /Rect [ 162.329 719.4708 260.7215 730.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://localhost:8080)
+>> /Border [ 0 0 0 ] /Rect [ 150.6665 657.2208 217.7915 668.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://localhost:8080)
+>> /Border [ 0 0 0 ] /Rect [ 356.3765 657.2208 423.5015 668.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://localhost:8080/app/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 636.4708 124.4015 647.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://localhost:8080/app/greeting/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 623.2208 153.584 634.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+10 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://localhost:8080/greeting/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 609.9708 138.989 621.2208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+11 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+12 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://spring.io/guides/gs/rest-service/)
+>> /Border [ 0 0 0 ] /Rect [ 138.029 520.9071 178.8815 532.1571 ] /Subtype /Link /Type /Annot
+>>
+endobj
+13 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://localhost:8080/app/greeting/)
+>> /Border [ 0 0 0 ] /Rect [ 431.624 368.1571 544.6115 379.4071 ] /Subtype /Link /Type /Annot
+>>
+endobj
+14 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/questions/27904594/spring-boot-war-deployed-to-tomcat)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 320.5933 163.5665 331.8433 ] /Subtype /Link /Type /Annot
+>>
+endobj
+15 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-create-a-deployable-war-file)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 307.3433 235.6865 318.5933 ] /Subtype /Link /Type /Annot
+>>
+endobj
+16 0 obj
+<<
+/Annots [ 3 0 R 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 12 0 R 13 0 R 14 0 R 
+  15 0 R ] /Contents 24 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+17 0 obj
+<<
+/Outlines 19 0 R /PageMode /UseNone /Pages 23 0 R /Type /Catalog
+>>
+endobj
+18 0 obj
+<<
+/Author () /CreationDate (D:20240604101122-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101122-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+19 0 obj
+<<
+/Count 2 /First 20 0 R /Last 20 0 R /Type /Outlines
+>>
+endobj
+20 0 obj
+<<
+/Count -2 /Dest [ 16 0 R /Fit ] /First 21 0 R /Last 22 0 R /Parent 19 0 R /Title (Update 1: The Tomcat admin interface screenshot)
+>>
+endobj
+21 0 obj
+<<
+/Dest [ 16 0 R /Fit ] /Next 22 0 R /Parent 20 0 R /Title (Update 1: The Tomcat admin interface screenshot)
+>>
+endobj
+22 0 obj
+<<
+/Dest [ 16 0 R /Fit ] /Parent 20 0 R /Prev 21 0 R /Title (References)
+>>
+endobj
+23 0 obj
+<<
+/Count 1 /Kids [ 16 0 R ] /Type /Pages
+>>
+endobj
+24 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2342
+>>
+stream
+Gb"/(=``=W&q9SYkc0&mZ=QB+&!:lR1A57=Ci/OWelHN8Sd.f<7)gLg!C86-WVQ#;!3(S`V4hFHnuu>YXU&S?NBY'?5f(;ZCAs5,JBK,.I\]5G(f#Xn`.d0biJ6C6D^QXsQWDUZ5TI9%p*$Xk@LjF`f<.hH32>R@nL]OM*m@E!A%FeG-UHXB@02Z+SAc`FTg&#=WL!@B1[#;n(%ZKkbHk;57d1>!1T<T&?/0rC0GMWrWO!2[q#i$RI*^n)(k.%p5;gJ'%EBQ[q=Xo_=RJiPrB]KO0#coA]JVpFf92bHk2rS*'W;`XcNiaqCuBZ%J5,oo>2F!BL>-!XT`[VqMp&bcO?IQMMDuAm'XS4D-tZnaMbXcENodF4rj%@>M:N;lRicO'disNBHj$o`5"&np,VD"\<@B"8('@2W0UA4X4G(DF8<QK1o+B/$\EhEb'gft-%-ITYOeoDe;49"<N)_.Or9b;NG;(d/HF&Qin(EXQ1sf5Gf7lY#)"J@iAW]<Tb3`.FjY.HAJd^?!b]/]KIFOZpDp$nmQMVKl^^MaL;Sq7r020q$85Cs#j/ViS9C%NLlg4?1ikt00f0_<se$cdsFbk7G#s's^"?>*_Y#j;L6]'j,7^NICj$`?DbYlMB#HbPb+T?M1I0Da(A0OV\0XYVATi0QhY8<*OMaMU'o=t^7hFqsmcm!fU`^ea?VE_;As'dC#-0Am$F+uV?:`G<lYpe]hqRsPPp&JTuD[jQL/t`p'[#d7#6#f;^b*#2ebbC?n8ZoPO*l?pH_FctS5N[hNOJ@;Em0m\(peNOui`NP+DL(4uMKq(ejM%[?.)!$r^[usO(sHj_00e;u^TY2'106[6cb;pkS?Y%@WR_?TO+5ZnNCEPCh^5G.64BiA*u4#cjr5[,0N&kdrqaMc[=S%Sh!Gie/5<cYmbB=41@O1o/a=@C1f1ZBBnXMfa7%p:^45S/aXiHM7e3d)>+=j9im+_4i_SI,/`CdlIr#6,HOYC:&.mHqUJD5WNT&_s,BF&AU#'j@e10D?J7>1Oo[?[%RP9OMf*8'0YmK^j=8D<Ta/D([_/71XUsM,2lOJJ=KF-F@'_*I9.!#ZgX%"#_1Zab=Q1f[o=F1-?ZWu,#3RHbko!`\7HUiMA0SLK(>D(>R9$7<1Wcfo'V#F"Umu&_FZ!M3#@8aP[^;$5+W/ZYXSrinEJuXUb2A3@O]`I.49$A38^2(KZ`1A6V7KP5^?EdK-)7,\me;/^tU*M)C#__d^&YhHAp`&uB,(^]ZJPh8=R1uE`-Z@_qdIREK,NeI-!j_+%roOq"\7cFQ`K!:e=0'PM`6iWQ]i`%mJ$KAm2F,T2Xg!=^2G#*o(fH&*&Z/<bA,aAE]Wu:s^#K^^*qWf/!>jcNcZJi%Oll6;i7l.!J)IfpC8:FffCOIV%PUh.H:T&7AYKuD(.Y;,/G.#h0WO603_Mp/CrTXqAc+&OZ?WGBN.ndf+cc!$WW--0bf/AR5$X(ao@W`IFcfLS*/j:;9mL$/A4"jg9-Ipn2oYSlZ@pPX]I+pI'IbR+2,V(OH7O_]4'!i[BN@Z1D1%0R4#a?,^2#!rO^uE:a6Vu)bjrD)Z>8tP9o&06BK-G/-FGT#+JO1fS7%1sf=b2\17r?MDAVp>r9i+a\8(ro;BN`6o<.3o7Soullng2en`.sOhqIj[mgurCQlH>?A[0D9!@s3;XGfa6XpZ\K@SX)al?]E+8>^ON0Z^=oXI=oH!"2=763%eJ/)jKP'SXZDn[CY8GkPHkJ$s`YP3m)InEcq*9C`C]/h5m%OLpL\-p[c3ENFJpeub12>CJ;.n'X`qW3>*Zp1tbXV+;A=h'L))`ZO81VX`lX:)).-.WB(E@!8Wa_ul>]RdfI"aV#8rDjkV[MY>j==0lm[PUTc8hi9OKCi5,S0":Yi/16J8)(h4T(/4FI7!i>@Rj)P1eof]]FQoP&h07J941,UO;CF`K4El9kX;"bQ_SV9"g<m)mN#)faP,gpH]8e/I.--cY%2&U7GlI`%kc#HIZ&+V)/9?G5![k2_O'Dq&0pj<ho=tpCFLEEAAKi:)PIMc0lg!aFi=8ud#f=59/DQ(6T&88E_Wff,6ebe`kutU<pX^ojO*\b45J?'hQsrc#P)gA3Q`DaA\bDi/]6Gnq#g.+;`qDifpXH9IoP>9XkN]$]*lYC%H=5tU`?lV-Sl*g<22@7YT/hp-W#P)@pcM?]jG$I@j=*DqCW<;GqL($l-Ah<-[[qrq[@a:p=/E:$2Yk:%<Ek\/3*a-%[1S]nM+djQ@G-DBbI78giNio-Bhe(qJU,'lHuGSola>Lf-+\Ji4A^cl"Ek=f]#Q"efGff^TmifN@;Gg%\.WNI"lSIV-7\:g~>endstream
+endobj
+xref
+0 25
+0000000000 65535 f 
+0000000073 00000 n 
+0000000125 00000 n 
+0000000232 00000 n 
+0000000425 00000 n 
+0000000530 00000 n 
+0000000712 00000 n 
+0000000885 00000 n 
+0000001058 00000 n 
+0000001236 00000 n 
+0000001422 00000 n 
+0000001605 00000 n 
+0000001718 00000 n 
+0000001911 00000 n 
+0000002098 00000 n 
+0000002330 00000 n 
+0000002586 00000 n 
+0000002878 00000 n 
+0000002965 00000 n 
+0000003218 00000 n 
+0000003292 00000 n 
+0000003445 00000 n 
+0000003574 00000 n 
+0000003666 00000 n 
+0000003727 00000 n 
+trailer
+<<
+/ID 
+[<bc74bafefbfb4f8ea680e05053246ee8><bc74bafefbfb4f8ea680e05053246ee8>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 18 0 R
+/Root 17 0 R
+/Size 25
+>>
+startxref
+6161
+%%EOF

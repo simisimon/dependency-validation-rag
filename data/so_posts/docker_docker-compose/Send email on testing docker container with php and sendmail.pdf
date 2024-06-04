@@ -1,0 +1,128 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 6 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://unix.stackexchange.com/questions/36982/can-i-set-up-system-mail-to-use-an-external-smtp-server)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 543.9708 391.9565 555.2208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/cmaessen/docker-php-sendmail/blob/master/Dockerfile)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 530.7208 284.849 541.9708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+7 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://wiki.debian.org/msmtp)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 206.2208 137.714 217.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://owendavies.net/articles/setting-up-msmtp/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 192.9708 203.159 204.2208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://wiki.archlinux.org/index.php/msmtp#Send_mail_with_PHP_using_msmtp)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 179.7208 305.2715 190.9708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+10 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/questions/25880689/linux-msmtp-configuration-sends-from-shell-but-fails-from-php-apache)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 166.4708 271.514 177.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+11 0 obj
+<<
+/Annots [ 4 0 R 5 0 R 7 0 R 8 0 R 9 0 R 10 0 R ] /Contents 15 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+12 0 obj
+<<
+/PageMode /UseNone /Pages 14 0 R /Type /Catalog
+>>
+endobj
+13 0 obj
+<<
+/Author () /CreationDate (D:20240604101119-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101119-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+14 0 obj
+<<
+/Count 1 /Kids [ 11 0 R ] /Type /Pages
+>>
+endobj
+15 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2692
+>>
+stream
+Gb!#^qet5t(B-IH`BcR.mP%4uh[,V)Arf-[mFG!:>SIGTck:28O[PJ1icsZ/Ih+!_0kJCk4aUmq-5%VekBoCQmi9H)3r\p:GE;h&494i0%t4Tb,OeoT$O2*rDhF6,-Qhln5J+PTF.9:,Wrp%]h//Z>S+u?uAKMo,(id1\VVc()j9-k((Me0L?De6b"FT+GX13gh[-P0nWcdnX`_[U.("766VJ-;m+Y3hhJtc/JF:9<'m\kYdVi%\mO![OhO@:#u]NsMQqMA9-p^7;`CDB#O'gAd%Utb4Hp"$A^l#Wi^B-'go/'HE+*"gitVhp-`+6KQF_=+&^0"csqgf#>7;k%3Co4j<V9s$Bo!hNq-;S;Q+]ZAQ$mteutm</p;,U5TCU#EH8assmSDYn*On,Y*G"j-rYo0>%[5)Y79EKQo7g2qSBB%iu"qGq*F9PRL(KlP@sWk(f^QJ4RV0#$?Z:u"TQ]].=/<d^Z=EM:1mX8c."!DVU!N\Q>\H7+9?5f.l2"r)#H5Z!m=<)Qj:kYA=,7!H0M!h(PV_IY2E<)e&#:8`)"Mgg^fai3'G+LV+l>3#JoIPk^r@PNT%(cD5>m&T<XRuO^QNE)ra)EDP/r3<QEHk<u%`5^BTb8pRb&'k/ZIJU-i:,:piWNsNG.M[eW;4K<5l-u#*-7Z>kZnAmuZ!8Z0/XbP0[(cJM7Qg!!UI+P$)Oa(L3_,1r3QgWg5`O'+S`c.C(>=uMBV"tlH@7$F1akq<W\qJWnm#FS#tnWpT]fkA3jil&ande4oV`*Z"*="ee[D_'gNQWLi,-;Rr.GOAK':Eh?+Hr"0FKRFN_@RK40*0_1_fZ7$?f404iN:miQg6E<4F1J>-fV!?5W=SF6Ls)^$\2Eh_)]UY+e]?]Wm"=j+D5u[FP.B9!e@u]sp6fUucH[!OX$IEIIBQ\*JN8BjC.RE-X<#jJn^)mCF!'F5(_tL6aC$>0u00k^98^N2YrLmCWq8:K8,dE[eYg#:)4;T_tAscOKQ@ZQPei[H=WT>E;sY]g8MR0?,]6Z&kC]?nUm\qlEHqg>0)`#ZF_YYf:eP@%0tA8L_0(p8QWqhUA\%'IsqB91G0G<O1Ma/*K!9&WB7fL.I=NIEZFfRRFdD4!k18R3Pd&VJOBa>t%1=c@CuF(eZ;8iOUqh'.g-D%VF,TD<-N=79u)G9M<#0o>qBJ)o(,b6D6f.8/*je]fer"l?D#!-F>ZVcpWWGnJ;9^>V?I`gq=FahlIhIQ-"*nb>\,m+uMb<rD;R$^!5E#>e:nT7:*<Aen]L28KEQ%5rgsFLoF?1EO8G"ME=A0*5"re'GW'R*?AU[,,&(mHqWStI#p;@D7<eX)EJ#b@l2ebBRgR*U-1(#AfZro)!h]A54fJ>BFF:6g=Z_\of&PNa"&"aZ#QSo"BT,p>./QS5A&gj!E1,_<)sg6>Mm,5XCrT-:bR^Yg.,5_U]@<IWglCD,buDlop]CVJDM-KE'^L2<*#`9G/OgfRHIa/^j&[$#k(K/ITJ+(;#[;(CITmJ_TGT,(*4LBA1tjIA<@Ib@m8:66ZLK.HIh*0`VWj3mQMEa06\>9X-Zn+D<C`YTRY_2]Y=C&LT=c8;Qamn_=*M3KcB7H\jjSW)AGc^#0"c&W;Q4[s*8a!&Zc`[lRnEe$_i=/!-Ln.KcR&MP>Y=i13(\2anbk-g;J@+Cfqf^\m?jNAe@^crN+`s'.S8oYEc&aj*p=_^F+.9If7Pqq<Q[ZE17X#7U>`)T!,*<9MmZXWOHW,N`r@AdtOeSaLZ9</)Fts%TJrUO8?jf#>R#bq@,OMcSj/Xqke(Ca&X&>/.PAlLJ5!o?>f3*k,N0`,sf?<Zs5kU806Mq&XW3Afd<hmL7f[,jnbsBEFD(b"OfD5V+=X%f&>^p%%9L_\5.rdWnTrD/%%iU0;(X'V"p$7?m?F0]9$o,&l?oMDa;2KmPZXgEYWH&Y$8.h?IRNlC<TjNUmuC4a.8VK4W.k_3S[/iAq'9g_Y.Io+0U9>:NQhQ>WB?R8%UflZW5CdT.jXPbk:oAIYj1m^X5N$TIB4R+:HdS)agW4K-@J_H0C%j\YGT,lW62;24[Da6doL1*YSQVq;iLLe:rRN6)9prMR1(.qX>lZ+W#gQ=n$Io6$V)YDdKt.d,d:0ZC%=RO3=bPWeHj"YS"u\bYhW8V)SA87XB=?3c\TmO6IOjUuX#JDs>#bUWR)`"[dB>L"sHN'rV+"@nW]rL1*>r"V-0UGn_fce:*3rS'Tc9q'Uu4Fp8Zu)(\l,baB:6bdM\JEr?H4hhqHOd''M?KM3Q>rD=!',fH\j1c4b.QtKE%I(dJCQVJN7R49VQIRq'>4/J??'+%=LinFuTlJn/^Dcu*Mh(,EE&S':I"eCO%VY<dRe-t-^W&n>X!1o_UU=d!ukM%#5GmWsRfH1M:/$;H,^d_KpQk3L<2:B/Fdjp_h=,mQ=<._>oUju.[ZuTNJZ/9a/'eTBJUn^''+0+8]"?Y\^`q-'\%=M6kN\YdhL[D-;fH#$#3b0LY\JQt7@hl6=T/U\)_?tofcTc@ZRSPWMOaA?]DG$1,3*8kNLH_luZ0=HeJ^:BUht(HB9g/DlgH@VPI)aZl#U1Omq1Gq1%$L8!eHs1ppJSan]/9md'C+?O]DcY"&_c!qbd(/s:.i,)elK]]&*:Y47OW;bom)F?_^gY8+X7oG(u$d!+KVn8`-%BZpOVts$(Uo8e:dm=~>endstream
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000336 00000 n 
+0000000590 00000 n 
+0000000811 00000 n 
+0000000923 00000 n 
+0000001103 00000 n 
+0000001303 00000 n 
+0000001528 00000 n 
+0000001793 00000 n 
+0000002048 00000 n 
+0000002118 00000 n 
+0000002371 00000 n 
+0000002432 00000 n 
+trailer
+<<
+/ID 
+[<7a14c0f5fea819e92a86f6ec1382f594><7a14c0f5fea819e92a86f6ec1382f594>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 13 0 R
+/Root 12 0 R
+/Size 16
+>>
+startxref
+5216
+%%EOF

@@ -1,0 +1,132 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/docker/docker/blob/master/experimental/docker-stacks-and-bundles.md)
+>> /Border [ 0 0 0 ] /Rect [ 163.5665 498.7708 462.8465 510.0208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/docker/docker/issues/23901)
+>> /Border [ 0 0 0 ] /Rect [ 242.114 212.4208 396.7715 223.6708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/Annots [ 5 0 R 6 0 R ] /Contents 17 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 16 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/Outlines 10 0 R /PageMode /UseNone /Pages 16 0 R /Type /Catalog
+>>
+endobj
+9 0 obj
+<<
+/Author () /CreationDate (D:20240604101117-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101117-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+10 0 obj
+<<
+/Count 3 /First 11 0 R /Last 11 0 R /Type /Outlines
+>>
+endobj
+11 0 obj
+<<
+/Count -1 /Dest [ 7 0 R /Fit ] /First 12 0 R /Last 12 0 R /Parent 10 0 R /Title (1\) Can you run commands directly 'against' a swarm / swarm-mode in Docker 1.12 running on a remote machine?)
+>>
+endobj
+12 0 obj
+<<
+/Count -3 /Dest [ 7 0 R /Fit ] /First 13 0 R /Last 15 0 R /Parent 11 0 R /Title (1\) Can you run commands directly 'against' a swarm / swarm-mode in Docker 1.12 running on a remote machine?)
+>>
+endobj
+13 0 obj
+<<
+/Dest [ 7 0 R /Fit ] /Next 14 0 R /Parent 12 0 R /Title (1\) Can you run commands directly 'against' a swarm / swarm-mode in Docker 1.12 running on a remote machine?)
+>>
+endobj
+14 0 obj
+<<
+/Dest [ 7 0 R /Fit ] /Next 15 0 R /Parent 12 0 R /Prev 13 0 R /Title (2\) Can you still use docker-compose files to start services in Docker 1.12 swarm-mode?)
+>>
+endobj
+15 0 obj
+<<
+/Dest [ 7 0 R /Fit ] /Parent 12 0 R /Prev 14 0 R /Title (Here's what I did:)
+>>
+endobj
+16 0 obj
+<<
+/Count 1 /Kids [ 7 0 R ] /Type /Pages
+>>
+endobj
+17 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2346
+>>
+stream
+GauHLBlE$$')h6*;'-R9-Q#])F]ep#Ku]cP80WCs!L$p)=L?/8`0fmlGY"V.p%tbYUikALA>?qqlt.>>YGtpBVFtcR\`U@C'>9l3l[qj58!=h$?)L>ZTBQ77m.[j4pi25FhM'GCp:GaaBX]"#f]cf2emk&8XrVKdm>gN*BRPVph<M(mF4'I(,UV,cn.\C^T`_45VmaiO18j_8QppS/DRBEhPNK95QTCD=%^SSY7]lhd)\6_H`:UAGAE++nI\Y$ZD";4Ko&o%f%k\&]]6c$FmrY#G3ur,iCYR>,T+K'_/Q39sUQqW&V:W)icf9:1,9WG0dmu[:ThJCJ.gdi]IXsC@A"`rTT8QO^/O?@e4&84$VedMJa`XkgLkhN4F$/gMJ(B>TILKu-nG6KR+E^tfn('a<A?dlb`I9BP\I*JN;PV;kP@k?YkT$hf;=H&A6't2-M`);h]VS&/\tOKhLo^aKk4\Ylp\4^`FSdcN-nKM>1B%C%9&Ru&9LYDd&=Z]_hYQ/qNh":r9:]VJ]D^*tr8hLjja%q[lfYS&)>%aEC]Rt)Ja%Q`U,7gq0OB3nI\(DS5tXZeL0uSHaU"i^NHdNR0G[7>s+Kqhkuh/o;U%QTS[o-T+1`i$e(]3V;qR+;ZX!</W0N1UCdY1^-&.Ch,,54>B;kQV50[(=aaHG#H1OEV,N3.1g,75!S<?gSHs\K^):4X@&]%*YK+r'ieiP0nIL>6GM=e=p>P?T*X`I)9*?gHaN;pbtGXK7/0GCu`CK/2Db]AV5=mI?K@kJn_B=WgP[_VKNNJ\KCQ?#ELR7$FE;O,T$>-;E,Q:>I:!@$Z/ZZ)M2[WJ)a&YkkW197;kbS6p'NiueTB]?4NX>^8$m,N]ZSZZUUnJo"<VLr<$(DmsJj'!iu#gA$Yo[bKnTi#rmQMkW?K)e@,o^\/@!3Q=aYm0s@_FH&tg'-!l>r]`*=aGZHnmrCWLo*THe]:G@!/2G0%O'g,f2lH<m00eh<$nZm5Jf2+^&X/I8^Sdt_[GHUcN)C`U.O&%Mu@m'eR]0DRH[Js@a9J2cB*i[NPe_XSu-R3dfP(k.4>NE$[0P6NeV'T%'(;@'d$;/Vi%%4>i-.&Z?4-!q%\gQ6'FB9.X1`!@EI'UW-2nI5T0N%.HCFX%<&:(5Sm9#aX$WB_@5+,C)`-F]t90D?<KB,9^O=np4c?>:J3,uqu5WD,.H$D4HI);9'm#%&JJme\Q95.o^FGteF,G9SP&`YVJhT<fg=kC,KL]S.5Ks*W"KF#k=G_)76WE?5&6)].L[1=P;(!d&N-S"%SaIba&7Fa3A,<3IM:qQMR3Xm7]mk/S=#u21p$7Lq,&3SF=6+WO*ESLn_@JBs2jU^LQ]lZO)O`,8Z!pPKdN!r3f9RjX`o/AP5CR6bo2KXUTqnGAI9l!pN2K]/XoAoa#)5nQE@CB[V<_P-=$/7dO'dEC#qtP`'JO%J_X.RVE%gVU18MPjt^;79cTRkjcgK&Go.MrF7.Xh\Vrj^R(d5ETLqoKA@452=CVU=n\FmfV]d8+EsZfAX%j#=g;\-%*riKP;odG@9?S`66IQnMfBqC)F?=sH2a'j;Y(*NYAg!4oe+M<g&D7MI#?a"fhEc!Ee9-+5pKIf`XiS*==g8enRWNg>;.<j0r5b$>Ehbn2\lm^f2gp-hZG!\JSRL+fI&d<sfdlO<X53L"]V4I8b#S3O[F\T=UkMJn9$0`q_2mt0X6l:X997!hh6HVL6g+;P:$5i&diI#7=2T\k2c'0Oq+a.4N>`VD5U9>\flq`&B(QF0LW\^nI)Gh'C_CGh6joPt#0_^B>C?;/l@(i6J##^U2.E@eL'o>=1oJpcV[$Dp*VD?<q3b"ESMp+[_5j,ESbCqW&R/&NpJUUWL<Q+g\])P+^qe2pQtXGYO"3a6Q?NT2nc3KWX`iP=E(Rc3TJ+&?puN<ir8q)i%c/+oK>a+&R7D(h.<*2aUV"Q*[6\[@S`*/.C+NEEgn:StOQLSXP7<ES!;/[BX6Y9p(t<Zc0?B;lgaM*;.%@=&`hm%Vm"e"nM^R#YOmT`E1Br_hg2d<M4Ua*(DoI=LWVJ<&Ra%8Er'`CIkI<+AeC9b(MDo%UIV5O+@-`iC=:=h?n*c&1R#J#_dT/mY&?=]aF=I0-[eWj0)ub.hop##Y&(B73gUX7^_XRs"ISC]"o^^p+h@06oLtJP:D\&E<_!-0k,CFpld7/7G159a[f!gtrX*LQ$GAZL@*@[DYFn3KN-SdG1Q0c[-`/3$o6EI[DI#-$hQF"`(l\o$h;l<Wh?sf[<bL[A<S`L3&Z#CIZg1ItXW]W5,42,c8[Zh!#ffKD5(Ls51ko>&=[WVDj<rfjXbNfSkma201Zi:%LncZK~>endstream
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000336 00000 n 
+0000000448 00000 n 
+0000000686 00000 n 
+0000000882 00000 n 
+0000001111 00000 n 
+0000001197 00000 n 
+0000001449 00000 n 
+0000001523 00000 n 
+0000001736 00000 n 
+0000001949 00000 n 
+0000002138 00000 n 
+0000002319 00000 n 
+0000002418 00000 n 
+0000002478 00000 n 
+trailer
+<<
+/ID 
+[<89f2f16fac47d4b679562814d365cd55><89f2f16fac47d4b679562814d365cd55>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 9 0 R
+/Root 8 0 R
+/Size 18
+>>
+startxref
+4916
+%%EOF

@@ -1,0 +1,148 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 7 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stackoverflow.com/questions/38762709/one-or-multiple-databases-per-docker-container)
+>> /Border [ 0 0 0 ] /Rect [ 98.12896 477.8708 169.4165 489.1208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/abagayev/docker-bootstrap-collection/tree/master/mysql-few-databases)
+>> /Border [ 0 0 0 ] /Rect [ 359.5115 477.8708 420.554 489.1208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+8 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/docker-library/mysql)
+>> /Border [ 0 0 0 ] /Rect [ 110.2115 351.2708 185.6465 362.5208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/docker-library/mysql/blob/333935aa6612376d58737a8cab0e3f5df370585a/8.0/docker-entrypoint.sh#L197)
+>> /Border [ 0 0 0 ] /Rect [ 212.3315 351.2708 265.2665 362.5208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+10 0 obj
+<<
+/Annots [ 5 0 R 6 0 R 8 0 R 9 0 R ] /Contents 19 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 18 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+11 0 obj
+<<
+/Outlines 13 0 R /PageMode /UseNone /Pages 18 0 R /Type /Catalog
+>>
+endobj
+12 0 obj
+<<
+/Author () /CreationDate (D:20240604101116-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240604101116-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title () /Trapped /False
+>>
+endobj
+13 0 obj
+<<
+/Count 3 /First 14 0 R /Last 14 0 R /Type /Outlines
+>>
+endobj
+14 0 obj
+<<
+/Count -1 /Dest [ 10 0 R /Fit ] /First 15 0 R /Last 15 0 R /Parent 13 0 R /Title (Multiple databases in a single Docker container)
+>>
+endobj
+15 0 obj
+<<
+/Count -2 /Dest [ 10 0 R /Fit ] /First 16 0 R /Last 17 0 R /Parent 14 0 R /Title (Multiple databases in a single Docker container)
+>>
+endobj
+16 0 obj
+<<
+/Dest [ 10 0 R /Fit ] /Next 17 0 R /Parent 15 0 R /Title (Multiple databases in a single Docker container)
+>>
+endobj
+17 0 obj
+<<
+/Dest [ 10 0 R /Fit ] /Parent 15 0 R /Prev 16 0 R /Title (How does this work?)
+>>
+endobj
+18 0 obj
+<<
+/Count 1 /Kids [ 10 0 R ] /Type /Pages
+>>
+endobj
+19 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2751
+>>
+stream
+Gb!SnD0+aG&cR6o!]+[`cAbPTYG0f1X^'$c--l>3<h!\J1Ccf>,%?_n!MC2$f69MYZ9cSJlrnfVhcV93/p8&C&"[(L7K`FjlebQod+Jj#05P/\BXU17B6e06M'fQQ?f$3cs)pKY#qaa:]E!Y<J`Vhq(S6%sgI<Q61L^duY3l!toaV,ZS$duO)#.d1+ksH`/hE\3*Ep0\F\r,-,s%JlR?CJ_ZfmG=PDEcR'*PG99MeceOqoK40p['E"VG+8fe7%4?7Gc^<qc-&Q&">F)L.$8q%FDSS[#[c2:a,\%d:cD011n(1g_HKd"3lC:(Sp%9%ZaqcjZG3O^,>$7\rq&FdH<4Q8WW)*rN,]AR(B8/NCq8pl_A]bR.br)t*Nfs72-T/`1]^Q93ie-W1_"ZO99:s$t"JM.o`[D2pEH5IVhX623V%`mWuq9fn8;rJd2YYoMk6@;a#)+",cB3&h?P`m:M=^H75i=Tred.(PB._tP]61Ep^:,Tjls>SOdseQT[]Lk;99L+(=9Z6Q0m-cM5Sq4A0pf,Y!llIS\<nIWiFrJcS.q^ji1C@\B41m]RHV_XiJZ*AD6hc%g@KtM?!me8s&I(m8,^:KchIN%,!r,?e,XpaBNR;_BiQ-RFVn_*\LU+[/*<G:*)\B\H"-J.'29(@KmhnR*IJ&V!\$h7c]3p,0dI[)1>`K"2MgXJ1&]Dq3\1O$b:AG!]@nn+smOZ?oS3t@2n.:.=**"o$K^/CnZO*Q5_>4iPs]d1M$%-JYVes!`l]uNJe][lVSiSeOGKHNBipB5I[9:cM:@:[4&Pc]JHS!P,tmkn[<.Js)Si.[$:XK%\m*l.M0NtV"fIII$FbUntDg7#cqJgK'X)tio#h%f/"bM3CIPO%P8%N$aa^AQHe1Zl'FlN5P"kcQ?o>B66F?,b;"_K2eK1ZW^S,"_7&XL&otf,r;uR\Z=<qU8:Q@H,971)u:.Ym\N+%V(!A7t,!pI66p66dN.FSfQMPaKqEkZ9@2W&s<D)4IH&q=1X=8BHBD(Z[l-VCbrcE597N?ZDiJ>Nfc;TI>t;Q=NVff.:%oN`t=a"kcSEF`]@MI8OPVbMa4'rOCBBFL?fot@#GLHc,Up[m>u_%k?k\3NqF[u`O,_J^JFMsDrkR^0%UJ\r?Cpgd_?m#[%G/H@MREWNIp=n;GslQYlq,jV'H`")=J^:-dI0lkcSi<#^jSQl@q3]?p+p=VFSFJ+ao2@/9T'\f:ru_$>_dYFJ9@Q"4.L3NZmUM!Pe?LZ>G4miX?3pU9lsNH3\+T,g%UD8m"]IO:_F_J8#1]3Pn>[IT0+FBa(UXD@6`1@h^B1,[(EYcHEX(<$+GsLnY)!nu*L\`d,ODJeAL033Uo93YLOp$,hD#>l;^rJ%g?H?J.;q8>-r*j'8Yk2a0h9GOV%jQD%@:Q9ldsS;kZ8<a,RYL`<7T<:rTlL,*#-Pd*=&7^sr^C>O[Q#,;:KPpm=s]a(/ZS^>$$+N`:798JHINXeW[p=Bs>nBs_l+?X&1eh,KWQ2ZKL^4!BE[;DgX,TP>pMrV=%K0!XD!dm\EdsIY@$6*O3(`"NsE!FIl6?Qs!afR5tc&!(.$5Ktblq)o&C6Uh]bW&pWDg9'6)_3>S;OP9&cr6gMPlYD<-`A.-#YYHrQ?`lUWTmZS`_aXs?CE(._V[@fquM7ITXsi-NPA^YHfK5[QVen?#d1kQf`>)c.^<Z@RqH0Fge1C]^o[Ni/ec$<FH'W.QTe@icYoI@Eec^hg3#QVf$1Jd<]:hLm7oud]c#8D[e'1FeeZ9&>'iWk)SPY(DWY2RGaBX?K4,%<J`Z\N(^F)d^j:d*JJ?qU1a'W#*B]qUNaO4=6XQ>X.S`fANqHG0qVYI%7(iuN)e^iHhA$cU6O'%qPF0pkq8#p)@ratVP\_=dN.=hiGkV"AO;'QP"TjMm0(9k#f`EHbWYJKL^U;f!o[+0UJadS%?6lUGis&9t1R.t`'/ZJB"m?C5nYL'c_e)qZAtp)H4J^9rW`hf,/3N>QW#X<f:L<TB<\MTV9,VB;#JA$)Rr%`*2g-/6NH<L"Gk2Dh\3_GhD!OoE\$tBg2/*K<F7Zh;;fM'o<?8TU,G]pW7W5d2PODP"CM580B1Js;e#>Z/U'*h@.j5*>JPV^Cr*q/l@5dkk;d#PuPr5+H[q/;Z(6dL/)Cp'Zf.B]npBqII;8lAH[_/g=_gfi;R(Z5_X`uYD8>,"ZJY?PN=8N*sj8kQ*0.%--G/M\rBRCPNr'o"iR]#G=WI4q\e)@p1N+Wf@B[-+U_<HYsq=/3s>u1G`]p[\i6U)A,&tE#fs8Lo`THJ2E`S4%o++$/Xp%Dt_*<tqRl"Zfib5fg8pUXJ?0[\9SXkikqYKd<j"*F%)SkhPqVAI_'\Mej/UFr?k\u-MIiHkE!GMW&b;S2pM4oO.-Eq3Y5]CY<_G5:!@Y?fJWFrKj3I<h$h#_G4=r%AZ<DqGE9N/35'XVef/m\@:P@tdAiqhW+DK,S5baCn:VrP3Fq"r[haLQ45![<[eu>9cY1\@9ulbeuAc+jsOITH9(H7!;j*eZO.iEXb$Gaa__1(,o/15q$HY/=e.1%N-N9:5c6pl?[G=U%mZE,1E'Ib6/0gVF[l#k!l%7!-bg='[t4u"\W@E:k@4r$$;C=q1q,a5(J,jr1Zl#V@H:mVVFH"3t48RKAr-pUMU$.Ql@=s_t@:mf0[s!o*qp6Zm%Y.g2Da`RF3jAD7-3T9biYGi4P=$:0UZ^qKVs_9B)3cb#JcqOJi;Hc+>D_HM:5)ZT%"~>endstream
+endobj
+xref
+0 20
+0000000000 65535 f 
+0000000073 00000 n 
+0000000134 00000 n 
+0000000241 00000 n 
+0000000346 00000 n 
+0000000458 00000 n 
+0000000701 00000 n 
+0000000939 00000 n 
+0000001054 00000 n 
+0000001245 00000 n 
+0000001512 00000 n 
+0000001754 00000 n 
+0000001841 00000 n 
+0000002094 00000 n 
+0000002168 00000 n 
+0000002321 00000 n 
+0000002474 00000 n 
+0000002603 00000 n 
+0000002704 00000 n 
+0000002765 00000 n 
+trailer
+<<
+/ID 
+[<9b455b2ffa553c09d2a481c3aa94fce3><9b455b2ffa553c09d2a481c3aa94fce3>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 12 0 R
+/Root 11 0 R
+/Size 20
+>>
+startxref
+5608
+%%EOF

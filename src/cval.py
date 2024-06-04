@@ -1,123 +1,55 @@
-from dotenv import dotenv_values, load_dotenv
-from database.database import VectorDatabase
-from typing import Dict
-import argparse
-import os
+from retrieval.retrieval_engine import RetrievalEngine
+from prompting.prompt_manager import PromptManager
+from generator.generator import GeneratorFactory
+from scraper.scraper import Scraper
+from data.dependency import Dependency
+from typing import Dict, List
+from dotenv import load_dotenv
 
 
 class CVal:
     def __init__(self, config: Dict) -> None:
         self.config = config
-        self._check_config()
+        load_dotenv()
 
-    def _check_config(self):
-        raise NotImplementedError()
+    def retrieve(self, dependency: Dependency) -> List:
+        """
+        Retrieve relevant text from vector store.
+        """
+        retrieval_engine = RetrievalEngine(embed_model_name=self.config.embed_model)
 
-    def validate():
-        raise NotImplementedError
+        if self.config.mode == "live":
+            raise NotImplementedError()
+        else:
+            index = retrieval_engine.get_index(index_name=self.config.index_name)
+            vector_store = retrieval_engine.get_vector_store(index=index)
+            raise NotImplementedError()
 
 
-def get_args():
-    parser = argparse.ArgumentParser()
+    def generate_completion(self, dependency: Dependency, context_str: List) -> str:
+        """
+        Generate answer from context.
+        """
+        generator = GeneratorFactory().get_generator(model_name=self.config.model_name)
 
-    # basic CVal config
-    parser.add_argument(
-        "--output_file", 
-        type="str",
-        help="Path to the output file or directory."
-    )
+        messages = PromptManager().create_prompt(
+            dependency=dependency, 
+            context_str=context_str
+        )
 
-    # basic RAG config
-    parser.add_argument(
-        "--enable_rag", 
-        type=bool, 
-        default=True,
-        help="Enable or disable the RAG system."
-    )
-    parser.add_argument(
-        "--embed_model", 
-        type=str, 
-        default="openai", 
-        choices=["openai", "huggingface"],
-        help="Embedding model used for vectorization."
-    )
-    parser.add_argument(
-        "--mode", 
-        type=str, 
-        default="static", 
-        choices=["static", "live"],
-        help="Operation mode of CVal."
-    )
+        response = generator.generate(messages=messages)
 
-    # vector database config
-    parser.add_argument(
-        "--index_name", 
-        type=str, 
-        default="technology-docs", 
-        choices=["technology-docs", "so-posts", "blog-posts", "websearch"],
-        help="Name of the index."
-    )
-    parser.add_argument(
-        "--metric", 
-        type=str, 
-        default="cosine",
-        help="Metric of the index."
-    )
-    parser.add_argument(
-        "--dimension", 
-        type=int, 
-        default=1536,
-        help="Dimension of the index."
-    )
+        return response.choices[0].message.content
+
     
-    # retrieval config
-    parser.add_argument(
-        "--top_k",
-        type=int, 
-        default=5,
-        help="Number of similar documents to retrieve."
-    )
+    def validate(self, dependency: Dependency) -> None:
+        """
+        Validate the given dependency.
+        """
 
-    # llm config
-    parser.add_argument(
-        "--model_name", 
-        type=str, 
-        default="llama3:70b", 
-        choices=["gpt-4-0125-preview", "gpt-3.5-turbo-0125", "llama3:8b", "gpt-4o-2024-05-13"],
-        help="Name of the model"
-    )
-    parser.add_argument(
-        "--prompt_strategy",
-        type=str, 
-        default="zero-shot",
-        choices=[],
-        help="Name of the prompting strategy."
-    )
-    parser.add_argument(
-        "--temperature", 
-        type=float, 
-        default=0.0,
-        help="Temperature of the model."
-    )
-   
-    return parser.parse_args()
-
-
-def main():
-    args = get_args()
-    load_dotenv()
-
-    db = VectorDatabase()
-    retrieval_engine = db.get_retrieval_engine(args)
-
-    answer = retrieval_engine.retrieve('EXPOSE instruction Docker')
-
-    # Inspect results
-    for i in answer:
-        print(i.get_content())
-
-
-
-
-if __name__ == "__main__":
-    main()
+        context_str = self.retrieve(dependency=dependency)
+        completion = self.generate_completion(
+            dependency=dependency,
+            context_str=context_str
+        )
+        return completion

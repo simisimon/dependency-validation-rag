@@ -5,6 +5,7 @@ from ollama._types import ResponseError, RequestError
 import ollama
 import backoff
 import logging
+import os
 
 
 logging.basicConfig(
@@ -14,24 +15,34 @@ logging.basicConfig(
 )
 
 class GeneratorFactory:
-    def get_generator(self, model_name):
+    def get_generator(self, model_name: str, temperature: int):
         if model_name.startswith("gpt"):
-            return GPTGenerator(model_name=model_name)
+            return GPTGenerator(
+                model_name=model_name,
+                temperature=temperature
+            )
         else:
-            return OllamaGenerator(model_name=model_name)
+            return OllamaGenerator(
+                model_name=model_name,
+                temperature=temperature
+            )
         
 
 class Generator:
-    def __init__(self, model_name) -> None:
+    def __init__(self, model_name: str, temperature: int) -> None:
         self.model_name = model_name
+        self.temperature = temperature
 
-    def generate(self, args: Dict, messages: List) -> Tuple:
+    def generate(self, messages: List) -> Tuple:
         pass
 
 
 class GPTGenerator(Generator):
-    def __init__(self, model_name) -> None:
-        super().__init__(model_name)
+    def __init__(self, model_name: str, temperature: int) -> None:
+        super().__init__(
+            model_name=model_name, 
+            temperature=temperature
+        )
         logging.info(f"GPT ({model_name}) generator initialized.")
 
     @backoff.on_exception(
@@ -44,12 +55,12 @@ class GPTGenerator(Generator):
     ),
     max_tries=10
     )
-    def generate(self, args: Dict, messages: List) -> Tuple:
-        client = OpenAI(api_key=args.api_key)
+    def generate(self, messages: List) -> Tuple:
+        client = OpenAI(api_key=os.getenv("OPENAI_KEY"))
         response = client.chat.completions.create(
-            model=args.model_name, 
+            model=self.model_name, 
             messages=messages,        
-            temperature=args.temperature,
+            temperature=self.temperature,
             response_format={"type": "json_object"},
             max_tokens=1000
         )
@@ -58,8 +69,11 @@ class GPTGenerator(Generator):
 
 
 class OllamaGenerator(Generator):
-    def __init__(self, model_name) -> None:
-        super().__init__(model_name)
+    def __init__(self, model_name: str, temperature: int) -> None:
+        super().__init__(
+            model_name=model_name, 
+            temperature=temperature
+        )
         logging.info(f"Ollama ({model_name}) generator initialized.")
 
     @backoff.on_exception(
@@ -70,13 +84,13 @@ class OllamaGenerator(Generator):
     ),
     max_tries=10
     )
-    def generate(self, args: Dict, messages: List) -> Tuple:
+    def generate(self, messages: List) -> Tuple:
         response = ollama.chat(
-            model=args.model_name, 
+            model=self.model_name, 
             messages=messages,
             format="json",
             options={
-                "temperature": args.temperature
+                "temperature": self.temperature
             }
         )
         return response['message']['content'], None

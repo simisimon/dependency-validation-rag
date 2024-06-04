@@ -37,7 +37,7 @@ def main():
     args = get_args()
 
     cfg = NetworkConfiguration(
-        project_root_abs=args.repo_pat
+        project_root_abs=args.repo_pat,
         enable_internal_links=True,
         enable_static_blacklist=True
     )

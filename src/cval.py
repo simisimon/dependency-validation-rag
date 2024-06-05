@@ -1,10 +1,19 @@
 from retrieval.retrieval_engine import RetrievalEngine
-from prompting.prompt_manager import PromptManager
 from generator.generator import GeneratorFactory
 from scraper.scraper import Scraper
 from data.dependency import Dependency
 from typing import Dict, List
 from dotenv import load_dotenv
+from rich.logging import RichHandler
+import tempfile
+import logging
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[RichHandler()],
+)
 
 
 class CVal:
@@ -12,30 +21,40 @@ class CVal:
         self.config = config
         load_dotenv()
 
-    def retrieve(self, dependency: Dependency) -> List:
+    def retrieve(self, query: str) -> List:
         """
         Retrieve relevant text from vector store.
         """
-        retrieval_engine = RetrievalEngine(embed_model_name=self.config.embed_model)
+        retrieval_engine = RetrievalEngine(embed_model_name=self.config.embed_model_name)
 
-        if self.config.mode == "live":
-            raise NotImplementedError()
-        else:
-            index = retrieval_engine.get_index(index_name=self.config.index_name)
-            vector_store = retrieval_engine.get_vector_store(index=index)
-            raise NotImplementedError()
+        if self.config.index_name == "web-search":
+            logging.info("Start scraping new documents.")
+            scraper = Scraper()
+            with tempfile.TemporaryDirectory() as temp_dir:
+                scraper.scrape(output_dir=temp_dir, query=query, num_documents=self.config.num_documents), 
+                retrieval_engine.add_documents(
+                    index_name=self.config.index_name, 
+                    document_dir=temp_dir,
+                    dimension=self.config.dimension,
+                    metric=self.config.metric
+                )
+
+        context_list = retrieval_engine.retrieve_context(
+            query=query,
+            index_name=self.config.index_name,
+            top_k=self.config.top_k
+        )
+
+        return context_list
 
 
-    def generate_completion(self, dependency: Dependency, context_str: List) -> str:
+    def generate(self, dependency: Dependency, context_str: List) -> str:
         """
         Generate answer from context.
         """
         generator = GeneratorFactory().get_generator(model_name=self.config.model_name)
 
-        messages = PromptManager().create_prompt(
-            dependency=dependency, 
-            context_str=context_str
-        )
+        messages = []
 
         response = generator.generate(messages=messages)
 
@@ -48,7 +67,7 @@ class CVal:
         """
 
         context_str = self.retrieve(dependency=dependency)
-        completion = self.generate_completion(
+        completion = self.generate(
             dependency=dependency,
             context_str=context_str
         )

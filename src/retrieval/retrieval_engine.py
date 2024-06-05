@@ -2,72 +2,89 @@ from pinecone import Pinecone, ServerlessSpec
 from llama_index.core import Settings
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.vector_stores.pinecone import PineconeVectorStore
-from llama_index.core import VectorStoreIndex
+from llama_index.core import VectorStoreIndex, ServiceContext, get_response_synthesizer
 from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core.node_parser import SemanticSplitterNodeParser
+from llama_index.core.query_engine import RetrieverQueryEngine
+from llama_index.core.postprocessor import SimilarityPostprocessor
+from rich.logging import RichHandler
+from typing import Tuple
 from dotenv import load_dotenv
-from typing import List, Dict
 import os
 import re
+import logging
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[RichHandler()],
+)
 
 
 class RetrievalEngine:
-    def __init__(self, config: Dict) -> None:
-        self.config = config
+    def __init__(self, embed_model_name: str) -> None:
         self.instance = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-        self.set_settings(
-            embed_model=self.config["embed_model"]
-        )
+        self.set_settings(embed_model_name=embed_model_name)
 
-    def set_settings(self, embed_model: str):
-        if embed_model == "openai":
+    def set_settings(self, embed_model_name: str):
+        load_dotenv()
+        if embed_model_name == "openai":
             Settings.embed_model = OpenAIEmbedding(api_key=os.getenv("OPENAI_KEY"))
-        if embed_model == "huggingface":
+        if embed_model_name == "huggingface":
             raise NotImplementedError()
 
-    def get_index(self, index_name: str):
+    def retrieve_context(self, query: str, index_name: str, top_k: int) -> Tuple:
         """
-        Get Index.
+        Retrieve relevant context from index.
         """
         if index_name not in self.instance.list_indexes().names():
             raise Exception(f"Index {index_name} does not exist.")
         
         index = self.instance.Index(index_name)
-
-        return index
-    
-    def get_vector_store(self, index):
-        """
-        Get VectorStore.
-        """
         vector_store = PineconeVectorStore(pinecone_index=index)
-        return vector_store
 
-    
-    def get_vector_index(self, vector_store):
-        """
-        Get VectorStoreIndex.
-        """
-        raise NotImplementedError()
+        service_context = ServiceContext.from_defaults(
+            llm=None, 
+            embed_model=Settings.embed_model
+        )
+
+        vector_index = VectorStoreIndex.from_vector_store(
+            vector_store=vector_store, 
+            service_context=service_context
+        )
+
+        retriever = VectorIndexRetriever(
+            index=vector_index, 
+            similarity_top_k=top_k
+        )
 
 
+        query_engine = RetrieverQueryEngine(
+            retriever=retriever,
+            node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=0.7)]
+        )
 
-    def add_documents(self, index_name: str, document_dir: str) -> None:
+        query_results = query_engine.query(query)
+
+        return query_results
+
+
+    def add_documents(self, index_name: str, document_dir: str, dimension: int, metric: str) -> None:
         """
         Add documents to index. If index does not exist, create a new index.
         
         :param index_name: Name of index.
         :param documents: Path to documents to be indexed.    
         """
-        
         if index_name not in self.instance.list_indexes().names():
-            print(f"Create index for {index_name}")
+            logging.info(f"Create index: {index_name}.")
             self.instance.create_index(
                 name=index_name,
-                dimension=self.config["dimension"],
-                metric=self.config["metric"],
+                dimension=dimension,
+                metric=metric,
                 spec=ServerlessSpec(
                     cloud="aws",
                     region="us-east-1"
@@ -79,7 +96,7 @@ class RetrievalEngine:
 
         cleaned_documents = []
 
-        documents = SimpleDirectoryReader(dir).load_data()
+        documents = SimpleDirectoryReader(document_dir).load_data()
 
         for document in documents: 
             cleaned_text = self._clean_up_text(document.text)
@@ -98,11 +115,12 @@ class RetrievalEngine:
             vector_store=vector_store
         )
 
+        logging.info(f"Start indexing.")
         pipeline.run(documents=cleaned_documents)
+        logging.info(f"Indexing done.")
 
 
-    
-    def _clean_up_text(content: str) -> str:
+    def _clean_up_text(self, content: str) -> str:
         """
         Remove unwanted characters and patterns in text input.
 
@@ -110,7 +128,6 @@ class RetrievalEngine:
         
         :return: Cleaned version of original text input.
         """
-
         # Fix hyphenated words broken by newline
         content = re.sub(r'(\w+)-\n(\w+)', r'\1\2', content)
 

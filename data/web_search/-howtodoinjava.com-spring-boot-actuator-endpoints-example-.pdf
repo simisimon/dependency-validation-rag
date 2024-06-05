@@ -1,0 +1,910 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 8 0 R /F3 14 0 R /F4 16 0 R /F5 24 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/java-tutorial/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 766.4708 56.43646 777.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+4 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/spring-boot/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 753.2208 79.78396 764.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/hibernate-tutorials/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 739.9708 73.10896 751.2208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/junit/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 726.7208 57.68146 737.9708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/interview-guides/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 713.4708 70.60396 724.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+9 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/author/lokeshgupta1981/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 661.8646 76.04146 673.1146 ] /Subtype /Link /Type /Annot
+>>
+endobj
+10 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/spring-boot/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 620.3646 68.53396 631.6146 ] /Subtype /Link /Type /Annot
+>>
+endobj
+11 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/tag/health-check/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 607.1146 74.36146 618.3646 ] /Subtype /Link /Type /Annot
+>>
+endobj
+12 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/tag/log-monitoring/)
+>> /Border [ 0 0 0 ] /Rect [ 78.53146 607.1146 128.1365 618.3646 ] /Subtype /Link /Type /Annot
+>>
+endobj
+13 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/tag/spring-boot-actuator/)
+>> /Border [ 0 0 0 ] /Rect [ 132.3065 607.1146 201.509 618.3646 ] /Subtype /Link /Type /Annot
+>>
+endobj
+14 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+15 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide#actuator-endpoints-sanitization)
+>> /Border [ 0 0 0 ] /Rect [ 81.46396 495.5508 180.2615 506.8008 ] /Subtype /Link /Type /Annot
+>>
+endobj
+16 0 obj
+<<
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+17 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://restfulapi.net)
+>> /Border [ 0 0 0 ] /Rect [ 261.1115 319.9871 281.114 331.2371 ] /Subtype /Link /Type /Annot
+>>
+endobj
+18 0 obj
+<<
+/Annots [ 3 0 R 4 0 R 5 0 R 6 0 R 7 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 
+  15 0 R 17 0 R ] /Contents 91 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 90 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+19 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/spring-webflux/http-declarative-http-client-httpexchange/)
+>> /Border [ 0 0 0 ] /Rect [ 328.0578 194.3071 382.2453 205.5571 ] /Subtype /Link /Type /Annot
+>>
+endobj
+20 0 obj
+<<
+/Annots [ 19 0 R ] /Contents 92 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 90 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+21 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/spring-security/spring-security-tutorial/)
+>> /Border [ 0 0 0 ] /Rect [ 66.86896 783.9708 115.214 795.2208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+22 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://start.spring.io/)
+>> /Border [ 0 0 0 ] /Rect [ 199.424 99.50706 252.7715 110.7571 ] /Subtype /Link /Type /Annot
+>>
+endobj
+23 0 obj
+<<
+/Annots [ 21 0 R 22 0 R ] /Contents 93 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 90 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+24 0 obj
+<<
+/BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F5 /Subtype /Type1 /Type /Font
+>>
+endobj
+25 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#production-ready-endpoints)
+>> /Border [ 0 0 0 ] /Rect [ 151.904 389.1071 163.154 400.3571 ] /Subtype /Link /Type /Annot
+>>
+endobj
+26 0 obj
+<<
+/Annots [ 25 0 R ] /Contents 94 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 90 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+27 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/lokeshgupta1981/SpringExamples/tree/master/spring-boot-actuator-example)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 764.7208 119.7965 775.9708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+28 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/interview-questions/spring-boot-interview-questions/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 721.1208 242.3465 732.3708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+29 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/spring-boot/info-endpoint-custom-info/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 707.8708 189.4265 719.1208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+30 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/interview-questions/spring-security-interview-questions/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 694.6208 159.389 705.8708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+31 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/spring-cloud/spring-cloud-config-server-git/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 681.3708 196.4915 692.6208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+32 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/spring-boot/resilience4j2-rate-limiting-bulkhead/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 668.1208 247.5665 679.3708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+33 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/spring-boot/spring-boot-tutorial-with-hello-world-application/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 654.8708 211.9115 666.1208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+34 0 obj
+<< /DA (/Helv 10 Tf 0 0 0 rg) /DV ()
+ /F 4 /FT /Tx/MK << /BC [ 0 0 0 ] >> /MaxLen 1000000
+ /P 48 0 R
+ /Rect     [28.346456692913385 583.0433070866143 128.3464566929134 595.0433070866143 ]/Subtype /Widget /T (wpdiscuzSubscriptionEmail)
+ /Type    /Annot /V ()
+ /Ff 0
+>>
+endobj
+35 0 obj
+<< /DA (/Helv 10 Tf 0 0 0 rg) /DV ()
+ /F 4 /FT /Tx/MK << /BC [ 0 0 0 ] >> /MaxLen 1000000
+ /P 48 0 R
+ /Rect     [28.346456692913385 571.0433070866143 128.3464566929134 583.0433070866143 ]/Subtype /Widget /T (wpdiscuz_subscription_button)
+ /Type    /Annot /V ()
+ /Ff 0
+>>
+endobj
+36 0 obj
+<< /DA (/Helv 10 Tf 0 0 0 rg) /DV ()
+ /F 4 /FT /Tx/MK << /BC [ 0 0 0 ] >> /MaxLen 1000000
+ /P 48 0 R
+ /Rect     [28.346456692913385 476.0433070866143 128.3464566929134 488.0433070866143 ]/Subtype /Widget /T (s)
+ /Type    /Annot /V ()
+ /Ff 0
+>>
+endobj
+37 0 obj
+<< /DA (/Helv 10 Tf 0 0 0 rg) /DV ()
+ /F 4 /FT /Tx/MK << /BC [ 0 0 0 ] >> /MaxLen 1000000
+ /P 48 0 R
+ /Rect     [28.346456692913385 390.9183070866143 128.3464566929134 402.9183070866143 ]/Subtype /Widget /T (email)
+ /Type    /Annot /V ()
+ /Ff 0
+>>
+endobj
+38 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/oop-tutorials/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 283.0958 46.01896 294.3458 ] /Subtype /Link /Type /Annot
+>>
+endobj
+39 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/java-regex/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 262.3458 51.02146 273.5958 ] /Subtype /Link /Type /Annot
+>>
+endobj
+40 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/maven-tutorials/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 241.5958 51.85396 252.8458 ] /Subtype /Link /Type /Annot
+>>
+endobj
+41 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/java-logging/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 220.8458 56.03146 232.0958 ] /Subtype /Link /Type /Annot
+>>
+endobj
+42 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/series/typescript-tutorial/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 200.0958 65.18896 211.3458 ] /Subtype /Link /Type /Annot
+>>
+endobj
+43 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/python-tutorial/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 179.3458 52.69396 190.5958 ] /Subtype /Link /Type /Annot
+>>
+endobj
+44 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/about/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 137.8458 60.19396 149.0958 ] /Subtype /Link /Type /Annot
+>>
+endobj
+45 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/advertise/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 117.0958 60.60646 128.3458 ] /Subtype /Link /Type /Annot
+>>
+endobj
+46 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/contact/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 96.34581 66.44146 107.5958 ] /Subtype /Link /Type /Annot
+>>
+endobj
+47 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/privacy-policy/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 75.59581 76.01896 86.84581 ] /Subtype /Link /Type /Annot
+>>
+endobj
+48 0 obj
+<<
+/Annots [ 27 0 R 28 0 R 29 0 R 30 0 R 31 0 R 32 0 R 33 0 R 34 0 R 35 0 R 36 0 R 
+  37 0 R 38 0 R 39 0 R 40 0 R 41 0 R 42 0 R 43 0 R 44 0 R 45 0 R 46 0 R 
+  47 0 R ] /Contents 95 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 90 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+49 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://restfulapi.net/)
+>> /Border [ 0 0 0 ] /Rect [ 29.34646 806.2208 90.61396 817.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+50 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/lokeshgupta1981/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 764.7208 62.69146 775.9708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+51 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://www.linkedin.com/in/lokeshgupta1981/)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 751.4708 68.94646 762.7208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+52 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://twitter.com/howtodoinjava)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 738.2208 63.09646 749.4708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+53 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://facebook.com/howtodoinjava)
+>> /Border [ 0 0 0 ] /Rect [ 40.59646 724.9708 73.52896 736.2208 ] /Subtype /Link /Type /Annot
+>>
+endobj
+54 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://howtodoinjava.com/sitemap.xml)
+>> /Border [ 0 0 0 ] /Rect [ 93.93646 662.7208 121.4465 673.9708 ] /Subtype /Link /Type /Annot
+>>
+endobj
+55 0 obj
+<<
+/Annots [ 49 0 R 50 0 R 51 0 R 52 0 R 53 0 R 54 0 R ] /Contents 96 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 90 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+56 0 obj
+<<
+/AcroForm 97 0 R /Outlines 58 0 R /PageMode /UseNone /Pages 90 0 R /Type /Catalog
+>>
+endobj
+57 0 obj
+<<
+/Author (Lokesh Gupta) /CreationDate (D:20240605125445-01'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240605125445-01'00') /Producer (xhtml2pdf <https://github.com/xhtml2pdf/xhtml2pdf/>) 
+  /Subject () /Title (Spring Boot Actuator Example [Updated for Spring Boot 3]) /Trapped /False
+>>
+endobj
+58 0 obj
+<<
+/Count 9 /First 59 0 R /Last 59 0 R /Type /Outlines
+>>
+endobj
+59 0 obj
+<<
+/Count -8 /Dest [ 18 0 R /Fit ] /First 60 0 R /Last 81 0 R /Parent 58 0 R /Title (Spring Boot Actuator Example)
+>>
+endobj
+60 0 obj
+<<
+/Dest [ 18 0 R /Fit ] /Next 61 0 R /Parent 59 0 R /Title (1. Important Change in Spring Boot 3)
+>>
+endobj
+61 0 obj
+<<
+/Count -3 /Dest [ 18 0 R /Fit ] /First 62 0 R /Last 64 0 R /Next 65 0 R /Parent 59 0 R 
+  /Prev 60 0 R /Title (2. Getting Started with Spring Boot Actuator Module)
+>>
+endobj
+62 0 obj
+<<
+/Dest [ 18 0 R /Fit ] /Next 63 0 R /Parent 61 0 R /Title (2.1. Maven)
+>>
+endobj
+63 0 obj
+<<
+/Dest [ 18 0 R /Fit ] /Next 64 0 R /Parent 61 0 R /Prev 62 0 R /Title (2.2. Default Configuration)
+>>
+endobj
+64 0 obj
+<<
+/Dest [ 20 0 R /Fit ] /Parent 61 0 R /Prev 63 0 R /Title (2.3. Enabling Only Specific Endpoints)
+>>
+endobj
+65 0 obj
+<<
+/Dest [ 20 0 R /Fit ] /Next 66 0 R /Parent 59 0 R /Prev 61 0 R /Title (3. Important Actuator Endpoints)
+>>
+endobj
+66 0 obj
+<<
+/Count -3 /Dest [ 20 0 R /Fit ] /First 67 0 R /Last 69 0 R /Next 70 0 R /Parent 59 0 R 
+  /Prev 65 0 R /Title (4. Actuator Configurations)
+>>
+endobj
+67 0 obj
+<<
+/Dest [ 23 0 R /Fit ] /Next 68 0 R /Parent 66 0 R /Title (4.1. Securing Endpoints)
+>>
+endobj
+68 0 obj
+<<
+/Dest [ 23 0 R /Fit ] /Next 69 0 R /Parent 66 0 R /Prev 67 0 R /Title (4.2. CORS Support)
+>>
+endobj
+69 0 obj
+<<
+/Dest [ 23 0 R /Fit ] /Parent 66 0 R /Prev 68 0 R /Title (4.3. Caching the Response)
+>>
+endobj
+70 0 obj
+<<
+/Count -3 /Dest [ 23 0 R /Fit ] /First 71 0 R /Last 73 0 R /Next 74 0 R /Parent 59 0 R 
+  /Prev 66 0 R /Title (5. Demo Setup)
+>>
+endobj
+71 0 obj
+<<
+/Dest [ 23 0 R /Fit ] /Next 72 0 R /Parent 70 0 R /Title (5.1. Development environment)
+>>
+endobj
+72 0 obj
+<<
+/Dest [ 23 0 R /Fit ] /Next 73 0 R /Parent 70 0 R /Prev 71 0 R /Title (5.2. Create a Maven Project)
+>>
+endobj
+73 0 obj
+<<
+/Dest [ 23 0 R /Fit ] /Parent 70 0 R /Prev 72 0 R /Title (5.3. Add a Rest Endpoint)
+>>
+endobj
+74 0 obj
+<<
+/Count -3 /Dest [ 26 0 R /Fit ] /First 75 0 R /Last 77 0 R /Next 78 0 R /Parent 59 0 R 
+  /Prev 70 0 R /Title (6. Spring Boot Actuator Endpoints in Action)
+>>
+endobj
+75 0 obj
+<<
+/Dest [ 26 0 R /Fit ] /Next 76 0 R /Parent 74 0 R /Title (6.1. The \217/env\217 Endpoint)
+>>
+endobj
+76 0 obj
+<<
+/Dest [ 26 0 R /Fit ] /Next 77 0 R /Parent 74 0 R /Prev 75 0 R /Title (6.2. The \217/beans\217 Endpoint)
+>>
+endobj
+77 0 obj
+<<
+/Dest [ 26 0 R /Fit ] /Parent 74 0 R /Prev 76 0 R /Title (6.3. The \217/threaddump\217 Endpoint)
+>>
+endobj
+78 0 obj
+<<
+/Count -2 /Dest [ 26 0 R /Fit ] /First 79 0 R /Last 80 0 R /Next 81 0 R /Parent 59 0 R 
+  /Prev 74 0 R /Title (7. Advanced Configurations)
+>>
+endobj
+79 0 obj
+<<
+/Dest [ 26 0 R /Fit ] /Next 80 0 R /Parent 78 0 R /Title (7.1. Change the Management Endpoint Context Path)
+>>
+endobj
+80 0 obj
+<<
+/Dest [ 26 0 R /Fit ] /Parent 78 0 R /Prev 79 0 R /Title (7.2. Customize the Management Server Port)
+>>
+endobj
+81 0 obj
+<<
+/Count -2 /Dest [ 26 0 R /Fit ] /First 82 0 R /Last 83 0 R /Parent 59 0 R /Prev 78 0 R 
+  /Title (8. Conclusion)
+>>
+endobj
+82 0 obj
+<<
+/Dest [ 48 0 R /Fit ] /Next 83 0 R /Parent 81 0 R /Title (Further reading:)
+>>
+endobj
+83 0 obj
+<<
+/Count -6 /Dest [ 48 0 R /Fit ] /First 84 0 R /Last 89 0 R /Parent 81 0 R /Prev 82 0 R 
+  /Title (Comments)
+>>
+endobj
+84 0 obj
+<<
+/Dest [ 48 0 R /Fit ] /Next 85 0 R /Parent 83 0 R /Title (About Us)
+>>
+endobj
+85 0 obj
+<<
+/Dest [ 48 0 R /Fit ] /Next 86 0 R /Parent 83 0 R /Prev 84 0 R /Title (Tutorial Series)
+>>
+endobj
+86 0 obj
+<<
+/Dest [ 48 0 R /Fit ] /Next 87 0 R /Parent 83 0 R /Prev 85 0 R /Title (Meta Links)
+>>
+endobj
+87 0 obj
+<<
+/Dest [ 48 0 R /Fit ] /Next 88 0 R /Parent 83 0 R /Prev 86 0 R /Title (Our Blogs)
+>>
+endobj
+88 0 obj
+<<
+/Dest [ 55 0 R /Fit ] /Next 89 0 R /Parent 83 0 R /Prev 87 0 R /Title (Follow On:)
+>>
+endobj
+89 0 obj
+<<
+/Dest [ 55 0 R /Fit ] /Parent 83 0 R /Prev 88 0 R /Title (Dark Mode)
+>>
+endobj
+90 0 obj
+<<
+/Count 6 /Kids [ 18 0 R 20 0 R 23 0 R 26 0 R 48 0 R 55 0 R ] /Type /Pages
+>>
+endobj
+91 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2394
+>>
+stream
+Gb!#]Bli#e&H2$(JT"C@(/440VWj&'33b8_db%1@G!+6),Y16r&hFR8C8_*F$h+]R;)3Npl""VP3/GQ.\%?PrJdhEEeF-7fd-C]nH:JN$d9qQ^NGUL37jiqA57]rq&#iU!5.5:ZG*-\[fF0;=p9ph)lB?5kH\Os_#;$G.REP=00mmuGmJ*9*,%Lr2Pmcl>&7$<,%AY`%_nPH06%fN[YR[asp3G;Q#*t1q.I(3pn-%hSNC9;C3.HqmJ"XUcC&)CQq<)Ym4l=/3X^hD0N&$Vp(G%2G/b(CYBd*;s/TD6dm(oLpr78-(1o!'Xk="d-Gb-Yt/F"KQH)DB[9Q4%:M^mgt9tG_FF/k4TmHs$1pVXm'Y\eYIKBHQs>U:h[Vs(N"qS?[pH\:MY!FnJJ\\#2j]mr-)6^G_KBA0SW`nj8cNq!2u>#0dnLG(C6-]6m]:G[k[s*g[J3ePS=c8f)k"I@=:XqtKdK.jiO6Ju"\l#5,U@UNYKL8@ReYiCr$C/`D\ntKpMTb[IgGa'"$(F_DUV,7k?ZefgE**=8-\.Wbc)a%F4S;S>Pc-Z>3agEq;CH7dW3jq8Kp0P!LB+ZC$j;]Am0J..JV#GZKUfJVAo`X:>rjBR"LaJq0khoj$XIC8([7L4=r!#?\g5SP>0QH$Z((nm2A5>54`o3000V>$t1H)gA5cgK'Lmim`LJr:<+@uosh-I(n,#B(j`sjl!hSE\'qhYfF]@$i.&4MFXY]NcrTYLa/RaE*$WL393PHu.MOdMeM_8Eq3A&RAH,']Vjj[s]cLlA#f9t;Z-`8c\F,FWZc,<?MBln)+7SP>:nj<HO-#V/DR0p]^5jd6sj?C''Qa:?t*;8i$iO'n'gF.S7KJhEaF(9EP:-k[uHg;$qLIfoUO$qNs_e!uIcG)-nB/U/+)kX)KjAf5?I;r-Q0]Q">IasU[U>bWi`Q5Iia667hT0acU(V0&^ILh(kOiiK*(.l!AP)VbuKJ]'>c1$S1nhpaA4G@^Om'*qp^nTTQnOmCZV-F<e38`3\.>1g;ad48uTbZX'4_uujA-kU/gJJN091knX*<SQYOkAAt+Dr*XH@L'&-^dd>"FHs=#hZor7,kKS3WH=Z(=QD^J*\/o3a[6i$pbXRtB3G:R[ZVI2$I3?fa=%9ocu;:;)2`*N;fZ]u-F=&""Jf-?G4a([c0?<80NNgcXZ]+imA81_:\YVPS7LAY<ZJ"mX0AFH&O><<),QX^I,5-s?7Y6I=_NFKd<"OsrA0Ni7YbCi@q2)V+^N5uJj37u<+o@YX)EtqQ6d)A/3BpXG>r+`M"k?=F!`(>`BnlOil<1$YRI;C9KeJulc3%TJoau9Uh=%P]AqqncR5&`IQ4G!CbIq8s*FV/e[EfR8?^Lq?VaH]rdOcVE;Jhim'i1f>C6&A"qp4+Ie.r.drEsIiumYRU6JX]f5?-mF.>NWm?dU^C*B:<fX7VGo3H]#mVN+CG0Osu2X,%0@`G(&m%Bil!0V.`gD7*u9Vnj^/Mak+Y-6KdXGL=DNp]64jNS4s7m5ReBiKh3n&P!oNS_PZA:\pr[0X,DUlQP^TraCPC!H<Vd@b!\%<WmLGKZ2JWLP;)moc5T?XDie:a#Ea3!b.3[<Nk7Kmlg361c'jYe0r&Lu)0(2(aDCGO5Qi,=hHM7/,3J6b(s[BpqlkeBPF#fp\@:068lrB4r_$WN;i"="%(I@`=d`/M\/W&jHNC\/;3%QCL*;^e;X/&kWq_B9i:gW9X.GSZlpF@9H\V=UTITgJDfoO`O6]_no<W6f$[B;aFZ[>R`TE69jNiX^^tbnm#Q$R/t.<Z&\r]+CB\;`Lg_pVK*pFWeS8P-Ca'"iHITN/Cl`#JKWT\cr2BE0#<c$g@ZcZqO*5LZqkm$9_E#JZC7Go(9;Y1mKI0.5kYENNe!>:L,-QR\g_Cr\0\M4+VP'><[qZN6uT)A*]<#QF36kHAUotm1$QS,R!u+)I)?."mt^S,ptI,R[46K&@E'jL9=&lMCmPrPI\U?&5H9.\<#!I-Gc`<LFG`^-:/\#l$^'<(@Js6'hK[PToBtXLD`@cqDObr!@@C-,+.sTV0Bn3X_i_k`ODl<,a>N]X:,fOPCL\p!l@08qhfg6dja0dkp/Jb1RsMNdK.ls"rG2Z!5MD3%GNG5_-9eB_Dl`m(9tNl.)[L;[YN=5g8Bf[[pK4klX1WN0A%*\Kj;fg]2Cn@'=N"F3nG9\1:s7.!N7"O?dTgudg3T$[d?MebfWeJKeLH\gfao2(F9X>K--Pk]kmnTFBW&ea_o)hNDhRt5pUR-?G6>LXmPN-UdhWYNNrF+q;ZD6AZ/sd@_N,;eodt1&QWJH9BPUYh_="dRd.&Ho>EnKa:kfd&L_\sC=QAt[.=:_sgPbV3?hlU'4m);QPbdP;q6D/b-R.d4?e0sXr;~>endstream
+endobj
+92 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 3124
+>>
+stream
+Gau`V>BAOW(4Q"]^eA+"N^SdA;:84GZe8TlmNc#W<goAf5U7VKTh(IL-0sIW3<67[AV!J89u`Jf'&\OdrQYF[15>h;qAjAYq=fJGJ$=dsON!+0T&l*R8+M+Kp".`,pp#aTSXJSc^?:]ZmopIOF^]+H[S96"^1'gWY3ep(rkr15>.[,\3L2IRbDRsWD%$C=#bYEX[3g]EXSujJ1>($BY1],[dUI3`-9RU2g9[Wp*n!I;)7+Q-7!Zj[s87a*rZl%EZhbR;UqR=pr`CGJYA,b,>tX,?d(1?%_ue&tp:q;.os2D0:I=u#qp:&,@5O.:+cf^HON"ijP0mCX";?=j4t@(i5,&:#@SQ#4H>#iQ$[6@1r5Z+O]<Zl!PB$\W$PF_ii$$9G87Y&QN6iU,&R@kblo-IB>WoJgj9C@tjcIhK,[.XMA\9Y94^h]]\NB1\&.EbG7kMlgls`g%>diCFE\,fdmh$Y&fAq/&1:^1`^fNXKb=ugl@.i\mCYmMV>,^i!A_REh\64qW,AG.u/48ZW>U[G;.&qA7L1GQP+^<>VP!^OB1u^h&,[d%9]N2!S'"%qm"uIZY8c0(%85a^%T^DXQK3)N-g@GY?O-YPun`""_[>"^t/]HD5DFL>;j&us<C5"/Ca9Y<g+_-#`*"B(XSnc2#9d:]Uaci+1N.h>p;lhtqW+<:g.OE9tE`qgObL37KpdK]%_W1Zq5KY9rTGni[mn>:eaDoN5V%[eipZt`1<TraP;cPN"8n]'\b2KO8QIeKqHsF_+*Wr-I]k3\rN\D(@GRT&`fLJ@?nSmJ^+,b/W3VIi$pnqoP]\0Y!/9"BV\LCC3/2u<?!C)3mq'M1`PtBOkW_=PQ]$n3>nYf>OXPG@X304NR9k',AclM(+b@i$?SjR0enuV(r(AX1#ft8M$kGoudECt[c/8g61-o12A2t';C;L_\,L.2JoX*P.RZ&V&5+re>(*S8!%"o`BVJOHjK9KH0No&];776]Wr+6YVB=?BD)LsG)85.`U01Lg<?j4LMq9Oo+q-BRD=a2Am"2IMp4muo=R'u;ET7CDS-f0ebU3"1)FCFBnh\E5l/e4UQ'qgXtca.>UiY*Muf\LL27=HQFXU7h12>]0hG^F]U`@?1e);@<N^5PO>[D%SZpicIUeqJ3X9;1%f;"o8cBk-k/>3._";F5$u`(BH7r#2'o?"=-Oc[B3S=GeRTU\YaYn,m0o%*UG7q3Bg2`$I>tJ2`6M8G>.-:KI5bQ1mc;iaR"efo1\`[?pGkGWFV_K+@%rcJ33YQ!P]\s2oi2t&A6rM+[sJg^f4VfE?`pr'adb.>u66'.5_sm&X<Fo_O-]ZQ:g473+0sqN'nX`"U#do!m::%c&ePH\<(=DiGilu/]4jJgY%P)LuBBDR7m)Z0S[Gla$gooK9g*`JYe)QBm0'n^[?V-1Ef!I20AF,&E8[//RW5R?SGeOd;(4:B4enDS9V69Mg/K/TOS)-M0D'T@\fi3S]$GBd0_8:!i6q=a`E_;<NK:g#3E+?E`89H8NRFLBEUppV=o*:a7h.Z@[]W,Dlfsq;$Qqa<P=6>G+aX1ocDAD>\5fS[&QI2So"kcI+@n-.<kQQ$^kf]*AnP3],[Mf4`ECAY!^_:NeaRJ/X$m3"snAZjIKc05\$rol8qdM%GGNjZ<j\V"<2Bo?C@L\,7V,aWZ+N]%1Bm;!C8N5jHq/Y*0=]?844LaSPTLQ!GZ(8KlX.04`&1#@>O4G:..\VVHY6Jh=^[1$1TWI*MUY^#-%j3KDGh)Cb\CM.KKnla9gWT\+&,S7\IK/qu,i1/\H%+q=XtJ=$T&j`d-ki.#*!T<60rY>'C?3]$pXecS(]5^eB9[@_le/-[Yh*.Hl55@BIT["[_&4;DaSGN_oO9M'$:>0]:)k]-PunhQub6A.:dX[$hB70,Sbg%""2;[nT0F<Z.WU;%Gn*CY9L3qUhfNCR"=N)M`fhJob5MYX.iSZL*8?hpd156>VcGh<RMsKIg\SaPu+X`a1TdCW-Q:bG_[^YkbBT<]8<_GJRNhZn@?GE<[1GlX+`^-eNeI%kFm@*6*.T.'s_M::>BtU%JRu.'XQ4gi9c(4<[DlEKni>ks>ED'?#p*QE8k<GZKdK"keEVF;s?S$RHPFc)pID8:@OAP[9'(.!XoXiV8R0!SE=o`=p6E_%TEV%J<K3d,]_<%dLL2&n46PX4cO<lFs<)1a]$np8T!AT+%g98sq;Ni]@A2%CZBKh%g(cD,0D/L1R>CT3nVD!Mi<jVV7G)E=-Y[j8&4e7s41>R*7P\2B=h\`6-/j$^Qq']Z;RT_M"5SnQoQD/SX^Fe\nV8)QF?>FKKA)ca"Qb4i/Bk"L>OR'j,c4Zp".tjnU79i(U?.j:]A/WS[J=kni;#mj1?2?_^o/ngHO17'!&r7Gd:BpTUoXFBXciZ/o>O?cYs]BGfmde5Vgl9<^Qea]Qf_D/+_,+Y"k\WogOABaV4DQCC^AA?(F9p+N[FO#r1<l@3X3/=GdmWR;D@Ca#_B3%9%MEU5)`RcJN5Eg+AhR9boLD_W.5k/Fn&K$7IRe`nRZQDB&bm)hSeoUV-%rqHUT[u_?SrnrloK90nBhVN^\'U@_Pe;uqt'ItpA3br=NeOG+a$g1$<fO?g%m7-#&7`#!"AATC>%?9!%m?>rM)WO'Z,Ue*$mQXc-EQ=C.5huT&Ogo3^:&8ApX1B"-q]F@(`O"&loOtn?oMD]s\u3TU>B"/"WV[$BoDI?Qb4*-4o/YBpa$7Tb5!P?T[<E$jWnG4EF1/q%F]nPhGp9REmX4lkmBD!'.pIIYnqSAHs*fS%MB0FE.b_f:N5I-]e:N`JFB4qPg,Q6H]Oa9NnGp@8epGTq+Nj`A\'*+<GknK4bEZTW7ajQsq@"p'[qVHo)n,iX??JCJ_<Y'\ES[GRFi!(=Dk#ZR9=%@C!Y?Zm.I[uL`.97O`'C]6PZVG,IH#WbIIc=[5ht%@@_]D/f@nRl"4kE?WR'&Y1XC"&Bb6@,dFb]$!ZC_PO!saQC\@ie<Tcd+LG)2r#Vqk614YPBC(VT<$s6KtjQ=diM)TeD=QnX`7a\R-PDQEM[dilUcaUpnACg5-\T&C6PL<.i;OE`IZrPe\W\45#3:C)l?D`iU)EYOte@T7!ml\^Pn:#EN5NZiNdJ~>endstream
+endobj
+93 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2237
+>>
+stream
+Gb!;egN)%,&:O:Sm.<m6fW]U_.&Gs!mFY1(f""o*j@(^5$!BeiJ,ph:8gjYq"aCUsaU2OuD)r_r&c_uG00%Ti37,W/a*raL^r[E'cQ-t0(sg"fM%AX]i,$(#C%!YQ42klW5WlgMpE:@`M)Y&hI(.\o^k%]YOJ"Q)JfZK;E+5_K$X`XU>U%"<Lsn.q*1jdpm$M@rp.ns]a!V@J&ITD4Meb9c;(B-'fb53PJFTfIf3=1!m2bEeI1km7fC^-8TZ_\bT'm!T!n).pd0[%(JCkMPoZ3[Ie='h`eR!-Ljp[)V,XTluiYJ7KJ<Ml[4'=kfAonXNIB`;'':>pR[Gke!DS<&ro+usj^]^4J/:s9h5iW\pW#&Fn%p#\9p^FYjA*FHaYo+$VJ=\P&A"$sXeT1d.1KZD7nn\e>67Bg3?S<*'=_(\_'`u"mMt-SeHN&?A<na7bDJ>9RC`fI/<sFdl_BNJ>_n#F[."k9.MX)dL3,g;bL+LLV*)TqK!'$0S!i(@#$GdEjD/[0b\pbTF2bY![F^%sagjiG"VOC//HHAt`,7rD9&o-DFRB5=INl,qAS@`iiH?o%\BWY>%^ms8c8k$%iDSAf<rmiR`is';."oaL"c(3iTV!GQuCYmgqr#a8Mb+<]Q-#Zj4N/C9*k;(3UTTcFcF4BtBUN+:#:[AVXWp*t2o<9shDMUd*ENu-*ods9hZ<N<3BYNu-:!9df<i1m%RVJ]<"95Ncj<%r[oC9le)l==1fR!2`JZ&n"6Hu5ol]'uML2)W@3\Rj8[u*&`N^?TSPFa;8C^PK3)m[sqi@_+<j4s;]$PUKC/Qel'W=J)b9faTP?fgZCb@@e,)^h2uPK=J)(MJ695I4fqL@$!]IW(*aO?\2D#giH48k=Vm<<:W@5iso86<]auI^)$)M\56`#A_b8SC!4MArU_(pLQM'm#E`9H)3HA+-C:k"H;n=n3fkXhS)"I6Ajq2>GC/`r#BK+0[0rFcCVJ0_=qs.<\jT>/Es^`*W2-QH+Ed?oB7f=fKj]cjYs/V'2lC=3KK;8T?T+-B_5r,rBDk7Q<:nW!?Y&P'nmR.HnUKYkPSqdX4'1ec@1:5'[mF92HQD$GT8jrS,.$W7-.`k3jX3*dhF`;cB]e1L_Z]4$DqXb7?e&6*;L>EpPNi5T%V?(FB6K`NO?Dg8mr((.r<ej&@EBb`B??XX%4#dGC%LH-?SA,UrZi!Z*gMH,Me=c/2:uMD&rTOh0UFN"4Cs"QgPFRBT9Y.:2f'=_u:0?UKmrI?=/\"Zq+,pFDG-0QhZVbb$.8:NlZHUiGF]sX!0J,MQVeA2Phn0?7A3Q4Og6"k^Ra4o="JO3c/'+.1)h;W\U7LM[kjHY.;V3]b+&d'U.*J/[/pUG+R<&WOBEs#XPLIs1<qH12N7>4Zk:DFW?XIO8O0"-$_%]o_`O<s5rufgfc"0oZG5HE">+%L@^RcY#pu^d=)>36'(ZP1Jb_dh<0$h<.ft19TYT.<:UBA(XN,oAl-QVMZAL5_769en=n>B8Iu^\C\eY-?*#0FMP>eA)@YJ6>;h2+S7nLu""b$mNZ4p=oW<dO-'"fC48'pkj?dOAGcosu[Q:dco5K^,.^<C'j*6J9XZ)Bso?#otiU.=6iF4.UVM^D(DX3I\lf-L_]?ZtGOVrLpn29JSELl']n/i2&2H@c6fs/jq<(GgjE68e",7I`'f%@P7EJ%^"d;h-.2mpc5(2,4V`Wsk50kI,AEROqWH#m^U]6[.[W.&"ggfDllLQ!*N!YVJO^f2p;pF!(kar0hBfA39S#I.+OPcIU5%?"e44:@k?E$^56hATk\,Q/WPg2<@J7>;"QL$?mCcGU"j$ORJ_[<ul[QI^P2qBn8=5$SB<ig@L9LJ'b#"\`11s'V,an2T64[@^DEGm34NY@-FKGUF]4ig"N`]'%BJCG2O\fNKM+5b.kHPLMHfSV'rtQPCIC\,1T<Z$h/_PMp$>H4sSN,aZ.A)^R_QYdK5s>iN<3?41AJ>uWgMQZRkQEDtu1*c@5bHW)fM<9a<-_c"&8?7D=*T'#U<-d-$@Nj#XnMJD"%i0r,^IkIb\[9KcWPkFAe)aVYo2Ved:b\9rM:rH7R)^[ns0_.5h9+agckHlNj0&SN]e,7W&UFcn9"?)WmlELeq`ehr1lL3`CZ]Y\"1O:9_q=3J:XSiTeZ-lD%51'0\ni`$&kVP#tXtE<#Vk,/IkBck/$=:h#cm['8,sVA\asp$=0QrkSC^inL.V!;(!UTaeK%&q'~>endstream
+endobj
+94 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2160
+>>
+stream
+Gb!#]gMYb*&:Ml+Y^LP9'1Q%r7T#gm[S7.*7GG=jH(ch4<\'A;MMgG"m(_utFg:#[Y&\MZ(l;g],3Krk%*qa.Z/B,]s3h,pDoUl1SP<pUN+6=De0F!HnofEQpX'fPZ`DqX86p/t%EU:4BJ=I4Gd_bL-7<ui63GE=*M4m4aV>Y22gB/ZVNqVWiru])MAMV0bp<D`&Y*DrC.8EL,*PX6+QMp$5g$;!m"SB./3(>-;jRF%1`sW=Qf]n<s0;5?WFe!5<$GqZ@LKo7l3CVc$(W=cU.bilR80QN(L2H#=U+hrB"Y<0fB6%F-.A*ZopB@HfA4()$+"*(-I^7ne!/s>Vr\909)4brl43isB<.NuJ%]/EEBSPqb&80CpAFd+@g:b@lUiCYSYg/)lTmD]PMg`MQf>SQU=8c44\o#0C&4-6E<#9-pQ<b)5<HV@?;-&X,4Lq[_><'CPKHP.JirSBjG>NOZGk1a!Q=*FC_7/*h[;=eGsi["'\[+D]/9/sTF,99n!P#2a7GCU.hai%NKfm%9m+:Z<910;178E=P=/e/`(k6oiG''cLA/f2h/"pB[_8)em(9glPLQ,d3R_N\adh1+_P2iV-0_>r]_[K$JdF?q$SF9\q6WtT?;W?-,j!FSR&)gHSnR7'&1q=$(bj,U5g%T=.@G1P':tCI8NCsNOrQt8XJW*;T"O6DUKn;B()$TIRF%160JI4N"F&-I.<6D,a[J4&4W(BSJG,ks$E<(XTtWm=JBme.^99@lHBT,]6j+i4H'Jin]TYBNh<"Cto*=n=*,MA1'#GCZS8l@[6ln$/&tf7'1(gcjMfLFQ4or?8\>&&J>U%/1,Y]d&bjB_@W;UON%fOcSM>R,o2n6aK4RRNU+jm!,'6>>)2Zq@&A.2LF4-!V:in)ujVd/"VNQnd3m+DMPD\tj&%M.\/+*>X$/A\9;$fi=E:QuP1B.P?-.H4l=.)UL/ADCM&hC(M-@D-^'6Vu:&U?+cY3\1'U$]8X_]oVduB:kMa3"u*$q2&Z[k?n^*J:HY9&<7]Z0doRB)(+`gB_Spk$V&W1R$Tc2;-J91&+TSU-cA3s6em)2U?@EODHJHqVf<BrKrfMQU;ujND^?*>"P?3Z,a-:n8;W*ET`35Fqp[fWnn=G7:D\"<\#4fCX0U('M^&64i_\M;(E-2t8"GEu&+ZRIC.cUu_o1)M/p"am+Ka292/N(^F`uAr^"djE?A]iRbjo::b-I"pI+o'6DqA^7,)XE1#98q!Tf]h"[+A"b5q2ma[q`jFd8fM;(u,=^!HZK9%l8i>REd+'KU!nD8+5R06Y_Uth$*])8FV.mZfm.#.9M#Tfee$pl?Z8Wpu-d%9n8DgI*T[3>g8=hS8Qa\)Qrn<-D-]tpGUcHcklGDrBu@VRh^d)b_f@AS'@km15]/U0gQgE=W)`iB9Y(S<!K"1!Rm4Ga!<=t34X`c>:._WZrZUZI#(@Qja^TTn7n8!kIO4C[n3aMZ['1&K!?90DTh>c75sou;cLlO3LC[@F)EF8k$6i?;^NWVk#sC#J!t?;,q.-qBHonPg&mU:n)Wbe2Kae'(@NEgoaFk-9G\\Y72n$H:#^25"CJS;<-dX:0A?lD4!aKS41+4UQ`k:[R,@43X];'tX$1TR"\;E#l)W:=:N(mA&Q4%Motedd-&ZeFQp=VEb(@.'_O)dn2To3#L^<Q51J@N1lQmjIcMF_0)=9KdD26NEIY;AQ#Wlr5Y3d>c7Y+!4=XpE8a],ZaVfU/3ri+;Mr4T0*RtGR"B+Ls7aOqM8^H'fT@./^^MNrT=o/B1N/irHXFaF?AO7mMkO45^W5bE7D]p<KF.Z921oim)5J=llL%[Ko2Eat#6D[9):,cI;qgY3ndGbrK8DJE1D=[$p\1oHeUdkRpE[=65P=<.\jqH'@*g3kO]7s*g<rpK(:C#jV3;>a2<,/;/9\`_A&mo]=ar,sdZ=r:p9NpPI'&V@"6]mOZd-<Oo_2shUj\&SGGcBK__YWh17GUsmB[n^ns73kD^7Uk$M5npL\c3Pj"Tq3Bl;>gh/W,-g$C$H"nH=DO^=!tT`0UbkbJ9G=>ZjuW">f8ned;c:O_57@XcoIi$cB9uoKL>jpJ(n1jCWCGc\lr4:pHm%50]]4-USPm`7:`)QUUJ%h<!3VhN=,:FjTLV]<qrKCFZN!PrWd&k]#O~>endstream
+endobj
+95 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1810
+>>
+stream
+Gb!#]>BALX'RnB33.9KEmVGiq[Um!FD(]\3PI=&UgY&!CEGPYjN9/2;P^gHgL+oEWTR`HT0]?JDa.GPDkGD)Fn3u++F:<-:LKEpm:^6k!d!u8G^P)4XdJ'DOr1f1^R36so!tN3>#`F*QkH54l32Z9t,k??*6C8gf@Cghe6j+$o56a^dNoD:PLINP*T'E^:1PD+`Us*7TU]d_A1V/7-Xpoc^AS%,Z.Sp<$Ob?\pa0Moa<&/:paR@LU#5pb)i7BRMlh0bB-miAA./4mIZCJb-9MD.;+hW'Y$nE#;Eaj/TEqB:/=CC)5#XoHE(h+#j/q<'2>@#/Ek,msBm5iPb[)dBQ5nDXE-(O6o3\SJ8>8Ri[5Pg(BSF-W`KuOC(5\#&,rhPY0TE#B;R:OD/CM-a+,kM\'f5LBj4)k@:M.>S]bC=4?[@e(ne$_!rGHtqrdPR[[dFuH+@ATA?3JHdqlO:.Oo,jec8f"DMi(QmVY46_tbb7Nur5dIgIiMAS&PmLDj4i)7M+-9->ndAMk=&Ed<EQ%O)4.n?95l$[J!Sf`54TJnDPG.&\XlK1U[2ff#b;ik64uCZV+$&\'P8/7S`[N/0ZFk1eZ`[5(uD.4No7U>Hh,N/%=?C]EV=39SKNl6m\Xo?&h>Wc=J=Ro.5H-h;Wi6KbReh:De,^82X1J'J2u'qM!#]D"=#)Y<.cc`+(UsYpo7&[h1rMlE$C(;-nn<0qc^Os!NYRh^VLGhPWX<C$)`[gd2=U4#:p:1okfs4FmDep-Os6jJ'q@,AtTC3E5FTQ4E2c/"f@*,7dWp2lZ-._\(KCh,>3.9Wp'i0Z\RQnfS.(lrP%+Xg3/6'R[mnOan(ro7\W+a1)A7INUcDU2GFX)T,R&[Psp^Mat>I=i2KHj@_[4KVnFL!<Cjos1qQK14*OY+-6LNWs)&1D,gW+L#6@l!L\'IG2SJ@RBel2_Z68/_q,2_Q_7<Yb,;C")76k>@q(ZYK"nP)L]!*%JJqO3o?iauI%%878n\?oW"/H.Y[Mra`Lh.$V&1=0#aC>@2h'Qk:Yj5ioeg[IKb\?'LL/GlGn6:p>QB6e/bG?!/,/rMXX<jE^%0ZCJB<r%SV7auan4?BU>["4amPj2$U$8\+6a=kkKhf3$PodlRS/;e@&_N[+WEZ,k/-(&0[*fZ_\ssjP4iU=E-8YEp*a=&?L1TDX6Mt(-=A\agbj]XAi'n/G(9lWDn5"*2F]$rZ+3k*cJ]C;TT2+<lQhTR&A+:7RZkG986EH489l=ojnX,M)`od(V;)u;61*\=48E@hJ$9*;m^+Zo6gGG1B.jEk$,-kQ#inI[C>PR4'MBA%4G(M&CF#9koI=7tGMSG<GdR%-jiKm@Z4i-D)CTQ6)UQW9))lXF8A>oN:h2^_$Rb@(aOZC!E#$.Ur6K`ZN"e)c=pt,iBDMVYd[k6a_8jbI.9XCIUKNhS^>[rq#Q-/Af*$=/im:]b@Dc#]2Sfa(P$QBrY]uI^BTcg?&E.r%PN3PL"G$ZSTUD7clXg%e6YF7f\Uu*%h'KO<bV$HZ7S:M4mD*BdsfVj)aq>'WI1Zjc\3l_HKQqM_35NEbDPWt[(qk9e/2hAt4hs1:8a(-BbO,k-T+?.P_6B1OIqh)W4_kAQ7Y-;U[m&+UR/FgeYW&*l@XHYkap.O][4nA=][uZh9d)jh^NnhquBumlCibO/#7qiXH</#\V7=Db>E.&63ciK,%c28:#m3c1m_tSqW9r,%oE^$:6ro&Z\e(o"6`/FBQqc"@I;u74FkAdQXh2qp_V8+UV-:p7N/"N__k2+7i6?dspMrutBcj<`ple-rdrrDR,*]*~>endstream
+endobj
+96 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 521
+>>
+stream
+Gb!$D9i&Vk&;KZP'lubVfC!kKbmtpB(^9WSV*K`,5HpFb'7[[L<hY:H(F6gRD)OK)jE]Y9S\\_"#8c93"E:9s\q:"s:bR>:@\ESE<n<`tcnGCD-4ZbD0EI2N,N;V$s/gr/>iB].8Xj2+@:PRb@FpD066O8gaWU_:&J9?^ZP13sdL:AY-'9E3W!KWQj>fr[-P=Z*bG94iX^QRPi:a\dC7QYbi.Vu??9qlZm"9n<:p3,V(NF&]i)_I-`NflQ:(i<'#+jfn@ik%\g#-O,7E#p!LY3=,%CF,WaoY0KeX!16[OW)h)KB\lb&"t1Fb=M8Set\KG[lTUBShYc8IXhgn^='&@Ui%ZBtSY&4XL!/o0JtH9orq8C2=3"Oo6q/$"F6&j><`U]W"+eP3"F$e0YIQ1$mi=oY1Va?,C),o1aLaP_SRMcTn0*SRS01%aILQhl[,!$ur`Xmh1<RJ6mPNT<(6)@(s]i9XlFV$%l#%FR8XZK$9:gQ*EA>:GjG6LjS[(T4YJ^@!r'L)U@L~>endstream
+endobj
+97 0 obj
+<<
+/NeedAppearances false
+/DA (/Helv 0 Tf 0 g )
+/DR 98 0 R
+/Fields [ 34 0 R 35 0 R 36 0 R 37 0 R ]
+
+/SigFlags 0>>
+endobj
+98 0 obj
+<< /Encoding 99 0 R
+ /Font 100 0 R
+>>
+endobj
+99 0 obj
+<< /PDFDocEncoding 101 0 R
+>>
+endobj
+100 0 obj
+<<
+/CoBO 102 0 R /CoBo 103 0 R /CoOb 104 0 R /Cour 105 0 R /HeBO 106 0 R /HeBo 107 0 R 
+  /HeOb 108 0 R /Helv 109 0 R /TiBI 110 0 R /TiBo 111 0 R /TiIt 112 0 R /Time 113 0 R 
+  /ZaDb 114 0 R
+>>
+endobj
+101 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+102 0 obj
+<< /BaseFont /Courier-BoldOblique
+ /Encoding 115 0 R
+ /Name /CoBO
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+103 0 obj
+<< /BaseFont /Courier-Bold
+ /Encoding 116 0 R
+ /Name /CoBo
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+104 0 obj
+<< /BaseFont /Courier-Oblique
+ /Encoding 117 0 R
+ /Name /CoOb
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+105 0 obj
+<< /BaseFont /Courier
+ /Encoding 118 0 R
+ /Name /Cour
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+106 0 obj
+<< /BaseFont /Helvetica-BoldOblique
+ /Encoding 119 0 R
+ /Name /HeBO
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+107 0 obj
+<< /BaseFont /Helvetica-Bold
+ /Encoding 120 0 R
+ /Name /HeBo
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+108 0 obj
+<< /BaseFont /Helvetica-Oblique
+ /Encoding 121 0 R
+ /Name /HeOb
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+109 0 obj
+<< /BaseFont /Helvetica
+ /Encoding 122 0 R
+ /Name /Helv
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+110 0 obj
+<< /BaseFont /Times-BoldItalic
+ /Encoding 123 0 R
+ /Name /TiBI
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+111 0 obj
+<< /BaseFont /Times-Bold
+ /Encoding 124 0 R
+ /Name /TiBo
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+112 0 obj
+<< /BaseFont /Times-Italic
+ /Encoding 125 0 R
+ /Name /TiIt
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+113 0 obj
+<< /BaseFont /Times-Roman
+ /Encoding 126 0 R
+ /Name /Time
+ /Subtype  /Type1  /Type  /Font >>
+endobj
+114 0 obj
+ << /BaseFont    /ZapfDingbats /Name    /ZaDb /Subtype    /Type1 /Type    /Font>>
+endobj
+115 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+116 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+117 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+118 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+119 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+120 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+121 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+122 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+123 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+124 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+125 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+126 0 obj
+<< /Differences    [ 24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis    ] /Type /Encoding>>
+endobj
+xref
+0 127
+0000000000 65535 f 
+0000000073 00000 n 
+0000000147 00000 n 
+0000000254 00000 n 
+0000000453 00000 n 
+0000000650 00000 n 
+0000000855 00000 n 
+0000001046 00000 n 
+0000001248 00000 n 
+0000001360 00000 n 
+0000001561 00000 n 
+0000001752 00000 n 
+0000001948 00000 n 
+0000002146 00000 n 
+0000002349 00000 n 
+0000002455 00000 n 
+0000002723 00000 n 
+0000002839 00000 n 
+0000003013 00000 n 
+0000003312 00000 n 
+0000003548 00000 n 
+0000003773 00000 n 
+0000003992 00000 n 
+0000004168 00000 n 
+0000004400 00000 n 
+0000004511 00000 n 
+0000004765 00000 n 
+0000004990 00000 n 
+0000005233 00000 n 
+0000005464 00000 n 
+0000005681 00000 n 
+0000005915 00000 n 
+0000006138 00000 n 
+0000006366 00000 n 
+0000006607 00000 n 
+0000006897 00000 n 
+0000007190 00000 n 
+0000007456 00000 n 
+0000007726 00000 n 
+0000007926 00000 n 
+0000008123 00000 n 
+0000008325 00000 n 
+0000008524 00000 n 
+0000008730 00000 n 
+0000008925 00000 n 
+0000009110 00000 n 
+0000009299 00000 n 
+0000009486 00000 n 
+0000009680 00000 n 
+0000010051 00000 n 
+0000010227 00000 n 
+0000010415 00000 n 
+0000010612 00000 n 
+0000010798 00000 n 
+0000010985 00000 n 
+0000011175 00000 n 
+0000011435 00000 n 
+0000011539 00000 n 
+0000011860 00000 n 
+0000011934 00000 n 
+0000012068 00000 n 
+0000012186 00000 n 
+0000012372 00000 n 
+0000012464 00000 n 
+0000012585 00000 n 
+0000012704 00000 n 
+0000012830 00000 n 
+0000012991 00000 n 
+0000013096 00000 n 
+0000013208 00000 n 
+0000013315 00000 n 
+0000013463 00000 n 
+0000013573 00000 n 
+0000013695 00000 n 
+0000013801 00000 n 
+0000013979 00000 n 
+0000014091 00000 n 
+0000014218 00000 n 
+0000014337 00000 n 
+0000014498 00000 n 
+0000014628 00000 n 
+0000014751 00000 n 
+0000014886 00000 n 
+0000014984 00000 n 
+0000015114 00000 n 
+0000015204 00000 n 
+0000015314 00000 n 
+0000015419 00000 n 
+0000015523 00000 n 
+0000015628 00000 n 
+0000015719 00000 n 
+0000015815 00000 n 
+0000018301 00000 n 
+0000021517 00000 n 
+0000023846 00000 n 
+0000026098 00000 n 
+0000028000 00000 n 
+0000028612 00000 n 
+0000028748 00000 n 
+0000028804 00000 n 
+0000028851 00000 n 
+0000029062 00000 n 
+0000030395 00000 n 
+0000030516 00000 n 
+0000030630 00000 n 
+0000030747 00000 n 
+0000030856 00000 n 
+0000030979 00000 n 
+0000031095 00000 n 
+0000031214 00000 n 
+0000031325 00000 n 
+0000031443 00000 n 
+0000031555 00000 n 
+0000031669 00000 n 
+0000031782 00000 n 
+0000031881 00000 n 
+0000033214 00000 n 
+0000034547 00000 n 
+0000035880 00000 n 
+0000037213 00000 n 
+0000038546 00000 n 
+0000039879 00000 n 
+0000041212 00000 n 
+0000042545 00000 n 
+0000043878 00000 n 
+0000045211 00000 n 
+0000046544 00000 n 
+trailer
+<<
+/ID 
+[<1810bcb227ea0d2643228f7dde99c387><1810bcb227ea0d2643228f7dde99c387>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 57 0 R
+/Root 56 0 R
+/Size 127
+>>
+startxref
+47877
+%%EOF

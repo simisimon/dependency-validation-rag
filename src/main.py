@@ -1,5 +1,9 @@
 from dotenv import load_dotenv
-from database.database import VectorDatabase
+from data.dependency import Dependency, DependencyCategory, DependencyLevel, DependencyType
+from cval import CVal
+import argparse
+import json
+
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -7,8 +11,8 @@ def get_args():
     # basic CVal config
     parser.add_argument(
         "--output_file", 
-        type="str",
-        help="Path to the output file or directory."
+        type=str,
+        help="Path of output file or directory."
     )
 
     # basic RAG config
@@ -19,18 +23,19 @@ def get_args():
         help="Enable or disable the RAG system."
     )
     parser.add_argument(
-        "--embed_model", 
+        "--embed_model_name", 
         type=str, 
         default="openai", 
         choices=["openai", "huggingface"],
         help="Embedding model used for vectorization."
     )
+
+    # scraping config
     parser.add_argument(
-        "--mode", 
-        type=str, 
-        default="static", 
-        choices=["static", "live"],
-        help="Operation mode of CVal."
+        "--num_documents", 
+        type=int, 
+        default=5,
+        help="Number of documented to be scraped."
     )
 
     # vector database config
@@ -38,7 +43,7 @@ def get_args():
         "--index_name", 
         type=str, 
         default="technology-docs", 
-        choices=["technology-docs", "so-posts", "blog-posts", "websearch"],
+        choices=["technology-docs", "so-posts", "blog-posts", "web-search"],
         help="Name of the index."
     )
     parser.add_argument(
@@ -89,18 +94,33 @@ def get_args():
 
 def main():
     args = get_args()
-    load_dotenv()
 
-    db = VectorDatabase()
-    retrieval_engine = db.get_retrieval_engine(args)
+    dep = Dependency(
+        dependency_type=DependencyType.INTRA.name,
+        dependency_level=DependencyLevel.CONFIG_FILE_LEVEL.name,
+        project="piggymetrics",
+        dependency_category="value-equality",
+        option_name="EXPOSE",
+        option_value="8080",
+        option_type="PORT",
+        option_file="Dockerfile",
+        option_technology="Docker",
+        dependent_option_name="server.port",
+        dependent_option_value="8080",
+        dependent_option_file="application.yml",
+        dependent_option_type="PORT",
+        dependent_option_technology="Spring-Boot"
+    )
 
-    answer = retrieval_engine.retrieve('EXPOSE instruction Docker')
+    cval = CVal(config=args)
 
-    # Inspect results
-    for i in answer:
-        print(i.get_content())
+    context = cval.retrieve("EXPOSE server.port dependency")
 
+    source_nodes = [i.get_content() for i in context.source_nodes]
 
+    for response, (_, values) in zip(source_nodes, context.metadata.items()):
+        print(response, json.dumps(values, indent=2))
+        break
 
 
 if __name__ == "__main__":

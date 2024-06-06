@@ -5,6 +5,15 @@ import argparse
 import json
 
 
+TEST_PROMPT = """Is there a configuration dependency between the port specified in my Dockerfile and in the application.yml of my Webserver?
+
+Respond in a JSON format as shown below:
+{{
+  "rationale": string, // Provide a concise explanation of whether and why the configuration options depend on each other.
+  "uncertainty": integer, // Rate your certainty of this dependency on a scale from 0 (completely uncertain) to 10 (absolutely certain).
+  "isDependency": boolean // Indicate True if a dependency exists, or False otherwise.
+}}"""
+
 def get_args():
     parser = argparse.ArgumentParser()
 
@@ -55,7 +64,7 @@ def main():
     )
 
     cval.validate(
-        query="Is there a configuration dependency between the port specified in my Dockerfile and in the application.yml of my Webserver?",
+        query=TEST_PROMPT,
         index_name=args.index_name,
         retriever_type="node_with_score",
         top_k=args.top_k

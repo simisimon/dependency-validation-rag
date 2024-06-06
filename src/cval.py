@@ -49,7 +49,7 @@ class CVal:
         Scrape websites from the web and index the corresponding data.
         """
         vector_store = self._get_vector_store(
-            index_name="web-search",
+            index_name=index_name,
             dimension=dimension,
             metric=metric
         )
@@ -164,3 +164,8 @@ class CVal:
             )
 
         return retriever
+    
+    def _retrieve_context(self, query) -> List[str]:
+        """
+        Retrieve context from the vector database.
+        """

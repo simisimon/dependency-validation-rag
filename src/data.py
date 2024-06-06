@@ -1,6 +1,15 @@
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Optional
+from typing import Optional, List
+
+
+@dataclass
+class Response:
+    response: str
+    source_nodes: Optional[List] = None
+
+    def __str__(self):
+        return self.response
 
 
 class DependencyLevel(Enum):

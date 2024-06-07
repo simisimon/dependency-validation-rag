@@ -1,43 +1,68 @@
 from llama_index.core.schema import NodeWithScore, QueryBundle
 from llama_index.vector_stores.pinecone import PineconeVectorStore
-from llama_index.core.retrievers import BaseRetriever
+from llama_index.core.retrievers import BaseRetriever, VectorIndexRetriever
+from llama_index.core.postprocessor import LLMRerank, SentenceTransformerRerank
+from llama_index.postprocessor.rankgpt_rerank import RankGPTRerank
+from llama_index.core import VectorStoreIndex, Settings
 from llama_index.core.schema import NodeWithScore
-from llama_index.core.vector_stores import VectorStoreQuery
-from typing import List, Any, Optional
+from llama_index_client import MetadataFilters
+from typing import List, Any
+  
 
-
-class CustomNodeWithScoreRetriever(BaseRetriever):
-    """Retriever over a pinecone vector store."""
-
+class CustomRerankRetriever(BaseRetriever):
     def __init__(
-        self,
-        vector_store: PineconeVectorStore,
+        self, 
+        vector_store: PineconeVectorStore, 
         embed_model: Any,
-        query_mode: str = "default",
-        similarity_top_k: int = 2,
+        similarity_top_k: int
     ) -> None:
-        """Init params."""
-        self._vector_store = vector_store
-        self._embed_model = embed_model
-        self._query_mode = query_mode
-        self._similarity_top_k = similarity_top_k
         super().__init__()
+        self._vector_retriever = VectorIndexRetriever(
+            index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
+            embed_model=embed_model,
+            similarity_top_k=similarity_top_k
+        )
 
     def _retrieve(self, query_bundle: QueryBundle) -> List[NodeWithScore]:
-        """Retrieve."""
-        query_embedding = self._embed_model.get_query_embedding(query_bundle.query_str)
-        vector_store_query = VectorStoreQuery(
-            query_embedding=query_embedding,
-            similarity_top_k=self._similarity_top_k,
-            mode=self._query_mode,
+
+        retrieved_nodes = self._vector_retriever.retrieve(query_bundle)
+        print("Len of retrieved nodes: ", len(retrieved_nodes))
+
+        # LLMReranker
+        #reranker = LLMRerank(service_context=self._service_context)
+        #retrieved_nodes = reranker.postprocess_nodes(retrieved_nodes, query_bundle)
+
+        # SentenceTransformerRerank
+        reranker = SentenceTransformerRerank(
+        model="cross-encoder/ms-marco-MiniLM-L-2-v2", top_n=3)
+        retrieved_nodes = reranker.postprocess_nodes(nodes=retrieved_nodes, query_bundle=query_bundle)
+        print("Len of retrieved nodes after reranking: ", len(retrieved_nodes))
+
+        #reranker = RankGPTRerank(llm=Settings.llm, top_n=3, verbose=True)
+        #retrieved_nodes = reranker.postprocess_nodes(nodes=retrieved_nodes, query_bundle=query_bundle)
+        #print("Len of retrieved nodes after reranking: ", len(retrieved_nodes))
+
+        return retrieved_nodes
+
+
+
+class CustomRerankAndFilterRetriever(BaseRetriever):
+    def __init__(
+        self, 
+        vector_store: PineconeVectorStore, 
+        embed_model: Any,
+        similarity_top_k: int,
+        filters: MetadataFilters
+    ) -> None:
+        super().__init__()
+        self._vector_retriever = VectorIndexRetriever(
+            index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
+            embed_model=embed_model,
+            similarity_top_k=similarity_top_k,
+            filters=filters
         )
-        query_result = self._vector_store.query(vector_store_query)
-
-        nodes_with_scores = []
-        for index, node in enumerate(query_result.nodes):
-            score: Optional[float] = None
-            if query_result.similarities is not None:
-                score = query_result.similarities[index]
-            nodes_with_scores.append(NodeWithScore(node=node, score=score))
-
-        return nodes_with_scores
+    
+    def _retrieve(self, query_bundle: QueryBundle) -> List[NodeWithScore]:
+        retrieved_nodes = self._vector_retriever.retrieve(query_bundle)
+        print("Len of retrieved nodes: ", len(retrieved_nodes))
+        return retrieved_nodes

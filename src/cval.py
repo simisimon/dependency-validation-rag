@@ -2,15 +2,16 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
-from llama_index.core import Settings, VectorStoreIndex, get_response_synthesizer, SimpleKeywordTableIndex
+from llama_index.core import Settings, VectorStoreIndex, StorageContext
+from llama_index_client import MetadataFilter, MetadataFilters
 from pinecone import Pinecone, ServerlessSpec
 from llama_index.vector_stores.pinecone import PineconeVectorStore
-from llama_index.core.retrievers import BaseRetriever, VectorIndexRetriever
+from llama_index.core.retrievers import BaseRetriever, VectorIndexRetriever, AutoMergingRetriever
 from data import Dependency
 from data_ingestion import DataIngestionEngine
-from retrieval import CustomNodeWithScoreRetriever
+from retrieval import CustomRerankRetriever, CustomRerankAndFilterRetriever
 from llama_index.core.query_engine import RetrieverQueryEngine
-from llama_index.core.postprocessor import SimilarityPostprocessor
+from llama_index.core.indices.query.schema import QueryBundle
 from typing import Dict, List, Optional
 from dotenv import load_dotenv
 from llama_index.core.response.notebook_utils import display_source_node
@@ -79,34 +80,33 @@ class CVal:
         Validate dependencies.
         """
         vector_store = self._get_vector_store(index_name=index_name)
-        retriever = self._get_retriever(
+
+        retrieved_nodes = self.get_retrieved_nodes(
+            query=query,
             retriever_type=retriever_type,
             vector_store=vector_store,
             top_k=top_k
-        )
+        ) 
 
-        #retrieved_nodes = retriever.retrieve(query)
-        #for node in retrieved_nodes:
-        #    print(node)
-        #    print(type(node))
-        #   print(node.text)
-        #    break  
+        for node in retrieved_nodes:
+            print(node)
 
-        response_synthesizer = get_response_synthesizer()
 
-        query_engine = RetrieverQueryEngine(
-            retriever=retriever,
-            response_synthesizer=response_synthesizer,
-            node_postprocessors=[
-                SimilarityPostprocessor(similarity_cutoff=0.7)
-            ]
-        )
+        #response_synthesizer = get_response_synthesizer()
 
-        response = query_engine.query(
-            str_or_query_bundle=query
-        )        
+        #query_engine = RetrieverQueryEngine(
+        #    retriever=retriever,
+        #    response_synthesizer=response_synthesizer,
+        #    node_postprocessors=[
+        #        SimilarityPostprocessor(similarity_cutoff=0.7)
+        #    ]
+        #)
 
-        print(response)
+        #response = query_engine.query(
+        #    str_or_query_bundle=query
+        #)        
+
+        #print(response)
 
 
     def _get_vector_store(
@@ -133,39 +133,68 @@ class CVal:
         vector_store = PineconeVectorStore(pinecone_index=index)
 
         return vector_store
-    
 
-    def _get_retriever(
-        self, 
+
+    def get_retrieved_nodes(
+        self,
+        query: str, 
         retriever_type: str,
         vector_store, 
         top_k: int, 
-        query_mode: str = "default"
-    ) -> BaseRetriever:
+    ) -> List[str]:
         """
-        Configure and return retriever.
+        Retrieve relevant nodes from the vector database.
         """
-        retriever_types = ["node_with_score"]
+        if retriever_type == "rerank_retriever":
+            print(f"Initialize RerankRetriever.")
+            retriever = CustomRerankRetriever(
+                vector_store=vector_store,
+                embed_model=Settings.embed_model,
+                similarity_top_k=top_k
+            )
 
-        if retriever_type not in retriever_types:
-            print(f"Retriever of type {retriever_type} not yet supported.")
+        elif retriever_type == "rerank_and_filter_retriever":
+            print(f"Initialize RerankAndFilterRetriever.")
+
+            filters = [
+                MetadataFilter(
+                    key='technology',
+                    value=title,
+                    operator='==',
+                
+                )
+                for title in ['docker', 'spring-boot']
+            ]
+
+            filters = MetadataFilters(filters=filters, condition="or")
+
+            retriever = CustomRerankAndFilterRetriever(
+                vector_store=vector_store,
+                embed_model=Settings.embed_model,
+                similarity_top_k=top_k,
+                filters=filters
+            )
+
+        elif retriever_type == "auto_merging_retriever":
+            print(f"Initialize AutoMergingRetriever.")
+            storage_context = StorageContext.from_defaults(vector_store=vector_store)
+            base_retriever = VectorIndexRetriever(
+                index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
+                similarity_top_k=top_k,
+                embed_model=Settings.embed_model
+            )
+            retriever = AutoMergingRetriever(vector_retriever=base_retriever, storage_context=storage_context)
+
+        else:
+            print(f"Initialize BaseRetriever.")
             retriever = VectorIndexRetriever(
                 index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
                 similarity_top_k=top_k,
                 embed_model=Settings.embed_model
             )
 
-        if retriever_type == "node_with_score":
-            retriever = CustomNodeWithScoreRetriever(
-                vector_store=vector_store, 
-                embed_model=Settings.embed_model, 
-                query_mode=query_mode, 
-                similarity_top_k=top_k
-            )
 
-        return retriever
-    
-    def _retrieve_context(self, query) -> List[str]:
-        """
-        Retrieve context from the vector database.
-        """
+        query_bundle = QueryBundle(query)
+        retrieved_nodes = retriever.retrieve(query_bundle)
+
+        return retrieved_nodes

@@ -27,7 +27,8 @@ def get_args():
     parser.add_argument("--index_name", type=str, default="tech-docs",  choices=["tech-docs", "so-posts", "blog-posts", "web-search"], help="Name of the index.")
 
     # retrieval config
-    parser.add_argument("--top_k", type=int, default=5, help="Number of similar documents to retrieve.")
+    parser.add_argument("--top_k", type=int, default=10, help="Number of documents to retrieve.")
+    parser.add_argument("--retriever_type", type=str, default="rerank_and_filter_retriever", choices=["base_retreiver", "rerank_retriever", "rerank_and_filter_retriever", "auto_merging_retriever"], help="Type of retriever.")
 
     # llm config
     parser.add_argument("--model_name", type=str, default="gpt-4o-2024-05-13", choices=["gpt-4-0125-preview", "gpt-3.5-turbo-0125", "llama3:8b", "gpt-4o-2024-05-13"], help="Name of the model")
@@ -66,11 +67,9 @@ def main():
     cval.validate(
         query=TEST_PROMPT,
         index_name=args.index_name,
-        retriever_type="node_with_score",
+        retriever_type=args.retriever_type,
         top_k=args.top_k
     )
-
-
 
 
 if __name__ == "__main__":

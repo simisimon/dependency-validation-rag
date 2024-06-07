@@ -22,9 +22,8 @@ class ScrapingException(Exception):
 
 
 class DataIngestionEngine:
-    def __init__(self, db_instance) -> None:
+    def __init__(self) -> None:
         self.base_url = "https://www.bing.com/search?q="
-        self.instance = db_instance
     
     @backoff.on_exception(
         backoff.expo,

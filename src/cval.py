@@ -2,19 +2,15 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
-from llama_index.core import Settings, VectorStoreIndex, StorageContext
-from llama_index_client import MetadataFilter, MetadataFilters
-from pinecone import Pinecone, ServerlessSpec
-from llama_index.vector_stores.pinecone import PineconeVectorStore
-from llama_index.core.retrievers import BaseRetriever, VectorIndexRetriever, AutoMergingRetriever
-from data import Dependency
-from data_ingestion import DataIngestionEngine
-from retrieval import CustomRerankRetriever, CustomRerankAndFilterRetriever
+from llama_index.core import Settings, get_response_synthesizer
+from data import ValidationResponse, Dependency
+from ingestion_engine import DataIngestionEngine
+from retrieval_engine import RetrievalEngine
 from llama_index.core.query_engine import RetrieverQueryEngine
-from llama_index.core.indices.query.schema import QueryBundle
-from typing import Dict, List, Optional
+from generator import GeneratorFactory
+from prompt_templates import SYSTEM_PROMPT, USER_PROMPT, DEPENDENCY_PROMPT
+from typing import List, Optional
 from dotenv import load_dotenv
-from llama_index.core.response.notebook_utils import display_source_node
 import os
 
 
@@ -22,10 +18,11 @@ class CVal:
     def __init__(self, model_name: str, env_file_path: str) -> None:
         load_dotenv(dotenv_path=env_file_path)
         self.model_name = model_name
-        self.vector_db_instance = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
         self.set_settings()
+        self.ingestion_engine = DataIngestionEngine()
+        self.retrieval_engine = RetrievalEngine()
 
-
+    
     def set_settings(self) -> None:
         if self.model_name.startswith("gpt"):
             Settings.embed_model = OpenAIEmbedding(api_key=os.getenv(key="OPENAI_KEY"))
@@ -36,7 +33,6 @@ class CVal:
         else:
             raise Exception(f"Model {self.model_name} not yet supported.")
             
-
     def scrape_data(
         self, 
         query: str, 
@@ -49,50 +45,100 @@ class CVal:
         """
         Scrape websites from the web and index the corresponding data.
         """
-        vector_store = self._get_vector_store(
-            index_name=index_name,
-            dimension=dimension,
-            metric=metric
-        )
 
-        ingestion_engine = DataIngestionEngine()
-
-        documents = ingestion_engine.scrape(
+        # Scrape documents from web
+        documents = self.ingestion_engine.scrape(
             query=query, 
             website=website,
             num_websites=num_websites
         )
 
-        ingestion_engine.index_documents(
+        # Get VectorStore from RetrievalEngine
+        vector_store = self.retrieval_engine.get_vector_store(
+            index_name=index_name,
+            dimension=dimension,
+            metric=metric
+        )
+
+        # Add data to vector store
+        self.ingestion_engine.index_documents(
             vector_store = vector_store,
             documents=documents
-        )      
+        )
 
 
     def validate(
         self, 
-        query: str, 
+        enable_rag: bool,
+        dependency: Dependency, 
         index_name: str, 
         retriever_type: str,
         top_k: int
     ) -> List:
         """
-        Validate dependencies.
+        Validate a dependency.
         """
-        vector_store = self._get_vector_store(index_name=index_name)
+        if not enable_rag:
+            messages = [
+                {
+                    "role": "system", 
+                    "content": SYSTEM_PROMPT.format(
+                        dependency.option_technology,
+                        dependency.dependent_option_technology,
+                        dependency.project
+                    )
+                },
+                {
+                    "role": "user",
+                    "content": USER_PROMPT.format(DEPENDENCY_PROMPT.format(
+                        dependency.dependency_type,
+                        dependency.project,
+                        dependency.option_name,
+                        dependency.option_value,
+                        dependency.option_type,
+                        dependency.option_file,
+                        dependency.option_technology,
+                        dependency.dependent_option_name,
+                        dependency.dependent_option_value,
+                        dependency.dependency_type,
+                        dependency.dependent_option_file,
+                        dependency.dependent_option_technology,
+                        dependency.dependency_category
+                    ))
+                }
+            ]
 
-        retrieved_nodes = self.get_retrieved_nodes(
-            query=query,
+            generator = GeneratorFactory().get_generator(
+                model_name=self.model_name,
+                temperature=0.0
+            )
+            
+            validation_response = generator.generate(messages=messages)
+
+            return validation_response
+
+
+        vector_store = self.retrieval_engine.get_vector_store(index_name=index_name)
+        retriever = self.retrieval_engine.get_retriever(
             retriever_type=retriever_type,
             vector_store=vector_store,
             top_k=top_k
-        ) 
+        )
 
-        for node in retrieved_nodes:
-            print(node)
+        #query_bundle = QueryBundle(query)
+        #retrieved_nodes = retriever.retrieve(query_bundle)
+        #for node in retrieved_nodes:
+        #    print(node)
 
+        response_synthesizer = get_response_synthesizer()
 
-        #response_synthesizer = get_response_synthesizer()
+        query_engine = RetrieverQueryEngine.from_args(
+            retriever=retriever,
+            response_synthesizer=response_synthesizer,
+            llm=Settings.llm,
+            output_cls=ValidationResponse,
+            response_mode="compact",
+        )
 
         #query_engine = RetrieverQueryEngine(
         #    retriever=retriever,
@@ -102,99 +148,29 @@ class CVal:
         #    ]
         #)
 
-        #response = query_engine.query(
-        #    str_or_query_bundle=query
-        #)        
+        validation_response = query_engine.query(
+            str_or_query_bundle=self._create_query(dependency=dependency)
+        )        
 
-        #print(response)
-
-
-    def _get_vector_store(
-        self, 
-        index_name: str,
-        dimension: int = 1536,
-        metric: str = "cosine"
-    ):
-        """
-        Create and return vector store.
-        """
-        if index_name not in self.vector_db_instance.list_indexes().names():
-            self.vector_db_instance.create_index(
-                name=index_name,
-                dimension=dimension,
-                metric=metric,
-                spec=ServerlessSpec(
-                    cloud="aws",
-                    region="us-east-1"
-                )
-            )
-
-        index = self.vector_db_instance.Index(index_name)
-        vector_store = PineconeVectorStore(pinecone_index=index)
-
-        return vector_store
+        return validation_response
+ 
+    def _create_query(self, dependency: Dependency) -> str:
+        return USER_PROMPT.format(DEPENDENCY_PROMPT.format(
+            dependency.dependency_type,
+            dependency.project,
+            dependency.option_name,
+            dependency.option_value,
+            dependency.option_type,
+            dependency.option_file,
+            dependency.option_technology,
+            dependency.dependent_option_name,
+            dependency.dependent_option_value,
+            dependency.dependency_type,
+            dependency.dependent_option_file,
+            dependency.dependent_option_technology,
+            dependency.dependency_category
+        ))
 
 
-    def get_retrieved_nodes(
-        self,
-        query: str, 
-        retriever_type: str,
-        vector_store, 
-        top_k: int, 
-    ) -> List[str]:
-        """
-        Retrieve relevant nodes from the vector database.
-        """
-        if retriever_type == "rerank_retriever":
-            print(f"Initialize RerankRetriever.")
-            retriever = CustomRerankRetriever(
-                vector_store=vector_store,
-                embed_model=Settings.embed_model,
-                similarity_top_k=top_k
-            )
+    
 
-        elif retriever_type == "rerank_and_filter_retriever":
-            print(f"Initialize RerankAndFilterRetriever.")
-
-            filters = [
-                MetadataFilter(
-                    key='technology',
-                    value=title,
-                    operator='==',
-                
-                )
-                for title in ['docker', 'spring-boot']
-            ]
-
-            filters = MetadataFilters(filters=filters, condition="or")
-
-            retriever = CustomRerankAndFilterRetriever(
-                vector_store=vector_store,
-                embed_model=Settings.embed_model,
-                similarity_top_k=top_k,
-                filters=filters
-            )
-
-        elif retriever_type == "auto_merging_retriever":
-            print(f"Initialize AutoMergingRetriever.")
-            storage_context = StorageContext.from_defaults(vector_store=vector_store)
-            base_retriever = VectorIndexRetriever(
-                index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
-                similarity_top_k=top_k,
-                embed_model=Settings.embed_model
-            )
-            retriever = AutoMergingRetriever(vector_retriever=base_retriever, storage_context=storage_context)
-
-        else:
-            print(f"Initialize BaseRetriever.")
-            retriever = VectorIndexRetriever(
-                index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
-                similarity_top_k=top_k,
-                embed_model=Settings.embed_model
-            )
-
-
-        query_bundle = QueryBundle(query)
-        retrieved_nodes = retriever.retrieve(query_bundle)
-
-        return retrieved_nodes

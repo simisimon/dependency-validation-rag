@@ -19,6 +19,7 @@ def get_args():
 
     # basic CVal config
     parser.add_argument("--output_file", type=str, help="Path of output file or directory.")
+    parser.add_argument("--enable_rag", type=bool, default=True, help="Whether RAG is enabled or not.")
 
     # scraping config
     parser.add_argument("--num_websites", type=int, default=5, help="Number of websites to be scraped.")
@@ -28,7 +29,7 @@ def get_args():
 
     # retrieval config
     parser.add_argument("--top_k", type=int, default=10, help="Number of documents to retrieve.")
-    parser.add_argument("--retriever_type", type=str, default="rerank_and_filter_retriever", choices=["base_retreiver", "rerank_retriever", "rerank_and_filter_retriever", "auto_merging_retriever"], help="Type of retriever.")
+    parser.add_argument("--retriever_type", type=str, default="base_retriever", choices=["base_retriever", "rerank_retriever", "rerank_and_filter_retriever", "auto_merging_retriever"], help="Type of retriever.")
 
     # llm config
     parser.add_argument("--model_name", type=str, default="gpt-4o-2024-05-13", choices=["gpt-4-0125-preview", "gpt-3.5-turbo-0125", "llama3:8b", "gpt-4o-2024-05-13"], help="Name of the model")
@@ -64,12 +65,15 @@ def main():
         env_file_path="./.env"
     )
 
-    cval.validate(
-        query=TEST_PROMPT,
-        index_name=args.index_name,
-        retriever_type=args.retriever_type,
-        top_k=args.top_k
+    response = cval.validate(
+        enable_rag=True,
+        dependency=dep,
+        index_name="tech-docs", # ["tech-docs", "so-posts", "blog-posts", "web-search"]
+        retriever_type="rerank_retriever", #["base_retriever", "rerank_retriever", "rerank_and_filter_retriever", "auto_merging_retriever"]
+        top_k=10
     )
+
+    print(response)
 
 
 if __name__ == "__main__":

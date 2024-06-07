@@ -1,13 +1,39 @@
+
+from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core.schema import NodeWithScore, QueryBundle
 from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core.retrievers import BaseRetriever, VectorIndexRetriever
 from llama_index.core.postprocessor import LLMRerank, SentenceTransformerRerank
 from llama_index.postprocessor.rankgpt_rerank import RankGPTRerank
-from llama_index.core import VectorStoreIndex, Settings
+from llama_index_client import MetadataFilters
 from llama_index.core.schema import NodeWithScore
 from llama_index_client import MetadataFilters
+from llama_index.core.indices.query.schema import QueryBundle
+from llama_index.core import VectorStoreIndex
 from typing import List, Any
-  
+
+
+
+
+class CustomBaseRetriever(BaseRetriever):
+    def __init__(
+        self, 
+        vector_store: PineconeVectorStore, 
+        embed_model: Any,
+        similarity_top_k: int
+    ):
+        self._vector_retriever = VectorIndexRetriever(
+            index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
+            embed_model=embed_model,
+            similarity_top_k=similarity_top_k
+        )
+
+
+    def _retrieve(self, query_bundle: QueryBundle) -> List[NodeWithScore]:
+        retrieved_nodes = self._vector_retriever.retrieve(query_bundle)
+        print("Len of retrieved nodes: ", len(retrieved_nodes))
+        return retrieved_nodes[:3]
+
 
 class CustomRerankRetriever(BaseRetriever):
     def __init__(

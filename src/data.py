@@ -1,7 +1,14 @@
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Optional, List
+from pydantic import BaseModel
 
+
+class ValidationResponse(BaseModel):
+    """Data model for validation response."""
+    explanation: str
+    uncertanity: int
+    isDependency: bool
 
 
 class DependencyLevel(Enum):

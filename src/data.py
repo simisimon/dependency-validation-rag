@@ -7,7 +7,7 @@ from pydantic import BaseModel
 class ValidationResponse(BaseModel):
     """Data model for validation response."""
     explanation: str
-    uncertanity: int
+    uncertainty: int
     isDependency: bool
 
 

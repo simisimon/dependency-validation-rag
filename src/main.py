@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from data import Dependency, DependencyLevel, DependencyType
 from cval import CVal
 import argparse
-import json
 
 
 TEST_PROMPT = """Is there a configuration dependency between the port specified in my Dockerfile and in the application.yml of my Webserver?

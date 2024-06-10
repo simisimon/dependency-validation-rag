@@ -1,16 +1,11 @@
-from pinecone import Pinecone, ServerlessSpec
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core import Settings
-from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core import Settings
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.readers.web import SimpleWebPageReader
-from llama_index.core.base.llms.base import BaseLLM
-from llama_index.core.base.embeddings.base import BaseEmbedding
 from typing import List, Optional
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
-import os
 import re
 import backoff
 import requests

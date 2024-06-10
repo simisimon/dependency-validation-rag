@@ -5,12 +5,21 @@ from llama_index.core import Settings, StorageContext, VectorStoreIndex
 from llama_index.core.retrievers import VectorIndexRetriever, AutoMergingRetriever
 from retriever import CustomBaseRetriever, CustomRerankAndFilterRetriever, CustomRerankRetriever
 from typing import List
+from rich.logging import RichHandler
 import os
+import logging
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[RichHandler()],
+)
 
 
 class RetrievalEngine:
     def __init__(self) -> None:
-        pass
+        logging.info("Retrieval Engine initialized.")
 
     def get_vector_store(
         self, 

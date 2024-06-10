@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
-from data import Dependency, DependencyLevel, DependencyType
+from data import Dependency
 from cval import CVal
+from query_engine import QueryEngine
 import argparse
 
 
@@ -43,8 +44,6 @@ def main():
     args = get_args()
 
     dep = Dependency(
-        dependency_type=DependencyType.INTRA.name,
-        dependency_level=DependencyLevel.CONFIG_FILE_LEVEL.name,
         project="piggymetrics",
         dependency_category="value-equality",
         option_name="EXPOSE",
@@ -72,7 +71,7 @@ def main():
         top_k=10
     )
 
-    print(response)
+    print(response, type(response))
 
 
 if __name__ == "__main__":

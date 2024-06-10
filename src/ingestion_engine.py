@@ -6,9 +6,17 @@ from llama_index.readers.web import SimpleWebPageReader
 from typing import List, Optional
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
+from rich.logging import RichHandler
 import re
 import backoff
 import requests
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[RichHandler()],
+)
 
 
 class ScrapingException(Exception):
@@ -18,6 +26,7 @@ class ScrapingException(Exception):
 
 class DataIngestionEngine:
     def __init__(self) -> None:
+        logging.info(f"Data Ingestion Engine initialized.")
         self.base_url = "https://www.bing.com/search?q="
     
     @backoff.on_exception(

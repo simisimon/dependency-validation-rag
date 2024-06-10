@@ -11,8 +11,14 @@ from llama_index_client import MetadataFilters
 from llama_index.core.indices.query.schema import QueryBundle
 from llama_index.core import VectorStoreIndex
 from typing import List, Any
+from rich.logging import RichHandler
+import logging
 
-
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[RichHandler()],
+)
 
 
 class CustomBaseRetriever(BaseRetriever):
@@ -22,6 +28,8 @@ class CustomBaseRetriever(BaseRetriever):
         embed_model: Any,
         similarity_top_k: int
     ):
+        logging.info("Custom Base Retriever initialized.")
+        super().__init__()
         self._vector_retriever = VectorIndexRetriever(
             index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
             embed_model=embed_model,
@@ -42,6 +50,7 @@ class CustomRerankRetriever(BaseRetriever):
         embed_model: Any,
         similarity_top_k: int
     ) -> None:
+        logging.info("Custom Rerank Retriever initialized.")
         super().__init__()
         self._vector_retriever = VectorIndexRetriever(
             index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
@@ -80,6 +89,7 @@ class CustomRerankAndFilterRetriever(BaseRetriever):
         similarity_top_k: int,
         filters: MetadataFilters
     ) -> None:
+        logging.info("Custom Rerank and Filter Retriever initialized.")
         super().__init__()
         self._vector_retriever = VectorIndexRetriever(
             index=VectorStoreIndex.from_vector_store(vector_store=vector_store),

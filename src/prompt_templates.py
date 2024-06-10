@@ -1,27 +1,41 @@
-SYSTEM_PROMPT = """You are an expert in validating intra-technology and cross-technology configuration dependencies. 
-You will be presented with configuration options from the technologies {} and {} in the project {}. 
-Your task is to determine whether the given configuration options actually depend on each other based on the specified type of dependency."""
+from llama_index.core import PromptTemplate
 
-USER_PROMPT = """Validate the given dependency description step by step whether the given configuration options actually depend on each other due to value-equality.
 
-Steps:
-1. **Contextual Analysis**: Review the context information related to the configuration options from the provided project and technologies. Understand their purpose, existing dependencies, and constraints to set the foundation for your validation task.
-2. **Dependency Review**: Examine the dependency description to determine the logic behind the specified type of  dependency between the configuration options. Consider how these configuration options are set and may interact within the specified project.
-3. **Critical Evaluation**: Consider that “value-equality” may lead to false positives. Not all configurations with equal values necessarily depend on each other. Analyze whether such equality in this case indicates a true dependency between the specified configuration options .
-4. **Conclusive Decision**: Based on the steps above, decide if a true dependency exists between the specified configuration options. If you are not completely not completely sure, …
+RETRIEVAL_STR = PromptTemplate(
+    "Are the following configuration options found in {project} dependent on each other?\n"
+    "Option A: The configuration option named '{nameA}' with the value '{valueA}' of type '{typeA}' located in '{fileA}', which belongs to the technology '{technologyA}'.\n"
+    "Option B: The configuration option named '{nameB}' with the value '{valueB}' of type '{typeB}' located in '{fileB}', which belongs to the technology '{technologyB}'.\n\n"
+)
 
-Respond in a JSON format as shown below:
-{{
-  "rationale": string, // Provide a concise explanation of whether and why the configuration options depend on each other.
-  "uncertainty": integer, // Rate your certainty of this dependency on a scale from 0 (completely uncertain) to 10 (absolutely certain).
-  "isDependency": boolean // Indicate True if a dependency exists, or False otherwise.
-}}
 
-### Dependency Description
-{}
-"""
+QUERY_PROMPT = PromptTemplate(
+    "{system_str}\n"
+    "Context information is below.\n"
+    "---------------------\n"
+    "{context_str}\n"
+    "---------------------\n"
+    "Given the context information, perform the following task.\n"
+    "---------------------\n"
+    "{task_str}\n"
+)
 
-DEPENDENCY_PROMPT = """There is a potential dependency between two configuration options based on {} found in project {}:
-- Option A:  The configuration option named {} with the value {} of type {} located in the file {} from the technology {}.
-- Option B: The configuration option named {} with the value {} of type {} located in the file {}  from the technology {}.
-Both configuration options may depend on each other due to a {} dependency."""
+
+SYSTEM_STR = PromptTemplate(
+    "You are an expert in validating intra-technology and cross-technology configuration dependencies.\n" 
+    "You will be presented with configuration options from the technologies '{technologyA}' and '{technologyB}' found in project '{project}'.\n" 
+    "Your task is to determine whether the given configuration options actually depend on each other based on the specified type of dependency."
+)
+
+TASK_STR = PromptTemplate(
+    "Given the following configuration options found in project '{project}':\n"
+    "Option A: The configuration option named '{nameA}' with the value '{valueA}' of type '{typeA}' located in '{fileA}', which belongs to the technology '{technologyA}'.\n"
+    "Option B: The configuration option named '{nameB}' with the value '{valueB}' of type '{typeB}' located in '{fileB}', which belongs to the technology '{technologyB}'.\n\n"
+    "Validate step by step whether the given configuration options actually depend on each other due to a '{dependency_category}' dependency.\n" 
+    "Respond in a JSON format as shown below:\n"
+    "{{\n"
+    "'rationale': string, // Provide a concise explanation of whether and why the configuration options depend on each other.\n"
+    "'uncertainty': integer, // Rate your certainty of this dependency on a scale from 0 (completely uncertain) to 10 (absolutely certain).\n"
+    "'isDependency': boolean // Indicate True if a configuration dependency exists, or False otherwise.\n"
+    "}}"
+)
+

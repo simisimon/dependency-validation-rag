@@ -17,18 +17,18 @@ logging.basicConfig(
 class GeneratorFactory:
     def get_generator(self, model_name: str, temperature: int):
         if model_name.startswith("gpt"):
-            return GPTGenerator(
+            return GPTGeneratorEngine(
                 model_name=model_name,
                 temperature=temperature
             )
         else:
-            return OllamaGenerator(
+            return OllamaGeneratorEngine(
                 model_name=model_name,
                 temperature=temperature
             )
         
 
-class Generator:
+class GeneratorEngine:
     def __init__(self, model_name: str, temperature: int) -> None:
         self.model_name = model_name
         self.temperature = temperature
@@ -37,7 +37,7 @@ class Generator:
         pass
 
 
-class GPTGenerator(Generator):
+class GPTGeneratorEngine(GeneratorEngine):
     def __init__(self, model_name: str, temperature: int) -> None:
         super().__init__(
             model_name=model_name, 
@@ -68,7 +68,7 @@ class GPTGenerator(Generator):
         return response.choices[0].message.content, response.usage   
 
 
-class OllamaGenerator(Generator):
+class OllamaGeneratorEngine(GeneratorEngine):
     def __init__(self, model_name: str, temperature: int) -> None:
         super().__init__(
             model_name=model_name, 

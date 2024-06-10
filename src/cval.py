@@ -2,25 +2,29 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
-from llama_index.core import Settings, get_response_synthesizer
-from data import ValidationResponse, Dependency
+from llama_index.core import Settings
+from data import Dependency
 from ingestion_engine import DataIngestionEngine
 from retrieval_engine import RetrievalEngine
-from llama_index.core.query_engine import RetrieverQueryEngine
-from generator import GeneratorFactory
-from prompt_templates import SYSTEM_PROMPT, USER_PROMPT, DEPENDENCY_PROMPT
+from query_engine import QueryEngine
+from generator_engine import GeneratorFactory
 from typing import List, Optional
 from dotenv import load_dotenv
 import os
 
 
 class CVal:
-    def __init__(self, model_name: str, env_file_path: str) -> None:
+    def __init__(self, model_name: str, temperature: int, env_file_path: str) -> None:
         load_dotenv(dotenv_path=env_file_path)
         self.model_name = model_name
         self.set_settings()
         self.ingestion_engine = DataIngestionEngine()
         self.retrieval_engine = RetrievalEngine()
+        self.query_engine = QueryEngine()
+        self.generator_engine = GeneratorFactory().get_generator(
+            model_name=model_name,
+            temperature=temperature
+        )
 
     
     def set_settings(self) -> None:
@@ -45,7 +49,6 @@ class CVal:
         """
         Scrape websites from the web and index the corresponding data.
         """
-
         # Scrape documents from web
         documents = self.ingestion_engine.scrape(
             query=query, 
@@ -82,41 +85,17 @@ class CVal:
             messages = [
                 {
                     "role": "system", 
-                    "content": SYSTEM_PROMPT.format(
-                        dependency.option_technology,
-                        dependency.dependent_option_technology,
-                        dependency.project
-                    )
+                    "content": self.query_engine.get_system_str(dependency=dependency)
                 },
                 {
                     "role": "user",
-                    "content": USER_PROMPT.format(DEPENDENCY_PROMPT.format(
-                        dependency.dependency_type,
-                        dependency.project,
-                        dependency.option_name,
-                        dependency.option_value,
-                        dependency.option_type,
-                        dependency.option_file,
-                        dependency.option_technology,
-                        dependency.dependent_option_name,
-                        dependency.dependent_option_value,
-                        dependency.dependency_type,
-                        dependency.dependent_option_file,
-                        dependency.dependent_option_technology,
-                        dependency.dependency_category
-                    ))
+                    "content": self.query_engine.get_task_str(dependency=dependency)
                 }
             ]
 
-            generator = GeneratorFactory().get_generator(
-                model_name=self.model_name,
-                temperature=0.0
-            )
-            
-            validation_response = generator.generate(messages=messages)
+            validation_response = self.generator.generate(messages=messages)
 
             return validation_response
-
 
         vector_store = self.retrieval_engine.get_vector_store(index_name=index_name)
         retriever = self.retrieval_engine.get_retriever(
@@ -125,51 +104,14 @@ class CVal:
             top_k=top_k
         )
 
-        #query_bundle = QueryBundle(query)
-        #retrieved_nodes = retriever.retrieve(query_bundle)
-        #for node in retrieved_nodes:
-        #    print(node)
-
-        response_synthesizer = get_response_synthesizer()
-
-        query_engine = RetrieverQueryEngine.from_args(
+        validation_response = self.query_engine.custom_query(
             retriever=retriever,
-            response_synthesizer=response_synthesizer,
-            llm=Settings.llm,
-            output_cls=ValidationResponse,
-            response_mode="compact",
+            llm=Settings.llm, 
+            dependency=dependency
         )
-
-        #query_engine = RetrieverQueryEngine(
-        #    retriever=retriever,
-        #    response_synthesizer=response_synthesizer,
-        #    node_postprocessors=[
-        #        SimilarityPostprocessor(similarity_cutoff=0.7)
-        #    ]
-        #)
-
-        validation_response = query_engine.query(
-            str_or_query_bundle=self._create_query(dependency=dependency)
-        )        
 
         return validation_response
  
-    def _create_query(self, dependency: Dependency) -> str:
-        return USER_PROMPT.format(DEPENDENCY_PROMPT.format(
-            dependency.dependency_type,
-            dependency.project,
-            dependency.option_name,
-            dependency.option_value,
-            dependency.option_type,
-            dependency.option_file,
-            dependency.option_technology,
-            dependency.dependent_option_name,
-            dependency.dependent_option_value,
-            dependency.dependency_type,
-            dependency.dependent_option_file,
-            dependency.dependent_option_technology,
-            dependency.dependency_category
-        ))
 
 
     

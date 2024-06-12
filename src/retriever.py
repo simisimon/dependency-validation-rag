@@ -30,11 +30,7 @@ def generate_queries(query_bundle: QueryBundle, num_queries: int) -> List[str]:
             query=query_bundle.query_str
         )
 
-        print("Test B")
-
         queries = response.split("\n")
-        print("Generated queries: ", queries)
-
         return queries
 
 
@@ -63,7 +59,7 @@ class CustomBaseRetriever(BaseRetriever):
 
         for query, index in enumerate(queries):
             retrieved_nodes = self._vector_retriever.retrieve(QueryBundle(query_str=query))
-            print(f"Len of retrieved nodes of query {index}: ", len(retrieved_nodes))
+            logging.info(f"Len of retrieved nodes of query {index}: {len(retrieved_nodes)}")
             all_retrieved_nodes += retrieved_nodes[:1]
 
         return all_retrieved_nodes
@@ -85,8 +81,6 @@ class CustomRerankRetriever(BaseRetriever):
         )
 
     def _retrieve(self, query_bundle: QueryBundle) -> List[NodeWithScore]:
-        print("Query: ", query_bundle.query_str)
-
         all_retrieved_nodes = []
         queries = generate_queries(
             query_bundle=query_bundle,
@@ -95,23 +89,25 @@ class CustomRerankRetriever(BaseRetriever):
 
         for query, index in enumerate(queries):
             retrieved_nodes = self._vector_retriever.retrieve(QueryBundle(query_str=query))
-            print(f"Len of retrieved nodes of query {index}: ", len(retrieved_nodes))
+            logging.info(f"Len of retrieved nodes of query {index}: {len(retrieved_nodes)}")
             all_retrieved_nodes += retrieved_nodes
 
 
         # LLMReranker
         #reranker = LLMRerank(service_context=self._service_context)
-        #retrieved_nodes = reranker.postprocess_nodes(retrieved_nodes, query_bundle)
+          #final_retrieved_nodes = reranker.postprocess_nodes(nodes=all_retrieved_nodes, query_bundle=query_bundle)
+        #logging.info(f"Len of retrieved nodes after reranking: {len(final_retrieved_nodes)}")
+
 
         # SentenceTransformerRerank
         reranker = SentenceTransformerRerank(
         model="cross-encoder/ms-marco-MiniLM-L-2-v2", top_n=3)
         final_retrieved_nodes = reranker.postprocess_nodes(nodes=all_retrieved_nodes, query_bundle=query_bundle)
-        print("Len of retrieved nodes after reranking: ", len(retrieved_nodes))
+        logging.info(f"Len of retrieved nodes after reranking: {len(retrieved_nodes)}")
 
         #reranker = RankGPTRerank(llm=Settings.llm, top_n=3, verbose=True)
-        #retrieved_nodes = reranker.postprocess_nodes(nodes=retrieved_nodes, query_bundle=query_bundle)
-        #print("Len of retrieved nodes after reranking: ", len(retrieved_nodes))
+        #final_retrieved_nodes = reranker.postprocess_nodes(nodes=all_retrieved_nodes, query_bundle=query_bundle)
+        #logging.info(f"Len of retrieved nodes after reranking: {len(final_retrieved_nodes)}")
 
         return final_retrieved_nodes
 
@@ -142,13 +138,13 @@ class CustomRerankAndFilterRetriever(BaseRetriever):
 
         for query, index in enumerate(queries):
             retrieved_nodes = self._vector_retriever.retrieve(QueryBundle(query_str=query))
-            print(f"Len of retrieved nodes of query {index}: ", len(retrieved_nodes))
+            logging.info(f"Len of retrieved nodes of query {index}: {len(retrieved_nodes)}")
             all_retrieved_nodes += retrieved_nodes
 
         reranker = SentenceTransformerRerank(
         model="cross-encoder/ms-marco-MiniLM-L-2-v2", top_n=3)
         final_retrieved_nodes = reranker.postprocess_nodes(nodes=all_retrieved_nodes, query_bundle=query_bundle)
-        print("Len of retrieved nodes after reranking: ", len(retrieved_nodes))
+        logging.info(f"Len of retrieved nodes after reranking: {len(retrieved_nodes)}")
 
         return final_retrieved_nodes
 

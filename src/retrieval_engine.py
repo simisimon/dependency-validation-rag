@@ -58,7 +58,6 @@ class RetrievalEngine:
         Get Retriever.
         """
         if retriever_type == "rerank_retriever":
-            print(f"Initialize RerankRetriever.")
             retriever = CustomRerankRetriever(
                 vector_store=vector_store,
                 embed_model=Settings.embed_model,
@@ -66,8 +65,6 @@ class RetrievalEngine:
             )
 
         elif retriever_type == "rerank_and_filter_retriever":
-            print(f"Initialize RerankAndFilterRetriever.")
-
             filters = [
                 MetadataFilter(
                     key='technology',
@@ -88,7 +85,6 @@ class RetrievalEngine:
             )
 
         elif retriever_type == "auto_merging_retriever":
-            print(f"Initialize AutoMergingRetriever.")
             storage_context = StorageContext.from_defaults(vector_store=vector_store)
             base_retriever = VectorIndexRetriever(
                 index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
@@ -98,7 +94,6 @@ class RetrievalEngine:
             retriever = AutoMergingRetriever(vector_retriever=base_retriever, storage_context=storage_context)
 
         else:
-            print(f"Initialize BaseRetriever.")
             retriever = CustomBaseRetriever(
                 vector_store=vector_store,
                 similarity_top_k=top_k,

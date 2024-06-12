@@ -140,9 +140,9 @@ class DataIngestionEngine:
             vector_store=vector_store
         )
 
-        print(f"Start indexing.")
+        logging.info(f"Start indexing.")
         pipeline.run(documents=documents)
-        print(f"Indexing done.")
+        logging.info(f"Indexing done.")
 
 
     

@@ -57,7 +57,7 @@ class CustomBaseRetriever(BaseRetriever):
             num_queries=3
         )
 
-        for query, index in enumerate(queries):
+        for index, query in enumerate(queries):
             retrieved_nodes = self._vector_retriever.retrieve(QueryBundle(query_str=query))
             logging.info(f"Len of retrieved nodes of query {index}: {len(retrieved_nodes)}")
             all_retrieved_nodes += retrieved_nodes[:1]
@@ -87,7 +87,7 @@ class CustomRerankRetriever(BaseRetriever):
             num_queries=3
         )
 
-        for query, index in enumerate(queries):
+        for index, query in enumerate(queries):
             retrieved_nodes = self._vector_retriever.retrieve(QueryBundle(query_str=query))
             logging.info(f"Len of retrieved nodes of query {index}: {len(retrieved_nodes)}")
             all_retrieved_nodes += retrieved_nodes
@@ -136,7 +136,7 @@ class CustomRerankAndFilterRetriever(BaseRetriever):
             num_queries=3
         )
 
-        for query, index in enumerate(queries):
+        for index, query in enumerate(queries):
             retrieved_nodes = self._vector_retriever.retrieve(QueryBundle(query_str=query))
             logging.info(f"Len of retrieved nodes of query {index}: {len(retrieved_nodes)}")
             all_retrieved_nodes += retrieved_nodes

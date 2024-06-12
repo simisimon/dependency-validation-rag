@@ -1,13 +1,19 @@
 from dataclasses import dataclass
 from typing import Optional
-from pydantic import BaseModel
 
 
-class ValidationResponse(BaseModel):
-    """Data model for validation response."""
-    explanation: str
-    uncertainty: int
-    isDependency: bool
+@dataclass
+class CvalConfig:
+    enable_rag: Optional[bool] = None
+    env_file_path: Optional[str] = None
+    index_name: Optional[str] = None
+    top_k: Optional[int] = None
+    retrieval_type: Optional[str] = None
+    model_name: Optional[str] = None
+    temperature: Optional[float] = None
+    num_websites: Optional[int] = None
+    dimension: Optional[int] = None
+    metrics: Optional[str] = None
 
 
 @dataclass

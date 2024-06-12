@@ -2,13 +2,13 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
-from llama_index.core import Settings
-from data import Dependency
+from llama_index.core import Settings, SimpleDirectoryReader
+from data import Dependency, CvalConfig
 from ingestion_engine import DataIngestionEngine
 from retrieval_engine import RetrievalEngine
 from query_engine import QueryEngine
 from generator_engine import GeneratorFactory
-from typing import List
+from typing import List, Dict
 from dotenv import load_dotenv
 from rich.logging import RichHandler
 import os
@@ -23,30 +23,22 @@ logging.basicConfig(
 
 
 class CVal:
-    def __init__(self, model_name: str, temperature: int, env_file_path: str) -> None:
-        load_dotenv(dotenv_path=env_file_path)
-        self.model_name = model_name
-        self.temperature = temperature
+    def __init__(self, cfg: CvalConfig) -> None:
+        self.cfg = cfg
+        load_dotenv(dotenv_path=self.cfg.env_file_path)
         self.set_settings()
     
     def set_settings(self) -> None:
-        if self.model_name.startswith("gpt"):
+        if self.cfg.model_name.startswith("gpt"):
             Settings.embed_model = OpenAIEmbedding(api_key=os.getenv(key="OPENAI_KEY"))
-            Settings.llm = OpenAI(model=self.model_name, api_key=os.getenv(key="OPENAI_KEY"))
-        elif self.model_name.startswith("llama"):
-            Settings.embed_model = OllamaEmbedding(model_name=self.model_name)
+            Settings.llm = OpenAI(model=self.cfg.model_name, api_key=os.getenv(key="OPENAI_KEY"))
+        elif self.cfg.model_name.startswith("llama"):
+            Settings.embed_model = OllamaEmbedding(model_name=self.cfg.model_name)
             Settings.llm = Ollama(model=self.model_name)
         else:
-            raise Exception(f"Model {self.model_name} not yet supported.")
+            raise Exception(f"Model {self.cfg.model_name} not yet supported.")
             
-    def scrape(
-        self, 
-        dependency: Dependency,
-        num_websites: int = 5,
-        dimension: int = 1536,
-        metric: str = "cosine",
-        index_name: str = "web-search"
-    ) -> None:
+    def scrape(self, dependency: Dependency) -> None:
         """
         Scrape websites from the web and index the corresponding data.
         """
@@ -55,7 +47,7 @@ class CVal:
 
         website_documents = ingestion_engine.scrape_websites(
             dependency=dependency,
-            num_websites=num_websites
+            num_websites=self.cfg.num_websites
         )
 
         repo_documents = ingestion_engine.scrape_repositories(
@@ -66,9 +58,9 @@ class CVal:
         documents = website_documents + repo_documents
 
         vector_store = RetrievalEngine().get_vector_store(
-            index_name=index_name,
-            dimension=dimension,
-            metric=metric
+            index_name="web-search",
+            dimension=1536,
+            metric="cosine"
         )
         
         logging.info(f"Start indexing {len(documents)} documents.")
@@ -79,18 +71,11 @@ class CVal:
         logging.info(f"indexing done.")
 
 
-    def validate(
-        self, 
-        enable_rag: bool,
-        dependency: Dependency, 
-        index_name: str, 
-        retriever_type: str,
-        top_k: int
-    ) -> List:
+    def validate(self, dependency: Dependency) -> List:
         """
         Validate a dependency.
         """
-        if not enable_rag:
+        if not self.cfg.enable_rag:
             messages = [
                 {
                     "role": "system", 
@@ -103,30 +88,26 @@ class CVal:
             ]
 
             generator = GeneratorFactory().get_generator(
-                model_name=self.model_name,
-                temperature=self.temperature
+                model_name=self.cfg.model_name,
+                temperature=self.cfg.temperature
             )
-            validation_response = generator.generate(messages=messages)
+            response = generator.generate(messages=messages)
 
-            return validation_response
+            return response
 
         retrieval_engine = RetrievalEngine()
-        vector_store = retrieval_engine.get_vector_store(index_name=index_name)
+        vector_store = retrieval_engine.get_vector_store(index_name=self.cfg.index_name)
         retriever = retrieval_engine.get_retriever(
-            retriever_type=retriever_type,
+            retriever_type=self.cfg.retrieval_type,
             vector_store=vector_store,
-            top_k=top_k
+            top_k=self.cfg.top_k
         )
 
-        validation_response = QueryEngine().custom_query(
+        response = QueryEngine().custom_query(
             retriever=retriever,
             llm=Settings.llm, 
             dependency=dependency
         )
 
-        return validation_response
- 
-
-
-    
+        return response   
 

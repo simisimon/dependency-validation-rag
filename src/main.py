@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from data import Dependency
+from data import Dependency, CvalConfig
 from cval import CVal
 from query_engine import QueryEngine
 from ingestion_engine import DataIngestionEngine
@@ -59,21 +59,22 @@ def main():
         dependent_option_technology="Spring-Boot"
     )
 
-    cval = CVal(
+    cval_config = CvalConfig(
+        env_file_path="./.env",
         model_name=args.model_name,
+        index_name="tech-docs",
         temperature=0.0,
-        env_file_path="./.env"
+        top_k=5,
+        retrieval_type="rerank_retriever",
+        enable_rag=True,
+        num_websites=5
     )
+
+    cval = CVal(cfg=cval_config)
 
     #cval.scrape(dependency=dep)
 
-    response = cval.validate(
-        enable_rag=True,
-        dependency=dep,
-        index_name="tech-docs", # ["tech-docs", "so-posts", "blog-posts", "web-search"]
-        retriever_type="rerank_retriever", #["base_retriever", "rerank_retriever", "rerank_and_filter_retriever", "auto_merging_retriever"]
-        top_k=5
-    )
+    response = cval.validate(dependency=dep)
 
     print(response, type(response))
 

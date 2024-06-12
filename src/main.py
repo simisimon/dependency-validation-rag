@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from data import Dependency
 from cval import CVal
 from query_engine import QueryEngine
+from ingestion_engine import DataIngestionEngine
 import argparse
 
 
@@ -60,18 +61,24 @@ def main():
 
     cval = CVal(
         model_name=args.model_name,
+        temperature=0.0,
         env_file_path="./.env"
     )
+
+    #cval.scrape(dependency=dep)
 
     response = cval.validate(
         enable_rag=True,
         dependency=dep,
         index_name="tech-docs", # ["tech-docs", "so-posts", "blog-posts", "web-search"]
         retriever_type="rerank_retriever", #["base_retriever", "rerank_retriever", "rerank_and_filter_retriever", "auto_merging_retriever"]
-        top_k=10
+        top_k=5
     )
 
     print(response, type(response))
+
+    
+
 
 
 if __name__ == "__main__":

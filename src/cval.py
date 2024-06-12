@@ -8,24 +8,26 @@ from ingestion_engine import DataIngestionEngine
 from retrieval_engine import RetrievalEngine
 from query_engine import QueryEngine
 from generator_engine import GeneratorFactory
-from typing import List, Optional
+from typing import List
 from dotenv import load_dotenv
+from rich.logging import RichHandler
 import os
+import logging
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[RichHandler()],
+)
 
 
 class CVal:
     def __init__(self, model_name: str, temperature: int, env_file_path: str) -> None:
         load_dotenv(dotenv_path=env_file_path)
         self.model_name = model_name
+        self.temperature = temperature
         self.set_settings()
-        self.ingestion_engine = DataIngestionEngine()
-        self.retrieval_engine = RetrievalEngine()
-        self.query_engine = QueryEngine()
-        self.generator_engine = GeneratorFactory().get_generator(
-            model_name=model_name,
-            temperature=temperature
-        )
-
     
     def set_settings(self) -> None:
         if self.model_name.startswith("gpt"):
@@ -37,11 +39,10 @@ class CVal:
         else:
             raise Exception(f"Model {self.model_name} not yet supported.")
             
-    def scrape_data(
+    def scrape(
         self, 
-        query: str, 
-        website: Optional[str], 
-        num_websites: int,
+        dependency: Dependency,
+        num_websites: int = 5,
         dimension: int = 1536,
         metric: str = "cosine",
         index_name: str = "web-search"
@@ -49,25 +50,33 @@ class CVal:
         """
         Scrape websites from the web and index the corresponding data.
         """
-        # Scrape documents from web
-        documents = self.ingestion_engine.scrape(
-            query=query, 
-            website=website,
+        logging.info(f"Start scraping.")
+        ingestion_engine = DataIngestionEngine()
+
+        website_documents = ingestion_engine.scrape_websites(
+            dependency=dependency,
             num_websites=num_websites
         )
 
-        # Get VectorStore from RetrievalEngine
-        vector_store = self.retrieval_engine.get_vector_store(
+        repo_documents = ingestion_engine.scrape_repositories(
+            dependency=dependency
+        )
+        logging.info(f"Scraping done.")
+
+        documents = website_documents + repo_documents
+
+        vector_store = RetrievalEngine().get_vector_store(
             index_name=index_name,
             dimension=dimension,
             metric=metric
         )
-
-        # Add data to vector store
-        self.ingestion_engine.index_documents(
+        
+        logging.info(f"Start indexing {len(documents)} documents.")
+        ingestion_engine.index_documents(
             vector_store = vector_store,
             documents=documents
         )
+        logging.info(f"indexing done.")
 
 
     def validate(
@@ -93,18 +102,23 @@ class CVal:
                 }
             ]
 
-            validation_response = self.generator.generate(messages=messages)
+            generator = GeneratorFactory().get_generator(
+                model_name=self.model_name,
+                temperature=self.temperature
+            )
+            validation_response = generator.generate(messages=messages)
 
             return validation_response
 
-        vector_store = self.retrieval_engine.get_vector_store(index_name=index_name)
-        retriever = self.retrieval_engine.get_retriever(
+        retrieval_engine = RetrievalEngine()
+        vector_store = retrieval_engine.get_vector_store(index_name=index_name)
+        retriever = retrieval_engine.get_retriever(
             retriever_type=retriever_type,
             vector_store=vector_store,
             top_k=top_k
         )
 
-        validation_response = self.query_engine.custom_query(
+        validation_response = QueryEngine().custom_query(
             retriever=retriever,
             llm=Settings.llm, 
             dependency=dependency

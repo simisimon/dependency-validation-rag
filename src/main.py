@@ -65,7 +65,7 @@ def main():
         index_name="tech-docs",
         temperature=0.0,
         top_k=5,
-        retrieval_type="rerank_retriever",
+        retrieval_type="rerank_and_relevance_retriever",
         enable_rag=True,
         num_websites=5
     )

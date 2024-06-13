@@ -46,3 +46,13 @@ QUERY_GEN_PROMPT = PromptTemplate(
     "You are a helpful assistant that generates multiple search queries based on a single input query.\n"
     "Generate {num_queries} search queries, one on each line, related to the following input query: {query}"
 )
+
+RELEVANCE_PROMPT = PromptTemplate(
+    "Your task is to evaluate if the query is in line with the context information provided.\n"
+    "You have two options to answer. Either YES/ NO.\n"
+    "Answer - YES, if the response for the query \
+    is in line with context information otherwise NO.\n"
+    "Query: \n {query_str}\n"
+    "Context: \n {context_str}\n"
+    "Answer: "
+)

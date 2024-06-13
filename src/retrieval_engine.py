@@ -3,7 +3,7 @@ from llama_index_client import MetadataFilter, MetadataFilters
 from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core import Settings, StorageContext, VectorStoreIndex
 from llama_index.core.retrievers import VectorIndexRetriever, AutoMergingRetriever
-from retriever import CustomBaseRetriever, CustomRerankAndFilterRetriever, CustomRerankRetriever
+from retriever import CustomBaseRetriever, CustomRerankAndFilterRetriever, CustomRerankRetriever, CustomRerankAndRelevanceRetriever
 from typing import List
 from rich.logging import RichHandler
 import os
@@ -92,6 +92,13 @@ class RetrievalEngine:
                 embed_model=Settings.embed_model
             )
             retriever = AutoMergingRetriever(vector_retriever=base_retriever, storage_context=storage_context)
+
+        elif retriever_type == "rerank_and_relevance_retriever":
+            retriever = CustomRerankAndRelevanceRetriever(
+                vector_store=vector_store,
+                embed_model=Settings.embed_model,
+                similarity_top_k=top_k
+            )
 
         else:
             retriever = CustomBaseRetriever(

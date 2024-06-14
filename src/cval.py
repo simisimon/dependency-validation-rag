@@ -2,12 +2,14 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
-from llama_index.core import Settings, SimpleDirectoryReader
+from llama_index.core import Settings
+from llama_index.core.schema import NodeWithScore
+from llama_index.core.indices.query.schema import QueryBundle
 from data import Dependency, CvalConfig
 from ingestion_engine import DataIngestionEngine
 from retrieval_engine import RetrievalEngine
-from query_engine import QueryEngine
 from generator_engine import GeneratorFactory
+from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, VALUE_EQUALITY_DEFINITION_STR, FORMAT_STR
 from typing import List, Dict
 from dotenv import load_dotenv
 from rich.logging import RichHandler
@@ -71,19 +73,35 @@ class CVal:
         logging.info(f"indexing done.")
 
 
-    def validate(self, dependency: Dependency) -> List:
+    def retrieve(self, index_name, task_str: str) -> List[NodeWithScore]:
         """
-        Validate a dependency.
+        Retrieve relevant nodes from vector store.
+        """
+        retrieval_engine = RetrievalEngine()
+        vector_store = retrieval_engine.get_vector_store(index_name=index_name)
+        retriever = retrieval_engine.get_retriever(
+            retriever_type=self.cfg.retrieval_type,
+            vector_store=vector_store,
+            top_k=self.cfg.top_k
+        )
+
+        retrieved_nodes = retriever.retrieve(QueryBundle(query_str=task_str))
+
+        return retrieved_nodes
+
+    def generate(self, system_str: str, context_str: str, task_str: str) -> str:
+        """
+        Generate answer from context.
         """
         if not self.cfg.enable_rag:
             messages = [
                 {
                     "role": "system", 
-                    "content": self.query_engine.get_system_str(dependency=dependency)
+                    "content": system_str
                 },
                 {
                     "role": "user",
-                    "content": self.query_engine.get_task_str(dependency=dependency)
+                    "content": task_str
                 }
             ]
 
@@ -95,19 +113,60 @@ class CVal:
 
             return response
 
-        retrieval_engine = RetrievalEngine()
-        vector_store = retrieval_engine.get_vector_store(index_name=self.cfg.index_name)
-        retriever = retrieval_engine.get_retriever(
-            retriever_type=self.cfg.retrieval_type,
-            vector_store=vector_store,
-            top_k=self.cfg.top_k
+        else:
+            query_str = QUERY_PROMPT.format(
+                system_str=system_str,
+                context_str=context_str, 
+                task_str=task_str,
+                format_str=FORMAT_STR
+            )   
+
+            response = Settings.llm.complete(
+                prompt=query_str,
+                temperature=self.cfg.temperature
+            )
+
+            return response
+
+    def query(self, dependency: Dependency) -> List:
+        """
+        Validate a dependency.
+        """
+        system_str = self._get_system_prompt(dependency=dependency)
+        task_str = self._get_task_prompt(dependency=dependency)
+
+        retrieved_nodes = self.retrieve(
+            index_name=self.cfg.index_name,
+            task_str=task_str
         )
 
-        response = QueryEngine().custom_query(
-            retriever=retriever,
-            llm=Settings.llm, 
-            dependency=dependency
+        context_str = "\n\n".join([n.node.get_content() for n in retrieved_nodes])
+ 
+        response = self.generate(
+            system_str=system_str,
+            context_str=context_str,
+            task_str=task_str,
         )
 
-        return response   
+        return response
 
+    def _get_task_prompt(self, dependency: Dependency) -> str:
+        return TASK_PROMPT.format(
+            nameA=dependency.option_name,
+            typeA=dependency.option_type,
+            valueA=dependency.option_value,
+            fileA=dependency.option_file,
+            technologyA=dependency.option_technology,
+            nameB=dependency.dependent_option_name,
+            typeB=dependency.dependent_option_type,
+            valueB=dependency.dependent_option_value,
+            fileB=dependency.dependent_option_file,
+            technologyB=dependency.dependent_option_technology
+        )
+    
+    def _get_system_prompt(self, dependency: Dependency) -> str:
+        return SYSTEM_PROMPT.format(
+            project=dependency.project,
+            definition_str=VALUE_EQUALITY_DEFINITION_STR
+        )
+    

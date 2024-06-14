@@ -74,7 +74,7 @@ def main():
 
     #cval.scrape(dependency=dep)
 
-    response = cval.validate(dependency=dep)
+    response = cval.query(dependency=dep)
 
     print(response, type(response))
 

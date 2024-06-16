@@ -21,6 +21,62 @@ logging.basicConfig(
 )
 
 
+class RetrieverFactory:
+    def get_retriever(self, retriever_type: str, vector_store, top_k: int) -> List[str]:
+        """
+        Get Retriever.
+        """
+        if retriever_type == "rerank_retriever":
+            return CustomRerankRetriever(
+                vector_store=vector_store,
+                embed_model=Settings.embed_model,
+                similarity_top_k=top_k
+            )
+
+        elif retriever_type == "rerank_and_filter_retriever":
+            filters = [
+                MetadataFilter(
+                    key='technology',
+                    value=title,
+                    operator='==',
+                
+                )
+                for title in ['docker', 'spring-boot']
+            ]
+
+            filters = MetadataFilters(filters=filters, condition="or")
+
+            return CustomRerankAndFilterRetriever(
+                vector_store=vector_store,
+                embed_model=Settings.embed_model,
+                similarity_top_k=top_k,
+                filters=filters
+            )
+
+        elif retriever_type == "auto_merging_retriever":
+            storage_context = StorageContext.from_defaults(vector_store=vector_store)
+            base_retriever = VectorIndexRetriever(
+                index=VectorStoreIndex.from_vector_store(vector_store=vector_store),
+                similarity_top_k=top_k,
+                embed_model=Settings.embed_model
+            )
+            return AutoMergingRetriever(vector_retriever=base_retriever, storage_context=storage_context)
+
+        elif retriever_type == "rerank_and_relevance_retriever":
+            return CustomRerankAndRelevanceRetriever(
+                vector_store=vector_store,
+                embed_model=Settings.embed_model,
+                similarity_top_k=top_k
+            )
+
+        else:
+            return CustomBaseRetriever(
+                vector_store=vector_store,
+                similarity_top_k=top_k,
+                embed_model=Settings.embed_model
+            )
+
+
 def generate_queries(query_bundle: QueryBundle, num_queries: int) -> List[str]:
     """
     Rewrite query. Return list of rewritten queries. 

@@ -5,10 +5,12 @@ from llama_index.llms.ollama import Ollama
 from llama_index.core import Settings
 from llama_index.core.schema import NodeWithScore
 from llama_index.core.indices.query.schema import QueryBundle
+from llama_index.vector_stores.pinecone import PineconeVectorStore
+from pinecone import Pinecone, ServerlessSpec
 from data import Dependency, CvalConfig
-from ingestion_engine import DataIngestionEngine
-from retrieval_engine import RetrievalEngine
-from generator_engine import GeneratorFactory
+from ingestion import DataIngestionEngine
+from generator import GeneratorFactory
+from retriever import RetrieverFactory
 from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, VALUE_EQUALITY_DEFINITION_STR, FORMAT_STR
 from typing import List, Dict
 from dotenv import load_dotenv
@@ -39,7 +41,32 @@ class CVal:
             Settings.llm = Ollama(model=self.model_name)
         else:
             raise Exception(f"Model {self.cfg.model_name} not yet supported.")
-            
+
+
+    def get_vector_store(
+        self, 
+        index_name: str,
+        dimentsion: int = 1536,
+        metric: str = "cosine"
+    ):       
+        pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+
+        if index_name not in pc.list_indexes().names():
+            self.vector_db_instance.create_index(
+                name=index_name,
+                dimension=dimension,
+                metric=metric,
+                spec=ServerlessSpec(
+                    cloud="aws",
+                    region="us-east-1"
+                )
+            )
+
+        index = pc.Index(index_name)
+        vector_store = PineconeVectorStore(pinecone_index=index)
+
+        return vector_store
+    
     def scrape(self, dependency: Dependency) -> None:
         """
         Scrape websites from the web and index the corresponding data.
@@ -59,7 +86,7 @@ class CVal:
 
         documents = website_documents + repo_documents
 
-        vector_store = RetrievalEngine().get_vector_store(
+        vector_store = RetrievalFactory().get_vector_store(
             index_name="web-search",
             dimension=1536,
             metric="cosine"
@@ -77,9 +104,8 @@ class CVal:
         """
         Retrieve relevant nodes from vector store.
         """
-        retrieval_engine = RetrievalEngine()
-        vector_store = retrieval_engine.get_vector_store(index_name=index_name)
-        retriever = retrieval_engine.get_retriever(
+        vector_store = self.get_vector_store(index_name=index_name)
+        retriever = RetrieverFactory().get_retriever(
             retriever_type=self.cfg.retrieval_type,
             vector_store=vector_store,
             top_k=self.cfg.top_k

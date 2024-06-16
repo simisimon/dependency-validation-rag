@@ -1,8 +1,6 @@
 from dotenv import load_dotenv
 from data import Dependency, CvalConfig
 from cval import CVal
-from query_engine import QueryEngine
-from ingestion_engine import DataIngestionEngine
 import argparse
 
 

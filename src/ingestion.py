@@ -1,20 +1,23 @@
-from llama_index.core.node_parser import SentenceSplitter
-from llama_index.core import Settings
-from llama_index.core import Settings
+from llama_index.core import Settings, SimpleDirectoryReader
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.readers.web import SimpleWebPageReader
 from llama_index.readers.github import GithubRepositoryReader, GithubClient
+from llama_index.core.extractors import TitleExtractor
+from splitting import DataSplittingFactory
 from data import Dependency
 from prompt_templates import SCRAPING_PROMPT
-from typing import List, Optional
+from typing import List
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from rich.logging import RichHandler
+import glob
 import re
 import backoff
 import requests
 import logging
 import os
+import json
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -32,12 +35,13 @@ class DataIngestionEngine:
         Exception,
         max_tries=8,
     )
-    def scrape_websites(
+    def docs_from_web(
         self, 
         dependency: Dependency,
-        num_websites: int = 5) -> List:
+        num_websites: int
+    ) -> List:
         """
-        Scrape websites and return list of corresponding documents.
+        Get documents from websites.
         """
         logging.info(f"Start scraping {num_websites} websites.")
         scraping_query = SCRAPING_PROMPT.format(
@@ -73,7 +77,10 @@ class DataIngestionEngine:
 
         return documents
     
-    def scrape_repositories(self, dependency: Dependency) -> List:
+    def docs_from_github(self, dependency: Dependency) -> List:
+        """
+        Get documents from GitHub repository.
+        """
         logging.info(f"Start scraping the repository of {dependency.project}.")
         response = requests.get(f"https://api.github.com/search/repositories?q={dependency.project}")
         response.raise_for_status()
@@ -121,17 +128,45 @@ class DataIngestionEngine:
         
         return documents
 
+    def docs_from_dir(self, directory: str) -> List:
+        """
+        Create documents from directory.
+        """
+        if not os.path.exists(directory):
+            raise Exception(f"Dir {directory} does not exist.")
+            
+        documents = SimpleDirectoryReader(input_dir=directory, recursive=True).load_data()
+
+        return documents
+        
+    def docs_from_urls(self, url_file: str) -> List:
+        """
+        Get documents from urls.
+        """
+        if not url_file.endswith(".json"):
+            raise Exception(f"URL file has be a JSON file.")
+        
+        with open(url_file, "r", encoding="utf-8") as src:
+            data = json.load(src)
+
+        urls = data["urls"]
+        documents = SimpleWebPageReader(html_to_text=True).load_data(urls)
+        for document in documents: 
+            document.metadata["file_name"] = document.id_
+
+        return documents
 
     def index_documents(
             self,
             vector_store,
             documents: List,
-        ) -> None:
+            splitting: str = "sentence",
+    ) -> None:
         """
         Add documents to a vector store
         """
         transformations = [
-            SentenceSplitter(chunk_size=1024, chunk_overlap=20),
+            DataSplittingFactory().get_splitting(splitting=splitting),
             Settings.embed_model,
         ]
 

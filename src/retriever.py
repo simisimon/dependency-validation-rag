@@ -2,13 +2,13 @@
 from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core.schema import NodeWithScore, QueryBundle
 from llama_index.vector_stores.pinecone import PineconeVectorStore
-from llama_index.core.retrievers import BaseRetriever, VectorIndexRetriever
+from llama_index.core.retrievers import BaseRetriever, VectorIndexRetriever, AutoMergingRetriever
 from llama_index.core.postprocessor import SentenceTransformerRerank
 from llama_index_client import MetadataFilters
 from llama_index.core.schema import NodeWithScore
-from llama_index_client import MetadataFilters
+from llama_index_client import MetadataFilters, MetadataFilter
 from llama_index.core.indices.query.schema import QueryBundle
-from llama_index.core import VectorStoreIndex, Settings
+from llama_index.core import VectorStoreIndex, Settings, StorageContext
 from typing import List, Any
 from rich.logging import RichHandler
 from prompt_templates import QUERY_GEN_PROMPT, RELEVANCE_PROMPT
@@ -22,6 +22,7 @@ logging.basicConfig(
 
 
 class RetrieverFactory:
+    @staticmethod
     def get_retriever(self, retriever_type: str, vector_store, top_k: int) -> List[str]:
         """
         Get Retriever.

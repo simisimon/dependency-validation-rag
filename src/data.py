@@ -6,6 +6,7 @@ from typing import Optional
 class CvalConfig:
     enable_rag: Optional[bool] = None
     env_file_path: Optional[str] = None
+    indexing_config_file: Optional[str] = None
     index_name: Optional[str] = None
     top_k: Optional[int] = None
     retrieval_type: Optional[str] = None

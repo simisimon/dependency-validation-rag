@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from data import Dependency, CvalConfig
 from cval import CVal
 import argparse
+import yaml
 
 
 TEST_PROMPT = """Is there a configuration dependency between the port specified in my Dockerfile and in the application.yml of my Webserver?
@@ -59,6 +60,7 @@ def main():
 
     cval_config = CvalConfig(
         env_file_path="./.env",
+        indexing_config_file="../config.yml",
         model_name=args.model_name,
         index_name="tech-docs",
         temperature=0.0,
@@ -70,11 +72,13 @@ def main():
 
     cval = CVal(cfg=cval_config)
 
+    cval.index_data(config_file=cval_config.indexing_config_file)
+
     #cval.scrape(dependency=dep)
 
-    response = cval.query(dependency=dep)
+    #response = cval.query(dependency=dep)
 
-    print(response, type(response))
+    #print(response, type(response))
 
     
 

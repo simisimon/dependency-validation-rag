@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 from rich.logging import RichHandler
 import os
 import logging
+import yaml
 
 
 logging.basicConfig(
@@ -33,23 +34,6 @@ class CVal:
         self.pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
         self.set_embedding_and_inference_model(model_name=self.cfg.model_name)
         
-        if not self.is_vector_database_enabled():
-            raise Exception(
-                (
-                    "Vector database does not contain any index.\n"
-                    "Add data first before using CVal."
-                )
-            )
-
-
-    def is_vector_database_enabled(self) -> bool:
-        """
-        Check if vector database contains any index.
-        """
-        if not self.pc.list_indexes():
-            return False
-        return True
-
     def set_embedding_and_inference_model(self, model_name: str) -> None:
         if model_name.startswith("gpt"):
             Settings.embed_model = OpenAIEmbedding(api_key=os.getenv(key="OPENAI_KEY"))
@@ -85,9 +69,12 @@ class CVal:
 
         return vector_store
     
-    def scrape(self, dependency: Dependency) -> None:
+    def scrape(
+        self, 
+        dependency: Dependency
+    ) -> None:
         """
-        Scrape websites from the web and index the corresponding data.
+        Scrape websites and the repository and index the corresponding data.
         """
         logging.info(f"Start scraping.")
         ingestion_engine = DataIngestionEngine()
@@ -104,21 +91,86 @@ class CVal:
 
         documents = website_documents + repo_documents
 
-        vector_store = RetrieverFactory().get_vector_store(
+        vector_store = self.get_vector_store(
             index_name="web-search",
             dimension=1536,
             metric="cosine"
         )
         
-        logging.info(f"Start indexing {len(documents)} documents.")
+        logging.info(f"Start indexing {len(documents)} documents in index 'web-search'.")
         ingestion_engine.index_documents(
             vector_store = vector_store,
             documents=documents
         )
-        logging.info(f"indexing done.")
+        logging.info(f"Indexing documents in index 'web-search' done.")
+
+        logging.info(f"Start indexing {len(documents)} documents in index 'all'.")
+        ingestion_engine.index_documents(
+            vector_store = self.get_vector_store(index_name="all"),
+            documents=documents
+        )
+        logging.info(f"Indexing documents in index 'all' done.")
 
 
-    def retrieve(self, index_name: str, task_str: str) -> List[NodeWithScore]:
+    def index_data(
+        self, 
+        config_file: str
+    ) -> None:
+        """
+        Index data based on a given indexing config.
+        """
+        if not os.path.exists(config_file):
+            raise Exception(f"Indexing config file {config_file} does not exist.")
+
+        with open(config_file, "r", encoding="utf-8") as file:
+            indexing_config = yaml.load(file, Loader=yaml.FullLoader)
+
+        ingestion_engine = DataIngestionEngine()
+
+        all_documents = []
+
+        for index_name, config in indexing_config["index"].items():
+            vector_store = self.get_vector_store(
+                index_name=index_name,
+                dimension=config["dimension"],
+                metric=config["metric"]
+            )    
+            
+            documents = []
+
+            if config["type"] == "url":
+                documents = ingestion_engine.docs_from_urls(url_file=config["path"])
+
+            if config["type"] == "dir":
+                documents = ingestion_engine.docs_from_dir(directory=config["path"])
+
+            if not documents:
+                raise Exception("Documents could not be loaded.")
+
+            ingestion_engine.index_documents(
+                documents=documents,
+                vector_store=vector_store,
+                splitting=config["splitting"]
+            )
+
+            all_documents += documents
+
+        # index all data into one index
+        ingestion_engine.index_documents(
+            documents=all_documents,
+            vector_store=self.get_vector_store(
+                index_name="all",
+                dimension=config["dimension"],
+                metric=config["metric"]
+            ),
+            splitting=config["splitting"]    
+        )
+
+    def retrieve(
+        self, 
+        index_name: str, 
+        task_str: str
+    ) -> List[NodeWithScore]:
         """
         Retrieve relevant nodes from vector store.
         """
@@ -133,7 +185,12 @@ class CVal:
 
         return retrieved_nodes
 
-    def generate(self, system_str: str, context_str: str, task_str: str) -> str:
+    def generate(
+        self, 
+        system_str: str, 
+        context_str: str, 
+        task_str: str
+    ) -> str:
         """
         Generate answer from context.
         """
@@ -172,9 +229,12 @@ class CVal:
 
             return response
 
-    def query(self, dependency: Dependency) -> List:
+    def query(
+        self,
+        dependency: Dependency
+    ) -> str:
         """
-        Validate a dependency.
+        Validate a given dependency.
         """
         system_str = self._get_system_prompt(dependency=dependency)
         task_str = self._get_task_prompt(dependency=dependency)

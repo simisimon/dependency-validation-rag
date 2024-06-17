@@ -30,29 +30,47 @@ class CVal:
     def __init__(self, cfg: CvalConfig) -> None:
         self.cfg = cfg
         load_dotenv(dotenv_path=self.cfg.env_file_path)
-        self.set_settings()
-    
-    def set_settings(self) -> None:
-        if self.cfg.model_name.startswith("gpt"):
-            Settings.embed_model = OpenAIEmbedding(api_key=os.getenv(key="OPENAI_KEY"))
-            Settings.llm = OpenAI(model=self.cfg.model_name, api_key=os.getenv(key="OPENAI_KEY"))
-        elif self.cfg.model_name.startswith("llama"):
-            Settings.embed_model = OllamaEmbedding(model_name=self.cfg.model_name)
-            Settings.llm = Ollama(model=self.model_name)
-        else:
-            raise Exception(f"Model {self.cfg.model_name} not yet supported.")
+        self.pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+        self.set_embedding_and_inference_model(model_name=self.cfg.model_name)
+        
+        if not self.is_vector_database_enabled():
+            raise Exception(
+                (
+                    "Vector database does not contain any index.\n"
+                    "Add data first before using CVal."
+                )
+            )
 
+
+    def is_vector_database_enabled(self) -> bool:
+        """
+        Check if vector database contains any index.
+        """
+        if not self.pc.list_indexes():
+            return False
+        return True
+
+    def set_embedding_and_inference_model(self, model_name: str) -> None:
+        if model_name.startswith("gpt"):
+            Settings.embed_model = OpenAIEmbedding(api_key=os.getenv(key="OPENAI_KEY"))
+            Settings.llm = OpenAI(model=model_name, api_key=os.getenv(key="OPENAI_KEY"))
+        elif model_name.startswith("llama"):
+            Settings.embed_model = OllamaEmbedding(model_name=model_name)
+            Settings.llm = Ollama(model=model_name)
+        else:
+            raise Exception(f"Model {model_name} not yet supported.")
 
     def get_vector_store(
         self, 
         index_name: str,
-        dimentsion: int = 1536,
+        dimension: int = 1536,
         metric: str = "cosine"
     ):       
-        pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-
-        if index_name not in pc.list_indexes().names():
-            self.vector_db_instance.create_index(
+        """
+        Get vector store.
+        """
+        if index_name not in self.pc.list_indexes().names():
+            self.pc.create_index(
                 name=index_name,
                 dimension=dimension,
                 metric=metric,
@@ -62,7 +80,7 @@ class CVal:
                 )
             )
 
-        index = pc.Index(index_name)
+        index = self.pc.Index(index_name)
         vector_store = PineconeVectorStore(pinecone_index=index)
 
         return vector_store
@@ -86,7 +104,7 @@ class CVal:
 
         documents = website_documents + repo_documents
 
-        vector_store = RetrievalFactory().get_vector_store(
+        vector_store = RetrieverFactory().get_vector_store(
             index_name="web-search",
             dimension=1536,
             metric="cosine"
@@ -100,7 +118,7 @@ class CVal:
         logging.info(f"indexing done.")
 
 
-    def retrieve(self, index_name, task_str: str) -> List[NodeWithScore]:
+    def retrieve(self, index_name: str, task_str: str) -> List[NodeWithScore]:
         """
         Retrieve relevant nodes from vector store.
         """

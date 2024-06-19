@@ -65,7 +65,10 @@ class CVal:
             )
 
         index = self.pc.Index(index_name)
-        vector_store = PineconeVectorStore(pinecone_index=index)
+        vector_store = PineconeVectorStore(
+            pinecone_index=index,
+            #add_sparse_vector=True #TODO
+        )
 
         return vector_store
     
@@ -181,6 +184,9 @@ class CVal:
             top_k=self.cfg.top_k
         )
 
+        if not retriever:
+            raise Exception(f"Retriever type{self.cfg.retrieval_type} not yet supported.")
+
         retrieved_nodes = retriever.retrieve(QueryBundle(query_str=task_str))
 
         return retrieved_nodes
@@ -202,7 +208,7 @@ class CVal:
                 },
                 {
                     "role": "user",
-                    "content": task_str
+                    "content": f"{task_str}\n\n{FORMAT_STR}"
                 }
             ]
 
@@ -238,6 +244,9 @@ class CVal:
         """
         system_str = self._get_system_prompt(dependency=dependency)
         task_str = self._get_task_prompt(dependency=dependency)
+        
+
+
 
         retrieved_nodes = self.retrieve(
             index_name=self.cfg.index_name,

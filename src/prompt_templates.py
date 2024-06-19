@@ -36,7 +36,7 @@ TASK_PROMPT = PromptTemplate(
 
 FORMAT_STR = """Respond in a JSON format as shown below:
 {{
-  "rationale": string, // Provide a concise explanation of whether and why the configuration options depend on each other due to value-equality.
+  "rationale": string, // Provide a concise explanation of why or why not the configuration options depend on each other due to value-equality.
   "uncertainty": integer, // Rate your certainty of this dependency on a scale from 0 (completely uncertain) to 10 (absolutely certain).
   "isDependency": boolean // True if a dependency exists, or False otherwise.
 }}"""

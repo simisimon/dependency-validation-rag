@@ -62,10 +62,10 @@ def main():
         env_file_path="./.env",
         indexing_config_file="../config.yml",
         model_name=args.model_name,
-        index_name="tech-docs",
+        index_name="so-posts",
         temperature=0.0,
         top_k=5,
-        retrieval_type="rerank_retriever",
+        retrieval_type="hybrid",
         enable_rag=True,
         num_websites=5
     )

@@ -23,7 +23,7 @@ logging.basicConfig(
 
 class RetrieverFactory:
     @staticmethod
-    def get_retriever(self, retriever_type: str, vector_store, top_k: int) -> List[str]:
+    def get_retriever(retriever_type: str, vector_store, top_k: int) -> List[str]:
         """
         Get Retriever.
         """

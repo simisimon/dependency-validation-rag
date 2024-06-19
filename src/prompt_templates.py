@@ -48,7 +48,7 @@ QUERY_GEN_PROMPT = PromptTemplate(
 )
 
 RELEVANCE_PROMPT = PromptTemplate(
-    "Your task is to evaluate if the query is in line with the context information provided.\n"
+    "Your task is to evaluate if the mentioned configuration options in query are related to the context information provided.\n"
     "You have two options to answer. Either YES/ NO.\n"
     "Answer - YES, if the response for the query \
     is in line with context information otherwise NO.\n"

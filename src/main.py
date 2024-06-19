@@ -72,13 +72,13 @@ def main():
 
     cval = CVal(cfg=cval_config)
 
-    cval.index_data(config_file=cval_config.indexing_config_file)
+    #cval.index_data(config_file=cval_config.indexing_config_file)
 
     #cval.scrape(dependency=dep)
 
-    #response = cval.query(dependency=dep)
+    response = cval.query(dependency=dep)
 
-    #print(response, type(response))
+    print(response, type(response))
 
     
 

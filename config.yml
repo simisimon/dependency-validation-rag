@@ -3,12 +3,12 @@ index:
     type: "url"
     path: "../data/tech_docs.json"
     dimension: 1536
-    metric: "cosine"
+    metric: "dotproduct"
     splitting: "sentence"
   so-posts:
     type: "dir"
     path: "../data/so_posts/"
     dimension: 1536
-    metric: "cosine"
+    metric: "dotproduct"
     splitting: "sentence"
   

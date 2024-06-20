@@ -62,7 +62,7 @@ def main():
         env_file_path="./.env",
         indexing_config_file="../config.yml",
         model_name=args.model_name,
-        index_name="so-posts",
+        index_name="tech-docs",
         temperature=0.0,
         top_k=5,
         retrieval_type="hybrid",

@@ -11,8 +11,8 @@ from data import Dependency, CvalConfig
 from ingestion import DataIngestionEngine
 from generator import GeneratorFactory
 from retriever import RetrieverFactory
-from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, VALUE_EQUALITY_DEFINITION_STR, FORMAT_STR
-from typing import List, Dict
+from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, DEPENDENCY_STR, FORMAT_STR
+from typing import List
 from dotenv import load_dotenv
 from rich.logging import RichHandler
 import os
@@ -48,12 +48,13 @@ class CVal:
         self, 
         index_name: str,
         dimension: int = 1536,
-        metric: str = "cosine"
+        metric: str = "dotproduct"
     ):       
         """
         Get vector store.
         """
         if index_name not in self.pc.list_indexes().names():
+            logging.info(f"Create Index {index_name}.")
             self.pc.create_index(
                 name=index_name,
                 dimension=dimension,
@@ -67,8 +68,10 @@ class CVal:
         index = self.pc.Index(index_name)
         vector_store = PineconeVectorStore(
             pinecone_index=index,
-            #add_sparse_vector=True #TODO
+            add_sparse_vector=True
         )
+
+        logging.info(f"Select Index {index_name}.")
 
         return vector_store
     
@@ -79,15 +82,15 @@ class CVal:
         """
         Scrape websites and the repository and index the corresponding data.
         """
-        logging.info(f"Start scraping.")
+        logging.info(f"Start scraping web and Github.")
         ingestion_engine = DataIngestionEngine()
 
-        website_documents = ingestion_engine.scrape_websites(
+        website_documents = ingestion_engine.docs_from_web(
             dependency=dependency,
             num_websites=self.cfg.num_websites
         )
 
-        repo_documents = ingestion_engine.scrape_repositories(
+        repo_documents = ingestion_engine.docs_from_github(
             dependency=dependency
         )
         logging.info(f"Scraping done.")
@@ -95,24 +98,22 @@ class CVal:
         documents = website_documents + repo_documents
 
         vector_store = self.get_vector_store(
-            index_name="web-search",
-            dimension=1536,
-            metric="cosine"
+            index_name="web-search"
         )
         
-        logging.info(f"Start indexing {len(documents)} documents in index 'web-search'.")
+        logging.info(f"Start indexing documents in index: web-search.")
         ingestion_engine.index_documents(
             vector_store = vector_store,
             documents=documents
         )
-        logging.info(f"Indexing documents in index 'web-search' done.")
+        logging.info(f"Done with indexing documents in index: web-search")
 
-        logging.info(f"Start indexing {len(documents)} documents in index 'all'.")
+        logging.info("Start indexing documents in index: all.")
         ingestion_engine.index_documents(
             vector_store = self.get_vector_store(index_name="all"),
             documents=documents
         )
-        logging.info(f"Indexing documents in index 'all' done.")
+        logging.info("Done with indexing documents in index: all.")
 
 
     def index_data(
@@ -149,16 +150,19 @@ class CVal:
 
             if not documents:
                 raise Exception("Documents could not be loaded.")
-
+            
+            logging.info(f"Start indexing documents in index: {index_name}.")
             ingestion_engine.index_documents(
                 documents=documents,
                 vector_store=vector_store,
                 splitting=config["splitting"]
             )
+            logging.info(f"Done with indexing documents in index: {index_name}.")
 
             all_documents += documents
 
         # index all data into one index
+        logging.info(f"Start indexing documents in index: all.")
         ingestion_engine.index_documents(
             documents=all_documents,
             vector_store=self.get_vector_store(
@@ -168,6 +172,7 @@ class CVal:
             ),
             splitting=config["splitting"]    
         )
+        logging.info(f"Done with indexing documents in index: all.")
 
     def retrieve(
         self, 
@@ -280,6 +285,6 @@ class CVal:
     def _get_system_prompt(self, dependency: Dependency) -> str:
         return SYSTEM_PROMPT.format(
             project=dependency.project,
-            definition_str=VALUE_EQUALITY_DEFINITION_STR
+            dependency_str=DEPENDENCY_STR
         )
     

@@ -13,13 +13,16 @@ class DataSplittingFactory:
 
         if splitting == "token":
             splitter = TokenTextSplitter(
-                chunk_size=1024,
-                chunk_overlap=20,
+                chunk_size=512,
+                chunk_overlap=50,
                 separator=" ",
             )
 
         if splitting == "sentence":
-            splitter = SentenceSplitter(chunk_size=1024, chunk_overlap=20)
+            splitter = SentenceSplitter(
+                chunk_size=512, 
+                chunk_overlap=50
+            )
 
         if splitting == "semantic":
             splitter = SemanticSplitterNodeParser(

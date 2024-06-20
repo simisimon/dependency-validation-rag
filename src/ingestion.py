@@ -97,36 +97,41 @@ class DataIngestionEngine:
             return []
         
         github_client = GithubClient(github_token=os.getenv(key="GITHUB_TOKEN"), verbose=True)
-        documents = GithubRepositoryReader(
-            github_client=github_client,
-            owner=owner,
-            repo=dependency.project,
-            use_parser=False,
-            verbose=False,
-            filter_file_extensions=(
-                [
-                    ".xml",
-                    ".properties",
-                    ".yml",
-                    "Dockerfile",
-                    ".json",
-                    ".ini",
-                    ".cnf",
-                    ".toml",
-                    ".yaml",
-                    ".conf",
-                    ".md"
-                ],
-                GithubRepositoryReader.FilterType.INCLUDE,
-            ),
-        ).load_data(branch=branch)
-
-        for d in documents:
-            d.metadata["description"] = description
-            d.metadata["full_name"] = full_name
-            d.metadata["topics"] = topics
         
-        return documents
+        try:
+            documents = GithubRepositoryReader(
+                github_client=github_client,
+                owner=owner,
+                repo=dependency.project,
+                use_parser=False,
+                verbose=False,
+                filter_file_extensions=(
+                    [
+                        ".xml",
+                        ".properties",
+                        ".yml",
+                        "Dockerfile",
+                        ".json",
+                        ".ini",
+                        ".cnf",
+                        ".toml",
+                        ".yaml",
+                        ".conf",
+                        ".md"
+                    ],
+                    GithubRepositoryReader.FilterType.INCLUDE,
+                ),
+            ).load_data(branch=branch)
+
+            for d in documents:
+                d.metadata["description"] = description
+                d.metadata["full_name"] = full_name
+                d.metadata["topics"] = topics
+            
+            return documents
+        except Exception:
+            logging.info("Error occurred while scraping Github.")
+            return []
 
     def docs_from_dir(self, directory: str) -> List:
         """
@@ -174,10 +179,8 @@ class DataIngestionEngine:
             transformations=transformations,
             vector_store=vector_store
         )
-
-        logging.info(f"Start indexing.")
         pipeline.run(documents=documents)
-        logging.info(f"Indexing done.")
+    
 
 
     

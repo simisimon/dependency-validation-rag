@@ -283,9 +283,21 @@ class CustomHybridRetriever(CustomBaseRetriever):
             vector_store_query_mode="hybrid",
             similarity_top_k=self._top_k
         )
-        retrieved_nodes = query_engine.retrieve(query_bundle=query_bundle)
+
+        all_retrieved_nodes = []
+        queries = self._generate_queries(
+            query_bundle=query_bundle,
+            num_queries=3
+        )
+
+        for index, query in enumerate(queries):
+            retrieved_nodes = query_engine.retrieve(query_bundle=QueryBundle(query_str=query))
+            logging.info(f"Len of retrieved nodes of query {index}: {len(retrieved_nodes)}")
+            all_retrieved_nodes += retrieved_nodes
+
         reranked_nodes = self._rerank_nodes(
-            nodes=retrieved_nodes,
+            nodes=all_retrieved_nodes,
             query_bundle=query_bundle
         )
+
         return reranked_nodes

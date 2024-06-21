@@ -1,0 +1,27 @@
+# data sources
+# ------------
+# web
+websites = []
+
+# splitting
+# -----------
+# "sentence"
+# "token"
+# "semantic"
+# "recursive"
+spltting = "sentence" 
+
+# meta data extractors
+# --------------------
+# ["summary", "keyword", title]
+extractors = []
+
+# embedding model
+
+# weaviate config
+# ---------------
+weaviate_host = "127.0.0.1"
+weaviate_http_port = 8080
+weaviate_grpc_port = 50051
+
+

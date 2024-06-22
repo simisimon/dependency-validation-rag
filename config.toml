@@ -1,27 +1,28 @@
-# data sources
-# ------------
-# web
-websites = []
+# basic config
+embed_model = "openai"
+inference_model = "gpt-4o-2024-05-13"
+with_rag = true
 
-# splitting
-# -----------
-# "sentence"
-# "token"
-# "semantic"
-# "recursive"
-spltting = "sentence" 
-
-# meta data extractors
-# --------------------
-# ["summary", "keyword", title]
-extractors = []
-
-# embedding model
-
-# weaviate config
-# ---------------
+# vector database
 weaviate_host = "127.0.0.1"
 weaviate_http_port = 8080
 weaviate_grpc_port = 50051
+
+# ingestion
+urls = []
+so_post_dir = "../data/so_posts"
+splitting = "sentence" # "sentence", "token", "semantic", "recursive"
+extractors = [] # ["summary", "keyword", title]
+
+# retrieval
+target_index_name = "Tech"
+distance_metric = "dot" # "dot", "cosine", "hammering", "manattan", "squared"
+search_strategy = "hybrid" 
+temperature = 0.0
+num_queries = 3
+top_k = 5
+alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
+rerank = "sentence" # "sentence" or "llm"
+top_n = 3
 
 

@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from data import Dependency, CvalConfig
+from data import Dependency
 from cval import CVal
 import argparse
 import yaml
@@ -58,19 +58,8 @@ def main():
         dependent_option_technology="Spring-Boot"
     )
 
-    cval_config = CvalConfig(
-        env_file_path="./.env",
-        indexing_config_file="../config.yml",
-        model_name=args.model_name,
-        index_name="tech-docs",
-        temperature=0.0,
-        top_k=5,
-        retrieval_type="hybrid",
-        enable_rag=True,
-        num_websites=5
-    )
 
-    cval = CVal(cfg=cval_config)
+    #cval = CVal(cfg=cval_config)
 
     #cval.index_data(config_file=cval_config.indexing_config_file)
 

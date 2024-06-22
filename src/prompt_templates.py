@@ -23,13 +23,12 @@ SYSTEM_PROMPT = PromptTemplate(
     "You will be presented with configuration options found in the software project '{project}'.\n" 
     "Your task is to determine whether the given configuration options \
     actually depend on each other based on value-equality.\n\n"
-    "{dependency_str}"
+    "A value-equality dependency is present if two configuration options \
+    must have identical values in order to function correctly."
+    "Inconsistencies in these configuration values can lead to configuration errors."
+    "Importantly, configuration options may have equal values by accident, \
+    meaning that there is no actual dependency, but it just happens that they have equal values."
 )
-
-
-DEPENDENCY_STR = """A value-equality dependency is present if two configuration options must have identical values in order to function correctly.
-Inconsistencies in these configuration values can lead to configuration errors. 
-Importantly, configuration options may have equal values by accident, meaning that there is no actual dependency, but it just happens that they have equal values."""
 
 
 TASK_PROMPT = PromptTemplate(
@@ -45,21 +44,3 @@ FORMAT_STR = """Respond in a JSON format as shown below:
   “uncertainty”: integer, // Rate your certainty of this dependency on a scale from 0 (completely uncertain) to 10 (absolutely certain), given the context, plan, and rationale.
   “isDependency”: boolean // True if a dependency exists, or False otherwise.
 }}"""
-
-
-QUERY_GEN_PROMPT = PromptTemplate(
-    "You are a helpful assistant that generates multiple search queries \
-    to provide information about both configuration options, such as descriptions and prior usages, that are mentioned in the input query.\n"
-    "Generate {num_queries} search queries, one on each line, for both configuration options mentioned in the following input query: {query}"
-)
-
-RELEVANCE_PROMPT = PromptTemplate(
-    "Your task is to evaluate if the mentioned configuration options \
-    in the query are related to the context information provided.\n"
-    "You have two options to answer. Either YES/ NO.\n"
-    "Answer - YES, if the context information provided \
-    is is related to the configuration optons otherwise NO.\n"
-    "Query: \n {query_str}\n"
-    "Context: \n {context_str}\n"
-    "Answer: "
-)

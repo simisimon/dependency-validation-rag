@@ -68,7 +68,7 @@ def set_llm(inference_model_name: str) -> None:
         )
         
     if inference_model_name.startswith("llama"):
-        Settings.embed_model = OllamaEmbedding(
+        Settings.llm = Ollama(
             model_name=inference_model_name
     )
 

@@ -47,10 +47,12 @@ FORMAT_STR = """Respond in a JSON format as shown below:
 }}"""
 
 
-QUERY_GEN_PROMPT = PromptTemplate(
+REWRITE_QUERY = PromptTemplate(
     "You are a helpful assistant that generates multiple search queries \
-    to provide information about both configuration options, such as descriptions and prior usages, that are mentioned in the input query.\n"
-    "Generate {num_queries} search queries, one on each line, for both configuration options mentioned in the following input query: {query}"
+    to provide information about the configuration options mentioned in the input query, \
+    such as descriptions and prior usages of the configuration options.\n"
+    "Generate {num_queries} search queries, one on each line, \
+    for both configuration options mentioned in the following input query: {query}"
 )
 
 RELEVANCE_PROMPT = PromptTemplate(

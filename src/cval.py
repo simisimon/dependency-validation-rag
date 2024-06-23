@@ -1,4 +1,4 @@
-from llama_index.embeddings.openai import OpenAIEmbedding
+from llama_index.embeddings.openai import OpenAIEmbedding, OpenAIEmbeddingModelType
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
@@ -8,16 +8,16 @@ from llama_index.core.indices.query.schema import QueryBundle
 from llama_index.vector_stores.pinecone import PineconeVectorStore
 from pinecone import Pinecone, ServerlessSpec
 from data import Dependency, CvalConfig
-from ingestion import DataIngestionEngine
+from ingestion import IngestionEngine
 from generator import GeneratorFactory
-from retriever import RetrieverFactory
+from retrieval import RetrievalEngine
 from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, DEPENDENCY_STR, FORMAT_STR
-from typing import List
+from typing import List, Dict
 from dotenv import load_dotenv
 from rich.logging import RichHandler
 import os
 import logging
-import yaml
+import toml
 
 
 logging.basicConfig(
@@ -27,54 +27,76 @@ logging.basicConfig(
 )
 
 
-class CVal:
-    def __init__(self, cfg: CvalConfig) -> None:
-        self.cfg = cfg
-        load_dotenv(dotenv_path=self.cfg.env_file_path)
-        self.pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-        self.set_embedding_and_inference_model(model_name=self.cfg.model_name)
+def load_config(config_file: str) -> Dict:
+    """
+    Load config from TOML file.
+    """
+    if not config_file.endswith(".toml"):
+            raise Exception("Config file has to be a TOML file.")
         
-    def set_embedding_and_inference_model(self, model_name: str) -> None:
-        if model_name.startswith("gpt"):
-            Settings.embed_model = OpenAIEmbedding(api_key=os.getenv(key="OPENAI_KEY"))
-            Settings.llm = OpenAI(model=model_name, api_key=os.getenv(key="OPENAI_KEY"))
-        elif model_name.startswith("llama"):
-            Settings.embed_model = OllamaEmbedding(model_name=model_name)
-            Settings.llm = Ollama(model=model_name)
-        else:
-            raise Exception(f"Model {model_name} not yet supported.")
+    with open(config_file, "r", encoding="utf-8") as f:
+        config = toml.load(f)
+        
+    return config
 
-    def get_vector_store(
-        self, 
-        index_name: str,
-        dimension: int = 1536,
-        metric: str = "dotproduct"
-    ):       
-        """
-        Get vector store.
-        """
-        if index_name not in self.pc.list_indexes().names():
-            logging.info(f"Create Index {index_name}.")
-            self.pc.create_index(
-                name=index_name,
-                dimension=dimension,
-                metric=metric,
-                spec=ServerlessSpec(
-                    cloud="aws",
-                    region="us-east-1"
-                )
-            )
 
-        index = self.pc.Index(index_name)
-        vector_store = PineconeVectorStore(
-            pinecone_index=index,
-            add_sparse_vector=True
+def set_embedding(embed_model_name: str) -> None:
+    """
+    Set embedding model.
+    """
+    if embed_model_name.startswith("openai"):
+        Settings.embed_model = OpenAIEmbedding(
+            api_key=os.getenv(key="OPENAI_KEY"),
+            model=OpenAIEmbeddingModelType.TEXT_EMBED_ADA_002
         )
 
-        logging.info(f"Select Index {index_name}.")
+    if embed_model_name.startswith("llama"):
+        Settings.embed_model = OllamaEmbedding(model_name=embed_model_name)
 
-        return vector_store
+    if not Settings.embed_model:
+        raise Exception("Embedding model has to be set.")
+
+
+def set_llm(inference_model_name: str) -> None: 
+    """
+    Set inference model.
+    """
+    if inference_model_name.startswith("gpt"):
+        Settings.llm = OpenAI(
+            model=inference_model_name, 
+            api_key=os.getenv(key="OPENAI_KEY")
+        )
+        
+    if inference_model_name.startswith("llama"):
+        Settings.embed_model = OllamaEmbedding(
+            model_name=inference_model_name
+    )
+
+    if not Settings.llm:
+        raise Exception("Inference model has to be set.")
+
+
+class CVal:
+    def __init__(self, config: Dict) -> None:
+        self.config = config
+        self._pinecone_client = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
     
+        self.retrieval_engine = RetrievalEngine(
+            pinecone_client=self._pinecone_client,
+            rerank=self.config["rerank"],
+            top_k=self.config["top_k"],
+            top_n=self.config["top_n"],
+            num_queries=self.config["num_queries"],
+            alpha=self.config["alpha"]
+        )
+
+        self.ingestion_engine = IngestionEngine(
+            pinecone_client=self._pinecone_client,
+            splitting=self.config["splitting"],
+            extractors=self.config["extractors"]
+        )
+
+
     def scrape(
         self, 
         dependency: Dependency
@@ -82,194 +104,103 @@ class CVal:
         """
         Scrape websites and the repository and index the corresponding data.
         """
-        logging.info(f"Start scraping web and Github.")
-        ingestion_engine = DataIngestionEngine()
-
-        website_documents = ingestion_engine.docs_from_web(
+        # create ingestion engine
+        logging.info(f"Scraping web.")
+        web_docs = self.ingestion_engine.docs_from_web(
             dependency=dependency,
-            num_websites=self.cfg.num_websites
+            num_websites=self.config["num_websites"]
+        )
+        logging.info(f"Scraping web done.")
+
+        logging.info(f"Scraping GitHub.")
+        repo_docs= self.ingestion_engine.docs_from_github(
+            project_name=dependency.project
+        )
+        logging.info(f"Scraping GitHub done.")
+
+        docs = web_docs + repo_docs
+
+        logging.info(f"Indexing data from web and Github.")
+        self.ingestion_engine.index_documents(
+            index_name="web-search",
+            documents=docs,
+            delete_index=False
         )
 
-        repo_documents = ingestion_engine.docs_from_github(
-            dependency=dependency
+        self.ingestion_engine.index(
+            index_name="all",
+            documents=docs,
+            splitting=self.config["splitting"],
+            delete_index=False
         )
-        logging.info(f"Scraping done.")
+        logging.info(f"Indexing data from web and Github done.")
+    
 
-        documents = website_documents + repo_documents
-
-        vector_store = self.get_vector_store(
-            index_name="web-search"
-        )
-        
-        logging.info(f"Start indexing documents in index: web-search.")
-        ingestion_engine.index_documents(
-            vector_store = vector_store,
-            documents=documents
-        )
-        logging.info(f"Done with indexing documents in index: web-search")
-
-        logging.info("Start indexing documents in index: all.")
-        ingestion_engine.index_documents(
-            vector_store = self.get_vector_store(index_name="all"),
-            documents=documents
-        )
-        logging.info("Done with indexing documents in index: all.")
-
-
-    def index_data(
-        self, 
-        config_file: str
-    ) -> None:
+    def retrieve(self, index_name: str, task_str: str) -> List[NodeWithScore]:
         """
-        Index data based on a given indexing config.
+        Retrieve relevant context.
         """
-        if not os.path.exists(config_file):
-            raise Exception(f"Indexing config file {config_file} does not exist.")
-
-        with open(config_file, "r", encoding="utf-8") as file:
-            indexing_config = yaml.load(file, Loader=yaml.FullLoader)
-
-        ingestion_engine = DataIngestionEngine()
-
-        all_documents = []
-
-        for index_name, config in indexing_config["index"].items():
-            vector_store = self.get_vector_store(
-                index_name=index_name,
-                dimension=config["dimension"],
-                metric=config["metric"]
-            )    
-            
-            documents = []
-
-            if config["type"] == "url":
-                documents = ingestion_engine.docs_from_urls(url_file=config["path"])
-
-            if config["type"] == "dir":
-                documents = ingestion_engine.docs_from_dir(directory=config["path"])
-
-            if not documents:
-                raise Exception("Documents could not be loaded.")
-            
-            logging.info(f"Start indexing documents in index: {index_name}.")
-            ingestion_engine.index_documents(
-                documents=documents,
-                vector_store=vector_store,
-                splitting=config["splitting"]
-            )
-            logging.info(f"Done with indexing documents in index: {index_name}.")
-
-            all_documents += documents
-
-        # index all data into one index
-        logging.info(f"Start indexing documents in index: all.")
-        ingestion_engine.index_documents(
-            documents=all_documents,
-            vector_store=self.get_vector_store(
-                index_name="all",
-                dimension=config["dimension"],
-                metric=config["metric"]
-            ),
-            splitting=config["splitting"]    
+        retrieved_nodes = self.retrieval_engine.retrieve(
+            index_name=index_name,
+            query_str=task_str
         )
-        logging.info(f"Done with indexing documents in index: all.")
-
-    def retrieve(
-        self, 
-        index_name: str, 
-        task_str: str
-    ) -> List[NodeWithScore]:
-        """
-        Retrieve relevant nodes from vector store.
-        """
-        vector_store = self.get_vector_store(index_name=index_name)
-        retriever = RetrieverFactory().get_retriever(
-            retriever_type=self.cfg.retrieval_type,
-            vector_store=vector_store,
-            top_k=self.cfg.top_k
-        )
-
-        if not retriever:
-            raise Exception(f"Retriever type{self.cfg.retrieval_type} not yet supported.")
-
-        retrieved_nodes = retriever.retrieve(QueryBundle(query_str=task_str))
 
         return retrieved_nodes
 
-    def generate(
-        self, 
-        system_str: str, 
-        context_str: str, 
-        task_str: str
-    ) -> str:
+    def generate(self, system_str: str, task_str: str) -> str:
         """
-        Generate answer from context.
+        Generate answer without context.
         """
-        if not self.cfg.enable_rag:
-            messages = [
-                {
-                    "role": "system", 
-                    "content": system_str
-                },
-                {
-                    "role": "user",
-                    "content": f"{task_str}\n\n{FORMAT_STR}"
-                }
-            ]
+        messages = [
+            {
+                "role": "system", 
+                "content": system_str
+            },
+            {
+                "role": "user",
+                "content": f"{task_str}\n\n{FORMAT_STR}"
+            }
+        ]
 
-            generator = GeneratorFactory().get_generator(
-                model_name=self.cfg.model_name,
-                temperature=self.cfg.temperature
-            )
-            response = generator.generate(messages=messages)
-
-            return response
-
-        else:
-            query_str = QUERY_PROMPT.format(
-                system_str=system_str,
-                context_str=context_str, 
-                task_str=task_str,
-                format_str=FORMAT_STR
-            )   
-
-            response = Settings.llm.complete(
-                prompt=query_str,
-                temperature=self.cfg.temperature
-            )
-
-            return response
-
-    def query(
-        self,
-        dependency: Dependency
-    ) -> str:
-        """
-        Validate a given dependency.
-        """
-        system_str = self._get_system_prompt(dependency=dependency)
-        task_str = self._get_task_prompt(dependency=dependency)
-        
-
-
-
-        retrieved_nodes = self.retrieve(
-            index_name=self.cfg.index_name,
-            task_str=task_str
+        generator = GeneratorFactory().get_generator(
+            model_name=self.config["inference"],
+            temperature=self.config["temperature"]
         )
+        response = generator.generate(messages=messages)
 
-        context_str = "\n\n".join([n.node.get_content() for n in retrieved_nodes])
- 
-        response = self.generate(
+        return response
+
+    def generate(self, system_str: str, context_str: str, task_str: str) -> str:
+        """
+        Generate answer with context.
+        """
+        query_str = QUERY_PROMPT.format(
             system_str=system_str,
-            context_str=context_str,
+            context_str=context_str, 
             task_str=task_str,
+            format_str=FORMAT_STR
+        )   
+
+        response = Settings.llm.complete(
+            prompt=query_str,
+            temperature=self.config["temperature"]
         )
 
         return response
 
-    def _get_task_prompt(self, dependency: Dependency) -> str:
-        return TASK_PROMPT.format(
+
+    def query(self, dependency: Dependency, index_name: str) -> str:
+        """
+        Validate a given dependency.
+        """
+        # create system prompt
+        system_str = SYSTEM_PROMPT.format(
+            project=dependency.project,
+            dependency_str=DEPENDENCY_STR
+        )
+
+        # create task prompt
+        task_str = TASK_PROMPT.format(
             nameA=dependency.option_name,
             typeA=dependency.option_type,
             valueA=dependency.option_value,
@@ -281,10 +212,96 @@ class CVal:
             fileB=dependency.dependent_option_file,
             technologyB=dependency.dependent_option_technology
         )
+
+        # generate answer with context
+        if self.config["with_rag"]:
+            retrieved_nodes = self.retrieve(
+                index_name=index_name,
+                task_str=task_str
+            )
+
+            context_str = "\n\n".join([n.get_content() for n in retrieved_nodes])
     
-    def _get_system_prompt(self, dependency: Dependency) -> str:
-        return SYSTEM_PROMPT.format(
-            project=dependency.project,
-            dependency_str=DEPENDENCY_STR
+            response = self.generate(
+                system_str=system_str,
+                context_str=context_str,
+                task_str=task_str,
+            )
+
+            return response
+            
+        # generate answer without context
+        else:
+            response = self.generate(
+                system_str=system_str,
+                task_str=task_str,
+            )
+            return response
+    
+
+    @staticmethod
+    def init(config_file: str, env_file: str) -> None:
+        """
+        Initialize CVal.
+        """ 
+    
+        
+
+        # load env variables from .env file
+        load_dotenv(dotenv_path=env_file)
+
+        # load config from TOML file
+        config = load_config(config_file=config_file)
+        cval_config = config["cval"]
+        data_config = config["data"]
+
+        # set embed and inference model
+        set_embedding(embed_model_name=cval_config["embed_model"])
+        set_llm(inference_model_name=cval_config["inference_model"])
+
+        # create pinecone client
+        pinecone_client = Pinecone(api_key=os.getenv(key="PINECONE_API_KEY"))
+
+        if all(index in pinecone_client.list_indexes().names() for index in ["tech-docs", "so-posts", "all"]):
+            logging.info("All indexes already exist.")
+            # return cval instance
+            return CVal(config=cval_config)
+
+        # create ingestion engine
+        ingestion_engine = IngestionEngine(
+            pinecone_client=pinecone_client,
+            splitting=cval_config["splitting"],
+            extractors=cval_config["extractors"]
         )
-    
+
+        all_docs = []
+
+        logging.info("Index data into 'tech-docs'.")
+        docs = ingestion_engine.docs_from_urls(urls=data_config["urls"])
+        ingestion_engine.index_documents(
+            index_name="tech-docs",
+            documents=docs,
+            delete_index=True
+        ) 
+        all_docs += docs
+
+        logging.info("Index data into 'so-docs'.")
+        docs = ingestion_engine.docs_from_dir(data_dir=data_config["data_dir"])
+        ingestion_engine.index_documents(
+            index_name="so-posts",
+            documents=docs,
+            delete_index=True
+        )
+        all_docs += docs
+
+        logging.info("Index data into 'all'.")
+        ingestion_engine.index_documents(
+            index_name="all",
+            documents=all_docs,
+            delete_index=True
+        )
+
+        # return cval instance
+        return CVal(config=cval_config)
+
+

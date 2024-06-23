@@ -13,13 +13,11 @@ from typing import List
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from rich.logging import RichHandler
-import glob
 import re
 import backoff
 import requests
 import logging
 import os
-import json
 
 
 logging.basicConfig(

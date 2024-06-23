@@ -4,13 +4,11 @@ from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
 from llama_index.core import Settings
 from llama_index.core.schema import NodeWithScore
-from llama_index.core.indices.query.schema import QueryBundle
-from llama_index.vector_stores.pinecone import PineconeVectorStore
-from pinecone import Pinecone, ServerlessSpec
-from data import Dependency, CvalConfig
+from pinecone import Pinecone
 from ingestion import IngestionEngine
 from generator import GeneratorFactory
 from retrieval import RetrievalEngine
+from data import Dependency
 from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, DEPENDENCY_STR, FORMAT_STR
 from typing import List, Dict
 from dotenv import load_dotenv

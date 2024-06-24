@@ -13,6 +13,7 @@ from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, DEPENDENC
 from typing import List, Dict
 from dotenv import load_dotenv
 from rich.logging import RichHandler
+import backoff
 import os
 import logging
 import toml
@@ -157,7 +158,7 @@ class CVal:
 
         return response
 
-
+    @backoff.on_exception(backoff.expo, Exception, max_tries=5)
     def query(self, dependency: Dependency, index_name: str) -> str:
         """
         Validate a given dependency.

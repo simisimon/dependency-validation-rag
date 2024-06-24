@@ -7,22 +7,20 @@ SCRAPING_PROMPT = PromptTemplate(
 
 
 QUERY_PROMPT = PromptTemplate(
-    "{system_str}\n"
-    "---------------------\n"
     "Information about both configuration options, including their descriptions and prior usages are stated below:\n"
     "{context_str}\n"
     "---------------------\n"
-    "Given the context information, perform the following task: {task_str}\n\n{format_str}\n\n"
+    "Given the context information, perform the following task:\n"
+    "{task_str}\n\n"
+    "{format_str}\n\n"
     "Answer:\n {{ “plan”:"
 )
 
 
 SYSTEM_PROMPT = PromptTemplate(
-    "You are a full-stack expert in validating intra-technology \
-    and cross-technology configuration dependencies.\n" 
+    "You are a full-stack expert in validating intra-technology and cross-technology configuration dependencies.\n" 
     "You will be presented with configuration options found in the software project '{project}'.\n" 
-    "Your task is to determine whether the given configuration options \
-    actually depend on each other based on value-equality.\n\n"
+    "Your task is to determine whether the given configuration options actually depend on each other based on value-equality.\n\n"
     "{dependency_str}"
 )
 
@@ -48,19 +46,14 @@ FORMAT_STR = """Respond in a JSON format as shown below:
 
 
 REWRITE_QUERY = PromptTemplate(
-    "You are a helpful assistant that generates multiple search queries \
-    to provide information about the configuration options mentioned in the input query, \
-    such as descriptions and prior usages of the configuration options.\n"
-    "Generate {num_queries} search queries, one on each line, \
-    for both configuration options mentioned in the following input query: {query}"
+    "You are a helpful assistant that generates multiple search queries to provide information about the configuration options mentioned in the input query, such as descriptions and prior usages of the configuration options.\n"
+    "Generate {num_queries} search queries, one on each line, for both configuration options mentioned in the following input query: {query}"
 )
 
 RELEVANCE_PROMPT = PromptTemplate(
-    "Your task is to evaluate if the mentioned configuration options \
-    in the query are related to the context information provided.\n"
+    "Your task is to evaluate if the mentioned configuration options in the query are related to the context information provided.\n"
     "You have two options to answer. Either YES/ NO.\n"
-    "Answer - YES, if the context information provided \
-    is is related to the configuration optons otherwise NO.\n"
+    "Answer - YES, if the context information provided is is related to the configuration optons otherwise NO.\n"
     "Query: \n {query_str}\n"
     "Context: \n {context_str}\n"
     "Answer: "

@@ -65,7 +65,7 @@ class GPTGeneratorEngine(GeneratorEngine):
             max_tokens=1000
         )
 
-        return response.choices[0].message.content, response.usage   
+        return response.choices[0].message.content 
 
 
 class OllamaGeneratorEngine(GeneratorEngine):
@@ -93,4 +93,4 @@ class OllamaGeneratorEngine(GeneratorEngine):
                 "temperature": self.temperature
             }
         )
-        return response['message']['content'], None
+        return response['message']['content']

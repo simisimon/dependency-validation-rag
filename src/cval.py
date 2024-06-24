@@ -8,7 +8,7 @@ from pinecone import Pinecone
 from ingestion import IngestionEngine
 from generator import GeneratorFactory
 from retrieval import RetrievalEngine
-from data import Dependency
+from data import Dependency, Response
 from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, DEPENDENCY_STR, FORMAT_STR
 from typing import List, Dict
 from dotenv import load_dotenv
@@ -145,44 +145,15 @@ class CVal:
 
         return retrieved_nodes
 
-    def generate(self, system_str: str, task_str: str) -> str:
+    def generate(self, messages: List) -> str:
         """
-        Generate answer without context.
+        Generate answer.
         """
-        messages = [
-            {
-                "role": "system", 
-                "content": system_str
-            },
-            {
-                "role": "user",
-                "content": f"{task_str}\n\n{FORMAT_STR}"
-            }
-        ]
-
         generator = GeneratorFactory().get_generator(
-            model_name=self.config["inference"],
+            model_name=self.config["inference_model"],
             temperature=self.config["temperature"]
         )
         response = generator.generate(messages=messages)
-
-        return response
-
-    def generate(self, system_str: str, context_str: str, task_str: str) -> str:
-        """
-        Generate answer with context.
-        """
-        query_str = QUERY_PROMPT.format(
-            system_str=system_str,
-            context_str=context_str, 
-            task_str=task_str,
-            format_str=FORMAT_STR
-        )   
-
-        response = Settings.llm.complete(
-            prompt=query_str,
-            temperature=self.config["temperature"]
-        )
 
         return response
 
@@ -211,30 +182,42 @@ class CVal:
             technologyB=dependency.dependent_option_technology
         )
 
-        # generate answer with context
+        # query answer with context
         if self.config["with_rag"]:
             retrieved_nodes = self.retrieve(
                 index_name=index_name,
                 task_str=task_str
             )
 
-            context_str = "\n\n".join([n.get_content() for n in retrieved_nodes])
-    
-            response = self.generate(
-                system_str=system_str,
-                context_str=context_str,
-                task_str=task_str,
-            )
+            context_str = "\n\n".join([source_node.node.get_content() for source_node in retrieved_nodes])
 
-            return response
-            
-        # generate answer without context
-        else:
-            response = self.generate(
-                system_str=system_str,
+            query_str = QUERY_PROMPT.format(
+                context_str=context_str, 
                 task_str=task_str,
-            )
-            return response
+                format_str=FORMAT_STR
+            ) 
+
+        #query without context
+        else:
+            query_str = f"{task_str}\n\n{FORMAT_STR}"
+        
+        messages = [
+            {
+                "role": "system", 
+                "content": system_str
+            },
+            {
+                "role": "user",
+                "content": query_str
+            }
+        ]
+
+        response = self.generate(messages=messages)
+        return Response(
+            input="\n".join([x["content"] for x in messages]),
+            response=response,
+            source_nodes=retrieved_nodes
+        )
     
 
     @staticmethod
@@ -242,9 +225,6 @@ class CVal:
         """
         Initialize CVal.
         """ 
-    
-        
-
         # load env variables from .env file
         load_dotenv(dotenv_path=env_file)
 

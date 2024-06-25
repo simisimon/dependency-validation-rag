@@ -100,10 +100,7 @@ class CVal:
         )
         logging.info(f"CVal initialized.")
 
-    def scrape(
-        self, 
-        dependency: Dependency
-    ) -> None:
+    def _scrape(self, dependency: Dependency) -> None:
         """
         Scrape websites and the repository and index the corresponding data.
         """
@@ -113,18 +110,14 @@ class CVal:
             dependency=dependency,
             num_websites=self.config["num_websites"]
         )
-        logging.info(f"Scraping web done.")
-
-
+    
         logging.info(f"Indexing data into 'web-search'.")
         self.ingestion_engine.index_documents(
             index_name="web-search",
             documents=web_docs,
             delete_index=False
         )
-        logging.info(f"Indexing data from web and Github done.")
     
-
     def retrieve(self, index_name: str, task_str: str) -> List[NodeWithScore]:
         """
         Retrieve relevant context.
@@ -173,8 +166,12 @@ class CVal:
             technologyB=dependency.dependent_option_technology
         )
 
-        # query answer with context
+        # create query string with context
         if self.config["with_rag"]:
+
+            if index_name == "web-search":
+                self._scrape(dependency=dependency)   
+
             retrieved_nodes = self.retrieve(
                 index_name=index_name,
                 task_str=task_str
@@ -188,7 +185,7 @@ class CVal:
                 format_str=FORMAT_STR
             ) 
 
-        #query without context
+        # create query string without context
         else:
             query_str = f"{task_str}\n\n{FORMAT_STR}"
         

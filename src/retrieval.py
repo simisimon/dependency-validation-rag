@@ -140,7 +140,7 @@ class RetrievalEngine:
             vector_store = self._get_vector_store(index_name=index_name)
             retrieved_nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
             reranked_retrieved_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
-            return query_str
+            return reranked_retrieved_nodes
 
     def _retrieve(self, vector_store: PineconeVectorStore, query_str: str) -> List[NodeWithScore]:
         """

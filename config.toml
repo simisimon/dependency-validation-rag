@@ -7,6 +7,7 @@ with_rag = true
 # ingestions
 splitting = "sentence" # "sentence", "token", "semantic", "recursive"
 extractors = [] # ["summary", "keyword", title]
+num_websites = 5
 
 # retrieval
 distance_metric = "dot" # "dot", "cosine", "hammering", "manattan", "squared"

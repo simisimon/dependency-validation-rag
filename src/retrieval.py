@@ -35,6 +35,7 @@ class RetrievalEngine:
         self.alpha = alpha  
 
 
+
     def _get_vector_store(self, index_name: str) -> PineconeVectorStore:
         """
         Get Pinecone vector store.
@@ -102,15 +103,49 @@ class RetrievalEngine:
             passing = False
 
         return passing
+    
+    def _rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
+        """
+        Rerank retrieved nodes.
+        """
+        reranker = self._create_reranker()
+
+        reranked_nodes = reranker.postprocess_nodes(
+            nodes=nodes,
+            query_bundle=QueryBundle(query_str=query_str)
+        )
+        logging.info(f"Len of retrieved nodes after reranking: {len(reranked_nodes)}")
+
+        return reranked_nodes
+
 
 
     def retrieve(self, index_name: str, query_str: str) -> List[NodeWithScore]:
         """
         Retrieve context.
         """
-        # create weaviate vector store
-        vector_store = self._get_vector_store(index_name=index_name)
+        if index_name == "all":
+            retrieved_nodes = []
+            for name in self._pinecone_client.list_indexes().names():
+                vector_store = self._get_vector_store(index_name=name)
+                nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
+                reranked_nodes = self._rerank_nodes(nodes=nodes, query_str=query_str)
+                retrieved_nodes += reranked_nodes
 
+            reranked_retrieved_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
+            
+            return reranked_retrieved_nodes
+
+        else:
+            vector_store = self._get_vector_store(index_name=index_name)
+            retrieved_nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
+            reranked_retrieved_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
+            return query_str
+
+    def _retrieve(self, vector_store: PineconeVectorStore, query_str: str) -> List[NodeWithScore]:
+        """
+        Retrieve context from vector store.
+        """
         # create vector store index
         index = VectorStoreIndex.from_vector_store(
             vector_store=vector_store,
@@ -129,10 +164,7 @@ class RetrievalEngine:
             query_str=query_str,
             num_queries=self.num_queries
         )
-
-        # get reranker
-        reranker = self._create_reranker()
-
+       
         # retrieve nodes based on rewritten query
         retrieved_nodes = []
         for index, query in enumerate(queries):
@@ -142,11 +174,5 @@ class RetrievalEngine:
             logging.info(f"Len of retrieved nodes of query {index}: {len(nodes)}")
             retrieved_nodes += nodes
 
-        # rerank retrieved nodes
-        reranked_nodes = reranker.postprocess_nodes(
-            nodes=retrieved_nodes,
-            query_bundle=QueryBundle(query_str=query_str)
-        )
-        logging.info(f"Len of retrieved nodes after reranking: {len(reranked_nodes)}")
-
-        return reranked_nodes
+        return retrieved_nodes
+        

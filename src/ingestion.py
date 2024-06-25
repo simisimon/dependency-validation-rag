@@ -13,11 +13,16 @@ from typing import List
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from rich.logging import RichHandler
+import traceback
 import re
 import backoff
 import requests
 import logging
 import os
+import nest_asyncio
+
+
+nest_asyncio.apply()
 
 
 logging.basicConfig(
@@ -179,20 +184,25 @@ class IngestionEngine:
         data = response.json()
 
         if data['total_count'] > 0:
-            owner = data['items'][0]['owner']['login']
-            branch = data['items'][0]['default_branch']
-            topics = data['items'][0]["topics"]
-            full_name = data['items'][0]["full_name"]
-            description = data['items'][0]["description"]
+            owner = data["items"][0]["owner"]["login"]
+            branch = data["items"][0]["default_branch"]
+            repo_name = data['items'][0]["name"]
         else:
             return []
+        
+        print(owner)
+        print(branch)
                 
         try:
-            github_client = GithubClient(github_token=os.getenv(key="GITHUB_TOKEN"), verbose=True)
+            github_client = GithubClient(
+                github_token=os.getenv(key="GITHUB_TOKEN"), 
+                verbose=True
+            )
+
             documents = GithubRepositoryReader(
                 github_client=github_client,
                 owner=owner,
-                repo=project_name,
+                repo=repo_name,
                 use_parser=False,
                 verbose=False,
                 filter_file_extensions=(
@@ -211,13 +221,7 @@ class IngestionEngine:
                     ],
                     GithubRepositoryReader.FilterType.INCLUDE,
                 ),
-            ).load_data(branch=branch)
-
-            for d in documents:
-                d.metadata["description"] = description
-                d.metadata["full_name"] = full_name
-                d.metadata["topics"] = topics
-            
+            ).load_data(branch=branch)            
             return documents
         except Exception:
             logging.info("Error occurred while scraping Github.")

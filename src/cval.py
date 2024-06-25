@@ -13,10 +13,12 @@ from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, DEPENDENC
 from typing import List, Dict
 from dotenv import load_dotenv
 from rich.logging import RichHandler
+from util import is_index_empty
 import backoff
 import os
 import logging
 import toml
+
 
 
 logging.basicConfig(
@@ -75,11 +77,13 @@ def set_llm(inference_model_name: str) -> None:
         raise Exception("Inference model has to be set.")
 
 
+
+
 class CVal:
     def __init__(self, config: Dict) -> None:
         self.config = config
         self._pinecone_client = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-    
+
         self.retrieval_engine = RetrievalEngine(
             pinecone_client=self._pinecone_client,
             rerank=self.config["rerank"],
@@ -94,7 +98,7 @@ class CVal:
             splitting=self.config["splitting"],
             extractors=self.config["extractors"]
         )
-
+        logging.info(f"CVal initialized.")
 
     def scrape(
         self, 
@@ -111,25 +115,11 @@ class CVal:
         )
         logging.info(f"Scraping web done.")
 
-        logging.info(f"Scraping GitHub.")
-        repo_docs= self.ingestion_engine.docs_from_github(
-            project_name=dependency.project
-        )
-        logging.info(f"Scraping GitHub done.")
 
-        docs = web_docs + repo_docs
-
-        logging.info(f"Indexing data from web and Github.")
+        logging.info(f"Indexing data into 'web-search'.")
         self.ingestion_engine.index_documents(
             index_name="web-search",
-            documents=docs,
-            delete_index=False
-        )
-
-        self.ingestion_engine.index(
-            index_name="all",
-            documents=docs,
-            splitting=self.config["splitting"],
+            documents=web_docs,
             delete_index=False
         )
         logging.info(f"Indexing data from web and Github done.")
@@ -241,11 +231,6 @@ class CVal:
         # create pinecone client
         pinecone_client = Pinecone(api_key=os.getenv(key="PINECONE_API_KEY"))
 
-        if all(index in pinecone_client.list_indexes().names() for index in ["tech-docs", "so-posts", "all"]):
-            logging.info("All indexes already exist.")
-            # return cval instance
-            return CVal(config=cval_config)
-
         # create ingestion engine
         ingestion_engine = IngestionEngine(
             pinecone_client=pinecone_client,
@@ -253,32 +238,35 @@ class CVal:
             extractors=cval_config["extractors"]
         )
 
-        all_docs = []
+        if "tech-docs" not in pinecone_client.list_indexes().names():
+            if is_index_empty(index=pinecone_client.Index(name="tech-docs")):
+                logging.info("Index data into 'tech-docs'.")
+                docs = ingestion_engine.docs_from_urls(urls=data_config["urls"])
+                ingestion_engine.index_documents(
+                    index_name="tech-docs",
+                    documents=docs,
+                    delete_index=True
+                )
 
-        logging.info("Index data into 'tech-docs'.")
-        docs = ingestion_engine.docs_from_urls(urls=data_config["urls"])
-        ingestion_engine.index_documents(
-            index_name="tech-docs",
-            documents=docs,
-            delete_index=True
-        ) 
-        all_docs += docs
+        if "so-posts" not in pinecone_client.list_indexes().names():
+            if is_index_empty(index=pinecone_client.Index(name="so-posts")):
+                logging.info("Index data into 'so-posts'.")
+                docs = ingestion_engine.docs_from_dir(data_dir=data_config["data_dir"])
+                ingestion_engine.index_documents(
+                    index_name="so-posts",
+                    documents=docs,
+                    delete_index=True
+                )
 
-        logging.info("Index data into 'so-docs'.")
-        docs = ingestion_engine.docs_from_dir(data_dir=data_config["data_dir"])
-        ingestion_engine.index_documents(
-            index_name="so-posts",
-            documents=docs,
-            delete_index=True
-        )
-        all_docs += docs
-
-        logging.info("Index data into 'all'.")
-        ingestion_engine.index_documents(
-            index_name="all",
-            documents=all_docs,
-            delete_index=True
-        )
+        if "github" not in pinecone_client.list_indexes().names():
+            if is_index_empty(index=pinecone_client.Index(name="github")):
+                logging.info("Index data into 'github'.")
+                docs = [ingestion_engine.docs_from_github(project_name=project_name) for project_name in data_config["github"]]
+                ingestion_engine.index_documents(
+                    index_name="github",
+                    documents=docs,
+                    delete_index=True
+                )
 
         # return cval instance
         return CVal(config=cval_config)

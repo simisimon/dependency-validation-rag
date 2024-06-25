@@ -51,7 +51,20 @@ urls = [
     "https://docs.docker.com/compose/compose-file/develop/",
     "https://docs.docker.com/reference/dockerfile/",
     "https://docs.docker.com/build/building/packaging/",
-    "https://docs.docker.com/build/building/multi-stage/"]
+    "https://docs.docker.com/build/building/multi-stage/"
+]
+github = [
+    "macrozheng/mall",
+    "apolloconfig/apollo",
+    "linlinjava/litemall",
+    "sqshq/piggymetrics",
+    "codecentric/spring-boot-admin",
+    "macrozheng/mall-swarm",
+    "wxiaoqi/Spring-Cloud-Platform",
+    "pig-mesh/pig",
+    "jetlinks/jetlinks-community",
+    "Yin-Hongwei/music-website"
+]
 data_dir = "../data/so_posts"
 
 

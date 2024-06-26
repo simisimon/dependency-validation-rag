@@ -1,15 +1,23 @@
 from dataclasses import dataclass, field
 from llama_index.core.schema import NodeWithScore
 from llama_index.core.utils import truncate_text
-from typing import Optional, List
+from typing import Optional, List, Dict
+import json
 
 @dataclass
 class Response:
     input: str
     response: str
+    response_dict: Dict = field(default_factory=dict)
     source_nodes: List[NodeWithScore] = field(default_factory=list)
     expected_output: str = None
     context: List[str] = None
+
+    def __post_init__(self):
+        try:
+            self.response_dict = json.loads(self.response)
+        except json.JSONDecodeError:
+            raise Exception("Response cannot be converted into a dict.")
 
     def __str__(self) -> str:
         """Convert to string representation."""

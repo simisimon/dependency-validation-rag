@@ -98,6 +98,12 @@ class CVal:
             splitting=self.config["splitting"],
             extractors=self.config["extractors"]
         )
+
+        self.generator = GeneratorFactory().get_generator(
+            model_name=self.config["inference_model"],
+            temperature=self.config["temperature"]
+        )
+
         logging.info(f"CVal initialized.")
 
     def _scrape(self, dependency: Dependency) -> None:
@@ -133,16 +139,12 @@ class CVal:
         """
         Generate answer.
         """
-        generator = GeneratorFactory().get_generator(
-            model_name=self.config["inference_model"],
-            temperature=self.config["temperature"]
-        )
-        response = generator.generate(messages=messages)
+        response = self.generator.generate(messages=messages)
 
         return response
 
     @backoff.on_exception(backoff.expo, Exception, max_tries=5)
-    def query(self, dependency: Dependency, index_name: str) -> str:
+    def query(self, dependency: Dependency, index_name: str) -> Response:
         """
         Validate a given dependency.
         """

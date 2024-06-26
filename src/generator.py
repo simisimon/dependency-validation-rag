@@ -1,11 +1,12 @@
 from openai import OpenAI, RateLimitError, Timeout, APIError, APIConnectionError
 from rich.logging import RichHandler
-from typing import Tuple, List
+from typing import Tuple, List, Dict
 from ollama._types import ResponseError, RequestError
 import ollama
 import backoff
 import logging
 import os
+import json
 
 
 logging.basicConfig(
@@ -33,7 +34,7 @@ class GeneratorEngine:
         self.model_name = model_name
         self.temperature = temperature
 
-    def generate(self, messages: List) -> Tuple:
+    def generate(self, messages: List) -> str:
         pass
 
 
@@ -55,7 +56,7 @@ class GPTGeneratorEngine(GeneratorEngine):
     ),
     max_tries=10
     )
-    def generate(self, messages: List) -> Tuple:
+    def generate(self, messages: List) -> str:
         client = OpenAI(api_key=os.getenv("OPENAI_KEY"))
         response = client.chat.completions.create(
             model=self.model_name, 
@@ -64,8 +65,13 @@ class GPTGeneratorEngine(GeneratorEngine):
             response_format={"type": "json_object"},
             max_tokens=1000
         )
+    
+        response_content = response.choices[0].message.content
 
-        return response.choices[0].message.content 
+        if not response:
+            raise Exception("Response content was empty.")
+        
+        return response_content
 
 
 class OllamaGeneratorEngine(GeneratorEngine):

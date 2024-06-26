@@ -10,8 +10,6 @@ extractors = [] # ["summary", "keyword", title]
 num_websites = 5
 
 # retrieval
-distance_metric = "dot" # "dot", "cosine", "hammering", "manattan", "squared"
-search_strategy = "hybrid" 
 temperature = 0.0
 num_queries = 3
 top_k = 5

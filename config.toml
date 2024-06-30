@@ -1,11 +1,11 @@
 # cval config
 [cval]
 embed_model = "openai"
-inference_model = "gpt-4o-2024-05-13"
+inference_model = "gpt-4o-2024-05-13" #"llama3:70b"
 with_rag = true
 
 # ingestions
-splitting = "sentence" # "sentence", "token", "semantic", "recursive"
+splitting = "semantic" # "sentence", "token", "semantic", "recursive"
 extractors = [] # ["summary", "keyword", title]
 num_websites = 5
 
@@ -16,6 +16,7 @@ top_k = 5
 alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
 rerank = "sentence" # "sentence" or "llm"
 top_n = 3
+with_rewriting = false
 
 # data
 [data]

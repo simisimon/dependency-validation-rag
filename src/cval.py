@@ -64,13 +64,14 @@ def set_llm(inference_model_name: str) -> None:
     """
     if inference_model_name.startswith("gpt"):
         Settings.llm = OpenAI(
-            model=inference_model_name, 
+            model="gpt-3.5-turbo-0125", 
             api_key=os.getenv(key="OPENAI_KEY")
         )
         
     if inference_model_name.startswith("llama"):
         Settings.llm = Ollama(
-            model_name=inference_model_name
+            model=inference_model_name,
+            request_timeout=90.0
     )
 
     if not Settings.llm:
@@ -86,6 +87,7 @@ class CVal:
 
         self.retrieval_engine = RetrievalEngine(
             pinecone_client=self._pinecone_client,
+            with_rewriting=self.config["with_rewriting"],
             rerank=self.config["rerank"],
             top_k=self.config["top_k"],
             top_n=self.config["top_n"],
@@ -139,11 +141,12 @@ class CVal:
         """
         Generate answer.
         """
+        logging.info(f"Query {self.generator.model_name}")
         response = self.generator.generate(messages=messages)
 
         return response
 
-    @backoff.on_exception(backoff.expo, Exception, max_tries=5)
+    @backoff.on_exception(backoff.expo, Exception, max_tries=3)
     def query(self, dependency: Dependency, index_name: str) -> Response:
         """
         Validate a given dependency.
@@ -190,6 +193,7 @@ class CVal:
         # create query string without context
         else:
             query_str = f"{task_str}\n\n{FORMAT_STR}"
+            retrieved_nodes = []
         
         messages = [
             {

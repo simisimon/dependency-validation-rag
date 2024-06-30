@@ -20,6 +20,7 @@ class RetrievalEngine:
     def __init__(
         self, 
         pinecone_client: Pinecone,
+        with_rewriting: bool,
         rerank: str, 
         top_k: int,
         top_n: int,
@@ -28,6 +29,7 @@ class RetrievalEngine:
     ) -> None:
         logging.info(f"Retrieval engine initialized.")
         self._pinecone_client = pinecone_client
+        self.with_rewriting = with_rewriting
         self.rerank = rerank
         self.top_k = top_k
         self.top_n = top_n
@@ -62,6 +64,7 @@ class RetrievalEngine:
 
         if self.rerank == "llm":
             reranker =  LLMRerank(
+                llm=Settings.llm,
                 choice_batch_size=self.top_n,
                 top_n=self.top_n)
         if self.rerank == "sentence":
@@ -77,6 +80,7 @@ class RetrievalEngine:
         """
         Rewrite query. Return list of rewritten queries. 
         """
+        logging.info(f"Rewrite query in {num_queries} queries.")
         response = Settings.llm.predict(
             prompt=REWRITE_QUERY, 
             num_queries=num_queries,
@@ -114,10 +118,9 @@ class RetrievalEngine:
             nodes=nodes,
             query_bundle=QueryBundle(query_str=query_str)
         )
-        logging.info(f"Len of retrieved nodes after reranking: {len(reranked_nodes)}")
+        logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(reranked_nodes)} nodes.")
 
         return reranked_nodes
-
 
 
     def retrieve(self, index_name: str, query_str: str) -> List[NodeWithScore]:
@@ -159,20 +162,26 @@ class RetrievalEngine:
             alpha=self.alpha,
         )
 
-        # rewrite queries
-        queries = self._rewrite_queries(
-            query_str=query_str,
-            num_queries=self.num_queries
-        )
-       
-        # retrieve nodes based on rewritten query
-        retrieved_nodes = []
-        for index, query in enumerate(queries):
-            nodes = query_engine.retrieve(
-                query_bundle=QueryBundle(query_str=query)
+        if self.with_rewriting:
+            logging.info("Retrieve relevant context with query rewriting.")
+            queries = self._rewrite_queries(
+                query_str=query_str,
+                num_queries=self.num_queries
             )
-            logging.info(f"Len of retrieved nodes of query {index}: {len(nodes)}")
-            retrieved_nodes += nodes
+       
+            retrieved_nodes = []
+            for index, query in enumerate(queries):
+                nodes = query_engine.retrieve(
+                    query_bundle=QueryBundle(query_str=query)
+                )
+                retrieved_nodes += nodes
+
+            return retrieved_nodes
+        
+        logging.info("Retrieve relevant context without query rewriting.")
+        retrieved_nodes = query_engine.retrieve(
+            query_bundle=QueryBundle(query_str=query_str)
+        )
 
         return retrieved_nodes
         

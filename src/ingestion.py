@@ -215,7 +215,6 @@ class IngestionEngine:
                         ".ini",
                         ".cnf",
                         ".toml",
-                        ".yaml",
                         ".conf",
                         ".md"
                     ],

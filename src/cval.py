@@ -19,7 +19,6 @@ import logging
 import toml
 
 
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(message)s",
@@ -260,7 +259,10 @@ class CVal:
 
         if "github" not in pinecone_client.list_indexes().names():
             logging.info("Index data into 'github'.")
-            docs = [ingestion_engine.docs_from_github(project_name=project_name) for project_name in data_config["github"]]
+            docs = []
+            for project_name in data_config["github"]:
+                docs += ingestion_engine.docs_from_github(project_name=project_name)
+
             ingestion_engine.index_documents(
                 index_name="github",
                 documents=docs,

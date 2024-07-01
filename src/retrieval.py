@@ -35,7 +35,6 @@ class RetrievalEngine:
         self.alpha = alpha  
 
 
-
     def _get_vector_store(self, index_name: str) -> PineconeVectorStore:
         """
         Get Pinecone vector store.
@@ -74,18 +73,19 @@ class RetrievalEngine:
         return reranker
     
 
-    def _rewrite_queries(self, query_str: str, num_queries: int = 1) -> List[str]:
+    def _rewrite_queries(self, query_str: str) -> List[str]:
         """
         Rewrite query. Return list of rewritten queries. 
         """
-        logging.info(f"Rewrite query in {num_queries} queries.")
+        logging.info(f"Rewrite query in one query.")
         response = Settings.llm.predict(
-            prompt=REWRITE_QUERY, 
-            num_queries=num_queries,
+            prompt=REWRITE_QUERY,
             query=query_str
         )
 
         queries = response.split("\n")
+
+        print("Queries: ", queries, len(queries))
         return queries
     
 
@@ -106,16 +106,29 @@ class RetrievalEngine:
 
         return passing
     
+
     def _rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
         """
         Rerank retrieved nodes.
         """
         reranker = self._create_reranker()
+        duplicates = True
+        
+        while duplicates:
+            reranked_nodes = reranker.postprocess_nodes(
+                nodes=nodes,
+                query_bundle=QueryBundle(query_str=query_str)
+            )
 
-        reranked_nodes = reranker.postprocess_nodes(
-            nodes=nodes,
-            query_bundle=QueryBundle(query_str=query_str)
-        )
+            node_ids = set(node.node_id for node in reranked_nodes)
+            print(node_ids)
+            if len(node_ids) == 3:
+                print("Rerank done.")
+                duplicates = False
+            else:
+                print("Reranking again.")
+                duplicates = True
+
         logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(reranked_nodes)} nodes.")
 
         return reranked_nodes
@@ -130,8 +143,7 @@ class RetrievalEngine:
             for name in self._pinecone_client.list_indexes().names():
                 vector_store = self._get_vector_store(index_name=name)
                 nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
-                reranked_nodes = self._rerank_nodes(nodes=nodes, query_str=query_str)
-                retrieved_nodes += reranked_nodes
+                retrieved_nodes += nodes
 
             reranked_retrieved_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
             

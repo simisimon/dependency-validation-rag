@@ -46,7 +46,7 @@ FORMAT_STR = """Respond in a JSON format as shown below:
 
 REWRITE_QUERY = PromptTemplate(
     "You are a helpful assistant that generates multiple search queries to provide information about the configuration options mentioned in the input query, such as descriptions and prior usages of the configuration options.\n"
-    "Generate {num_queries} search queries, one on each line, for both configuration options mentioned in the following input query: {query}"
+    "Generate one search query for both configuration options mentioned in the following input query: {query}"
 )
 
 RELEVANCE_PROMPT = PromptTemplate(

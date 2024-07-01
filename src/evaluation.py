@@ -1,7 +1,3 @@
-from deepeval.metrics import AnswerRelevancyMetric, FaithfulnessMetric, ContextualRelevancyMetric
-from deepeval.test_case import LLMTestCase
-from dotenv import dotenv_values
-from typing import List
 from data import Dependency
 from cval import CVal
 import mlflow
@@ -36,7 +32,7 @@ def run_inference():
 
             outputs = []
 
-            for x in df.to_dict("records"):
+            for x in df.to_dict("records")[:5]:
                 dependency = Dependency(
                     project=x["project"],
                     option_name=x["option_name"],
@@ -58,6 +54,10 @@ def run_inference():
 
 
                 outputs.append(response)
+
+            for x in outputs:
+                for node in x.source_nodes:
+                    print("Id: ", node.node_id)
 
             responses = [response.to_dict() for response in outputs]
 

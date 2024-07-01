@@ -9,7 +9,7 @@ from ingestion import IngestionEngine
 from generator import GeneratorFactory
 from retrieval import RetrievalEngine
 from data import Dependency, Response
-from prompt_templates import QUERY_PROMPT, SYSTEM_PROMPT, TASK_PROMPT, DEPENDENCY_STR, FORMAT_STR
+from prompt_settings import PrompSettingsFactory
 from typing import List, Dict
 from dotenv import load_dotenv
 from rich.logging import RichHandler
@@ -103,6 +103,11 @@ class CVal:
             temperature=self.config["temperature"]
         )
 
+        self.prompt_settings = PrompSettingsFactory.get_prompt_settings(
+            tool_name=self.config["tool_name"]
+        )
+
+
         logging.info(f"CVal initialized.")
 
     def _scrape(self, dependency: Dependency) -> None:
@@ -112,7 +117,9 @@ class CVal:
         # create ingestion engine
         logging.info(f"Scraping web.")
         web_docs = self.ingestion_engine.docs_from_web(
-            dependency=dependency,
+            query_str=self.prompt_settings.get_retrieval_prompt(
+                dependency=dependency
+            ),
             num_websites=self.config["num_websites"]
         )
     
@@ -123,13 +130,13 @@ class CVal:
             delete_index=False
         )
     
-    def retrieve(self, index_name: str, task_str: str) -> List[NodeWithScore]:
+    def retrieve(self, index_name: str, retrieval_str: str) -> List[NodeWithScore]:
         """
         Retrieve relevant context.
         """
         retrieved_nodes = self.retrieval_engine.retrieve(
             index_name=index_name,
-            query_str=task_str
+            query_str=retrieval_str
         )
 
         return retrieved_nodes
@@ -148,47 +155,48 @@ class CVal:
         Validate a given dependency.
         """
         # create system prompt
-        system_str = SYSTEM_PROMPT.format(
-            project=dependency.project,
-            dependency_str=DEPENDENCY_STR
+        system_str = self.prompt_settings.get_system_str(
+            dependency=dependency
         )
 
         # create task prompt
-        task_str = TASK_PROMPT.format(
-            nameA=dependency.option_name,
-            typeA=dependency.option_type,
-            valueA=dependency.option_value,
-            fileA=dependency.option_file,
-            technologyA=dependency.option_technology,
-            nameB=dependency.dependent_option_name,
-            typeB=dependency.dependent_option_type,
-            valueB=dependency.dependent_option_value,
-            fileB=dependency.dependent_option_file,
-            technologyB=dependency.dependent_option_technology
+        task_str = self.prompt_settings.get_task_str(
+            dependency=dependency
         )
 
         # create query string with context
         if self.config["with_rag"]:
+            logging.info("Query LLM with context.")
 
             if index_name == "web-search":
                 self._scrape(dependency=dependency)   
 
+            
+            if self.config["with_rewriting"]:
+                logging.info("Rewrite query.")
+                retrieval_str = self.prompt_settings.get_retrieval_prompt(
+                    dependency=dependency
+                )
+            else:
+                retrieval_str = task_str
+
             retrieved_nodes = self.retrieve(
                 index_name=index_name,
-                task_str=task_str
+                retrieval_str=retrieval_str
             )
 
             context_str = "\n\n".join([source_node.node.get_content() for source_node in retrieved_nodes])
 
-            query_str = QUERY_PROMPT.format(
+            query_str = self.prompt_settings.query_prompt.format(
                 context_str=context_str, 
                 task_str=task_str,
-                format_str=FORMAT_STR
+                format_str=self.prompt_settings.get_format_prompt()
             ) 
 
         # create query string without context
         else:
-            query_str = f"{task_str}\n\n{FORMAT_STR}"
+            logging.info("Query LLM without context.")
+            query_str = f"{task_str}\n\n{self.prompt_settings.get_format_prompt()}"
             retrieved_nodes = []
         
         messages = [
@@ -204,7 +212,7 @@ class CVal:
 
         response = self.generate(messages=messages)
         return Response(
-            input=f"{task_str}\n\n{FORMAT_STR}",
+            input=f"{task_str}\n\n{self.prompt_settings.get_format_prompt()}",
             response=response,
             source_nodes=retrieved_nodes
         )

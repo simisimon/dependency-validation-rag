@@ -4,7 +4,6 @@ from llama_index.core.schema import NodeWithScore, QueryBundle
 from llama_index.core import Settings, VectorStoreIndex
 from pinecone import Pinecone
 from typing import List
-from prompt_templates import REWRITE_QUERY, RELEVANCE_PROMPT
 from rich.logging import RichHandler
 import logging
 
@@ -71,41 +70,7 @@ class RetrievalEngine:
             )
 
         return reranker
-    
-
-    def _rewrite_queries(self, query_str: str) -> List[str]:
-        """
-        Rewrite query. Return list of rewritten queries. 
-        """
-        logging.info(f"Rewrite query in one query.")
-        response = Settings.llm.predict(
-            prompt=REWRITE_QUERY,
-            query=query_str
-        )
-
-        queries = response.split("\n")
-
-        print("Queries: ", queries, len(queries))
-        return queries
-    
-
-    def _relevance_filter(self, query_str: str, node: NodeWithScore) -> bool:
-        """
-        Check if the retrieved context is relevant to the query.
-        """
-        response = Settings.llm.predict(
-            prompt=RELEVANCE_PROMPT,
-            query_str=query_str,
-            context_str=node.text
-        )
-
-        if "yes" in response.lower():
-            passing = True
-        else:
-            passing = False
-
-        return passing
-    
+       
 
     def _rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
         """
@@ -171,21 +136,7 @@ class RetrievalEngine:
             similarity_top_k=self.top_k,
             alpha=self.alpha,
         )
-
-        if self.with_rewriting:
-            logging.info("Retrieve relevant context with query rewriting.")
-            queries = self._rewrite_queries(query_str=query_str)
-       
-            retrieved_nodes = []
-            for index, query in enumerate(queries):
-                nodes = query_engine.retrieve(
-                    query_bundle=QueryBundle(query_str=query)
-                )
-                retrieved_nodes += nodes
-
-            return retrieved_nodes
         
-        logging.info("Retrieve relevant context without query rewriting.")
         retrieved_nodes = query_engine.retrieve(
             query_bundle=QueryBundle(query_str=query_str)
         )

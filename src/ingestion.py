@@ -7,13 +7,10 @@ from llama_index.core.extractors import SummaryExtractor, TitleExtractor, Keywor
 from llama_index.core.node_parser import SentenceSplitter, TokenTextSplitter, SemanticSplitterNodeParser, LangchainNodeParser
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from pinecone import Pinecone, ServerlessSpec
-from data import Dependency
-from prompt_templates import SCRAPING_PROMPT
 from typing import List
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from rich.logging import RichHandler
-import traceback
 import re
 import backoff
 import requests
@@ -134,19 +131,12 @@ class IngestionEngine:
         Exception,
         max_tries=8,
     )
-    def docs_from_web(self, dependency: Dependency, num_websites: int) -> List[Document]:
+    def docs_from_web(self, query_str: str, num_websites: int) -> List[Document]:
         """
         Get documents from websites.
         """
         logging.info(f"Start scraping {num_websites} websites.")
-        scraping_query = SCRAPING_PROMPT.format(
-            technologyA=dependency.option_technology,
-            nameA=dependency.option_name,
-            technologyB=dependency.dependent_option_technology,
-            nameB=dependency.dependent_option_name
-        )
-
-        url = "https://www.bing.com/search?q=" + scraping_query
+        url = "https://www.bing.com/search?q=" + query_str
 
         response = requests.get(
             url, 

@@ -6,7 +6,7 @@ from pinecone import Pinecone
 from typing import List
 from rich.logging import RichHandler
 import logging
-
+import backoff
 
 logging.basicConfig(
     level=logging.INFO,
@@ -72,28 +72,24 @@ class RetrievalEngine:
         return reranker
        
 
+    @backoff.on_exception(backoff.expo, Exception, max_tries=5)
     def _rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
         """
         Rerank retrieved nodes.
         """
         reranker = self._create_reranker()
-        duplicates = True
         
-        while duplicates:
-            reranked_nodes = reranker.postprocess_nodes(
-                nodes=nodes,
-                query_bundle=QueryBundle(query_str=query_str)
-            )
+        reranked_nodes = reranker.postprocess_nodes(
+            nodes=nodes,
+            query_bundle=QueryBundle(query_str=query_str)
+        )
 
-            node_ids = set(node.node_id for node in reranked_nodes)
-            print(node_ids)
-            if len(node_ids) == 3:
-                print("Rerank done.")
-                duplicates = False
-            else:
-                print("Reranking again.")
-                duplicates = True
+        node_ids = set(node.node_id for node in reranked_nodes)
 
+        # check if duplicates are in reranked nodes
+        if len(node_ids) < 3:
+            raise Exception("Duplicates found after reranking nodes.")
+                
         logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(reranked_nodes)} nodes.")
 
         return reranked_nodes

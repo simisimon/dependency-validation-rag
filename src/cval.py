@@ -89,7 +89,6 @@ class CVal:
             rerank=self.config["rerank"],
             top_k=self.config["top_k"],
             top_n=self.config["top_n"],
-            num_queries=self.config["num_queries"],
             alpha=self.config["alpha"]
         )
 
@@ -141,10 +140,9 @@ class CVal:
         """
         logging.info(f"Query {self.generator.model_name}")
         response = self.generator.generate(messages=messages)
-
         return response
 
-    @backoff.on_exception(backoff.expo, Exception, max_tries=3)
+    @backoff.on_exception(backoff.expo, Exception, max_tries=5)
     def query(self, dependency: Dependency, index_name: str) -> Response:
         """
         Validate a given dependency.
@@ -206,7 +204,7 @@ class CVal:
 
         response = self.generate(messages=messages)
         return Response(
-            input="\n".join([x["content"] for x in messages]),
+            input=f"{task_str}\n\n{FORMAT_STR}",
             response=response,
             source_nodes=retrieved_nodes
         )

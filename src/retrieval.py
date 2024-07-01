@@ -24,7 +24,6 @@ class RetrievalEngine:
         rerank: str, 
         top_k: int,
         top_n: int,
-        num_queries: int,
         alpha: float,
     ) -> None:
         logging.info(f"Retrieval engine initialized.")
@@ -33,7 +32,6 @@ class RetrievalEngine:
         self.rerank = rerank
         self.top_k = top_k
         self.top_n = top_n
-        self.num_queries = num_queries
         self.alpha = alpha  
 
 
@@ -76,7 +74,7 @@ class RetrievalEngine:
         return reranker
     
 
-    def _rewrite_queries(self, query_str: str, num_queries: str) -> List[str]:
+    def _rewrite_queries(self, query_str: str, num_queries: int = 1) -> List[str]:
         """
         Rewrite query. Return list of rewritten queries. 
         """
@@ -164,10 +162,7 @@ class RetrievalEngine:
 
         if self.with_rewriting:
             logging.info("Retrieve relevant context with query rewriting.")
-            queries = self._rewrite_queries(
-                query_str=query_str,
-                num_queries=self.num_queries
-            )
+            queries = self._rewrite_queries(query_str=query_str)
        
             retrieved_nodes = []
             for index, query in enumerate(queries):

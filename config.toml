@@ -1,7 +1,7 @@
 # cval config
 [cval]
 embed_model = "openai"
-inference_model = "gpt-4o-2024-05-13" #"llama3:70b"
+inference_model = "gpt-3.5-turbo-0125" #"llama3:70b" #"llama3:70b"  # "gpt-4o-2024-05-13"
 with_rag = true
 
 # ingestions
@@ -11,7 +11,6 @@ num_websites = 5
 
 # retrieval
 temperature = 0.0
-num_queries = 3
 top_k = 5
 alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
 rerank = "sentence" # "sentence" or "llm"

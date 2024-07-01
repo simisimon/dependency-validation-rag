@@ -12,8 +12,7 @@ QUERY_PROMPT = PromptTemplate(
     "---------------------\n"
     "Given the context information, perform the following task:\n"
     "{task_str}\n\n"
-    "{format_str}\n\n"
-    "Answer:\n {{ “plan”:"
+    "{format_str}"
 )
 
 
@@ -31,8 +30,8 @@ Importantly, configuration options may have equal values by accident, meaning th
 
 
 TASK_PROMPT = PromptTemplate(
-    "Carefully evaluate whether configuration option {nameA} of type {typeA} with value {valueA} in {fileA} of technology {technologyA} \
-    depends on configuration option {nameB} of type {typeB} with value {valueB} in {fileB} of technology {technologyB} or vice versa." 
+    "Carefully evaluate whether configuration option {nameA} of type {typeA} with value {valueA} in {fileA} of technology {technologyA}"
+    "depends on configuration option {nameB} of type {typeB} with value {valueB} in {fileB} of technology {technologyB} or vice versa." 
 )
 
 

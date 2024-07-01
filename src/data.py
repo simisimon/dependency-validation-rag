@@ -3,6 +3,7 @@ from llama_index.core.schema import NodeWithScore
 from llama_index.core.utils import truncate_text
 from typing import Optional, List, Dict
 import json
+import logging
 
 @dataclass
 class Response:
@@ -17,7 +18,7 @@ class Response:
         try:
             self.response_dict = json.loads(self.response)
         except json.JSONDecodeError:
-            raise Exception("Response cannot be converted into a dict.")
+            logging.info("Response cannot be converted into a dict.")
 
     def __str__(self) -> str:
         """Convert to string representation."""
@@ -32,6 +33,15 @@ class Response:
             source_text = f"> Source (Doc id: {doc_id}): {fmt_text_chunk}"
             texts.append(source_text)
         return "\n\n".join(texts)
+    
+    def to_dict(self):
+        """Convert response object in a dictionary."""
+        return {
+            "input": self.input,
+            "response": self.response,
+            "context": [source_node.node.get_content() for source_node in self.source_nodes]
+        }
+    
 
 @dataclass
 class Dependency:

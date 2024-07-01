@@ -53,8 +53,9 @@ class GPTGeneratorEngine(GeneratorEngine):
         APIError,
         APIConnectionError,
         Timeout,
+        Exception
     ),
-    max_tries=10
+    max_tries=5
     )
     def generate(self, messages: List) -> str:
         client = OpenAI(api_key=os.getenv("OPENAI_KEY"))
@@ -68,7 +69,7 @@ class GPTGeneratorEngine(GeneratorEngine):
     
         response_content = response.choices[0].message.content
 
-        if not response:
+        if not response or len(response_content.strip()) == 0:
             raise Exception("Response content was empty.")
         
         return response_content

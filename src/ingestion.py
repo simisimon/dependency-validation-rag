@@ -129,7 +129,7 @@ class IngestionEngine:
     @backoff.on_exception(
         backoff.expo,
         Exception,
-        max_tries=8,
+        max_tries=10,
     )
     def docs_from_web(self, query_str: str, num_websites: int) -> List[Document]:
         """

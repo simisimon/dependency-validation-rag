@@ -110,9 +110,9 @@ class CVal:
 
         logging.info(f"CVal initialized.")
 
-    def _scrape(self, dependency: Dependency) -> None:
+    def scrape(self, dependency: Dependency) -> None:
         """
-        Scrape websites and the repository and index the corresponding data.
+        Scrape websites and index the corresponding data.
         """
         # create ingestion engine
         logging.info(f"Scraping web.")
@@ -169,7 +169,7 @@ class CVal:
             logging.info("Query LLM with context.")
 
             if index_name == "web-search":
-                self._scrape(dependency=dependency)   
+                self.scrape(dependency=dependency)   
 
             
             if self.config["with_rewriting"]:

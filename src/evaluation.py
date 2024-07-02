@@ -2,15 +2,15 @@ from data import Dependency
 from cval import CVal
 import mlflow
 import pandas as pd
-import os
 import json
 import glob
+import os
 
 
 CONFIG_FILE = "../config.toml"
 ENV_FILE = "../.env"
-EVAL_DATA_DIR = "../data/evaluation"
-INDEX_NAME = "tech-docs"
+EVAL_DATA_DIR = "../data/evaluation/data"
+INDEX_NAME = "all"
 
 
 def run_inference():
@@ -20,6 +20,12 @@ def run_inference():
     for file_path in glob.glob(EVAL_DATA_DIR + "/**"):
 
         file_name = file_path.split("/")[-1].split(".")[0]
+
+        print("File: ", file_name)
+
+        if os.path.exists(f"../data/evaluation/results/{file_name}_{INDEX_NAME}.json"):
+            print(f"{file_name}_{INDEX_NAME}.json already exists. Skip file.")
+            continue
 
         with mlflow.start_run(run_name=f"{file_name}_{INDEX_NAME}"): 
 
@@ -32,7 +38,7 @@ def run_inference():
 
             outputs = []
 
-            for x in df.to_dict("records")[:5]:
+            for x in df.to_dict("records"):
                 dependency = Dependency(
                     project=x["project"],
                     option_name=x["option_name"],
@@ -55,10 +61,6 @@ def run_inference():
 
                 outputs.append(response)
 
-            for x in outputs:
-                for node in x.source_nodes:
-                    print("Id: ", node.node_id)
-
             responses = [response.to_dict() for response in outputs]
 
             with open(f"../data/evaluation/results/{file_name}_{INDEX_NAME}.json", "w", encoding="utf-8") as dest:
@@ -68,6 +70,7 @@ def run_inference():
 
         
         print("Done with: ", file_path)
+
 
 if __name__ == "__main__":
     run_inference()

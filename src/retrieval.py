@@ -72,26 +72,32 @@ class RetrievalEngine:
         return reranker
        
 
-    @backoff.on_exception(backoff.expo, Exception, max_tries=5)
     def _rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
         """
         Rerank retrieved nodes.
         """
         reranker = self._create_reranker()
+        max_attempts = 5
+        attempt = 0
         
-        reranked_nodes = reranker.postprocess_nodes(
-            nodes=nodes,
-            query_bundle=QueryBundle(query_str=query_str)
-        )
 
-        node_ids = set(node.node_id for node in reranked_nodes)
+        while attempt < max_attempts:
+            attempt += 1
+            reranked_nodes = reranker.postprocess_nodes(
+                nodes=nodes,
+                query_bundle=QueryBundle(query_str=query_str)
+            )
 
-        # check if duplicates are in reranked nodes
-        if len(node_ids) < 3:
-            raise Exception("Duplicates found after reranking nodes.")
-                
-        logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(reranked_nodes)} nodes.")
+            node_ids = set(node.node_id for node in reranked_nodes)
 
+            # check if duplicates are in reranked nodes
+            if len(node_ids) == 3:
+                logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(reranked_nodes)} nodes on attempt {attempt}.")
+                return reranked_nodes
+            
+            logging.warning(f"Attempt {attempt}: Duplicates found after reranking nodes. Retrying...")
+
+        logging.info(f"Duplicates found after {max_attempts} retries. Return reranked notes with duplicates.")
         return reranked_nodes
 
 

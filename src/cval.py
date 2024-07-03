@@ -127,6 +127,13 @@ class CVal:
         self.ingestion_engine.index_documents(
             index_name="web-search",
             documents=web_docs,
+            delete_index=True
+        )
+
+        logging.info(f"Indexing data into 'web-search-all'.")
+        self.ingestion_engine.index_documents(
+            index_name="web-search-all",
+            documents=web_docs,
             delete_index=False
         )
     

@@ -8,7 +8,7 @@ tool_name = "cfgnet" # cfgnet, ...
 # ingestions
 splitting = "sentence" # "sentence", "token", "semantic", "recursive"
 extractors = [] # ["summary", "keyword", title]
-num_websites = 5
+num_websites = 3
 
 # retrieval
 temperature = 0.0

@@ -11,7 +11,7 @@ CONFIG_FILE = "../config.toml"
 ENV_FILE = "../.env"
 EVAL_DATA_DIR = "../data/evaluation/data"
 INDEX_NAME = "web-search"
-EVAL_FILE_PATH = "../data/evaluation/data/piggymetrics_dependencies.csv"
+EVAL_FILE_PATH = "../data/evaluation/data/Spring-Cloud-Platform_dependencies.csv"
 
 def run_inference(file_path):
 

@@ -10,7 +10,7 @@ import os
 CONFIG_FILE = "../config.toml"
 ENV_FILE = "../.env"
 EVAL_DATA_DIR = "../data/evaluation/data"
-INDEX_NAME = "all"
+INDEX_NAME = "github"
 
 
 def run_inference():

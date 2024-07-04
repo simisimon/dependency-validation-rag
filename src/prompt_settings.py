@@ -107,8 +107,6 @@ class _PromptSettings:
         return self._format_str.format()
 
 
-
-@dataclass
 class _CfgNetPromptSettings(_PromptSettings):
 
     _system_prompt: Optional[PromptTemplate] = PromptTemplate(

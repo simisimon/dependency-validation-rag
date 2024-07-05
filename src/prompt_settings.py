@@ -122,8 +122,8 @@ class _CfgNetPromptSettings(_PromptSettings):
     )
 
     _dependency_prompt: Optional[PromptTemplate] = PromptTemplate(
-        "A value-equality dependency is present if two configuration options must have identical values in order to function correctly."
-        "Inconsistencies in these configuration values can lead to configuration errors."
+        "A value-equality dependency is present if two configuration options must have identical values in order to function correctly.\n"
+        "Inconsistencies in these configuration values can lead to configuration errors.\n"
         "Importantly, configuration options may have equal values by accident, meaning that there is no actual dependency, but it just happens that they have equal values."
     )
 

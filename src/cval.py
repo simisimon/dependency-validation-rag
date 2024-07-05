@@ -129,13 +129,6 @@ class CVal:
             documents=web_docs,
             delete_index=True
         )
-
-        logging.info(f"Indexing data into 'web-search-all'.")
-        self.ingestion_engine.index_documents(
-            index_name="web-search-all",
-            documents=web_docs,
-            delete_index=False
-        )
     
     def retrieve(self, index_name: str, retrieval_str: str) -> List[NodeWithScore]:
         """
@@ -152,6 +145,7 @@ class CVal:
         """
         Generate answer.
         """
+        #print("Query: ", "\n\n".join([x["content"] for x in messages]))
         logging.info(f"Query {self.generator.model_name}")
         response = self.generator.generate(messages=messages)
         return response

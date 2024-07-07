@@ -117,13 +117,13 @@ class _CfgNetPromptSettings(_PromptSettings):
     )
 
     _task_prompt: Optional[PromptTemplate] = PromptTemplate(
-        "Carefully evaluate whether configuration option {nameA} of type {typeA} with value {valueA} in {fileA} of technology {technologyA}"
+        "Carefully evaluate whether configuration option {nameA} of type {typeA} with value {valueA} in {fileA} of technology {technologyA} "
         "depends on configuration option {nameB} of type {typeB} with value {valueB} in {fileB} of technology {technologyB} or vice versa." 
     )
 
     _dependency_prompt: Optional[PromptTemplate] = PromptTemplate(
-        "A value-equality dependency is present if two configuration options must have identical values in order to function correctly."
-        "Inconsistencies in these configuration values can lead to configuration errors."
+        "A value-equality dependency is present if two configuration options must have identical values in order to function correctly.\n"
+        "Inconsistencies in these configuration values can lead to configuration errors.\n"
         "Importantly, configuration options may have equal values by accident, meaning that there is no actual dependency, but it just happens that they have equal values."
     )
 

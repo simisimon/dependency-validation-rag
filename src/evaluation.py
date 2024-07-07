@@ -10,8 +10,8 @@ import os
 CONFIG_FILE = "../config.toml"
 ENV_FILE = "../.env"
 EVAL_DATA_DIR = "../data/evaluation/data"
-INDEX_NAME = "web-search"
-EVAL_FILE_PATH = "../data/evaluation/data/Spring-Cloud-Platform_dependencies.csv"
+INDEX_NAME = "without"
+EVAL_FILE_PATH = "../data/evaluation/data/mall_dependencies.csv"
 
 def run_inference(file_path):
 
@@ -32,7 +32,8 @@ def run_inference(file_path):
         df = pd.read_csv(file_path)
 
         outputs = []
-        for x in df.to_dict("records"):
+        for index, x in enumerate(df.to_dict("records")):
+            print("Dependency count: ", index)
             dependency = Dependency(
                 project=x["project"],
                 option_name=x["option_name"],
@@ -65,15 +66,12 @@ def run_inference(file_path):
         print("Done with: ", file_path)
 
 
-
 def main():
     
-
     mlflow.set_experiment(experiment_name=f"inference_{INDEX_NAME}")
 
-    #for file_path in glob.glob(EVAL_DATA_DIR + "/**"):
-
-    run_inference(file_path=EVAL_FILE_PATH)
+    for file_path in glob.glob(EVAL_DATA_DIR + "/**"):
+        run_inference(file_path=file_path)
 
 
 if __name__ == "__main__":

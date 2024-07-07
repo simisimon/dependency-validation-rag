@@ -117,7 +117,7 @@ class _CfgNetPromptSettings(_PromptSettings):
     )
 
     _task_prompt: Optional[PromptTemplate] = PromptTemplate(
-        "Carefully evaluate whether configuration option {nameA} of type {typeA} with value {valueA} in {fileA} of technology {technologyA}"
+        "Carefully evaluate whether configuration option {nameA} of type {typeA} with value {valueA} in {fileA} of technology {technologyA} "
         "depends on configuration option {nameB} of type {typeB} with value {valueB} in {fileB} of technology {technologyB} or vice versa." 
     )
 

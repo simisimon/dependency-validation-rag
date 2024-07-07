@@ -129,6 +129,13 @@ class CVal:
             documents=web_docs,
             delete_index=True
         )
+
+        #logging.info(f"Indexing data into 'web-search'.")
+        #self.ingestion_engine.index_documents(
+        #    index_name="web-search-all",
+        #    documents=web_docs,
+        #    delete_index=False
+        #)
     
     def retrieve(self, index_name: str, retrieval_str: str) -> List[NodeWithScore]:
         """

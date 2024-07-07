@@ -18,7 +18,7 @@ def run_inference(file_path):
     file_name = file_path.split("/")[-1].split(".")[0]
     print("File: ", file_name)
 
-    if os.path.exists(f"../data/evaluation/results/{file_name}_{INDEX_NAME}.json"):
+    if os.path.exists(f"../data/evaluation/results/gpt4o/{file_name}_{INDEX_NAME}.json"):
         print(f"{file_name}_{INDEX_NAME}.json already exists. Skip file.")
         return
 
@@ -71,8 +71,8 @@ def main():
 
     mlflow.set_experiment(experiment_name=f"inference_{INDEX_NAME}")
 
-    #for file_path in glob.glob(EVAL_DATA_DIR + "/**"):
-    run_inference(file_path=EVAL_FILE_PATH)
+    for file_path in glob.glob(EVAL_DATA_DIR + "/**"):
+        run_inference(file_path=file_path)
 
 
 if __name__ == "__main__":

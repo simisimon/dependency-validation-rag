@@ -78,8 +78,8 @@ class IngestionEngine:
 
         if self.splitting == "sentence":
             node_parser = SentenceSplitter(
-                chunk_size=512, 
-                chunk_overlap=50
+                chunk_size=256, 
+                chunk_overlap=20
             )
 
         if self.splitting == "semantic":

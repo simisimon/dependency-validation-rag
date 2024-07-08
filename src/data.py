@@ -8,11 +8,11 @@ import logging
 @dataclass
 class Response:
     input: str
+    input_complete: str
     response: str
     response_dict: Dict = field(default_factory=dict)
     source_nodes: List[NodeWithScore] = field(default_factory=list)
-    expected_output: str = None
-    context: List[str] = None
+
 
     def __post_init__(self):
         try:

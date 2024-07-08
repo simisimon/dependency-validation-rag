@@ -221,6 +221,7 @@ class CVal:
         response = self.generate(messages=messages)
         return Response(
             input=f"{task_str}\n\n{self.prompt_settings.get_format_prompt()}",
+            input_complete=query_str,
             response=response,
             source_nodes=retrieved_nodes
         )

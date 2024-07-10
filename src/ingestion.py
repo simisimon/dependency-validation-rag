@@ -6,6 +6,7 @@ from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core.extractors import SummaryExtractor, TitleExtractor, KeywordExtractor
 from llama_index.core.node_parser import SentenceSplitter, TokenTextSplitter, SemanticSplitterNodeParser, LangchainNodeParser
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from llama_index.core.base.embeddings.base import BaseEmbedding
 from pinecone import Pinecone, ServerlessSpec
 from typing import List
 from fake_useragent import UserAgent
@@ -34,12 +35,20 @@ class IngestionEngine:
     def __init__(
         self, 
         pinecone_client: Pinecone, 
+        embed_model: BaseEmbedding,
+        dimension: int,
         splitting: str, 
+        chunk_size: int,
+        chunk_overlap: int,
         extractors: List[str]
     ) -> None:
         logging.info(f"Ingestion engine initialized.")
-        self._pinecone_client = pinecone_client
+        self.pinecone_client = pinecone_client
+        self.embed_model = embed_model,
+        self.dimension = dimension,
         self.splitting = splitting
+        self.chunk_size = chunk_size,
+        self.chunk_overlap = chunk_overlap
         self.extractors = extractors
 
 
@@ -51,7 +60,7 @@ class IngestionEngine:
             logging.info(f"Create Index {index_name}.")
             self._pinecone_client.create_index(
                 name=index_name,
-                dimension=1536,
+                dimension=self.dimension,
                 metric="dotproduct",
                 spec=ServerlessSpec(
                     cloud="aws",
@@ -72,15 +81,15 @@ class IngestionEngine:
 
         if self.splitting == "token":
             node_parser = TokenTextSplitter(
-                chunk_size=512,
-                chunk_overlap=50,
+                chunk_size=self.chunk_size,
+                chunk_overlap=self.chunk_overlap,
                 separator=" ",
             )
 
         if self.splitting == "sentence":
             node_parser = SentenceSplitter(
-                chunk_size=512, 
-                chunk_overlap=50
+                chunk_size=self.chunk_size, 
+                chunk_overlap=self.chunk_overlap
             )
 
         if self.splitting == "semantic":
@@ -130,7 +139,7 @@ class IngestionEngine:
     @backoff.on_exception(
         backoff.expo,
         Exception,
-        max_tries=20,
+        max_tries=10,
     )
     def docs_from_web(self, query_str: str, num_websites: int) -> List[Document]:
         """
@@ -218,18 +227,18 @@ class IngestionEngine:
     
 
     def index_documents(
-            self,
-            index_name: str,
-            documents: List,
-            delete_index: bool,
+        self,
+        index_name: str,
+        documents: List,
+        delete_index: bool,
     ) -> None:
         """
         Add documents to a vector store
         """
         # delete index
         if delete_index:
-            if index_name in self._pinecone_client.list_indexes().names():
-                self._pinecone_client.delete_index(name=index_name)
+            if index_name in self.pinecone_client.list_indexes().names():
+                self.pinecone_client.delete_index(name=index_name)
                 logging.info(f"Delete index {index_name}")
 
         # create pinecone vector store
@@ -242,7 +251,7 @@ class IngestionEngine:
         extractors = self._create_extractors()
 
         # build list of transformations
-        transformations = [node_parser, Settings.embed_model]
+        transformations = [node_parser, self.embed_model]
         transformations.extend(extractors)
 
         # create ingestion pipeline

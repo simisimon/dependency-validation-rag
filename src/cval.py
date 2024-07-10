@@ -54,11 +54,9 @@ class CVal:
             temperature=self.config["temperature"]
         )
 
-
         self.prompt_settings = PrompSettingsFactory.get_prompt_settings(
             tool_name=self.config["tool_name"]
         )
-
 
         logging.info(f"CVal initialized.")
 

@@ -11,6 +11,7 @@ from typing import List
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from rich.logging import RichHandler
+from duckduckgo_search import DDGS
 import re
 import backoff
 import requests
@@ -78,8 +79,8 @@ class IngestionEngine:
 
         if self.splitting == "sentence":
             node_parser = SentenceSplitter(
-                chunk_size=256, 
-                chunk_overlap=20
+                chunk_size=512, 
+                chunk_overlap=50
             )
 
         if self.splitting == "semantic":
@@ -135,30 +136,13 @@ class IngestionEngine:
         """
         Get documents from websites.
         """
-        logging.info(f"Start scraping {num_websites} websites.")
-        url = "https://www.bing.com/search?q=" + query_str
+        results = DDGS().text(query_str, max_results=num_websites)
+        urls = []
+        for result in results:
+            url = result['href']
+            urls.append(url)
 
-        response = requests.get(
-            url, 
-            headers={'User-Agent':  UserAgent().chrome}
-        )
-        response.raise_for_status()
-        
-        search_urls = []
-
-        soup = BeautifulSoup(response.text, 'html.parser')
-        links = soup.find_all("h2")
-
-        links = [x for x in links if "https://" in str(x)]
-
-        for link in links:
-            match = re.findall(r'href="([^"]*)"', str(link))
-            search_urls.append(match[0])
-
-        if not search_urls or len(search_urls) < num_websites:
-            raise Exception() 
-        
-        documents = SimpleWebPageReader(html_to_text=True).load_data(search_urls)
+        documents = SimpleWebPageReader(html_to_text=True).load_data(urls)
 
         return documents
     

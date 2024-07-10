@@ -1,25 +1,23 @@
-# cval config
-[cval]
+# general
 embed_model = "openai"
-inference_model = "gpt-4o-2024-05-13" #"llama3:70b" #"llama3:70b"  # "gpt-4o-2024-05-13"
-with_rag = true
-tool_name = "cfgnet" # cfgnet, ...
-
-# ingestions
-splitting = "sentence" # "sentence", "token", "semantic", "recursive"
-extractors = [] # ["summary", "keyword", title]
-num_websites = 3
+inference_model = "gpt-4o-2024-05-13" #"gpt-3.5-turbo-0125" #"llama3:70b" #"llama3:70b"  # "gpt-4o-2024-05-13"
 
 # retrieval
-temperature = 0.0
 top_k = 10
 alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
-rerank = "sentence" # "sentence" or "llm"
-top_n = 3
+rerank = "colbert" # "sentence", "llm", "colbert"
+top_n = 5
 with_rewriting = true
+with_rag = true
+tool_name = "cfgnet" # cfgnet, ...
+temperature = 0.0
 
-# data
-[data]
+# ingestion
+splitting = "sentence" # "sentence", "token", "semantic", "recursive"
+chunk_size = 512
+chunk_overlap = 50
+extractors = [] # ["summary", "keyword", title]
+num_websites = 3
 urls = [        
     "https://maven.apache.org/pom.html",
     "https://maven.apache.org/ref/3.9.7/maven-model/maven.html",

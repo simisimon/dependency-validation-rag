@@ -1,4 +1,5 @@
 from llama_index.core.postprocessor import SentenceTransformerRerank, LLMRerank
+from llama_index.postprocessor.colbert_rerank import ColbertRerank
 from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core.schema import NodeWithScore, QueryBundle
 from llama_index.core import Settings, VectorStoreIndex
@@ -59,14 +60,24 @@ class RetrievalEngine:
         reranker = None
 
         if self.rerank == "llm":
+            logging.info("Create LLM reranker.")
             reranker =  LLMRerank(
                 llm=Settings.llm,
                 choice_batch_size=self.top_n,
                 top_n=self.top_n)
         if self.rerank == "sentence":
+            logging.info("Create Sentence transformer reranker.")
             reranker = SentenceTransformerRerank(
                 model="cross-encoder/ms-marco-MiniLM-L-2-v2",
                 top_n=self.top_n
+            )
+        if self.rerank == "colbert":
+            logging.info("Create Colbert reranker.")
+            reranker = ColbertRerank(
+                top_n=self.top_n,
+                model="colbert-ir/colbertv2.0",
+                tokenizer="colbert-ir/colbertv2.0",
+                keep_retrieval_score=True,
             )
 
         return reranker
@@ -77,29 +88,23 @@ class RetrievalEngine:
         Rerank retrieved nodes.
         """
         reranker = self._create_reranker()
-        max_attempts = 5
-        attempt = 0
         
+        reranked_nodes = reranker.postprocess_nodes(
+            nodes=nodes,
+            query_bundle=QueryBundle(query_str=query_str)
+        )
 
-        while attempt < max_attempts:
-            attempt += 1
-            reranked_nodes = reranker.postprocess_nodes(
-                nodes=nodes,
-                query_bundle=QueryBundle(query_str=query_str)
-            )
+        node_ids = set(node.node_id for node in reranked_nodes)
+        
+        filtered_reranked_nodes  = [node for node in reranked_nodes if node.node_id in node_ids]
 
-            node_ids = set(node.node_id for node in reranked_nodes)
+        if len(filtered_reranked_nodes) < self.top_n:
+            logging.info(f"Duplicates found. Return reranked notes with duplicates.")
 
-            # check if duplicates are in reranked nodes
-            if len(node_ids) == 3:
-                logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(reranked_nodes)} nodes on attempt {attempt}.")
-                return reranked_nodes
-            
-            logging.warning(f"Attempt {attempt}: Duplicates found after reranking nodes. Retrying...")
+        logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(filtered_reranked_nodes)} nodes.") 
 
-        logging.info(f"Duplicates found after {max_attempts} retries. Return reranked notes with duplicates.")
         return reranked_nodes
-
+    
 
     def retrieve(self, index_name: str, query_str: str) -> List[NodeWithScore]:
         """

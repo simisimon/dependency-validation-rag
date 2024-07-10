@@ -5,19 +5,18 @@ from llama_index.llms.ollama import Ollama
 from llama_index.core import Settings
 from llama_index.core.schema import NodeWithScore
 from pinecone import Pinecone
-from ingestion import IngestionEngine
+from ingestion_engine import IngestionEngine
 from generator import GeneratorFactory
-from retrieval import RetrievalEngine
+from retrieval_engine import RetrievalEngine
 from data import Dependency, Response
 from prompt_settings import PrompSettingsFactory
+from util import load_config, set_embedding, set_llm, DIMENSION
 from typing import List, Dict
 from dotenv import load_dotenv
 from rich.logging import RichHandler
 import backoff
 import os
 import logging
-import toml
-
 
 logging.basicConfig(
     level=logging.INFO,
@@ -26,62 +25,20 @@ logging.basicConfig(
 )
 
 
-def load_config(config_file: str) -> Dict:
-    """
-    Load config from TOML file.
-    """
-    if not config_file.endswith(".toml"):
-            raise Exception("Config file has to be a TOML file.")
-        
-    with open(config_file, "r", encoding="utf-8") as f:
-        config = toml.load(f)
-        
-    return config
-
-
-def set_embedding(embed_model_name: str) -> None:
-    """
-    Set embedding model.
-    """
-    if embed_model_name.startswith("openai"):
-        Settings.embed_model = OpenAIEmbedding(
-            api_key=os.getenv(key="OPENAI_KEY"),
-            model=OpenAIEmbeddingModelType.TEXT_EMBED_ADA_002
-        )
-
-    if embed_model_name.startswith("llama"):
-        Settings.embed_model = OllamaEmbedding(model_name=embed_model_name)
-
-    if not Settings.embed_model:
-        raise Exception("Embedding model has to be set.")
-
-
-def set_llm(inference_model_name: str) -> None: 
-    """
-    Set inference model.
-    """
-    if inference_model_name.startswith("gpt"):
-        Settings.llm = OpenAI(
-            model=inference_model_name, 
-            api_key=os.getenv(key="OPENAI_KEY")
-        )
-        
-    if inference_model_name.startswith("llama"):
-        Settings.llm = Ollama(
-            model=inference_model_name,
-            request_timeout=90.0
-    )
-
-    if not Settings.llm:
-        raise Exception("Inference model has to be set.")
-
-
-
-
 class CVal:
     def __init__(self, config: Dict) -> None:
         self.config = config
         self._pinecone_client = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+
+        self.ingestion_engine = IngestionEngine(
+            pinecone_client=self._pinecone_client,
+            embed_model=Settings.embed_model,
+            dimension=DIMENSION[self.config["embed_model"]],
+            splitting=self.config["splitting"],
+            chunk_size=self.config["chunk_size"],
+            chunk_overlap=self.config["chunk_overlap"],
+            extractors=self.config["extractors"]
+        )
 
         self.retrieval_engine = RetrievalEngine(
             pinecone_client=self._pinecone_client,
@@ -92,16 +49,11 @@ class CVal:
             alpha=self.config["alpha"]
         )
 
-        self.ingestion_engine = IngestionEngine(
-            pinecone_client=self._pinecone_client,
-            splitting=self.config["splitting"],
-            extractors=self.config["extractors"]
-        )
-
         self.generator = GeneratorFactory().get_generator(
             model_name=self.config["inference_model"],
             temperature=self.config["temperature"]
         )
+
 
         self.prompt_settings = PrompSettingsFactory.get_prompt_settings(
             tool_name=self.config["tool_name"]
@@ -157,7 +109,7 @@ class CVal:
         response = self.generator.generate(messages=messages)
         return response
 
-    @backoff.on_exception(backoff.expo, Exception, max_tries=5)
+    @backoff.on_exception(backoff.expo, Exception, max_tries=3)
     def query(self, dependency: Dependency, index_name: str) -> Response:
         """
         Validate a given dependency.
@@ -237,12 +189,10 @@ class CVal:
 
         # load config from TOML file
         config = load_config(config_file=config_file)
-        cval_config = config["cval"]
-        data_config = config["data"]
 
         # set embed and inference model
-        set_embedding(embed_model_name=cval_config["embed_model"])
-        set_llm(inference_model_name=cval_config["inference_model"])
+        set_embedding(embed_model_name=config["embed_model"])
+        set_llm(inference_model_name=config["inference_model"])
 
         # create pinecone client
         pinecone_client = Pinecone(api_key=os.getenv(key="PINECONE_API_KEY"))
@@ -250,13 +200,17 @@ class CVal:
         # create ingestion engine
         ingestion_engine = IngestionEngine(
             pinecone_client=pinecone_client,
-            splitting=cval_config["splitting"],
-            extractors=cval_config["extractors"]
+            embed_model=Settings.embed_model,
+            dimension=DIMENSION[config["embed_model"]],
+            splitting=config["splitting"],
+            chunk_size=config["chunk_size"],
+            chunk_overlap=config["chunk_overlap"],
+            extractors=config["extractors"]
         )
 
         if "tech-docs" not in pinecone_client.list_indexes().names():
             logging.info("Index data into 'tech-docs'.")
-            docs = ingestion_engine.docs_from_urls(urls=data_config["urls"])
+            docs = ingestion_engine.docs_from_urls(urls=config["urls"])
             ingestion_engine.index_documents(
                 index_name="tech-docs",
                 documents=docs,
@@ -265,7 +219,7 @@ class CVal:
 
         if "so-posts" not in pinecone_client.list_indexes().names():
             logging.info("Index data into 'so-posts'.")
-            docs = ingestion_engine.docs_from_dir(data_dir=data_config["data_dir"])
+            docs = ingestion_engine.docs_from_dir(data_dir=config["data_dir"])
             ingestion_engine.index_documents(
                 index_name="so-posts",
                 documents=docs,
@@ -275,7 +229,7 @@ class CVal:
         if "github" not in pinecone_client.list_indexes().names():
             logging.info("Index data into 'github'.")
             docs = []
-            for project_name in data_config["github"]:
+            for project_name in config["github"]:
                 docs += ingestion_engine.docs_from_github(project_name=project_name)
 
             ingestion_engine.index_documents(
@@ -285,6 +239,6 @@ class CVal:
             )
 
         # return cval instance
-        return CVal(config=cval_config)
+        return CVal(config=config)
 
 

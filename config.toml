@@ -14,8 +14,8 @@ num_websites = 3
 temperature = 0.0
 top_k = 10
 alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
-rerank = "sentence" # "sentence" or "llm"
-top_n = 3
+rerank = "colbert" # "sentence", "llm", "colbert"
+top_n = 5
 with_rewriting = true
 
 # data

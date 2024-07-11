@@ -1,13 +1,11 @@
 from typing import Dict, List
-from util import load_config
-from ingestion_engine import IngestionEngine
+from util import load_config, set_embedding, set_llm
 from retrieval_engine import RetrievalEngine
 from prompt_settings import PrompSettingsFactory
 from generator import GeneratorFactory
 from pinecone import Pinecone
 from dotenv import load_dotenv
-from data import Dependency, Response
-from cval import CVal
+from data import Dependency, MultipleResponses
 from rich.logging import RichHandler
 import mlflow
 import pandas as pd
@@ -73,7 +71,7 @@ def run_experiment(
             alpha=config["alpha"]
         )
 
-        results = []
+        outputs = []
 
         for index, x in enumerate(df.to_dict("records")):
             print("Dependency count: ", index)
@@ -132,23 +130,27 @@ def run_experiment(
                 }
             ]
 
-            run_responses = {}
+            responses = []
             for model_name in model_names:
-                response = Response(
-                    input=f"{task_str}\n\n{prompt_settings.get_format_prompt()}",
-                    input_complete=query_str,
-                    response=generate(
+                response = generate(
                             model_name=model_name, 
                             temperature=config["temperature"],
                             messages=messages
                         ),
-                    source_nodes=retrieved_nodes
-                )
-                
-                run_responses[model_name] = response.to_dict()
+                responses.append({model_name: response})
+            
 
-            results.append(run_responses)
+            print("retrieved_nodes: ", retrieved_nodes)
+            print(len(retrieved_nodes))
 
+            outputs.append(MultipleResponses(
+                input=f"{task_str}\n\n{prompt_settings.get_format_prompt()}",
+                input_complete=query_str,
+                responses=responses,
+                source_nodes=retrieved_nodes
+            ))
+
+        results = [response.to_dict() for response in outputs]
 
         with open(f"../data/evaluation/{file_name}_{index_name}.json", "w", encoding="utf-8") as dest:
             json.dump(results, dest, indent=2)
@@ -162,10 +164,9 @@ def main():
     config_file = "../config.toml"
     env_file = "../.env"
     eval_data_dir = "../data/evaluation/data"
-    index_name = "all"
+    index_name = "tech-docs"
     eval_file_path = "../data/evaluation/test_dependencies.csv"
-    model_names = ["gpt-3.5-turbo-0125", "gpt-4o-2024-05-13", "llama3:70b", "llama3:70b"]
-
+    model_names = ["gpt-3.5-turbo-0125", "gpt-4o-2024-05-13"] #"llama3:70b", "llama3:70b"
 
     config = load_config(config_file=config_file)
     load_dotenv(dotenv_path=env_file)
@@ -174,6 +175,9 @@ def main():
 
     #for file_path in glob.glob(eval_data_dir + "/**"):
     #    run_experiment(file_path=file_path)
+
+    set_embedding(embed_model_name=config["embed_model"])
+    set_llm(inference_model_name=config["inference_model"])
 
     run_experiment(
         config=config, 

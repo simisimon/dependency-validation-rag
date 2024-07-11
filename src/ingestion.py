@@ -20,7 +20,7 @@ logging.basicConfig(
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_file", type=str, default="../config.toml")
+    parser.add_argument("--config_file", type=str, default="../ingestion_config.toml")
     parser.add_argument("--env_file", type=str, default="../.env")    
     
     return parser.parse_args()
@@ -38,7 +38,7 @@ def run_ingestion(config):
     ingestion_engine = IngestionEngine(
         pinecone_client=pinecone_client,
         embed_model=Settings.embed_model,
-        dimension=4096,
+        dimension=dimension,
         splitting=config["splitting"],
         chunk_size=config["chunk_size"],
         chunk_overlap=config["chunk_overlap"],

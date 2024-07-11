@@ -1,16 +1,5 @@
 # general
-embed_model = "openai"
-inference_model = "gpt-4o-2024-05-13" #"gpt-3.5-turbo-0125" #"llama3:70b" #"llama3:70b"  # "gpt-4o-2024-05-13"
-
-# retrieval
-top_k = 10
-alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
-rerank = "colbert" # "sentence", "llm", "colbert"
-top_n = 5
-with_rewriting = true
-with_rag = true
-tool_name = "cfgnet" # cfgnet, ...
-temperature = 0.0
+embed_model = "sfr"
 
 # ingestion
 splitting = "sentence" # "sentence", "token", "semantic", "recursive"

@@ -124,6 +124,7 @@ class RetrievalEngine:
         else:
             vector_store = self._get_vector_store(index_name=index_name)
             retrieved_nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
+            print("Len retrieved_nodes: ", len(retrieved_nodes))
             reranked_retrieved_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
             return reranked_retrieved_nodes
 

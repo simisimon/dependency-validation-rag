@@ -1,6 +1,7 @@
 from llama_index.embeddings.openai import OpenAIEmbedding, OpenAIEmbeddingModelType
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.embeddings.langchain import LangchainEmbedding
+from llama_index.core import ServiceContext
+from sentence_transformers import SentenceTransformer
 from embedding import SentenceTransformerEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
@@ -35,20 +36,21 @@ def set_embedding(embed_model_name: str):
     Set embedding model.
     """
     if embed_model_name == "openai":
+        print("OpenAI Key:", os.getenv(key="OPENAI_KEY"))
         Settings.embed_model = OpenAIEmbedding(
             api_key=os.getenv(key="OPENAI_KEY"),
             model=OpenAIEmbeddingModelType.TEXT_EMBED_ADA_002
         )
 
     if embed_model_name == "qwen":
-        Settings.embed_model = HuggingFaceEmbedding(
+        Settings.embed_model = SentenceTransformer(
             model_name="Alibaba-NLP/gte-Qwen2-7B-instruct",
             trust_remote_code=True
         )
 
     if embed_model_name == "sfr":
-        Settings.embed_model = SentenceTransformerEmbedding(
-            model_name="Salesforce/SFR-Embedding-2_R"
+        Settings.embed_model = SentenceTransformer(
+            model_name_or_path="Salesforce/SFR-Embedding-2_R"
         )
 
 
@@ -57,6 +59,7 @@ def set_llm(inference_model_name: str) -> None:
     Set inference model.
     """
     if inference_model_name.startswith("gpt"):
+        print("OpenAI Key:", os.getenv(key="OPENAI_KEY"))
         Settings.llm = OpenAI(
             model=inference_model_name, 
             api_key=os.getenv(key="OPENAI_KEY")

@@ -10,7 +10,7 @@ import os
 CONFIG_FILE = "../config.toml"
 ENV_FILE = "../.env"
 EVAL_DATA_DIR = "../data/evaluation/data"
-INDEX_NAME = "all"
+INDEX_NAME = "without"
 EVAL_FILE_PATH = "../data/evaluation/data/apollo_dependencies.csv"
 
 def run_inference(file_path):
@@ -18,7 +18,7 @@ def run_inference(file_path):
     file_name = file_path.split("/")[-1].split(".")[0]
     print("File: ", file_name)
 
-    if os.path.exists(f"../data/evaluation/results/{file_name}_{INDEX_NAME}.json"):
+    if os.path.exists(f"../data/evaluation/results/gpt4o/{file_name}_{INDEX_NAME}.json"):
         print(f"{file_name}_{INDEX_NAME}.json already exists. Skip file.")
         return
 
@@ -52,6 +52,7 @@ def run_inference(file_path):
                 dependency=dependency,
                 index_name=INDEX_NAME
             )
+
 
             outputs.append(response)
 

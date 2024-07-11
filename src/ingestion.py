@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 from pinecone import Pinecone
 from util import set_embedding, DIMENSION
 from rich.logging import RichHandler
-import argparse
-import toml
-import os
+import re
+import backoff
+import requests
 import logging
 
 
@@ -18,72 +18,251 @@ logging.basicConfig(
 )
 
 
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--config_file", type=str, default="../config.toml")
-    parser.add_argument("--env_file", type=str, default="../.env")    
+class IngestionEngine:
+    def __init__(
+        self, 
+        pinecone_client: Pinecone, 
+        splitting: str, 
+        extractors: List[str]
+    ) -> None:
+        logging.info(f"Ingestion engine initialized.")
+        self._pinecone_client = pinecone_client
+        self.splitting = splitting
+        self.extractors = extractors
+
+
+    def _get_vector_store(self, index_name: str) -> PineconeVectorStore:
+        """
+        Get Pinecone vector store. If index does not exist, create index.
+        """
+        if index_name not in self._pinecone_client.list_indexes().names():
+            logging.info(f"Create Index {index_name}.")
+            self._pinecone_client.create_index(
+                name=index_name,
+                dimension=1536,
+                metric="dotproduct",
+                spec=ServerlessSpec(
+                    cloud="aws",
+                    region="us-east-1"
+                )
+            )
+
+        index = self._pinecone_client.Index(index_name)
+        vector_store = PineconeVectorStore(
+            pinecone_index=index,
+            add_sparse_vector=True
+        )
+        return vector_store
+
+
+    def _create_node_parser(self):
+        node_parser = None
+
+        if self.splitting == "token":
+            node_parser = TokenTextSplitter(
+                chunk_size=512,
+                chunk_overlap=50,
+                separator=" ",
+            )
+
+        if self.splitting == "sentence":
+            node_parser = SentenceSplitter(
+                chunk_size=256, 
+                chunk_overlap=20
+            )
+
+        if self.splitting == "semantic":
+            node_parser = SemanticSplitterNodeParser(
+                buffer_size=1, 
+                breakpoint_percentile_threshold=95, 
+                embed_model=Settings.embed_model    
+            )
+
+        if self.splitting == "recursive":
+            node_parser = LangchainNodeParser(RecursiveCharacterTextSplitter())
+
+        return node_parser
     
-    return parser.parse_args()
+
+    def _create_extractors(self) -> List:
+        """
+        Create meta data extractors.
+        """
+        metadata_extractors = []
+            
+        if "summary" in self.extractors:
+                metadata_extractors.append(
+                    SummaryExtractor(
+                        summaries=["self"],
+                        llm=Settings.llm
+                    )
+                )
+        if "title" in self.extractors:
+            metadata_extractors.append(
+                TitleExtractor(
+                    nodes=5,
+                    llm=Settings.llm
+                )
+            )
+        if "keyword" in self.extractors:
+            metadata_extractors.append(
+                KeywordExtractor(
+                    keywords=10,
+                    llm=Settings.llm
+                )
+            )
+
+        return metadata_extractors
 
 
-def run_ingestion(config):
-    """Run ingestion pipeline"""
-
-    set_embedding(embed_model_name=config["embed_model"])
-
-    dimension = DIMENSION[config["embed_model"]]
-
-    pinecone_client = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-
-    ingestion_engine = IngestionEngine(
-        pinecone_client=pinecone_client,
-        embed_model=Settings.embed_model,
-        dimension=4096,
-        splitting=config["splitting"],
-        chunk_size=config["chunk_size"],
-        chunk_overlap=config["chunk_overlap"],
-        extractors=config["extractors"]
+    @backoff.on_exception(
+        backoff.expo,
+        Exception,
+        max_tries=20,
     )
+    def docs_from_web(self, query_str: str, num_websites: int) -> List[Document]:
+        """
+        Get documents from websites.
+        """
+        logging.info(f"Start scraping {num_websites} websites.")
+        url = "https://www.bing.com/search?q=" + query_str
 
-    if pinecone_client.list_indexes().names():
-        logging.info("Vector Database is not empty.")
+        response = requests.get(
+            url, 
+            headers={'User-Agent':  UserAgent().chrome}
+        )
+        response.raise_for_status()
+        
+        search_urls = []
 
-    logging.info("Index data into 'tech-docs'.")
-    docs = ingestion_engine.docs_from_urls(urls=config["urls"])
-    ingestion_engine.index_documents(
-        index_name="tech-docs",
-        documents=docs,
-        delete_index=True
-    )
+        soup = BeautifulSoup(response.text, 'html.parser')
+        links = soup.find_all("h2")
 
-    logging.info("Index data into 'so-posts'.")
-    docs = ingestion_engine.docs_from_dir(data_dir=config["data_dir"])
-    ingestion_engine.index_documents(
-        index_name="so-posts",
-        documents=docs,
-            delete_index=True
-    )
+        links = [x for x in links if "https://" in str(x)]
 
-    logging.info("Index data into 'github'.")
-    docs = []
-    for project_name in config["github"]:
-        docs += ingestion_engine.docs_from_github(project_name=project_name)
+        for link in links:
+            match = re.findall(r'href="([^"]*)"', str(link))
+            search_urls.append(match[0])
 
-    ingestion_engine.index_documents(
-        index_name="github",
-        documents=docs,
-        delete_index=True
-    )
+        if not search_urls or len(search_urls) < num_websites:
+            raise Exception() 
+        
+        documents = SimpleWebPageReader(html_to_text=True).load_data(search_urls)
+
+        return documents
+    
+
+    def docs_from_github(self, project_name: str) -> List[Document]:
+        """
+        Get documents from GitHub repository.
+        """
+        logging.info(f"Start scraping the repository of {project_name}.")
+        response = requests.get(f"https://api.github.com/search/repositories?q={project_name}")
+        response.raise_for_status()
+
+        data = response.json()
+
+        if data['total_count'] > 0:
+            owner = data["items"][0]["owner"]["login"]
+            branch = data["items"][0]["default_branch"]
+            repo_name = data['items'][0]["name"]
+        else:
+            return []
+        
+        print(owner)
+        print(branch)
+                
+        try:
+            github_client = GithubClient(
+                github_token=os.getenv(key="GITHUB_TOKEN"), 
+                verbose=True
+            )
+
+            documents = GithubRepositoryReader(
+                github_client=github_client,
+                owner=owner,
+                repo=repo_name,
+                use_parser=False,
+                verbose=False,
+                filter_file_extensions=(
+                    [
+                        ".xml",
+                        ".properties",
+                        ".yml",
+                        "Dockerfile",
+                        ".json",
+                        ".ini",
+                        ".cnf",
+                        ".toml",
+                        ".conf",
+                        ".md"
+                    ],
+                    GithubRepositoryReader.FilterType.INCLUDE,
+                ),
+            ).load_data(branch=branch)            
+            return documents
+        except Exception:
+            logging.info("Error occurred while scraping Github.")
+            return []
 
 
-if __name__ == "__main__":
-    args = get_args()
+    def docs_from_dir(self, data_dir: str) -> List[Document]:
+        """
+        Get documents from data directory.
+        """
+        documents = SimpleDirectoryReader(input_dir=data_dir, recursive=True).load_data()
+        return documents
+    
 
-    # load env variables
-    load_dotenv(dotenv_path=args.env_file)
+    def docs_from_urls(self, urls: List[str]) -> List[Document]:
+        """
+        Get documents from urls.
+        """
+        documents = SimpleWebPageReader(html_to_text=True).load_data(urls)
+        return documents
+    
 
-    # load config
-    with open(args.config_file, "r", encoding="utf-8") as f:
-        config = toml.load(f)
+    def index_documents(
+            self,
+            index_name: str,
+            documents: List,
+            delete_index: bool,
+    ) -> None:
+        """
+        Add documents to a vector store
+        """
+        # delete index
+        if delete_index:
+            if index_name in self._pinecone_client.list_indexes().names():
+                self._pinecone_client.delete_index(name=index_name)
+                logging.info(f"Delete index {index_name}")
 
-    run_ingestion(config=config)
+        # create pinecone vector store
+        vector_store = self._get_vector_store(index_name=index_name)
+
+        # create node splitting parser
+        node_parser = self._create_node_parser()
+
+        # create meta data extractors
+        extractors = self._create_extractors()
+
+        # build list of transformations
+        transformations = [node_parser, Settings.embed_model]
+        transformations.extend(extractors)
+
+        # create ingestion pipeline
+        pipeline = IngestionPipeline(
+            transformations=transformations,
+            vector_store=vector_store
+        )
+
+        # run ingestion pipeline
+        pipeline.run(
+            documents=documents,
+            show_progress=True
+        )
+    
+
+
+    
+      

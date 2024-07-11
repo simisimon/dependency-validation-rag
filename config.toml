@@ -1,7 +1,6 @@
-# cval config
-[cval]
+# general config
 embed_model = "openai"
-inference_model = "gpt-4o-2024-05-13" #"llama3:70b" #"llama3:70b"  # "gpt-4o-2024-05-13"
+inference_model = "gpt-3.5-turbo-0125" #"llama3:8b" #"llama3:70b"  # "gpt-4o-2024-05-13"
 with_rag = true
 tool_name = "cfgnet" # cfgnet, ...
 temperature = 0.0
@@ -21,7 +20,6 @@ top_n = 5
 with_rewriting = true
 
 # data
-[data]
 urls = [        
     "https://maven.apache.org/pom.html",
     "https://maven.apache.org/ref/3.9.7/maven-model/maven.html",

@@ -6,19 +6,19 @@ from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core.extractors import SummaryExtractor, TitleExtractor, KeywordExtractor
 from llama_index.core.node_parser import SentenceSplitter, TokenTextSplitter, SemanticSplitterNodeParser, LangchainNodeParser
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from llama_index.core.base.embeddings.base import BaseEmbedding
 from pinecone import Pinecone, ServerlessSpec
 from typing import List
-from fake_useragent import UserAgent
-from bs4 import BeautifulSoup
 from rich.logging import RichHandler
 from duckduckgo_search import DDGS
-import re
+import traceback
 import backoff
 import requests
 import logging
 import os
 import nest_asyncio
+
+
+nest_asyncio.apply()
 
 
 logging.basicConfig(
@@ -32,11 +32,13 @@ class IngestionEngine:
     def __init__(
         self, 
         pinecone_client: Pinecone, 
+        dimension: int, 
         splitting: str, 
         extractors: List[str]
     ) -> None:
         logging.info(f"Ingestion engine initialized.")
         self._pinecone_client = pinecone_client
+        self.dimension = dimension
         self.splitting = splitting
         self.extractors = extractors
 
@@ -49,7 +51,7 @@ class IngestionEngine:
             logging.info(f"Create Index {index_name}.")
             self._pinecone_client.create_index(
                 name=index_name,
-                dimension=1536,
+                dimension=self.dimension,
                 metric="dotproduct",
                 spec=ServerlessSpec(
                     cloud="aws",
@@ -128,36 +130,20 @@ class IngestionEngine:
     @backoff.on_exception(
         backoff.expo,
         Exception,
-        max_tries=20,
+        max_tries=10,
     )
     def docs_from_web(self, query_str: str, num_websites: int) -> List[Document]:
         """
         Get documents from websites.
         """
-        logging.info(f"Start scraping {num_websites} websites.")
-        url = "https://www.bing.com/search?q=" + query_str
-
-        response = requests.get(
-            url, 
-            headers={'User-Agent':  UserAgent().chrome}
-        )
-        response.raise_for_status()
+        results = DDGS().text(query_str, max_results=num_websites)
+        urls = []
+        for result in results:
+            url = result['href']
+            urls.append(url)
+ 
         
-        search_urls = []
-
-        soup = BeautifulSoup(response.text, 'html.parser')
-        links = soup.find_all("h2")
-
-        links = [x for x in links if "https://" in str(x)]
-
-        for link in links:
-            match = re.findall(r'href="([^"]*)"', str(link))
-            search_urls.append(match[0])
-
-        if not search_urls or len(search_urls) < num_websites:
-            raise Exception() 
-        
-        documents = SimpleWebPageReader(html_to_text=True).load_data(search_urls)
+        documents = SimpleWebPageReader(html_to_text=True).load_data(urls)
 
         return documents
     
@@ -209,10 +195,11 @@ class IngestionEngine:
                     ],
                     GithubRepositoryReader.FilterType.INCLUDE,
                 ),
-            ).load_data(branch=branch)            
+            ).load_data(branch=branch)    
             return documents
         except Exception:
             logging.info("Error occurred while scraping Github.")
+            print(traceback.format_exc)
             return []
 
 

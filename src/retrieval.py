@@ -114,6 +114,8 @@ class RetrievalEngine:
         if index_name == "all":
             retrieved_nodes = []
             for name in self._pinecone_client.list_indexes().names():
+                if name == "web-search":
+                    continue
                 vector_store = self._get_vector_store(index_name=name)
                 nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
                 retrieved_nodes += nodes

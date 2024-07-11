@@ -1,7 +1,7 @@
 from llama_index.embeddings.openai import OpenAIEmbedding, OpenAIEmbeddingModelType
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.embeddings.langchain import LangchainEmbedding
-from embedding import SentenceTransformerEmbedding
+from llama_index.embeddings.ollama import OllamaEmbedding 
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding 
+from sentence_transformers import SentenceTransformer
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
 from llama_index.core import Settings
@@ -15,6 +15,15 @@ DIMENSION = {
     "qwen": 3584,
     "sfr": 4096
 }
+
+def get_embedding_dimension(embed_model_name: str) -> int:
+    dimension = DIMENSION[embed_model_name]
+
+    if not isinstance(dimension, int):
+        raise Exception(f"Dimension has to be an integer and not of type {type(dimension)}")
+
+    return dimension
+
 
 
 def load_config(config_file: str) -> Dict:
@@ -30,7 +39,7 @@ def load_config(config_file: str) -> Dict:
     return config
 
 
-def set_embedding(embed_model_name: str):
+def set_embedding(embed_model_name: str) -> None:
     """
     Set embedding model.
     """
@@ -40,16 +49,18 @@ def set_embedding(embed_model_name: str):
             model=OpenAIEmbeddingModelType.TEXT_EMBED_ADA_002
         )
 
+    if embed_model_name == "ollama":
+        Settings.embed_model = OllamaEmbedding(model_name=embed_model_name)
+
     if embed_model_name == "qwen":
         Settings.embed_model = HuggingFaceEmbedding(
-            model_name="Alibaba-NLP/gte-Qwen2-7B-instruct",
+            "Alibaba-NLP/gte-Qwen2-7B-instruct", 
             trust_remote_code=True
         )
-
-    if embed_model_name == "sfr":
-        Settings.embed_model = SentenceTransformerEmbedding(
-            model_name="Salesforce/SFR-Embedding-2_R"
-        )
+    
+    if not Settings.embed_model:
+        raise Exception("Embedding model has to be set.")
+    
 
 
 def set_llm(inference_model_name: str) -> None: 

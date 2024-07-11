@@ -60,3 +60,22 @@ class Dependency:
     dependent_option_file: Optional[str] = None 
     dependent_option_technology: Optional[str] = None
 
+    def to_dict(self):
+        """Convert dependency into a dictionary."""
+        return {
+            "project": self.project,
+            "dependency_type": self.dependency_type,
+            "dependency_category": self.dependency_category,
+            "dependency_level": self.dependency_level,
+            "option_name": self.option_name,
+            "option_file": self.option_file,
+            "option_value": self.option_value,
+            "option_type": self.option_type,
+            "option_technology": self.option_technology,
+            "dependent_option_name": self.dependent_option_name,
+            "dependent_option_value": self.dependent_option_value,
+            "dependent_option_file": self.dependent_option_file,
+            "dependent_option_type": self.dependent_option_type,
+            "dependent_option_technology": self.dependent_option_technology,
+        }
+    

@@ -80,6 +80,15 @@ class RetrievalEngine:
                 keep_retrieval_score=True,
             )
 
+        if self.rerank == "colbert":
+            logging.info("Create Colbert reranker.")
+            reranker = ColbertRerank(
+                top_n=self.top_n,
+                model="colbert-ir/colbertv2.0",
+                tokenizer="colbert-ir/colbertv2.0",
+                keep_retrieval_score=True,
+            )
+
         return reranker
        
 
@@ -88,7 +97,7 @@ class RetrievalEngine:
         Rerank retrieved nodes.
         """
         reranker = self._create_reranker()
-        
+
         reranked_nodes = reranker.postprocess_nodes(
             nodes=nodes,
             query_bundle=QueryBundle(query_str=query_str)

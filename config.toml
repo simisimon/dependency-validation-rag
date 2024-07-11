@@ -12,6 +12,17 @@ chunk_size = 512
 chunk_overlap = 50
 extractors = [] # ["summary", "keyword", title]
 num_websites = 3
+
+# retrieval
+temperature = 0.0
+top_k = 10
+alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
+rerank = "colbert" # "sentence", "llm", "colbert"
+top_n = 5
+with_rewriting = true
+
+# data
+[data]
 urls = [        
     "https://maven.apache.org/pom.html",
     "https://maven.apache.org/ref/3.9.7/maven-model/maven.html",

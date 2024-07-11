@@ -2,7 +2,7 @@
 [cval]
 embed_model = "openai"
 inference_model = "gpt-4o-2024-05-13" #"llama3:70b" #"llama3:70b"  # "gpt-4o-2024-05-13"
-with_rag = false
+with_rag = true
 tool_name = "cfgnet" # cfgnet, ...
 temperature = 0.0
 
@@ -14,7 +14,6 @@ extractors = [] # ["summary", "keyword", title]
 num_websites = 3
 
 # retrieval
-temperature = 0.0
 top_k = 10
 alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
 rerank = "colbert" # "sentence", "llm", "colbert"

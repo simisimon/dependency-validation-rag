@@ -66,28 +66,21 @@ class RetrievalEngine:
                 choice_batch_size=self.top_n,
                 top_n=self.top_n)
         if self.rerank == "sentence":
-            logging.info("Create Sentence transformer reranker.")
+            logging.info("Create Sentence Transformer reranlker.")
             reranker = SentenceTransformerRerank(
                 model="cross-encoder/ms-marco-MiniLM-L-2-v2",
                 top_n=self.top_n
-            )
-        if self.rerank == "colbert":
-            logging.info("Create Colbert reranker.")
-            reranker = ColbertRerank(
-                top_n=self.top_n,
-                model="colbert-ir/colbertv2.0",
-                tokenizer="colbert-ir/colbertv2.0",
-                keep_retrieval_score=True,
             )
 
         if self.rerank == "colbert":
             logging.info("Create Colbert reranker.")
             reranker = ColbertRerank(
-                top_n=self.top_n,
+                top_n=5,
                 model="colbert-ir/colbertv2.0",
                 tokenizer="colbert-ir/colbertv2.0",
                 keep_retrieval_score=True,
             )
+
 
         return reranker
        
@@ -97,7 +90,6 @@ class RetrievalEngine:
         Rerank retrieved nodes.
         """
         reranker = self._create_reranker()
-
         reranked_nodes = reranker.postprocess_nodes(
             nodes=nodes,
             query_bundle=QueryBundle(query_str=query_str)
@@ -113,7 +105,7 @@ class RetrievalEngine:
         logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(filtered_reranked_nodes)} nodes.") 
 
         return reranked_nodes
-    
+
 
     def retrieve(self, index_name: str, query_str: str) -> List[NodeWithScore]:
         """
@@ -158,4 +150,3 @@ class RetrievalEngine:
         )
 
         return retrieved_nodes
-        

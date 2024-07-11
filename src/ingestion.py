@@ -1,14 +1,24 @@
-
-from llama_index.core import Settings
-from ingestion_engine import IngestionEngine
-from dotenv import load_dotenv
-from pinecone import Pinecone
-from util import set_embedding, DIMENSION
+from llama_index.core import Settings, SimpleDirectoryReader, Document
+from llama_index.core.ingestion import IngestionPipeline
+from llama_index.readers.web import SimpleWebPageReader
+from llama_index.readers.github import GithubRepositoryReader, GithubClient
+from llama_index.vector_stores.pinecone import PineconeVectorStore
+from llama_index.core.extractors import SummaryExtractor, TitleExtractor, KeywordExtractor
+from llama_index.core.node_parser import SentenceSplitter, TokenTextSplitter, SemanticSplitterNodeParser, LangchainNodeParser
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from llama_index.core.base.embeddings.base import BaseEmbedding
+from pinecone import Pinecone, ServerlessSpec
+from typing import List
+from fake_useragent import UserAgent
+from bs4 import BeautifulSoup
 from rich.logging import RichHandler
+from duckduckgo_search import DDGS
 import re
 import backoff
 import requests
 import logging
+import os
+import nest_asyncio
 
 
 logging.basicConfig(
@@ -67,8 +77,8 @@ class IngestionEngine:
 
         if self.splitting == "sentence":
             node_parser = SentenceSplitter(
-                chunk_size=256, 
-                chunk_overlap=20
+                chunk_size=512, 
+                chunk_overlap=50
             )
 
         if self.splitting == "semantic":

@@ -56,11 +56,11 @@ class IngestionEngine:
         """
         Get Pinecone vector store. If index does not exist, create index.
         """
-        if index_name not in self._pinecone_client.list_indexes().names():
+        if index_name not in self.pinecone_client.list_indexes().names():
             logging.info(f"Create Index {index_name}.")
-            self._pinecone_client.create_index(
+            self.pinecone_client.create_index(
                 name=index_name,
-                dimension=self.dimension,
+                dimension=4096,
                 metric="dotproduct",
                 spec=ServerlessSpec(
                     cloud="aws",
@@ -68,7 +68,7 @@ class IngestionEngine:
                 )
             )
 
-        index = self._pinecone_client.Index(index_name)
+        index = self.pinecone_client.Index(index_name)
         vector_store = PineconeVectorStore(
             pinecone_index=index,
             add_sparse_vector=True
@@ -81,15 +81,15 @@ class IngestionEngine:
 
         if self.splitting == "token":
             node_parser = TokenTextSplitter(
-                chunk_size=self.chunk_size,
-                chunk_overlap=self.chunk_overlap,
+                chunk_size=512,
+                chunk_overlap=50,
                 separator=" ",
             )
 
         if self.splitting == "sentence":
             node_parser = SentenceSplitter(
-                chunk_size=self.chunk_size, 
-                chunk_overlap=self.chunk_overlap
+                chunk_size=512, 
+                chunk_overlap=50
             )
 
         if self.splitting == "semantic":

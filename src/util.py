@@ -1,6 +1,7 @@
 from llama_index.embeddings.openai import OpenAIEmbedding, OpenAIEmbeddingModelType
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.embeddings.ollama import OllamaEmbedding
+from llama_index.embeddings.langchain import LangchainEmbedding
+from embedding import SentenceTransformerEmbedding
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
 from llama_index.core import Settings
@@ -12,6 +13,7 @@ import os
 DIMENSION = {
     "openai": 1536,
     "qwen": 3584,
+    "sfr": 4096
 }
 
 
@@ -42,6 +44,11 @@ def set_embedding(embed_model_name: str):
         Settings.embed_model = HuggingFaceEmbedding(
             model_name="Alibaba-NLP/gte-Qwen2-7B-instruct",
             trust_remote_code=True
+        )
+
+    if embed_model_name == "sfr":
+        Settings.embed_model = SentenceTransformerEmbedding(
+            model_name="Salesforce/SFR-Embedding-2_R"
         )
 
 

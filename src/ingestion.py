@@ -3,7 +3,7 @@ from llama_index.core import Settings
 from ingestion_engine import IngestionEngine
 from dotenv import load_dotenv
 from pinecone import Pinecone
-from util import set_embedding
+from util import set_embedding, DIMENSION
 from rich.logging import RichHandler
 import argparse
 import toml
@@ -29,25 +29,27 @@ def get_args():
 def run_ingestion(config):
     """Run ingestion pipeline"""
 
-    dimension = set_embedding(embed_model_name=config["general"]["embed_model"])
+    set_embedding(embed_model_name=config["embed_model"])
+
+    dimension = DIMENSION[config["embed_model"]]
 
     pinecone_client = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 
     ingestion_engine = IngestionEngine(
         pinecone_client=pinecone_client,
         embed_model=Settings.embed_model,
-        dimension=dimension,
-        splitting=config["ingestion"]["splitting"],
-        chunk_size=config["ingestion"]["chunk_size"],
-        chunk_overlap=config["ingestion"]["chunk_overlap"],
-        extractors=config["ingestion"]["extractors"]
+        dimension=4096,
+        splitting=config["splitting"],
+        chunk_size=config["chunk_size"],
+        chunk_overlap=config["chunk_overlap"],
+        extractors=config["extractors"]
     )
 
     if pinecone_client.list_indexes().names():
         logging.info("Vector Database is not empty.")
 
     logging.info("Index data into 'tech-docs'.")
-    docs = ingestion_engine.docs_from_urls(urls=config["ingestion"]["urls"])
+    docs = ingestion_engine.docs_from_urls(urls=config["urls"])
     ingestion_engine.index_documents(
         index_name="tech-docs",
         documents=docs,
@@ -55,7 +57,7 @@ def run_ingestion(config):
     )
 
     logging.info("Index data into 'so-posts'.")
-    docs = ingestion_engine.docs_from_dir(data_dir=config["ingestion"]["data_dir"])
+    docs = ingestion_engine.docs_from_dir(data_dir=config["data_dir"])
     ingestion_engine.index_documents(
         index_name="so-posts",
         documents=docs,
@@ -64,7 +66,7 @@ def run_ingestion(config):
 
     logging.info("Index data into 'github'.")
     docs = []
-    for project_name in config["ingestion"]["github"]:
+    for project_name in config["github"]:
         docs += ingestion_engine.docs_from_github(project_name=project_name)
 
     ingestion_engine.index_documents(

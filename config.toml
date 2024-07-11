@@ -1,5 +1,5 @@
 # general
-embed_model = "openai"
+embed_model = "sfr"
 inference_model = "gpt-4o-2024-05-13" #"gpt-3.5-turbo-0125" #"llama3:70b" #"llama3:70b"  # "gpt-4o-2024-05-13"
 
 # retrieval

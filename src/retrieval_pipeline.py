@@ -96,13 +96,6 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
                 delete_index=True
             )
 
-            ingestion_engine.index_documents(
-                index_name="web-search-all",
-                documents=docs,
-                delete_index=False
-            )
-
-
         retrieved_nodes = retrieval_engine.retrieve(
             index_name=index_name,
             query_str=retrieval_str

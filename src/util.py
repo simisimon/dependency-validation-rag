@@ -5,7 +5,7 @@ from sentence_transformers import SentenceTransformer
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
 from llama_index.core import Settings
-from typing import Dict
+from typing import Dict, Optional
 import toml
 import os
 
@@ -44,40 +44,45 @@ def set_embedding(embed_model_name: str) -> None:
     Set embedding model.
     """
     if embed_model_name == "openai":
+        print("Set OpenAI Embedding.")
         Settings.embed_model = OpenAIEmbedding(
             api_key=os.getenv(key="OPENAI_KEY"),
             model=OpenAIEmbeddingModelType.TEXT_EMBED_ADA_002
         )
-
-    if embed_model_name == "ollama":
-        Settings.embed_model = OllamaEmbedding(model_name=embed_model_name)
-
-    if embed_model_name == "qwen":
+    elif embed_model_name == "ollama":
+        print("Set Ollama Embedding.")
+        Settings.embed_model = OllamaEmbedding(
+            model_name=embed_model_name
+        )
+    elif embed_model_name == "qwen":
+        print("Set Qwen Embedding.")
         Settings.embed_model = HuggingFaceEmbedding(
             "Alibaba-NLP/gte-Qwen2-7B-instruct", 
             trust_remote_code=True
         )
-    
-    if not Settings.embed_model:
+    else:
         raise Exception("Embedding model has to be set.")
-    
 
 
-def set_llm(inference_model_name: str) -> None: 
+def set_llm(inference_model_name: Optional[str]) -> None: 
     """
     Set inference model.
     """
-    if inference_model_name.startswith("gpt"):
+    if not inference_model_name:
+        Settings.llm = None
+        return
+    elif inference_model_name.startswith("gpt"):
         Settings.llm = OpenAI(
             model=inference_model_name, 
             api_key=os.getenv(key="OPENAI_KEY")
         )
-        
-    if inference_model_name.startswith("llama"):
+    elif inference_model_name.startswith("llama"):
         Settings.llm = Ollama(
             model=inference_model_name,
             request_timeout=90.0
     )
+    else:
+        raise Exception("Embedding model has to be set.")
 
-    if not Settings.llm:
-        raise Exception("Inference model has to be set.")
+    
+    

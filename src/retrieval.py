@@ -20,7 +20,6 @@ class RetrievalEngine:
     def __init__(
         self, 
         pinecone_client: Pinecone,
-        with_rewriting: bool,
         rerank: str, 
         top_k: int,
         top_n: int,
@@ -28,7 +27,6 @@ class RetrievalEngine:
     ) -> None:
         logging.info(f"Retrieval engine initialized.")
         self._pinecone_client = pinecone_client
-        self.with_rewriting = with_rewriting
         self.rerank = rerank
         self.top_k = top_k
         self.top_n = top_n
@@ -66,7 +64,7 @@ class RetrievalEngine:
                 choice_batch_size=self.top_n,
                 top_n=self.top_n)
         if self.rerank == "sentence":
-            logging.info("Create Sentence Transformer reranlker.")
+            logging.info("Create Sentence Transformer reranker.")
             reranker = SentenceTransformerRerank(
                 model="cross-encoder/ms-marco-MiniLM-L-2-v2",
                 top_n=self.top_n
@@ -113,8 +111,8 @@ class RetrievalEngine:
         """
         if index_name == "all":
             retrieved_nodes = []
-            for name in self._pinecone_client.list_indexes().names():
-                if name == "web-search":
+            for name in ["tech-docs", "so-posts", "github", "web-search-all"]:
+                if name not in self._pinecone_client.list_indexes().names():
                     continue
                 vector_store = self._get_vector_store(index_name=name)
                 nodes = self._retrieve(vector_store=vector_store, query_str=query_str)

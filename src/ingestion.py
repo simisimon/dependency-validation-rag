@@ -71,6 +71,7 @@ class IngestionEngine:
         node_parser = None
 
         if self.splitting == "token":
+            logging.info("Set token splitting.")
             node_parser = TokenTextSplitter(
                 chunk_size=512,
                 chunk_overlap=50,
@@ -78,15 +79,17 @@ class IngestionEngine:
             )
 
         if self.splitting == "sentence":
+            logging.info("Set sentence splitting.")
             node_parser = SentenceSplitter(
                 chunk_size=512, 
                 chunk_overlap=50
             )
 
         if self.splitting == "semantic":
+            logging.info("Set semantic splitting.")
             node_parser = SemanticSplitterNodeParser(
-                buffer_size=1, 
-                breakpoint_percentile_threshold=95, 
+                buffer_size=5, 
+                breakpoint_percentile_threshold=80, 
                 embed_model=Settings.embed_model    
             )
 
@@ -142,7 +145,6 @@ class IngestionEngine:
             url = result['href']
             urls.append(url)
  
-        
         documents = SimpleWebPageReader(html_to_text=True).load_data(urls)
 
         return documents

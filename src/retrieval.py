@@ -100,7 +100,7 @@ class RetrievalEngine:
         if len(filtered_reranked_nodes) < self.top_n:
             logging.info(f"Duplicates found. Return reranked notes with duplicates.")
 
-        logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(filtered_reranked_nodes)} nodes.") 
+        logging.info(f"Rerank {len(nodes)} retrieved nodes into {len(reranked_nodes)} nodes.") 
 
         return reranked_nodes
 

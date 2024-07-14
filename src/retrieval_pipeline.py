@@ -6,13 +6,15 @@ from pinecone import Pinecone
 from dotenv import load_dotenv
 from typing import Dict
 from data import Dependency
+from tqdm import tqdm
 import pandas as pd
 import os
 import toml
 import argparse
 import json
 import mlflow
-from tqdm import tqdm
+import backoff
+
 
 
 def get_args():
@@ -40,6 +42,37 @@ def transform(row: pd.Series) -> Dependency:
 
     return dependency
 
+
+def scrape(ingestion_engine, retrieval_str, num_websites):
+    print(f"Start Scraping {num_websites} documents.")
+    docs = ingestion_engine.docs_from_web(
+        query_str=retrieval_str, 
+        num_websites=num_websites
+    )
+    
+    print("Documents found: ", len(docs))
+
+    for d in docs:
+        d.metadata["index_name"] = "web-search"
+
+    ingestion_engine.index_documents(
+        index_name="web-search",
+        documents=docs,
+        delete_index=True
+    )
+
+
+@backoff.on_exception(backoff.expo, Exception, max_tries=10)
+def retrieve(retrieval_engine, index_name, retrieval_str):
+    nodes = retrieval_engine.retrieve(
+            index_name=index_name,
+            query_str=retrieval_str
+    )
+
+    if not nodes:
+        raise Exception("Nodes are empty.")
+
+    return nodes
 
 def run_retrieval(config: Dict, index_name: str, data_file: str):
     
@@ -71,6 +104,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
     df = pd.read_csv(data_file)
 
     queries = []
+    web_queries = []
     counter = 0
     batch_size = 100
     for index, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
@@ -80,27 +114,51 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
         task_str = prompt_settings.get_task_str(dependency=dependency)
         retrieval_str = prompt_settings.get_retrieval_prompt(dependency=dependency)
 
+        
         # scrape web
-        if index_name == "web-search" or index_name == "all":
-            docs = ingestion_engine.docs_from_web(
-                query_str=prompt_settings.get_retrieval_prompt(dependency=dependency), 
+        if index_name == "all":
+            scrape(
+                ingestion_engine=ingestion_engine,
+                retrieval_str=retrieval_str,
                 num_websites=config["num_websites"]
             )
-            
-            for d in docs:
-                d.metadata["index_name"] = "web-search"
 
-            ingestion_engine.index_documents(
-                index_name="web-search",
-                documents=docs,
-                delete_index=True
+            try:
+                retrieved_nodes = retrieve(
+                    retrieval_engine=retrieval_engine,
+                    index_name="web-search",
+                    retrieval_str=retrieval_str
+                )
+            except Exception:
+                retrieved_nodes = []
+
+            context_str = "\n\n".join([source_node.node.get_content() for source_node in retrieved_nodes])
+            context = [
+                {
+                    "content": node.get_content(),
+                    "score": node.get_score(),
+                    "index": node.metadata["index_name"] if "index_name" in node.metadata else None,
+                    "id": node.node_id
+                } for node in retrieved_nodes
+            ]
+
+            web_queries.append(
+                {
+                    "index": index,
+                    "dependency": dependency.to_dict(),
+                    "system_str": system_str,
+                    "task_str": task_str,
+                    "context_str": context_str,
+                    "context": context
+                }
             )
 
-        retrieved_nodes = retrieval_engine.retrieve(
+        retrieved_nodes = retrieve(
+            retrieval_engine=retrieval_engine,
             index_name=index_name,
-            query_str=retrieval_str
+            retrieval_str=retrieval_str
         )
-
+        
         context_str = "\n\n".join([source_node.node.get_content() for source_node in retrieved_nodes])
 
         context = [
@@ -124,23 +182,32 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 
         counter += 1
 
-        if index_name == all:
+        if index_name == "all":
             if counter % batch_size == 0:
                 output_file = f"../data/evaluation/all_dependencies_{index_name}_{counter}.json"
                 with open(output_file, "a", encoding="utf-8") as dest:
                     json.dump(queries, dest, indent=2)
-                    dest.write("\n")  # To separate different batches in the file
                 mlflow.log_artifact(local_path=output_file)
-                queries.clear()  # Clear the list after writing
 
+                web_output_file = f"../data/evaluation/all_dependencies_web-search_{counter}.json"
+                with open(web_output_file, "a", encoding="utf-8") as dest:
+                    json.dump(web_queries, dest, indent=2)
+                mlflow.log_artifact(local_path=web_output_file)
 
     if queries:
         output_file = f"../data/evaluation/all_dependencies_{index_name}.json"
         with open(output_file, "a", encoding="utf-8") as dest:
             json.dump(queries, dest, indent=2)
-            dest.write("\n")  # To separate different batches in the file
 
-    mlflow.log_artifact(local_path=output_file)
+        mlflow.log_artifact(local_path=output_file)
+
+
+    if web_queries:
+        web_output_file = f"../data/evaluation/all_dependencies_web-search.json"
+        with open(web_output_file, "a", encoding="utf-8") as dest:
+            json.dump(web_queries, dest, indent=2)
+
+        mlflow.log_artifact(local_path=web_output_file)
 
     print(f"Done with index: {index_name}")
 

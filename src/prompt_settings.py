@@ -15,10 +15,10 @@ logging.basicConfig(
 
 class _PromptSettings:
     _query_prompt: PromptTemplate = PromptTemplate(
-        "Information about both configuration options, including their descriptions and prior usages are stated below:\n"
+        "Information about both configuration options, such as their descriptions or prior usages are below:\n\n"
         "{context_str}\n"
         "---------------------\n"
-        "Given the context information, perform the following task:\n"
+        "Given the context information, perform the following task:\n\n"
         "{task_str}\n\n"
         "{format_str}"
     )

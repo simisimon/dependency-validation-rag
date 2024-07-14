@@ -8,7 +8,7 @@ splitting = "sentence"
 chunk_size = 512
 chunk_overlap = 50
 extractors = []
-num_websites = 5
+num_websites = 3
 
 # retrieval
 top_k = 10

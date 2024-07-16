@@ -34,6 +34,7 @@ def generate(generator: GeneratorEngine, messages: List) -> str:
 def run_generation(config: Dict) -> None:
     
     print("Data file: ", config["data_file"])
+    print("With RAG?: ", config["with_rag"])
 
     with open(config["data_file"], "r", encoding="utf-8") as src:
         data = json.load(src)
@@ -91,58 +92,6 @@ def run_generation(config: Dict) -> None:
             mlflow.log_artifact(local_path=output_file) 
 
 
-def run_generation(config: Dict, target_index: int) -> str:
-    print("Data file: ", config["data_file"])
-
-    with open(config["data_file"], "r", encoding="utf-8") as src:
-        data = json.load(src)
-
-    prompt_settings = PrompSettingsFactory.get_prompt_settings(tool_name=config["tool_name"])
-
- 
-    generator = GeneratorFactory().get_generator(
-        model_name=config["model_name"], 
-        temperature=config["temperature"]
-    )
-
-    target_entry = None
-    for entry in data:
-        if int(entry["index"]) == target_index:
-            target_entry = entry
-
-        
-    if config["with_rag"]:
-        query_str = prompt_settings.query_prompt.format(
-            context_str=entry["context_str"], 
-            task_str=entry["task_str"],
-            format_str=prompt_settings.get_format_prompt()
-        )
-    else:
-        query_str =f"{entry['task_str']}\n\n{prompt_settings.get_format_prompt()}"
-
-    messages = [
-        {
-            "role": "system", 
-            "content": entry["system_str"]
-        },
-        {
-             "role": "user",
-             "content": query_str
-        }
-    ]
-
-
-    response = generate(
-        generator=generator,
-        messages=messages
-    )
-
-    return response 
-
-
-
-
-
 def main():
     args = get_args()
 
@@ -161,7 +110,6 @@ def main():
         mlflow.log_artifact(local_path=args.env_file)
 
         run_generation(config=config)
-
 
 
 if __name__ == "__main__":

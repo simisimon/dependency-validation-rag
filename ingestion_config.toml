@@ -3,7 +3,7 @@ embedding_model = "qwen" # "qwen", "ollama"
 embedding_dimension = 3584 # qwen=3584, openai=1536, ollama=...
 
 # ingestion
-splitting = "semantic" # "sentence", "token", "semantic", "recursive"
+splitting = "sentence" # "sentence", "token", "semantic", "recursive"
 extractors = [] # ["summary", "keyword", title]
 
 # data

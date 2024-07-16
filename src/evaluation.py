@@ -50,11 +50,15 @@ def run_generation(config: Dict) -> None:
     )
 
     for entry in tqdm(data, total=len(data), desc="Processing entries"):
-        query_str = prompt_settings.query_prompt.format(
-            context_str=entry["context_str"], 
-            task_str=entry["task_str"],
-            format_str=prompt_settings.get_format_prompt()
-        ) 
+
+        if config["with_rag"]:
+            query_str = prompt_settings.query_prompt.format(
+                context_str=entry["context_str"], 
+                task_str=entry["task_str"],
+                format_str=prompt_settings.get_format_prompt()
+            )
+        else:
+            query_str =f"{entry['task_str']}\n\n{prompt_settings.get_format_prompt()}"
 
         messages = [
             {
@@ -67,6 +71,7 @@ def run_generation(config: Dict) -> None:
             }
         ]
 
+
         response = generate(
             generator=generator,
             messages=messages
@@ -77,7 +82,10 @@ def run_generation(config: Dict) -> None:
         results.append(entry)
 
         if counter % batch_size == 0:
-            output_file = f"../data/evaluation/all_dependencies_{config['index_name']}_{config['model_name']}_{counter}.json"
+            if config["with_rag"]:
+                output_file = f"../data/evaluation/all_dependencies_{config['index_name']}_{config['model_name']}_{counter}.json"
+            else:
+                output_file = f"../data/evaluation/all_dependencies_without_{config['model_name']}_{counter}.json"
             with open(output_file, "a", encoding="utf-8") as dest:
                 json.dump(results, dest, indent=2)
             mlflow.log_artifact(local_path=output_file) 
@@ -94,7 +102,7 @@ if __name__ == "__main__":
 
     mlflow.set_experiment(experiment_name="generation")
     
-    with mlflow.start_run(run_name=f"generation_{config["index_name"]}"): 
+    with mlflow.start_run(run_name=f"generation_{config['index_name']}"): 
 
         mlflow.log_params(config)
         mlflow.log_artifact(local_path=config["data_file"])

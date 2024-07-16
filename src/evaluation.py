@@ -83,15 +83,67 @@ def run_generation(config: Dict) -> None:
 
         if counter % batch_size == 0:
             if config["with_rag"]:
-                output_file = f"../data/evaluation/all_dependencies_{config['index_name']}_{config['model_name']}_{counter}.json"
+                output_file = f"{config['output_dir']}/all_dependencies_{config['index_name']}_{config['model_name']}_{counter}.json"
             else:
-                output_file = f"../data/evaluation/all_dependencies_without_{config['model_name']}_{counter}.json"
+                output_file = f"{config['output_dir']}/all_dependencies_without_{config['model_name']}_{counter}.json"
             with open(output_file, "a", encoding="utf-8") as dest:
                 json.dump(results, dest, indent=2)
             mlflow.log_artifact(local_path=output_file) 
 
 
-if __name__ == "__main__":
+def run_generation(config: Dict, target_index: int) -> str:
+    print("Data file: ", config["data_file"])
+
+    with open(config["data_file"], "r", encoding="utf-8") as src:
+        data = json.load(src)
+
+    prompt_settings = PrompSettingsFactory.get_prompt_settings(tool_name=config["tool_name"])
+
+ 
+    generator = GeneratorFactory().get_generator(
+        model_name=config["model_name"], 
+        temperature=config["temperature"]
+    )
+
+    target_entry = None
+    for entry in data:
+        if int(entry["index"]) == target_index:
+            target_entry = entry
+
+        
+    if config["with_rag"]:
+        query_str = prompt_settings.query_prompt.format(
+            context_str=entry["context_str"], 
+            task_str=entry["task_str"],
+            format_str=prompt_settings.get_format_prompt()
+        )
+    else:
+        query_str =f"{entry['task_str']}\n\n{prompt_settings.get_format_prompt()}"
+
+    messages = [
+        {
+            "role": "system", 
+            "content": entry["system_str"]
+        },
+        {
+             "role": "user",
+             "content": query_str
+        }
+    ]
+
+
+    response = generate(
+        generator=generator,
+        messages=messages
+    )
+
+    return response 
+
+
+
+
+
+def main():
     args = get_args()
 
     # load env variable
@@ -109,6 +161,11 @@ if __name__ == "__main__":
         mlflow.log_artifact(local_path=args.env_file)
 
         run_generation(config=config)
+
+
+
+if __name__ == "__main__":
+    main()
 
 
 

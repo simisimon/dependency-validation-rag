@@ -1,81 +1,112 @@
-from data import Dependency
-from cval import CVal
-import mlflow
-import pandas as pd
-import json
-import glob
+from prompt_settings import PrompSettingsFactory
+from util import load_config
+from dotenv import load_dotenv
+from generator import GeneratorFactory
+from typing import List, Dict
+from tqdm import tqdm
+from generator import GeneratorEngine
 import os
+import mlflow
+import json
+import argparse
+import json
+import backoff
 
 
-CONFIG_FILE = "../config.toml"
-ENV_FILE = "../.env"
-EVAL_DATA_DIR = "../data/evaluation/data"
-INDEX_NAME = "without"
-EVAL_FILE_PATH = "../data/evaluation/data/apollo_dependencies.csv"
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config_file", type=str, default="../generation_config.toml")
+    parser.add_argument("--env_file", type=str, default="../.env")   
+    
+    return parser.parse_args()
 
-def run_inference(file_path):
 
-    file_name = file_path.split("/")[-1].split(".")[0]
-    print("File: ", file_name)
+@backoff.on_exception(backoff.expo, Exception, max_tries=10)
+def generate(generator: GeneratorEngine, messages: List) -> str:
+    response = generator.generate(messages=messages)
 
-    if os.path.exists(f"../data/evaluation/results/gpt4o/{file_name}_{INDEX_NAME}.json"):
-        print(f"{file_name}_{INDEX_NAME}.json already exists. Skip file.")
-        return
+    if not response:
+        raise Exception("Response is empty.")
 
-    with mlflow.start_run(run_name=f"{file_name}_{INDEX_NAME}"): 
+    return response
 
-        cval = CVal.init(
-            config_file=CONFIG_FILE,
-            env_file=ENV_FILE
+
+def run_generation(config: Dict) -> None:
+    
+    print("Data file: ", config["data_file"])
+
+    with open(config["data_file"], "r", encoding="utf-8") as src:
+        data = json.load(src)
+
+    prompt_settings = PrompSettingsFactory.get_prompt_settings(tool_name=config["tool_name"])
+
+    results = []
+    batch_size = 100
+    counter = 0
+
+    generator = GeneratorFactory().get_generator(
+        model_name=config["model_name"], 
+        temperature=config["temperature"]
+    )
+
+    for entry in tqdm(data, total=len(data), desc="Processing entries"):
+        query_str = prompt_settings.query_prompt.format(
+            context_str=entry["context_str"], 
+            task_str=entry["task_str"],
+            format_str=prompt_settings.get_format_prompt()
+        ) 
+
+        messages = [
+            {
+                "role": "system", 
+                "content": entry["system_str"]
+            },
+            {
+                "role": "user",
+                "content": query_str
+            }
+        ]
+
+        response = generate(
+            generator=generator,
+            messages=messages
         )
 
-        df = pd.read_csv(file_path)
+        entry["response"] = response
+        counter += 1
+        results.append(entry)
 
-        outputs = []
-        for index, x in enumerate(df.to_dict("records")):
-            print("Dependency count: ", index)
-            dependency = Dependency(
-                project=x["project"],
-                option_name=x["option_name"],
-                option_value=x["option_value"],
-                option_type=x["option_type"].split(".")[-1],
-                option_file=x["option_file"],
-                option_technology=x["option_technology"],
-                dependent_option_name=x["dependent_option_name"],
-                dependent_option_value=x["dependent_option_value"],
-                dependent_option_type=x["dependent_option_type"].split(".")[-1],
-                dependent_option_file=x["dependent_option_file"],
-                dependent_option_technology=x["dependent_option_technology"]
-            )
-
-            response = cval.query(
-                dependency=dependency,
-                index_name=INDEX_NAME
-            )
-
-
-            outputs.append(response)
-
-        responses = [response.to_dict() for response in outputs]
-
-        with open(f"../data/evaluation/results/{file_name}_{INDEX_NAME}.json", "w", encoding="utf-8") as dest:
-            json.dump(responses, dest, indent=2)
-
-        mlflow.log_artifact(local_path=f"../data/evaluation/results/{file_name}_{INDEX_NAME}.json")
-
-        print("Done with: ", file_path)
-
-
-def main():
-    
-    mlflow.set_experiment(experiment_name=f"inference_{INDEX_NAME}")
-
-    for file_path in glob.glob(EVAL_DATA_DIR + "/**"):
-        run_inference(file_path=file_path)
+        if counter % batch_size == 0:
+            output_file = f"../data/evaluation/all_dependencies_{config['index_name']}_{config['model_name']}_{counter}.json"
+            with open(output_file, "a", encoding="utf-8") as dest:
+                json.dump(results, dest, indent=2)
+            mlflow.log_artifact(local_path=output_file) 
 
 
 if __name__ == "__main__":
-    main()
+    args = get_args()
+
+    # load env variable
+    load_dotenv(dotenv_path=args.env_file)
+
+    # load config
+    config = load_config(config_file=args.config_file)
+
+    mlflow.set_experiment(experiment_name="generation")
+    
+    with mlflow.start_run(run_name=f"generation_{config["index_name"]}"): 
+
+        mlflow.log_params(config)
+        mlflow.log_artifact(local_path=config["data_file"])
+        mlflow.log_artifact(local_path=args.env_file)
+
+        run_generation(config=config)
+
+
+
+
+
+
 
 
 

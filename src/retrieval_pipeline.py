@@ -126,7 +126,6 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
         task_str = prompt_settings.get_task_str(dependency=dependency)
         retrieval_str = prompt_settings.get_retrieval_prompt(dependency=dependency)
 
-        
         # scrape web
         if index_name == "all":
             scrape(
@@ -157,7 +156,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
             web_queries.append(
                 {
                     "index": index,
-                    #"dependency": dependency.to_dict(),
+                    "dependency": dependency.to_dict(),
                     "system_str": system_str,
                     "task_str": task_str,
                     "context_str": context_str,
@@ -182,7 +181,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
             } for node in retrieved_nodes
         ]
 
-        query = {
+        queries.append({
             "index": index,
             "dependency": dependency.to_dict(),
             "system_str": system_str,
@@ -190,11 +189,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
             "context_str": context_str,
             "context": context
 
-        }
-
-        print(query)
-
-        queries.append(query)
+        })
 
         counter += 1
 
@@ -202,22 +197,20 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
             if counter % batch_size == 0:
 
                 #queries = [query for query in queries if is_json_serializable(query)]
-                output_file = f"../data/evaluation/all_dependencies_{index_name}_{counter}.json"
+                output_file = f"{config['output_dir']}/all_dependencies_{index_name}_{counter}.json"
                 with open(output_file, "a", encoding="utf-8") as dest:
                     json.dump(queries, dest, indent=2)
                 mlflow.log_artifact(local_path=output_file)
 
                 #web_queries = [query for query in web_queries if is_json_serializable(query)]
-                web_output_file = f"../data/evaluation/all_dependencies_web-search_{counter}.json"
+                web_output_file = f"{config['output_dir']}/all_dependencies_web-search_{counter}.json"
                 with open(web_output_file, "a", encoding="utf-8") as dest:
                     json.dump(web_queries, dest, indent=2)
                 mlflow.log_artifact(local_path=web_output_file)
 
-        break
-
     if queries:
         #queries = [query for query in queries if is_json_serializable(query)]
-        output_file = f"../data/evaluation/all_dependencies_{index_name}.json"
+        output_file = f"{config['output_dir']}/all_dependencies_{index_name}.json"
         with open(output_file, "a", encoding="utf-8") as dest:
             json.dump(queries, dest, indent=2)
 
@@ -225,7 +218,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 
     if web_queries:
         #web_queries = [query for query in web_queries if is_json_serializable(query)]
-        web_output_file = f"../data/evaluation/all_dependencies_web-search.json"
+        web_output_file = f"{config['output_dir']}/all_dependencies_web-search.json"
         with open(web_output_file, "a", encoding="utf-8") as dest:
             json.dump(web_queries, dest, indent=2)
 

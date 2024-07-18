@@ -1,6 +1,6 @@
 # general
-data_file = "../data/evaluation/config5/all_dependencies_all.json"
-output_dir = "../data/evaluation/config5"
+data_file = "../data/evaluation/config6/all_dependencies_all_100.json"
+output_dir = "../data/evaluation/config3"
 with_rag = true
 index_name = "all"
 tool_name = "cfgnet"

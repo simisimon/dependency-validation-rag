@@ -198,20 +198,20 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 
                 #queries = [query for query in queries if is_json_serializable(query)]
                 output_file = f"{config['output_dir']}/all_dependencies_{index_name}_{counter}.json"
-                with open(output_file, "a", encoding="utf-8") as dest:
+                with open(output_file, "w", encoding="utf-8") as dest:
                     json.dump(queries, dest, indent=2)
                 mlflow.log_artifact(local_path=output_file)
 
                 #web_queries = [query for query in web_queries if is_json_serializable(query)]
                 web_output_file = f"{config['output_dir']}/all_dependencies_web-search_{counter}.json"
-                with open(web_output_file, "a", encoding="utf-8") as dest:
+                with open(web_output_file, "w", encoding="utf-8") as dest:
                     json.dump(web_queries, dest, indent=2)
                 mlflow.log_artifact(local_path=web_output_file)
 
     if queries:
         #queries = [query for query in queries if is_json_serializable(query)]
         output_file = f"{config['output_dir']}/all_dependencies_{index_name}.json"
-        with open(output_file, "a", encoding="utf-8") as dest:
+        with open(output_file, "w", encoding="utf-8") as dest:
             json.dump(queries, dest, indent=2)
 
         mlflow.log_artifact(local_path=output_file)
@@ -219,7 +219,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
     if web_queries:
         #web_queries = [query for query in web_queries if is_json_serializable(query)]
         web_output_file = f"{config['output_dir']}/all_dependencies_web-search.json"
-        with open(web_output_file, "a", encoding="utf-8") as dest:
+        with open(web_output_file, "w", encoding="utf-8") as dest:
             json.dump(web_queries, dest, indent=2)
 
         mlflow.log_artifact(local_path=web_output_file)

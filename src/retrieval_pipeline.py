@@ -62,7 +62,7 @@ def scrape(ingestion_engine, retrieval_str, num_websites):
     )
 
 
-@backoff.on_exception(backoff.expo, Exception, max_tries=10)
+@backoff.on_exception(backoff.expo, Exception, max_tries=5)
 def retrieve(retrieval_engine, index_name, retrieval_str):
     nodes = retrieval_engine.retrieve(
             index_name=index_name,
@@ -140,6 +140,12 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
                     index_name="web-search",
                     retrieval_str=retrieval_str
                 )
+
+                retrieved_nodes = retrieval_engine.rerank_nodes(
+                    nodes=retrieved_nodes,
+                    query_str=retrieval_str
+                )
+
             except Exception:
                 retrieved_nodes = []
 
@@ -168,6 +174,11 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
             retrieval_engine=retrieval_engine,
             index_name=index_name,
             retrieval_str=retrieval_str
+        )
+
+        retrieved_nodes = retrieval_engine.rerank_nodes(
+            nodes=retrieved_nodes,
+            query_str=retrieval_str
         )
         
         context_str = "\n\n".join([source_node.node.get_content() for source_node in retrieved_nodes])

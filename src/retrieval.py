@@ -21,8 +21,7 @@ class RetrievalEngine:
     def __init__(
         self, 
         pinecone_client: Pinecone,
-        rerank: str, 
-        with_compresssion: bool,
+        rerank: str,
         top_k: int,
         top_n: int,
         alpha: float,
@@ -30,13 +29,10 @@ class RetrievalEngine:
         logging.info(f"Retrieval engine initialized.")
         self._pinecone_client = pinecone_client
         self.rerank = rerank
-        self.with_compression = with_compresssion
         self.top_k = top_k
         self.top_n = top_n
         self.alpha = alpha  
-        
-
-
+    
     def _get_vector_store(self, index_name: str) -> PineconeVectorStore:
         """
         Get Pinecone vector store.
@@ -87,10 +83,11 @@ class RetrievalEngine:
         return reranker
     
 
-    def _compress_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
+    def compress_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
         """
         Compress nodes with LongLLMLingua.
         """
+        logging.info("Compress nodes with LongLLMLingua.")
         compressor = LongLLMLinguaPostprocessor(
             target_token=300,
             rank_method="longllmlingua",
@@ -111,7 +108,7 @@ class RetrievalEngine:
         return compressed_nodes
            
 
-    def _rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
+    def rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
         """
         Rerank retrieved nodes.
         """
@@ -135,9 +132,10 @@ class RetrievalEngine:
 
     def retrieve(self, index_name: str, query_str: str) -> List[NodeWithScore]:
         """
-        Retrieve context.
+        Retrieve nodes.
         """
-        final_nodes = []
+        # TODO check if this function still works
+        retrieved_nodes = []
 
         if index_name == "all":
             retrieved_nodes = []
@@ -145,18 +143,11 @@ class RetrievalEngine:
                 vector_store = self._get_vector_store(index_name=name)
                 nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
                 retrieved_nodes += nodes
-
-            final_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
         else:
             vector_store = self._get_vector_store(index_name=index_name)
             retrieved_nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
-            final_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
-
-
-        if self.with_compression:
-            final_nodes = self._compress_nodes(nodes=final_nodes, query_str=query_str)
             
-        return final_nodes
+        return retrieved_nodes
 
 
     def _retrieve(self, vector_store: PineconeVectorStore, query_str: str) -> List[NodeWithScore]:

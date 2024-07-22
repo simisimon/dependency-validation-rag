@@ -12,6 +12,6 @@ num_websites = 3
 
 # retrieval
 top_k = 10
-alpha = 0.6 
+alpha = 0.5 
 rerank = "colbert"
 top_n = 5

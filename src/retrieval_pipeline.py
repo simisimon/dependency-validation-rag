@@ -20,6 +20,7 @@ import backoff
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file", type=str, default="../retrieval_config.toml")
+    parser.add_argument("--env_file", type=str, default="../.env")
     parser.add_argument("--data_file", type=str, default="../data/evaluation/all_dependencies.csv")   
     
     return parser.parse_args()
@@ -241,6 +242,8 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 if __name__ == "__main__":
     args = get_args()
 
+    load_dotenv(dotenv_path=args.env_file)
+
     # load config
     config = load_config(config_file=args.config_file)
 
@@ -248,6 +251,7 @@ if __name__ == "__main__":
 
     os.environ["PINECONE_API_KEY"] = config["pinecone_key"]
     print("Pinecone Key: ", os.getenv("PINECONE_API_KEY"))
+    print("OpenAI Key: ", os.getenv("OPENAI_KEY"))
     
     for index_name in config["index_names"]:
 

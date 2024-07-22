@@ -20,6 +20,7 @@ import backoff
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file", type=str, default="../retrieval_config.toml")
+    parser.add_argument("--env_file", type=str, default="../.env")
     parser.add_argument("--data_file", type=str, default="../data/evaluation/all_dependencies.csv")   
     
     return parser.parse_args()
@@ -62,7 +63,7 @@ def scrape(ingestion_engine, retrieval_str, num_websites):
     )
 
 
-@backoff.on_exception(backoff.expo, Exception, max_tries=10)
+@backoff.on_exception(backoff.expo, Exception, max_tries=5)
 def retrieve(retrieval_engine, index_name, retrieval_str):
     nodes = retrieval_engine.retrieve(
             index_name=index_name,
@@ -140,6 +141,12 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
                     index_name="web-search",
                     retrieval_str=retrieval_str
                 )
+
+                retrieved_nodes = retrieval_engine.rerank_nodes(
+                    nodes=retrieved_nodes,
+                    query_str=retrieval_str
+                )
+
             except Exception:
                 retrieved_nodes = []
 
@@ -168,6 +175,11 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
             retrieval_engine=retrieval_engine,
             index_name=index_name,
             retrieval_str=retrieval_str
+        )
+
+        retrieved_nodes = retrieval_engine.rerank_nodes(
+            nodes=retrieved_nodes,
+            query_str=retrieval_str
         )
         
         context_str = "\n\n".join([source_node.node.get_content() for source_node in retrieved_nodes])
@@ -198,20 +210,20 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 
                 #queries = [query for query in queries if is_json_serializable(query)]
                 output_file = f"{config['output_dir']}/all_dependencies_{index_name}_{counter}.json"
-                with open(output_file, "a", encoding="utf-8") as dest:
+                with open(output_file, "w", encoding="utf-8") as dest:
                     json.dump(queries, dest, indent=2)
                 mlflow.log_artifact(local_path=output_file)
 
                 #web_queries = [query for query in web_queries if is_json_serializable(query)]
                 web_output_file = f"{config['output_dir']}/all_dependencies_web-search_{counter}.json"
-                with open(web_output_file, "a", encoding="utf-8") as dest:
+                with open(web_output_file, "w", encoding="utf-8") as dest:
                     json.dump(web_queries, dest, indent=2)
                 mlflow.log_artifact(local_path=web_output_file)
 
     if queries:
         #queries = [query for query in queries if is_json_serializable(query)]
         output_file = f"{config['output_dir']}/all_dependencies_{index_name}.json"
-        with open(output_file, "a", encoding="utf-8") as dest:
+        with open(output_file, "w", encoding="utf-8") as dest:
             json.dump(queries, dest, indent=2)
 
         mlflow.log_artifact(local_path=output_file)
@@ -219,7 +231,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
     if web_queries:
         #web_queries = [query for query in web_queries if is_json_serializable(query)]
         web_output_file = f"{config['output_dir']}/all_dependencies_web-search.json"
-        with open(web_output_file, "a", encoding="utf-8") as dest:
+        with open(web_output_file, "w", encoding="utf-8") as dest:
             json.dump(web_queries, dest, indent=2)
 
         mlflow.log_artifact(local_path=web_output_file)
@@ -230,6 +242,8 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 if __name__ == "__main__":
     args = get_args()
 
+    load_dotenv(dotenv_path=args.env_file)
+
     # load config
     config = load_config(config_file=args.config_file)
 
@@ -237,6 +251,7 @@ if __name__ == "__main__":
 
     os.environ["PINECONE_API_KEY"] = config["pinecone_key"]
     print("Pinecone Key: ", os.getenv("PINECONE_API_KEY"))
+    print("OpenAI Key: ", os.getenv("OPENAI_KEY"))
     
     for index_name in config["index_names"]:
 

@@ -3,6 +3,7 @@ from llama_index.postprocessor.colbert_rerank import ColbertRerank
 from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core.schema import NodeWithScore, QueryBundle
 from llama_index.core import Settings, VectorStoreIndex
+from llama_index.postprocessor.longllmlingua import LongLLMLinguaPostprocessor
 from pinecone import Pinecone
 from typing import List
 from rich.logging import RichHandler
@@ -20,7 +21,7 @@ class RetrievalEngine:
     def __init__(
         self, 
         pinecone_client: Pinecone,
-        rerank: str, 
+        rerank: str,
         top_k: int,
         top_n: int,
         alpha: float,
@@ -31,8 +32,7 @@ class RetrievalEngine:
         self.top_k = top_k
         self.top_n = top_n
         self.alpha = alpha  
-
-
+    
     def _get_vector_store(self, index_name: str) -> PineconeVectorStore:
         """
         Get Pinecone vector store.
@@ -81,9 +81,34 @@ class RetrievalEngine:
 
 
         return reranker
-       
+    
 
-    def _rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
+    def compress_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
+        """
+        Compress nodes with LongLLMLingua.
+        """
+        logging.info("Compress nodes with LongLLMLingua.")
+        compressor = LongLLMLinguaPostprocessor(
+            target_token=300,
+            rank_method="longllmlingua",
+            additional_compress_kwargs={
+                "condition_compare": True,
+                "condition_in_question": "after",
+                "context_budget": "+100",
+                "reorder_context": "sort",  # enable document reorder,
+                "dynamic_context_compression_ratio": 0.3,
+            },
+        )
+
+        compressed_nodes = compressor.postprocess_nodes(
+            nodes=nodes,
+            query_bundle=QueryBundle(query_str=query_str)
+        )
+
+        return compressed_nodes
+           
+
+    def rerank_nodes(self, nodes: List[NodeWithScore], query_str: str) -> List[NodeWithScore]:
         """
         Rerank retrieved nodes.
         """
@@ -107,24 +132,23 @@ class RetrievalEngine:
 
     def retrieve(self, index_name: str, query_str: str) -> List[NodeWithScore]:
         """
-        Retrieve context.
+        Retrieve nodes.
         """
+        # TODO check if this function still works
+        retrieved_nodes = []
+
         if index_name == "all":
             retrieved_nodes = []
             for name in self._pinecone_client.list_indexes().names():
                 vector_store = self._get_vector_store(index_name=name)
                 nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
                 retrieved_nodes += nodes
-
-            reranked_retrieved_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
-            
-            return reranked_retrieved_nodes
-
         else:
             vector_store = self._get_vector_store(index_name=index_name)
             retrieved_nodes = self._retrieve(vector_store=vector_store, query_str=query_str)
-            reranked_retrieved_nodes = self._rerank_nodes(nodes=retrieved_nodes, query_str=query_str)
-            return reranked_retrieved_nodes
+            
+        return retrieved_nodes
+
 
     def _retrieve(self, vector_store: PineconeVectorStore, query_str: str) -> List[NodeWithScore]:
         """

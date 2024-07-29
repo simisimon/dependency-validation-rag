@@ -1,0 +1,5 @@
+model_name,file,accuracy,precision,recall,f1-score
+gpt-3.5-turbo-0125,../data/evaluation/config13/all_dependencies_all_gpt-3.5-turbo-0125.json,0.646,0.5358361774744027,0.7929292929292929,0.6395112016293278
+gpt-4o-2024-05-13,../data/evaluation/config13/all_dependencies_all_gpt-4o-2024-05-13.json,0.81,0.8226950354609929,0.6236559139784946,0.709480122324159
+llama3:70b,../data/evaluation/config13/all_dependencies_all_llama3:70b.json,0.75,0.6153846153846154,0.7058823529411765,0.6575342465753424
+llama3:8b,../data/evaluation/config13/all_dependencies_all_llama3:8b.json,0.4899598393574297,0.4267990074441687,0.882051282051282,0.5752508361204013

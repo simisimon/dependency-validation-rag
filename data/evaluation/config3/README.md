@@ -1,20 +1,20 @@
 # general config
 pinecone_key = "4bc3fa0d-a789-4187-aa8f-d6b17d0ea6a3"
-embedding_model = "qwen" # "qwen", "ollama"
-embedding_dimension = 3584 # qwen=3584, openai=1536, ollama=...
+embedding_model = "qwen"
+embedding_dimension = 3584
 tool_name = "cfgnet"
 index_names = ["all"]
-output_dir = "../data/evaluation/config3"
+output_dir = "../data/evaluation/config13"
 
 # ingestion
-splitting = "sentence" # "sentence", "token", "semantic", "recursive"
+splitting = "sentence" 
 chunk_size = 512
 chunk_overlap = 50
-extractors = [] # ["summary", "keyword", title]
+extractors = [] 
 num_websites = 3
 
 # retrieval
 top_k = 10
-alpha = 1   #weight for sparse/dense retrieval, only used for hybrid query mode.
-rerank = "sentence" # "sentence", "llm", "colbert"
+alpha = 0.5  
+rerank = "sentence" 
 top_n = 5

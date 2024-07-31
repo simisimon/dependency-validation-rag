@@ -1,5 +1,5 @@
 # general config
-embedding_model = "openai"
+embedding_model = "openai" 
 embedding_dimension = 1536
 tool_name = "cfgnet"
 
@@ -12,6 +12,6 @@ num_websites = 3
 
 # retrieval
 top_k = 10
-alpha = 1  
-rerank = "colbert"
+alpha = 0.5
+rerank = "colbert" 
 top_n = 5

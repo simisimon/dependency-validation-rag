@@ -1,5 +1,5 @@
 model_name,file,accuracy,precision,recall,f1-score
-gpt-3.5-turbo-0125,../data/evaluation/config11/all_dependencies_all_gpt-3.5-turbo-0125.json,0.612,0.48788927335640137,0.7540106951871658,0.592436974789916
-gpt-4o-2024-05-13,../data/evaluation/config11/all_dependencies_all_gpt-4o-2024-05-13.json,0.802,0.8142857142857143,0.6096256684491979,0.6972477064220183
-llama3:70b,../data/evaluation/config11/all_dependencies_all_llama3:70b.json,0.656,0.5287356321839081,0.7379679144385026,0.6160714285714287
-llama3:8b,../data/evaluation/config11/all_dependencies_all_llama3:8b.json,0.4536290322580645,0.3980815347721823,0.8924731182795699,0.550580431177446
+gpt-3.5-turbo-0125,../data/evaluation/config11/all_dependencies_all_gpt-3.5-turbo-0125.json,0.616,0.5190311418685121,0.7389162561576355,0.6097560975609756
+gpt-4o-2024-05-13,../data/evaluation/config11/all_dependencies_all_gpt-4o-2024-05-13.json,0.778,0.8285714285714286,0.5714285714285714,0.6763848396501458
+llama3:70b,../data/evaluation/config11/all_dependencies_all_llama3:70b.json,0.664,0.5670498084291188,0.729064039408867,0.6379310344827587
+llama3:8b,../data/evaluation/config11/all_dependencies_all_llama3:8b.json,0.4778225806451613,0.4316546762589928,0.8910891089108911,0.5815831987075929

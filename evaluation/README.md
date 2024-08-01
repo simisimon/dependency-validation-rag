@@ -1,0 +1,5 @@
+- `analysis_without.ipynb`: notebook for the analysis of the results without RAG
+- `analysis_rag.ipynb`: notebook for the analysis of the results with the different RAG variants
+- `context_relevancy.ipynb`: notebook for the analysis of the context relevance
+- `dependency.py`: script to get dependencies from the subject systems and randomly select a sample set
+- `validation_effectivness.ipynb`: notebook for the calculating the validation effectiveness of LLMs with and without RAG

@@ -54,7 +54,7 @@ def get_dependencies(repo_dir: str, num_dependencies: int = 50) -> None:
 
 
     df = pd.DataFrame(data=link_list)
-    df.to_csv(f"../data/evaluation/{repo_name}_dependencies.csv", index=False)
+    df.to_csv(f"../data/projects/{repo_name}_dependencies.csv", index=False)
 
 
 

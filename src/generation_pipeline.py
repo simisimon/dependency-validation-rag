@@ -20,12 +20,19 @@ def get_args():
     return parser.parse_args()
 
 
-@backoff.on_exception(backoff.expo, Exception, max_tries=10)
+@backoff.on_exception(backoff.expo, Exception, max_tries=3)
 def generate(generator: GeneratorEngine, messages: List) -> str:
     response = generator.generate(messages=messages)
 
     if not response:
         raise Exception("Response is empty.")
+    
+    try:
+        response_dict = json.loads(response)
+        if "isDependency" not in response_dict:
+            raise Exception("KeyError: isDependency")
+    except json.JSONDecodeError:
+        raise Exception("Response format not serializable.")
 
     return response
 
@@ -71,11 +78,13 @@ def run_generation(config: Dict) -> None:
             }
         ]
 
-
-        response = generate(
-            generator=generator,
-            messages=messages
-        )
+        try:
+            response = generate(
+                generator=generator,
+                messages=messages
+            )
+        except Exception:
+            response = "None"
 
         entry["response"] = response
         counter += 1

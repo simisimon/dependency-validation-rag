@@ -22,11 +22,13 @@ class GeneratorFactory:
                 model_name=model_name,
                 temperature=temperature
             )
-        else:
+        if model_name.startswith("llama"):
             return OllamaGeneratorEngine(
                 model_name=model_name,
                 temperature=temperature
             )
+        else:
+            raise Exception(f"Model {model_name} is not yet supported.")
         
 
 class GeneratorEngine:

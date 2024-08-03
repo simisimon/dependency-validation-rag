@@ -2,6 +2,7 @@ from openai import OpenAI, RateLimitError, Timeout, APIError, APIConnectionError
 from rich.logging import RichHandler
 from typing import Tuple, List, Dict
 from ollama._types import ResponseError, RequestError
+from anthropic import Anthropic
 import ollama
 import backoff
 import logging
@@ -27,6 +28,13 @@ class GeneratorFactory:
                 model_name=model_name,
                 temperature=temperature
             )
+
+        if model_name.startswith("claude"):
+            return AnthropicGeneratorEngine(
+                model_name=model_name,
+                temperature=temperature
+            )
+    
         else:
             raise Exception(f"Model {model_name} is not yet supported.")
         
@@ -38,6 +46,37 @@ class GeneratorEngine:
 
     def generate(self, messages: List) -> str:
         pass
+
+
+
+class AnthropicGeneratorEngine(GeneratorEngine):
+    def __init__(self, model_name: str, temperature: int) -> None:
+        super().__init__(
+            model_name=model_name, 
+            temperature=temperature
+        )
+        logging.info(f"Anthropic ({model_name}) generator initialized.")
+
+    
+    def generate(self, messages: List) -> str:
+        client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+        response = client.messages.create(
+            max_tokens=1000,
+            system=messages[0]["content"],
+            messages=[
+                {
+                    "role": messages[1]["role"],
+                    "content": messages[1]["content"],
+                }
+            ],
+            model=self.model_name,
+            temperature=self.temperature
+        )
+
+        #x = response.content[0].to_dict()
+        #print("Response: ", x, type(x))
+
+        return response.content[0].to_dict()["text"]
 
 
 class GPTGeneratorEngine(GeneratorEngine):

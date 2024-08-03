@@ -28,7 +28,7 @@ def generate(generator: GeneratorEngine, messages: List) -> str:
         raise Exception("Response is empty.")
     
     try:
-        response_dict = json.loads(response)
+        response_dict = json.loads(response, strict=False)
         if "isDependency" not in response_dict:
             raise Exception("KeyError: isDependency")
     except json.JSONDecodeError:

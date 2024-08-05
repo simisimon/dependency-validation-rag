@@ -3,3 +3,4 @@ gpt-4o-2024-05-13,../data/results/config3/all_dependencies_all_gpt-4o-2024-05-13
 gpt-3.5-turbo-0125,../data/results/config3/all_dependencies_all_gpt-3.5-turbo-0125.json,0.63,0.5308219178082192,0.7635467980295566,0.6262626262626263
 llama3:70b,../data/results/config3/all_dependencies_all_llama3:70b.json,0.686,0.5871212121212122,0.7635467980295566,0.6638115631691648
 llama3:8b,../data/results/config3/all_dependencies_all_llama3:8b.json,0.5247058823529411,0.4578313253012048,0.8735632183908046,0.6007905138339921
+llama3.1:8b,../data/results/config3/all_dependencies_all_llama3.1:8b.json,0.5290581162324649,0.44694533762057875,0.6881188118811881,0.5419103313840156

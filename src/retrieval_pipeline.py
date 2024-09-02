@@ -21,7 +21,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file", type=str, default="../retrieval_config.toml")
     parser.add_argument("--env_file", type=str, default="../.env")
-    parser.add_argument("--data_file", type=str, default="../data/evaluation/all_dependencies.csv")   
+    parser.add_argument("--data_file", type=str, default="../data/results/all_dependencies_updated.csv")   
     
     return parser.parse_args()
 
@@ -121,6 +121,12 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
     counter = 0
     batch_size = 100
     for index, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
+
+        if index not in [125, 133, 181, 192, 238, 264, 268, 282, 285, 486]:
+            continue
+
+        print("Process Index: ", index)
+
         dependency = transform(row=row)
 
         system_str = prompt_settings.get_system_str(dependency=dependency)
@@ -205,36 +211,36 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 
         counter += 1
 
-        if index_name == "all":
-            if counter % batch_size == 0:
+        #if index_name == "all":
+        #    if counter % batch_size == 0:
 
-                #queries = [query for query in queries if is_json_serializable(query)]
-                output_file = f"{config['output_dir']}/all_dependencies_{index_name}_{counter}.json"
-                with open(output_file, "w", encoding="utf-8") as dest:
-                    json.dump(queries, dest, indent=2)
-                mlflow.log_artifact(local_path=output_file)
+        #        #queries = [query for query in queries if is_json_serializable(query)]
+        #        output_file = f"{config['output_dir']}/all_dependencies_{index_name}_{counter}.json"
+        #        with open(output_file, "w", encoding="utf-8") as dest:
+        #            json.dump(queries, dest, indent=2)
+        #        mlflow.log_artifact(local_path=output_file)
 
-                #web_queries = [query for query in web_queries if is_json_serializable(query)]
-                web_output_file = f"{config['output_dir']}/all_dependencies_web-search_{counter}.json"
-                with open(web_output_file, "w", encoding="utf-8") as dest:
-                    json.dump(web_queries, dest, indent=2)
-                mlflow.log_artifact(local_path=web_output_file)
+        #        #web_queries = [query for query in web_queries if is_json_serializable(query)]
+        #        web_output_file = f"{config['output_dir']}/all_dependencies_web-search_{counter}.json"
+        #        with open(web_output_file, "w", encoding="utf-8") as dest:
+        #            json.dump(web_queries, dest, indent=2)
+        #        mlflow.log_artifact(local_path=web_output_file)
 
     if queries:
         #queries = [query for query in queries if is_json_serializable(query)]
-        output_file = f"{config['output_dir']}/all_dependencies_{index_name}.json"
+        output_file = f"{config['output_dir']}/all_dependencies_{index_name}_updated.json"
         with open(output_file, "w", encoding="utf-8") as dest:
             json.dump(queries, dest, indent=2)
 
         mlflow.log_artifact(local_path=output_file)
 
-    if web_queries:
-        #web_queries = [query for query in web_queries if is_json_serializable(query)]
-        web_output_file = f"{config['output_dir']}/all_dependencies_web-search.json"
-        with open(web_output_file, "w", encoding="utf-8") as dest:
-            json.dump(web_queries, dest, indent=2)
+    #if web_queries:
+    #    #web_queries = [query for query in web_queries if is_json_serializable(query)]
+    #    web_output_file = f"{config['output_dir']}/all_dependencies_web-search.json"
+    #    with open(web_output_file, "w", encoding="utf-8") as dest:
+    #        json.dump(web_queries, dest, indent=2)
 
-        mlflow.log_artifact(local_path=web_output_file)
+    #    mlflow.log_artifact(local_path=web_output_file)
 
     print(f"Done with index: {index_name}")
 

@@ -1,5 +1,7 @@
 - `/results`: contains the results of the evaluation
 - `/dependencies`: contains file for each software projects with the 50 randomly selected configuration dependendies
 - `/analysis`: contains the results of the qualitative analysis
+- `/projects`: subject projects and their sampled dependencies
+- `/shots`: pool of examples 
 - `/so-posts`: pre-processed Stack Overflow posts that we indexed into a vector database
 - `/stackoverflow`: top 100 stack overflow posts for each technology pair 

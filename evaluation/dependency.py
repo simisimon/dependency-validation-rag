@@ -3,16 +3,16 @@ import pandas as pd
 import random
 
 EVAL_REPOS = [
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/piggymetrics",
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/pig",
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/litemall",
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/mall",
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/mall-swarm",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/piggymetrics",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/pig",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/litemall",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/mall",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/mall-swarm",
     "/home/simisimon/GitHub/cval_evaluation/spring-projects/Spring-Cloud-Platform",
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/jetlinks-community",
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/music-website",
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/spring-boot-admin",
-    "/home/simisimon/GitHub/cval_evaluation/spring-projects/apollo",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/jetlinks-community",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/music-website",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/spring-boot-admin",
+    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/apollo",
 ]
 
 
@@ -61,4 +61,4 @@ def get_dependencies(repo_dir: str, num_dependencies: int = 50) -> None:
 if __name__ == "__main__":
     print("Get Repositories")
     for repo_dir in EVAL_REPOS:
-        get_dependencies(repo_dir=repo_dir, num_dependencies=50)
+        get_dependencies(repo_dir=repo_dir, num_dependencies=10)

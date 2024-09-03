@@ -1,0 +1,6 @@
+Carefully evaluate whether configuration option services.statistics-mongodb.restart of type MODE with value always in docker-compose.yml of technology docker-compose  depends on configuration option services.monitoring.restart of type MODE with value always in docker-compose.yml of technology docker-compose or vice versa.
+
+{
+    "rationale": "The 'restart' option in docker-compose.yml specifies the restart policy for a service. The value 'always' means that the service will always be restarted if it stops. This setting is typically used to ensure high availability and resilience of services. Each service can have its own restart policy independently of the other and therefore the similarity of their values does not indicate a dependency.",
+    "isDependency": false
+}

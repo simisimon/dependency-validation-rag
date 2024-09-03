@@ -1,0 +1,6 @@
+Carefully evaluate whether configuration option project.modules.module of type NAME with value apollo-configservice in pom.xml of technology maven depends on configuration option spring.application.name of type NAME with value apollo-configservice in apollo-configservice/src/test/resources/application.yml of technology spring or vice versa.
+
+{
+    "rationale": "The configuration option project.modules.module with the value apollo-configservice in pom.xml defines a module within a Maven multi-module project. The configuration option spring.application.name with the same value apollo-configservice in the application.yml file specifies the name of the Spring application. The Maven module's name and the Spring application name are aligned, as they reference a common name in project that frequently appears in the project. So, the identical value does not indicate a dependency.",
+    "isDependency": false
+}

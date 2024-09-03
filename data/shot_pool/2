@@ -1,0 +1,6 @@
+Carefully evaluate whether configuration option project.parent_pig-common.artifactId of type NAME with value pig-common in pig-common/pig-common-seata/pom.xml of technology maven depends on configuration option project.parent_pig-common.artifactId of type NAME with value pig-common in pig-common/pig-common-mybatis/pom.xml of technology maven or vice versa.
+
+{
+    "rationale": "Both, pig-common-seata and pig-common-mybatis are submodule in the pig project and inherit the artifactID from the parent module pig-common. Due to project inheritance, these options depend on each other due to value-equality.",
+    "isDependency": true
+}

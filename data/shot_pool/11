@@ -1,0 +1,8 @@
+Carefully evaluate whether configuration option services.consul.ports.out of type PORT with value 8500 in spring-boot-admin-samples/spring-boot-admin-sample-consul/docker-compose.yml of technology docker-compose depends on configuration option services.consul.ports.in of type PORT with value 8500 in spring-boot-admin-samples/spring-boot-admin-sample-consul/docker-compose.yml of technology docker-compose or vice versa.
+
+{
+    "rationale": "In Docker Compose, the 'ports' configuration typically maps a port on the host to a port on the container. The 'in' port refers to the internal port within the container, while the 'out' port refers to the external port on the host. These ports do not need to be the same for the service to function correctly; they can be different. It is common to map the same port on the host for simplicity. However, this is not a requirement, and the service would still function if the ports were different.",
+    "isDependency": false
+}
+
+

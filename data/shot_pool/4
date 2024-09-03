@@ -1,0 +1,6 @@
+Carefully evaluate whether configuration option project.dependencyManagement.dependencies.dependency_awaitility.scope of type UNKNOWN with value test in pom.xml of technology maven depends on configuration option project.dependencies.dependency_h2.scope of type UNKNOWN with value test in apollo-build-sql-converter/pom.xml of technology maven or vice versa.
+
+{
+    "rationale": "The configuration option project.dependencyManagement.dependencies.dependency_awaitility.scope and the option project.dependencies.dependency_h2.scope are specified in different configuration files and indicate the scope of different Maven dependencies, but define the scope of dependencies in Maven. While both scopes are set to 'test', is does not create a dependency between these Maven dependencies, as each Maven dependency independently defines its scope.",
+    "isDependency": false
+}

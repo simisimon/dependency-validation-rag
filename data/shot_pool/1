@@ -1,0 +1,6 @@
+Carefully evaluate whether configuration option project.dependencyManagement.dependencies.dependency_litemall-admin-api.groupId of type NAME with value org.linlinjava in pom.xml of technology maven depends on configuration option project.parent_litemall.groupId of type NAME with value org.linlinjava in litemall-core/pom.xml of technology maven or vice versa.
+
+{
+    "rationale": "The 'groupId' in Maven is used to uniquely identify a project across all projects. The options depend on each other as litemall-admin-api is a specific module in the litemall project and therefore needs to specificy the same groupID used in the project to identify all modules.",
+    "isDependency": true
+}

@@ -5,7 +5,12 @@ from sentence_transformers import SentenceTransformer
 from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
 from llama_index.core import Settings
-from typing import Dict, Optional
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from prompt_settings import CfgNetPromptSettings
+from data import Dependency
+from typing import Dict, Optional, List
+import numpy as np
 import toml
 import os
 
@@ -86,3 +91,69 @@ def set_llm(inference_model_name: Optional[str]) -> None:
 
     
     
+def get_projet_description(project_name: str) -> str:
+    """
+    Read and return project-specific information.
+    """
+    with open(f"../data/project_info/{project_name}.txt", "r", encoding="utf-8") as src:
+        content = src.read().strip()
+
+    return content
+
+
+def load_shots() -> List[str]:
+    """
+    Load shots from the shot pool.
+    """
+    shot_pool_path = "../data/shot_pool/"
+    shot_files = [shot_pool_path + x for x in os.listdir(shot_pool_path) if ".csv" not in x]
+    shots = []
+    for shot_file in shot_files:
+        with open(shot_file, "r", encoding="utf-8") as src:
+            shot_content = src.read()
+            shots.append(shot_content.strip())
+
+    return shots
+
+
+def get_most_similar_shot(shots: List[str], dependency: Dependency) -> str:
+    """
+    Return most similar shot based on the given dependency.
+    """
+    task_str = CfgNetPromptSettings.get_task_str(dependency=dependency)
+    
+    all = shots + [task_str]
+
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(all)
+
+    cosine_sim_matrix = cosine_similarity(tfidf_matrix)
+
+    task_similarities = cosine_sim_matrix[-1, :-1]
+    most_similar_index = np.argmax(task_similarities)
+    most_similar_shot = shots[most_similar_index]
+
+    return most_similar_shot
+
+
+def get_most_similar_shots(shots: List[str], dependency: Dependency) -> str:
+    """
+    Return most similar shot based on the given dependency.
+    """
+    task_str = CfgNetPromptSettings.get_task_str(dependency=dependency)
+    
+    all = shots + [task_str]
+
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(all)
+
+    cosine_sim_matrix = cosine_similarity(tfidf_matrix)
+
+    task_similarities = cosine_sim_matrix[-1, :-1]
+    top_two_indices = np.argsort(task_similarities)[-2:][::-1]
+    most_similar_string1 = shots[top_two_indices[0]]
+    most_similar_string2 = shots[top_two_indices[1]]
+
+
+    return (most_similar_string1, most_similar_string2)
+

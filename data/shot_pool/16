@@ -1,0 +1,6 @@
+Carefully evaluate whether configuration option project.modelVersion of type VERSION_NUMBER with value modelVersion:4.0.0 in litemall-all/pom.xml of technology maven depends on configuration option project.modelVersion of type VERSION_NUMBER with value modelVersion:4.0.0 in litemall-admin-api/pom.xml of technology maven or vice versa.
+
+{
+    "rationale": "The 'project.modelVersion' in a Maven project typically specifies the version of the POM model being used. Maven currently only supports the model version 4.0.0 and this is required all modules to ensure compatibility. Therefore, the project.modelVersion must be consistent across all modules, creatiing a dependency based on value-equality.",
+    "isDependency": true
+}

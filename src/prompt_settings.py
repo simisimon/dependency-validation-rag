@@ -25,11 +25,11 @@ class _PromptSettings:
 
     _advanced_query_prompt: PromptTemplate = PromptTemplate(
         "Information about both configuration options, including their descriptions, prior usages, and examples of similar dependencies are provided below.\n"
-        "This information comes from various sources, such as manuals, Stack Overflow posts, GitHub repositories, and web search results.\n"
-        "Be aware that not all the provided information may be relevant for validating the dependency.\n"
+        "The provided information comes from various sources, such as manuals, Stack Overflow posts, GitHub repositories, and web search results.\n"
+        "Note that not all the provided information may be relevant for validating the dependency.\n"
         "Consider only the information that is relevant for validating the dependency, and disregard the rest."
         "{context_str}\n"
-        "Additionally, here are some examples on how similar dependencies are assessed.\n"
+        "Additionally, here are some examples on how similar dependencies are evaluated:\n\n"
         "{shot_str}"
         "---------------------\n"
         "Given the information and examples, perform the following task:\n\n"
@@ -132,7 +132,7 @@ class _AdvancedCfgNetPromptSettings(_PromptSettings):
         "You are a full-stack expert in validating intra-technology and cross-technology configuration dependencies.\n" 
         "You will be presented with configuration options found in the software project '{project}'.\n\n" 
         "{project_str}\n\n"
-        "Your task is to determine whether the given configuration options actually depend on each other based on value-equality.\n\n"
+        "Your task is to determine whether the given configuration options actually depend on each other based on value-equality.\n"
         "{dependency_str}"
     )
 
@@ -155,11 +155,13 @@ class _AdvancedCfgNetPromptSettings(_PromptSettings):
     _format_str: Optional[PromptTemplate] = PromptTemplate(
         "Respond in a JSON format as shown below:\n"
         "{{\n"
-        "\t“plan”: string, // Write down a step-by-step plan on how to solve the task given the information above.\n"
+        "\t“plan”: string, // Write down a step-by-step plan on how to solve the task given the information and examples of similar dependencies above.\n"
         "\t“rationale”: string, // Provide a concise explanation of whether and why the configuration options depend on each other due to value-equality.\n"
         "\t“isDependency”: boolean // True if a dependency exists, or False otherwise.\n"
         "}}"
     )
+
+
 
 
     def get_system_str(self, dependency: Dependency, project_str: str) -> str:

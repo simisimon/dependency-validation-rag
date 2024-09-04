@@ -1,0 +1,55 @@
+Spring-boot-admin is a monitoring tool that aims to visualize information provided by Spring Boot Actuators in a nice and accessible way. 
+It consists of two major parts: a server that provides a user interface to display and interact with Spring Boot Actuator and client that is used to register at the server and allow to access actuator endpoints 
+
+In the spring-boot-admin project, Maven's project inheritance is implemented by defining a parent module that contains shared dependencies, plugins, and configuration settings in a centralized POM file, which all other modules reference in their <parent> element. 
+Each module inherits these predefined configurations from the parent module, ensuring a consistent build environment and simplifying dependency management across the entire project.
+
+The project structure of the first two levels of spring-boot-admin is as follows:
+
+spring-boot-admin/
+├── pom.xml
+├── spring-boot-admin-build/
+│   └── pom.xml
+├── spring-boot-admin-client/
+│   ├── pom.xml
+│   └── src/
+├── spring-boot-admin-dependencies/
+│   └── pom.xml
+├── spring-boot-admin-docs/
+│   ├── pom.xml
+│   └── src/
+├── spring-boot-admin-samples/
+│   ├── pom.xml
+│   ├── spring-boot-admin-sample-consul/
+│   ├── spring-boot-admin-sample-custom-ui/
+│   ├── spring-boot-admin-sample-eureka/
+│   ├── spring-boot-admin-sample-hazelcast/
+│   ├── spring-boot-admin-sample-reactive/
+│   ├── spring-boot-admin-sample-servlet/
+│   ├── spring-boot-admin-sample-servlet-graalvm/
+│   ├── spring-boot-admin-sample-war/
+│   └── spring-boot-admin-sample-zookeeper/
+├── spring-boot-admin-server/
+│   ├── pom.xml
+│   └── src/
+├── spring-boot-admin-server-cloud/
+│   ├── pom.xml
+│   └── src/
+├── spring-boot-admin-server-ui/
+│   ├── babel.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── pom.xml
+│   ├── postcss.config.js
+│   ├── src/
+│   ├── tailwind.config.js
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.mts
+├── spring-boot-admin-starter-client/
+│   └── pom.xml
+├── spring-boot-admin-starter-server/
+│   └── pom.xml
+└── src/
+    ├── checkstyle/
+    └── main/

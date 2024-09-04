@@ -1,0 +1,62 @@
+Apollo is a reliable configuration management system, suitable for microservice configuration management scenarios.
+The server side is developed based on Spring Boot, Spring Cloud, Maven, Docker, and Docker-Compose.
+It is decomposed into 4 modules, including and admin service, meta server, a portal, and a client.
+The primary database in Apollo is MySQL.
+
+In the Apollo project, Maven's project inheritance is implemented by defining a parent module that contains shared dependencies, plugins, and configuration settings in a centralized POM file, which all other modules reference in their <parent> element. 
+Each module inherits these predefined configurations from the parent module, ensuring a consistent build environment and simplifying dependency management across the entire project.
+
+The project structure of the first two levels of apollo is as follows:
+
+apollo/
+├── apollo-adminservice/
+│   ├── pom.xml
+│   └── src/
+├── apollo-assembly/
+│   ├── pom.xml
+│   └── src/
+├── apollo-audit/
+│   ├── apollo-audit-annotation/
+│   ├── apollo-audit-api/
+│   ├── apollo-audit-impl/
+│   ├── apollo-audit-spring-boot-starter/
+│   └── pom.xml
+├── apollo-biz/
+│   ├── pom.xml
+│   └── src/
+├── apollo-build-sql-converter/
+│   ├── pom.xml
+│   └── src/
+├── apollo-buildtools/
+│   ├── pom.xml
+│   ├── src/
+│   └── style/
+├── apollo-common/
+│   ├── pom.xml
+│   └── src/
+├── apollo-configservice/
+│   ├── pom.xml
+│   └── src/
+├── apollo-portal/
+│   ├── pom.xml
+│   └── src/
+├── changes/
+├── doc/
+│   └── images/
+├── docs/
+│   ├── charts/
+│   ├── CNAME
+│   ├── css/
+│   ├── en/
+│   ├── index.html
+│   ├── scripts/
+│   └── zh/
+├── LICENSE
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+└── scripts/
+    ├── build.bat
+    ├── build.sh
+    ├── openapi/
+    └── sql/

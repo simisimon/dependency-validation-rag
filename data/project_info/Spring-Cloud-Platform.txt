@@ -1,0 +1,34 @@
+Spring-Cloud-Platform is a microservice development platform based on Spring Cloud, featuring a unified authorization and authentication backend management system. 
+It includes multiple modules such as user management, resource and permission management, and gateway API management 
+The core technologies used are Spring Boot, Spring Cloud, and Spring Cloud Alibaba, Maven, Docker, and Docker-Compose.
+
+In the Spring-Cloud-Platform project, Maven's project inheritance is implemented by defining a parent module that contains shared dependencies, plugins, and configuration settings in a centralized POM file, which all other modules reference in their <parent> element. 
+Each module inherits these predefined configurations from the parent module, ensuring a consistent build environment and simplifying dependency management across the entire project.
+
+The project structure of the first two levels of Spring-Cloud-Platform is as follows:
+
+Spring-Cloud-Platform/
+├── ace-api/ # Common data transfer object for cross-service calls
+│   ├── pom.xml
+│   └── src/
+├── ace-dev-base/ # general scaffolding
+│   ├── ace-auth-sdk/
+│   ├── ace-common/
+│   └── pom.xml
+├── ace-gate/ # Gateway load center
+│   ├── pom.xml
+│   └── src/
+├── ace-infrastructure/ # Operations and maintenance center
+│   ├── ace-monitor/
+│   ├── ace-nacos/
+│   ├── ace-sentinel/
+│   └── pom.xml
+├── ace-modules/ # Common service modules
+│   ├── ace-admin/
+│   ├── ace-generator/
+│   ├── ace-nlp/
+│   ├── ace-sample/
+│   ├── ace-tool/
+│   └── pom.xml
+├── docker-compose.yml
+└── pom.xml

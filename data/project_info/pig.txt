@@ -1,0 +1,57 @@
+Pig is a microservice developed with modern and popular technologies, such as Spring Boot, Spring Cloud, Maven, MySQL, Docker, and Docker Compose. 
+
+In the pig project, Maven's project inheritance is implemented by defining a parent module that contains shared dependencies, plugins, and configuration settings in a centralized POM file, which all other modules reference in their <parent> element. 
+Each module inherits these predefined configurations from the parent module, ensuring a consistent build environment and simplifying dependency management across the entire project. 
+However, in pig, each module specifies its own version, which overrides the inherited version from the parent.
+
+The project structure of the first two levels of pig is as follows:
+
+pig/
+├── db/
+│   ├── Dockerfile
+│   ├── pig.sql
+│   └── pig_config.sql
+├── docker-compose.yml
+├── pig-auth/ # Authorization service provider
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── pig-boot/ # The launcher for standalone mode
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── pig-common/ # Common system modules encompassing several sub-modules
+│   ├── pig-common-bom/
+│   ├── pig-common-core/
+│   ├── pig-common-datasource/
+│   ├── pig-common-feign/
+│   ├── pig-common-log/
+│   ├── pig-common-mybatis/
+│   ├── pig-common-oss/
+│   ├── pig-common-seata/
+│   ├── pig-common-security/
+│   ├── pig-common-swagger/
+│   ├── pig-common-xss/
+│   └── pom.xml
+├── pig-gateway/ # Spring Cloud Gateway for API gateway management
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── pig-register/ # Nacos Server for service registration and discovery
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── pig-upms/ # General user and permission management module with two sub-components
+│   ├── pig-upms-api/
+│   ├── pig-upms-biz/
+│   └── pom.xml
+├── pig-visual/ # Modules for visualization and monitoring purposes
+│   ├── pig-codegen/
+│   ├── pig-monitor/
+│   ├── pig-quartz/
+│   └── pom.xml
+├── pom.xml
+└── README.md
+
+
+

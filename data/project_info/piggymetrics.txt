@@ -1,0 +1,61 @@
+PiggyMetrics is a simple financial advisor app built to demonstrate the Microservice Architecture Pattern using Spring Boot, Spring Cloud, Maven, Docker, and Docker Compose. 
+It is decomposed into three core microservices, including a statistics, account, and notification service.
+Each microservice has its own database, with MongoDB being used the primary database for each service. 
+Overall, PiggyMetrics includes 9 Spring Boot modules, 4 MongoDB instances and a RabittMq.
+
+In the PiggyMetrics project, Maven's project inheritance is implemented by defining a parent module that contains shared dependencies, plugins, and configuration settings in a centralized POM file, which all other modules reference in their <parent> element. 
+Each module inherits these predefined configurations from the parent module, ensuring a consistent build environment and simplifying dependency management across the entire project. 
+However, in PiggyMetrics, each module specifies its own version, which overrides the inherited version from the parent.
+
+The project structure of the first two levels of PiggyMetrics is as follows:
+
+piggymetrics/
+├── account-service/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── auth-service/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── config/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── docker-compose.dev.yml
+├── docker-compose.yml
+├── gateway/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── LICENCE
+├── mongodb/
+│   ├── Dockerfile
+│   ├── dump/
+│   └── init.sh
+├── monitoring/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── notification-service/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── pom.xml
+├── README.md
+├── registry/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── statistics-service/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+└── turbine-stream-service/
+    ├── Dockerfile
+    ├── pom.xml
+    └── src/
+
+
+
+

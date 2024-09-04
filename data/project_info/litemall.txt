@@ -1,0 +1,82 @@
+Litemall is a simple shopping mall system that implements a complete frontend and backend project based on existing open source projects, such as Spring Boot, MyBatis, MySQL, Maven, Vue, Docker, and Docker Compose.
+The architecture of the project consists of four systems, nine modules, and one backend database.
+
+In the litemall project, Maven's project inheritance is implemented by defining a parent module that contains shared dependencies, plugins, and configuration settings in a centralized POM file, which all other modules reference in their <parent> element. 
+Each module inherits these predefined configurations from the parent module, ensuring a consistent build environment and simplifying dependency management across the entire project.
+
+The project structure of the first two levels of litemall is as follows:
+
+litemall/
+├── deploy/
+│   ├── bin/
+│   ├── db/
+│   ├── litemall/
+│   └── util/
+├── docker/
+│   ├── bin/
+│   ├── db/
+│   ├── docker-compose.yml
+│   ├── litemall/
+│   └── util/
+├── litemall-admin/ # management of frontend modules
+│   ├── babel.config.js
+│   ├── build/
+│   ├── jest.config.js
+│   ├── jsconfig.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public/
+│   ├── src/
+│   └── vue.config.js
+├── litemall-admin-api/ # background service module of the administration
+│   ├── pom.xml
+│   └── src/
+├── litemall-all/
+│   ├── pom.xml
+│   └── src/
+├── litemall-all-war/
+│   ├── pom.xml
+│   └── src/
+├── litemall-core/ # provides general services
+│   ├── pom.xml
+│   └── src/
+├── litemall-db/ # provides database access services
+│   ├── mybatis-generator/
+│   ├── pom.xml
+│   ├── sql/
+│   └── src/
+├── litemall-vue/ # frontend module
+│   ├── babel.config.js
+│   ├── package.json
+│   ├── public/
+│   ├── src/
+│   └── vue.config.js
+├── litemall-wx/
+│   ├── app.js
+│   ├── app.json
+│   ├── app.wxss
+│   ├── config/
+│   ├── lib/
+│   ├── pages/
+│   ├── project.config.json
+│   ├── project.private.config.json
+│   ├── sitemap.json
+│   ├── static/
+│   └── utils/
+├── litemall-wx-api/
+│   ├── pom.xml
+│   └── src/
+├── pom.xml
+└── renard-wx/
+    ├── app.js
+    ├── app.json
+    ├── app.wxss
+    ├── components/
+    ├── config/
+    ├── images/
+    ├── lib/
+    ├── pages/
+    ├── project.config.json
+    ├── sitemap.json
+    ├── static/
+    └── utils/

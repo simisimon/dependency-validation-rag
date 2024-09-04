@@ -1,0 +1,48 @@
+The JetLinks Community project represents a modular and comprehensive IoT platform developed with Spring Boot, Spring Webflus, ElasticSearch, PostgreSQL, Maven, Docker, and Docker-Compose. 
+
+In the jetlinks-community project, Maven's project inheritance is implemented by defining a parent module that contains shared dependencies, plugins, and configuration settings in a centralized POM file, which all other modules reference in their <parent> element. 
+Each module inherits these predefined configurations from the parent module, ensuring a consistent build environment and simplifying dependency management across the entire project.
+
+The project structure of the first two levels of jetlinks-community is as follows:
+
+TOjetlinks-community/
+├── docker/
+│   ├── dev-env/
+│   └── run-all/
+├── jetlinks-components/ # provides jetlinks modules
+│   ├── common-component/
+│   ├── configure-component/
+│   ├── dashboard-component/
+│   ├── elasticsearch-component/
+│   ├── gateway-component/
+│   ├── io-component/
+│   ├── logging-component/
+│   ├── network-component/
+│   ├── notify-component/
+│   ├── pom.xml
+│   ├── protocol-component/
+│   ├── relation-component/
+│   ├── rule-engine-component/
+│   ├── script-component/
+│   ├── tdengine-component/
+│   ├── things-component/
+│   └── timeseries-component/
+├── jetlinks-manager/ # provides jetlinks management modules
+│   ├── authentication-manager/
+│   ├── device-manager/
+│   ├── logging-manager/
+│   ├── network-manager/
+│   ├── notify-manager/
+│   ├── pom.xml
+│   └── rule-engine-manager/
+├── jetlinks-standalone/ # module for service startup and managing the standalone deployment
+│   ├── docker-entrypoint.sh
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+├── pom.xml
+└── simulator/ # device simulator for testing and development purposes
+    ├── device-simulator.jar
+    ├── history/
+    ├── mqtt/
+    └── start.shDO

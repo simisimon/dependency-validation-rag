@@ -1,0 +1,33 @@
+Music-website a music streaming plattform, encompasing two core modules: the client and server.
+It is developed with Spring Boot, MyBatis, Maven, Docker, and Vue.
+
+The project structure of the first two levels of music-website is as follows:
+
+music-website/
+├── img/
+├── LICENSE
+├── music-client/
+│   ├── babel.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public/
+│   ├── src/
+│   ├── tsconfig.json
+│   └── vue.config.js
+├── music-manage/
+│   ├── babel.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public/
+│   ├── src/
+│   ├── tsconfig.json
+│   └── vue.config.js
+└── music-server/
+    ├── docker-server/
+    ├── docker-vue-client/
+    ├── docker-vue-manage/
+    ├── mvnw
+    ├── mvnw.cmd
+    ├── pom.xml
+    ├── sql/
+    └── src/

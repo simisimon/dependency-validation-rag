@@ -1,5 +1,5 @@
-from prompt_settings import PrompSettingsFactory
-from util import load_config
+from prompt_settings import PrompSettingsFactory, AdvancedCfgNetPromptSettings
+from util import load_config, load_shots, get_most_similar_shots, get_projet_description, transform
 from dotenv import load_dotenv
 from generator import GeneratorFactory
 from typing import List, Dict
@@ -68,14 +68,8 @@ def run_generation(config: Dict) -> None:
             query_str =f"{entry['task_str']}\n\n{prompt_settings.get_format_prompt()}"
 
         messages = [
-            {
-                "role": "system", 
-                "content": entry["system_str"]
-            },
-            {
-                "role": "user",
-                "content": query_str
-            }
+            {"role": "system", "content": entry["system_str"]},
+            {"role": "user", "content": query_str}
         ]
 
         try:
@@ -100,6 +94,68 @@ def run_generation(config: Dict) -> None:
             mlflow.log_artifact(local_path=output_file) 
 
 
+def run_advanced_generation(config: Dict) -> None:
+    
+    with open(config["data_file"], "r", encoding="utf-8") as src:
+        data = json.load(src)
+
+    prompt_settings = AdvancedCfgNetPromptSettings
+
+    results = []
+    shots = load_shots()
+
+    generator = GeneratorFactory().get_generator(
+        model_name=config["model_name"], 
+        temperature=config["temperature"]
+    )
+
+    for entry in tqdm(data, total=len(data), desc="Processing entries"):
+
+        dependency = transform(entry["dependency"])
+
+        project_str = get_projet_description(project_name=dependency.project)
+        context_str = entry["context_str"]
+        task_str = prompt_settings.get_task_str(dependency=dependency)
+        shots_str = "\n\n".join([shot for shot in get_most_similar_shots(shots, dependency)])
+        format_str = prompt_settings.get_format_prompt()
+
+        system_prompt = prompt_settings.get_system_str(
+            dependency=dependency,
+            project_str=project_str
+        )
+
+        user_prompt = prompt_settings.advanced_query_prompt.format(
+                context_str=context_str, 
+                shot_str=shots_str,
+                task_str=task_str,
+                format_str=format_str
+        )
+
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+
+        try:
+            response = generate(
+                generator=generator,
+                messages=messages
+            )
+        except Exception:
+            response = "None"
+
+        entry["response"] = response
+        
+        results.append(entry)
+
+        
+    output_file = f"{config['output_dir']}/all_dependencies_{config['index_name']}_{config['model_name']}_advanced.json"
+    with open(output_file, "a", encoding="utf-8") as dest:
+        json.dump(results, dest, indent=2)
+
+
+
+
 def main():
     args = get_args()
 
@@ -117,7 +173,8 @@ def main():
         mlflow.log_artifact(local_path=config["data_file"])
         mlflow.log_artifact(local_path=args.env_file)
 
-        run_generation(config=config)
+        #run_generation(config=config)
+        run_advanced_generation(config=config)
 
 
 if __name__ == "__main__":

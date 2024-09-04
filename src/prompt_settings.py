@@ -30,7 +30,7 @@ class _PromptSettings:
         "Consider only the information that is relevant for validating the dependency, and disregard the rest."
         "{context_str}\n"
         "Additionally, here are some examples on how similar dependencies are evaluated:\n\n"
-        "{shot_str}"
+        "{shot_str}\n"
         "---------------------\n"
         "Given the information and examples, perform the following task:\n\n"
         "{task_str}\n\n"

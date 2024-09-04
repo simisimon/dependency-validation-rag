@@ -116,6 +116,25 @@ def load_shots() -> List[str]:
     return shots
 
 
+def transform(entry) -> Dependency:
+    dependency = Dependency(
+        project=entry["project"],
+        option_name=entry["option_name"],
+        option_value=entry["option_value"],
+        option_type=entry["option_type"].split(".")[-1],
+        option_file=entry["option_file"],
+        option_technology=entry["option_technology"],
+        dependent_option_name=entry["dependent_option_name"],
+        dependent_option_value=entry["dependent_option_value"],
+        dependent_option_type=entry["dependent_option_type"].split(".")[-1],
+        dependent_option_file=entry["dependent_option_file"],
+        dependent_option_technology=entry["dependent_option_technology"]
+    )
+    return dependency
+
+
+
+
 def get_most_similar_shot(shots: List[str], dependency: Dependency) -> str:
     """
     Return most similar shot based on the given dependency.

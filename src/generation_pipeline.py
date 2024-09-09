@@ -85,14 +85,18 @@ def run_generation(config: Dict) -> None:
         counter += 1
         results.append(entry)
 
-        if counter % batch_size == 0:
-            if config["with_rag"]:
-                output_file = f"{config['output_dir']}/all_dependencies_{config['index_name']}_{config['model_name']}_{counter}.json"
-            else:
-                output_file = f"{config['output_dir']}/all_dependencies_without_{config['model_name']}_{counter}.json"
-            with open(output_file, "a", encoding="utf-8") as dest:
-                json.dump(results, dest, indent=2)
-            mlflow.log_artifact(local_path=output_file) 
+        #if counter % batch_size == 0:
+        #    if config["with_rag"]:
+        #        output_file = f"{config['output_dir']}/validation_{config['index_name']}_{config['model_name']}_{counter}.json"
+        #    else:
+        #        output_file = f"{config['output_dir']}/all_dependencies_without_{config['model_name']}_{counter}.json"
+        #    with open(output_file, "a", encoding="utf-8") as dest:
+        #        json.dump(results, dest, indent=2)
+        #    mlflow.log_artifact(local_path=output_file) 
+
+    output_file = config["output_file"]
+    with open(output_file, "w", encoding="utf-8") as dest:
+        json.dump(results, dest, indent=2)
 
 
 def run_advanced_generation(config: Dict) -> None:
@@ -150,7 +154,7 @@ def run_advanced_generation(config: Dict) -> None:
         results.append(entry)
 
         
-    output_file = f"{config['output_dir']}/all_dependencies_{config['index_name']}_{config['model_name']}_advanced.json"
+    output_file = config["output_file"]
     with open(output_file, "a", encoding="utf-8") as dest:
         json.dump(results, dest, indent=2)
 
@@ -172,8 +176,8 @@ def main():
         mlflow.log_artifact(local_path=config["data_file"])
         mlflow.log_artifact(local_path=args.env_file)
 
-        run_generation(config=config)
-        #run_advanced_generation(config=config)
+        #run_generation(config=config)
+        run_advanced_generation(config=config)
 
 
 if __name__ == "__main__":

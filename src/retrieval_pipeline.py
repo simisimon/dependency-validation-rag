@@ -21,7 +21,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file", type=str, default="../retrieval_config.toml")
     parser.add_argument("--env_file", type=str, default="../.env")
-    parser.add_argument("--data_file", type=str, default="../data/results/all_dependencies_updated.csv")   
+    parser.add_argument("--data_file", type=str, default="../data/results/validation_set.csv")   
     
     return parser.parse_args()
 
@@ -121,11 +121,6 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
     counter = 0
     batch_size = 100
     for index, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
-
-        if index not in [125, 133, 181, 192, 238, 264, 268, 282, 285, 486]:
-            continue
-
-        print("Process Index: ", index)
 
         dependency = transform(row=row)
 
@@ -228,7 +223,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 
     if queries:
         #queries = [query for query in queries if is_json_serializable(query)]
-        output_file = f"{config['output_dir']}/all_dependencies_{index_name}_updated.json"
+        output_file = config["output_file"]
         with open(output_file, "w", encoding="utf-8") as dest:
             json.dump(queries, dest, indent=2)
 
@@ -243,6 +238,10 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
     #    mlflow.log_artifact(local_path=web_output_file)
 
     print(f"Done with index: {index_name}")
+
+
+
+
 
 
 if __name__ == "__main__":

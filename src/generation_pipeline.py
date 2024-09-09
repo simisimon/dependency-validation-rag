@@ -10,6 +10,7 @@ import json
 import argparse
 import json
 import backoff
+import pandas as pd
 
 
 def get_args():
@@ -154,8 +155,6 @@ def run_advanced_generation(config: Dict) -> None:
         json.dump(results, dest, indent=2)
 
 
-
-
 def main():
     args = get_args()
 
@@ -173,8 +172,8 @@ def main():
         mlflow.log_artifact(local_path=config["data_file"])
         mlflow.log_artifact(local_path=args.env_file)
 
-        #run_generation(config=config)
-        run_advanced_generation(config=config)
+        run_generation(config=config)
+        #run_advanced_generation(config=config)
 
 
 if __name__ == "__main__":

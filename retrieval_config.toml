@@ -4,7 +4,7 @@ embedding_model = "qwen" # "qwen", "ollama"
 embedding_dimension = 3584 # qwen=3584, openai=1536, ollama=...
 tool_name = "cfgnet"
 index_names = ["all"]
-output_dir = "../data/results/config4"
+output_file = "../data/results/validation/validation_set.json"
 
 # ingestion
 splitting = "sentence" # "sentence", "token", "semantic", "recursive"
@@ -17,4 +17,4 @@ num_websites = 3
 top_k = 10
 alpha = 0.5  #weight for sparse/dense retrieval, only used for hybrid query mode.
 rerank = "colbert" # "sentence", "llm", "colbert"
-top_n = 3
+top_n = 5

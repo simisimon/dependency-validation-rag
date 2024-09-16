@@ -16,13 +16,10 @@ import mlflow
 import backoff
 
 
-
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file", type=str, default="../retrieval_config.toml")
-    parser.add_argument("--env_file", type=str, default="../.env")
-    parser.add_argument("--data_file", type=str, default="../data/results/validation_set.csv")   
-    
+    parser.add_argument("--env_file", type=str, default="./.env")  
     return parser.parse_args()
 
 
@@ -100,7 +97,7 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
         pinecone_client=pinecone_client,
         dimension=dimension,
         splitting=config["splitting"],
-        extractors=config["extractors"]
+        extractors=[]
     )
 
     # set up retrieval engine
@@ -113,13 +110,10 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
     )
 
     # set up prompt settings
-    prompt_settings = PrompSettingsFactory.get_prompt_settings(tool_name=config["tool_name"])
+    prompt_settings = PrompSettingsFactory.get_prompt_settings(tool_name="cfgnet")
     df = pd.read_csv(data_file)
 
     queries = []
-    web_queries = []
-    counter = 0
-    batch_size = 100
     for index, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
 
         dependency = transform(row=row)
@@ -161,17 +155,6 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
                 } for node in retrieved_nodes
             ]
 
-            web_queries.append(
-                {
-                    "index": index,
-                    "dependency": dependency.to_dict(),
-                    "system_str": system_str,
-                    "task_str": task_str,
-                    "context_str": context_str,
-                    "context": context
-                }
-            )
-
         retrieved_nodes = retrieve(
             retrieval_engine=retrieval_engine,
             index_name=index_name,
@@ -204,43 +187,14 @@ def run_retrieval(config: Dict, index_name: str, data_file: str):
 
         })
 
-        counter += 1
-
-        #if index_name == "all":
-        #    if counter % batch_size == 0:
-
-        #        #queries = [query for query in queries if is_json_serializable(query)]
-        #        output_file = f"{config['output_dir']}/all_dependencies_{index_name}_{counter}.json"
-        #        with open(output_file, "w", encoding="utf-8") as dest:
-        #            json.dump(queries, dest, indent=2)
-        #        mlflow.log_artifact(local_path=output_file)
-
-        #        #web_queries = [query for query in web_queries if is_json_serializable(query)]
-        #        web_output_file = f"{config['output_dir']}/all_dependencies_web-search_{counter}.json"
-        #        with open(web_output_file, "w", encoding="utf-8") as dest:
-        #            json.dump(web_queries, dest, indent=2)
-        #        mlflow.log_artifact(local_path=web_output_file)
-
     if queries:
-        #queries = [query for query in queries if is_json_serializable(query)]
         output_file = config["output_file"]
         with open(output_file, "w", encoding="utf-8") as dest:
             json.dump(queries, dest, indent=2)
 
         mlflow.log_artifact(local_path=output_file)
 
-    #if web_queries:
-    #    #web_queries = [query for query in web_queries if is_json_serializable(query)]
-    #    web_output_file = f"{config['output_dir']}/all_dependencies_web-search.json"
-    #    with open(web_output_file, "w", encoding="utf-8") as dest:
-    #        json.dump(web_queries, dest, indent=2)
-
-    #    mlflow.log_artifact(local_path=web_output_file)
-
     print(f"Done with index: {index_name}")
-
-
-
 
 
 
@@ -249,12 +203,11 @@ if __name__ == "__main__":
 
     load_dotenv(dotenv_path=args.env_file)
 
-    # load config
     config = load_config(config_file=args.config_file)
 
     mlflow.set_experiment(experiment_name=f"retrieval_{config['rerank']}")
 
-    os.environ["PINECONE_API_KEY"] = config["pinecone_key"]
+    #os.environ["PINECONE_API_KEY"] = config["pinecone_key"]
     print("Pinecone Key: ", os.getenv("PINECONE_API_KEY"))
     print("OpenAI Key: ", os.getenv("OPENAI_KEY"))
     
@@ -262,11 +215,11 @@ if __name__ == "__main__":
 
         with mlflow.start_run(run_name=f"{index_name}"): 
             mlflow.log_artifact(local_path=args.config_file)
-            mlflow.log_artifact(local_path=args.data_file)
+            mlflow.log_artifact(local_path=config["data_file"])
             mlflow.log_params(config)
 
             run_retrieval(
                 config=config, 
                 index_name=index_name,
-                data_file=args.data_file
+                data_file=config["data_file"]
             )

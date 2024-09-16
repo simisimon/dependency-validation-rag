@@ -40,17 +40,14 @@ def generate(generator: GeneratorEngine, messages: List) -> str:
 
 def run_generation(config: Dict) -> None:
     
-    print("Data file: ", config["data_file"])
-    print("With RAG?: ", config["with_rag"])
+    print(f"Run generation for {config['data_file']} with RAG {config['with_rag']}")
 
     with open(config["data_file"], "r", encoding="utf-8") as src:
         data = json.load(src)
 
-    prompt_settings = PrompSettingsFactory.get_prompt_settings(tool_name=config["tool_name"])
+    prompt_settings = PrompSettingsFactory.get_prompt_settings(tool_name="cfgnet")
 
     results = []
-    batch_size = 100
-    counter = 0
 
     generator = GeneratorFactory().get_generator(
         model_name=config["model_name"], 
@@ -82,17 +79,7 @@ def run_generation(config: Dict) -> None:
             response = "None"
 
         entry["response"] = response
-        counter += 1
         results.append(entry)
-
-        #if counter % batch_size == 0:
-        #    if config["with_rag"]:
-        #        output_file = f"{config['output_dir']}/validation_{config['index_name']}_{config['model_name']}_{counter}.json"
-        #    else:
-        #        output_file = f"{config['output_dir']}/all_dependencies_without_{config['model_name']}_{counter}.json"
-        #    with open(output_file, "a", encoding="utf-8") as dest:
-        #        json.dump(results, dest, indent=2)
-        #    mlflow.log_artifact(local_path=output_file) 
 
     output_file = config["output_file"]
     with open(output_file, "w", encoding="utf-8") as dest:
@@ -101,6 +88,8 @@ def run_generation(config: Dict) -> None:
 
 def run_advanced_generation(config: Dict) -> None:
     
+    print(f"Run generation with refinements for {config['data_file']} with RAG {config['with_rag']}")
+
     with open(config["data_file"], "r", encoding="utf-8") as src:
         data = json.load(src)
 
@@ -170,14 +159,16 @@ def main():
 
     mlflow.set_experiment(experiment_name="generation")
     
-    with mlflow.start_run(run_name=f"generation_{config['index_name']}"): 
+    with mlflow.start_run(run_name=f"generation_{config['model_name']}"): 
 
         mlflow.log_params(config)
         mlflow.log_artifact(local_path=config["data_file"])
         mlflow.log_artifact(local_path=args.env_file)
 
-        #run_generation(config=config)
-        run_advanced_generation(config=config)
+        if not config["with_refinements"]:
+            run_generation(config=config)
+        else:
+            run_advanced_generation(config=config)
 
 
 if __name__ == "__main__":

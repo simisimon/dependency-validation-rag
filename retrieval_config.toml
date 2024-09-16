@@ -1,10 +1,9 @@
 # general config
-pinecone_key = "4bc3fa0d-a789-4187-aa8f-d6b17d0ea6a3"
 embedding_model = "qwen" # "qwen", "ollama"
 embedding_dimension = 3584 # qwen=3584, openai=1536, ollama=...
-tool_name = "cfgnet"
 index_names = ["all"]
-output_file = "../data/results/validation/validation_set.json"
+data_file = "../data/results/all_dependencies.csv"
+output_file = "../data/results/test.json"
 
 # ingestion
 splitting = "sentence" # "sentence", "token", "semantic", "recursive"

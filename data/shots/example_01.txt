@@ -1,8 +1,0 @@
-Carefully evaluate whether configuration option TODO of type TODO with value TODO in TODO of technology TODO depends on configuration option TODO of type TODO with value TODO in TODO of technology TODO or vice versa.
-
-{
-    "plan": TODO,
-    "rationale": TODO
-    "uncertainty": TODO,
-    "isDependency": TODO
-}

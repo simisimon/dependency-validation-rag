@@ -1,8 +1,7 @@
 # general
-data_file = "../data/results/validation/validation_set.json"
-output_file = "../data/results/validation/validation_set_all_gpt-4o-2024-05-13.json"
+data_file = "../data/results/test.json"
+output_file = "../data/results/test_gpt-3.5-turbo-0125.json"
 with_rag = true
-index_name = "all"
-tool_name = "cfgnet"
-model_name = "gpt-4o-2024-05-13" #["gpt-3.5-turbo-0125", "gpt-4o-2024-05-13", "llama3:70b", "llama3:8b"]
+with_refinements = true
+model_name = "gpt-3.5-turbo-0125" #["gpt-3.5-turbo-0125", "gpt-4o-2024-05-13", "llama3:70b", "llama3:8b"]
 temperature = 0.0

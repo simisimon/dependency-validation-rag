@@ -1,5 +1,0 @@
-model_name,file,accuracy,precision,recall,f1-score
-gpt-4o-2024-05-13,../data/results/validation/validation_set_all_gpt-4o-2024-05-13.json,0.78,0.9545454545454546,0.6774193548387096,0.7924528301886793
-gpt-3.5-turbo-0125,../data/results/validation/validation_set_all_gpt-3.5-turbo-0125.json,0.76,0.7878787878787878,0.8387096774193549,0.8125
-llama3:70b,../data/results/validation/validation_set_all_llama3:70b.json,0.86,0.8529411764705882,0.9354838709677419,0.8923076923076922
-llama3:8b,../data/results/validation/validation_set_all_llama3:8b.json,0.7346938775510204,0.8,0.7741935483870968,0.7868852459016393

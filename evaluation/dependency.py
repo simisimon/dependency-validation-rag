@@ -3,16 +3,16 @@ import pandas as pd
 import random
 
 EVAL_REPOS = [
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/piggymetrics",
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/pig",
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/litemall",
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/mall",
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/mall-swarm",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/piggymetrics",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/pig",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/litemall",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/mall",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/mall-swarm",
     "/home/simisimon/GitHub/cval_evaluation/spring-projects/Spring-Cloud-Platform",
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/jetlinks-community",
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/music-website",
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/spring-boot-admin",
-    #"/home/simisimon/GitHub/cval_evaluation/spring-projects/apollo",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/jetlinks-community",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/music-website",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/spring-boot-admin",
+    "/home/simisimon/GitHub/cval_evaluation/spring-projects/apollo",
 ]
 
 

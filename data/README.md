@@ -1,7 +1,7 @@
-- `/results`: contains the results of the evaluation
-- `/dependencies`: contains file for each software projects with the 50 randomly selected configuration dependendies
-- `/analysis`: contains the results of the qualitative analysis
+- `analysis`: contains the results of the qualitative failure analysis
+- `/results`: contains the results of the vanilla LLMs and different RAG variants for dependency validation
+- `/project_info`: contains project-specific information for each subject systems
 - `/projects`: subject projects and their sampled dependencies
-- `/shots`: pool of examples 
+- `/shot_pool`: pool of correctly and incorrectly classified dependencies 
 - `/so-posts`: pre-processed Stack Overflow posts that we indexed into a vector database
 - `/stackoverflow`: top 100 stack overflow posts for each technology pair 

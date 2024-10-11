@@ -1,7 +1,3 @@
-# README
-This repository provides the implementation of the RAG system, the validation results, and supplementary material for the paper "How to Evaluate RAG Systems? A Demonstration of a Sound
-Evaluation on Configuration Dependency Validation".
-
 ## Paper
 PDF: will be linked later
 
